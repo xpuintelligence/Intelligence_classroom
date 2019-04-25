@@ -3,6 +3,7 @@
 from aip import AipFace
 import base64
 import os
+import time
 
 class FaceSearch:
 
@@ -23,7 +24,8 @@ class FaceSearch:
             try:
                 result = self.client.search(image, self.imageType, self.groupIdList);  #调用人脸搜索在人脸库中搜索人脸返回json值
                 face_id = result['result']['user_list'][0]['user_id']   #对JSON进行分析获取图片ID(学号)
-                print(face_id)      
+                print(face_id)     
+                time.sleep(1) # 同时调用次数太多导致api 故加1秒延迟
             except Exception:
               pass
  
