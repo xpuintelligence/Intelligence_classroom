@@ -38,7 +38,7 @@ if __name__ == "__main__":
 
     groupIdList = "wisdom_class,1"
 
-    facefolder = "/Users/rex/Desktop/Code/WisdomClassRaspberry/faces/"
+    facefolder = "../faces/"
 
     faceSearch = FaceSearch(facefolder, imageType, groupIdList, client)
 

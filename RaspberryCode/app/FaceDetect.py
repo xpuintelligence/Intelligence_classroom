@@ -57,7 +57,7 @@ class FaceDetect:
             cropImg = img[top - 20:top + height + 20, left - 20:left + width + 20]
 
             # 图片路径
-            facebase = "/Users/rex/Desktop/Code/WisdomClassRaspberry/faces/" + str(i) + ".jpg"
+            facebase = "../faces/" + str(i) + ".jpg"
             print("saving.....")
             cv2.imwrite(facebase, cropImg)
             #cv2.rectangle(img, (left, top), (left + width, top + height), (0, 255, 0), 2)
@@ -76,7 +76,7 @@ if __name__ == "__main__":
     face_key = "TISYNrP-YDndZwEYzO1rhlYbJuDZ7SxQ"
     face_secret = "Ts5ELvCMeBLJkuxhcew7W7ouEX91uxWr"
 
-    file_path = "/Users/rex/Desktop/Code/WisdomClassRaspberry/image/test.jpg"
+    file_path = "../image/test.jpg"
 
     faceDetect = FaceDetect(face_http_url, face_key, face_secret, file_path)
     faces = faceDetect.getface()
