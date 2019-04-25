@@ -16,3 +16,11 @@
 /faces 裁剪人脸文件夹
 
 /image 测试图片文件夹
+
+
+# 2019-4-25
+	
+	编写了人脸识别模块FaceDetect
+	编写了人脸搜索模块FaceSearch
+
+
