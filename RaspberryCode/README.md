@@ -3,11 +3,11 @@
 
 /app 核心代码文件夹
 
-	LoadVideo.py rstp视频流读取模块
+	LoadVideo.py rstp视频流读取模块 （有bug，暂时无法使用）
 
-	FaceReco.py 图像识别处理模块
+	FaceReco.py 图像识别处理模块     （bug，暂时无法使用）
 
-	LoadDataBase.py 数据库读取模块
+	LoadDataBase.py 数据库读取模块    （bug，暂时无法使用）
 
 	FaceSearch.py 人脸搜索模块
 
