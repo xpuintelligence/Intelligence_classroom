@@ -5,6 +5,7 @@ import os
 import cv2
 import requests
 from json import JSONDecoder
+from FaceSearch import FaceSearch
 
 class FaceDetect:
 
@@ -21,7 +22,7 @@ class FaceDetect:
 
             data = {"api_key": self.key, "api_secret": self.secret, "return_attributes": "gender,age,smiling,beauty"}
 
-            files = {"image_file": open(file_path, "rb")}
+            files = {"image_file": open(self.file_path, "rb")}
 
             response = requests.post(self.url, data=data, files=files)
 
@@ -30,8 +31,6 @@ class FaceDetect:
             req_dict = JSONDecoder().decode(req_con)
 
             faces = req_dict['faces']
-
-            # face_num = len(faces)
             return faces
 
         except Exception:
@@ -59,7 +58,7 @@ class FaceDetect:
             # 图片路径
             facebase = "../faces/" + str(i) + ".jpg"
             print("saving.....")
-            cv2.imwrite(facebase, cropImg)
+            #cv2.imwrite(facebase, cropImg)
             #cv2.rectangle(img, (left, top), (left + width, top + height), (0, 255, 0), 2)
 
         #img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
@@ -67,17 +66,3 @@ class FaceDetect:
         #cv2.waitKey(0)
     
 
-
-
-
-if __name__ == "__main__":
-    # face++的api地址密码 用于人脸识别
-    face_http_url = "https://api-cn.faceplusplus.com/facepp/v3/detect"
-    face_key = "TISYNrP-YDndZwEYzO1rhlYbJuDZ7SxQ"
-    face_secret = "Ts5ELvCMeBLJkuxhcew7W7ouEX91uxWr"
-
-    file_path = "../image/test.jpg"
-
-    faceDetect = FaceDetect(face_http_url, face_key, face_secret, file_path)
-    faces = faceDetect.getface()
-    faceDetect.detect(faces)

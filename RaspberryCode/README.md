@@ -17,10 +17,21 @@
 
 /image 测试图片文件夹
 
+# 运行方法
+
+	1.确认安装opencv
+	pip3 install opencv-python
+	2.确认安装百度云开放平台
+	pip3 install baidu-aip
+	3.运行
+	python3 run.py
+
 
 # 2019-4-25
 	
 	编写了人脸识别模块FaceDetect
 	编写了人脸搜索模块FaceSearch
-
+	添加了run.py运行文件
+	修改了FaceDetect FaceSearch
+	
 
