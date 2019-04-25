@@ -53,8 +53,6 @@ class FaceReco:
 
         face_num = len(faces)
 
-        
-
         # 打开图片
         student_file = open(filepath, 'rb').read()
         # 调用百度Ai识别人数

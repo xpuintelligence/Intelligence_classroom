@@ -58,7 +58,7 @@ class FaceDetect:
             # 图片路径
             facebase = "../faces/" + str(i) + ".jpg"
             print("saving.....")
-            #cv2.imwrite(facebase, cropImg)
+            cv2.imwrite(facebase, cropImg)
             #cv2.rectangle(img, (left, top), (left + width, top + height), (0, 255, 0), 2)
 
         #img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
