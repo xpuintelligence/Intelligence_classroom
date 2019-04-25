@@ -20,11 +20,11 @@
 # 运行方法
 
 	1.确认安装opencv
-		pip3 install opencv-python
+	pip3 install opencv-python
 	2.确认安装百度云开放平台
-		pip3 install baidu-aip
+	pip3 install baidu-aip
 	3.运行
-		python3 run.py
+	python3 run.py
 
 
 # 2019-4-25
