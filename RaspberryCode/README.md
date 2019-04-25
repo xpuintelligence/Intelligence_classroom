@@ -1,5 +1,5 @@
 # WisdomClassRaspberry
-智慧教室树莓派端
+# 智慧教室树莓派端
 
 /app 核心代码文件夹
 
