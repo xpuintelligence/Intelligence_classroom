@@ -13,6 +13,8 @@
 
 	FaceDetect 人脸识别模块
 
+	run.py 程序执行文件
+
 /faces 裁剪人脸文件夹
 
 /image 测试图片文件夹
@@ -33,5 +35,6 @@
 	编写了人脸搜索模块FaceSearch
 	添加了run.py运行文件
 	修改了FaceDetect FaceSearch
+	修复了同时调用次数太多导致api调用失败的bug
 	
 
