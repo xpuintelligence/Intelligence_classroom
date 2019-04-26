@@ -18,12 +18,12 @@ class FaceDataBase:
         sql = "select student_name from student_info where student_id = '%s'"
         data = (student_id)
         cursor = conn.cursor()
-        #try:
-        result=cursor.execute(sql%data)
-        ret = cursor.fetchone()
-        student_name = ret[0]
-        print(student_name)
-        #except Exception as e:
-            #conn.rollback()
-        #finally:
-            #conn.close()
+        try:
+            result=cursor.execute(sql%data)
+            ret = cursor.fetchone()
+            student_name = ret[0]
+            return student_name
+        except Exception as e:
+            conn.rollback()
+        finally:
+            conn.close()

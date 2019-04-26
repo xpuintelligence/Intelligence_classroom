@@ -5,7 +5,6 @@ import base64
 import os
 import time
 from FaceDataBase import FaceDataBase
-from test import get_student_name
 
 face_id_list = []
 
