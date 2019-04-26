@@ -13,27 +13,17 @@ class LoadDataBase:
 
     
     # 获取课程id
-    def getCourseID(self):
+    def getCourseID(self, student_id):
 
-        conn = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database,
+        conn = pymsql.connect(host=self.host, user=self.user, password=self.password, database=self.database,
                                port=3306, charset="utf8")
-
-        current_time = time.strftime('%Y-%m-%d %H:%M:%s', time.localtime(time.time()))
-        current_time_Hour = time.strftime('%H', time.localtime(time.time()))
-        current_time_Date = time.strftime('%Y-%m-%d ', time.localtime(time.time()))
-        if current_time == '08' or current_time == '10':
-            class_time = current_time_Date + current_time_Hour + ":10:00"
-
-        sql = "select course_id from schedule_class where course_time = '%s';"
-
-        data = (class_time)
-
+        sql = "select student_name from student_info where student_id = '%s'"
+        data = (student_id)
         cursor = conn.cursor()
-
         try:
-            couse_id = cursor.execute(sql % data)
+            cursor.execute(sql % data)
             conn.commit()
-            return couse_id
+            print("插入成功")
         except Exception as e:
             conn.rollback()
 

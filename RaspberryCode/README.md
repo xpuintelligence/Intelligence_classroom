@@ -7,7 +7,7 @@
 
 	FaceReco.py 图像识别处理模块     （bug，暂时无法使用）
 
-	LoadDataBase.py 数据库读取模块    （bug，暂时无法使用）
+	FaceDataBase.py 数据库读取模块    
 
 	FaceSearch.py 人脸搜索模块
 
@@ -40,5 +40,8 @@
 # 2019-4-25
 
 	引入了百度云ai人体识别的借口 丰富了软件功能
+	添加了数据库读写的功能
+	编写了数据库读写类FaceDataBase
+	修复了同时调用次数太多导致api调用失败的bug(改为300毫秒调用一次api)
 	
 
