@@ -14,7 +14,7 @@ class FaceDataBase:
     
     # 获取人名
     def get_student_name(self, student_id):
-        conn = pymysql.connect(host="127.0.0.1",user="root",password="123456",database="Wisdom_Class",port=3306,charset="utf8")
+        conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
         sql = "select student_name from student_info where student_id = '%s'"
         data = (student_id)
         cursor = conn.cursor()
