@@ -1,0 +1,16 @@
+.gradle
+.idea
+build
+app/build
+app/app.iml
+app/lint.xml
+gradlew
+gradlew.bat
+import-summary.txt
+local.properties
+opencv_android_011.iml
+settings.gradle
+myfaceapplication/build
+myfaceapplication/libs
+myfaceapplication/myfaceapplication.iml
+myfaceapplication/proguard-rules.pro

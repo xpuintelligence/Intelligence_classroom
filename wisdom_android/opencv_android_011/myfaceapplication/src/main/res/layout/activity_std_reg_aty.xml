@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StdRegAty">
+
+    <EditText
+        android:id="@+id/stu_id"
+        android:hint="学号"
+        android:text="41604090109"
+        android:inputType="number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/stu_name"
+        android:hint="姓名"
+        android:text="邹长林"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:onClick="toFace"
+        android:layout_gravity="center"
+        android:text = "开始采集人脸（采集人脸时手机平放）"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
