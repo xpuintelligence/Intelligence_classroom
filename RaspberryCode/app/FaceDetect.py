@@ -8,15 +8,21 @@ import requests
 from json import JSONDecoder
 from FaceSearch import FaceSearch
 
+face_pixel = []
+
 class FaceDetect:
 
-    def __init__(self, face_http_url, face_key, face_secret, file_path, client_baidu_body):
+    def __init__(self, face_http_url, face_key, face_secret, file_path, client_baidu_body, client_baidu_face):
 
         self.url = face_http_url
         self.key = face_key
         self.secret = face_secret
         self.file_path = file_path
         self.client_baidu_body = client_baidu_body
+        self.client_baidu_face = client_baidu_face
+        self.face_num_class = 0
+        self.student_num_class = 0
+        self.headup_student = 0
 
     def getface(self): # 获取人脸识别信息
 
@@ -38,23 +44,23 @@ class FaceDetect:
         except Exception:
             pass
 
-    def detect(self,faces): # 识别
+    def detect(self, faces): # 识别
 
         face_num = len(faces) # 获取api返回的人脸数
+        self.face_num_class = face_num
         print("当前识别到人脸数为："+str(face_num))
         img = cv2.imread(self.file_path, cv2.IMREAD_COLOR)
         for i in range(0,face_num):
             # 获取人脸坐标
             face_rectangle = faces[i]['face_rectangle']
-            # print(face_rectangle)
-
             left = face_rectangle['left']
-
             top = face_rectangle['top']
-
             width = face_rectangle['width']
-
             height = face_rectangle['height']
+            face_pixel_info = str(left)+","+str(top)+","+str(width)+","+str(height)
+            #print(face_pixel_info)
+            face_pixel.append(face_pixel_info)
+
             # 准备截取人脸 获取需要截取的区域坐标
             cropImg = img[top - 20:top + height + 20, left - 20:left + width + 20]
 
@@ -67,15 +73,41 @@ class FaceDetect:
         #img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
         #cv2.imshow("detial",img2)
         #cv2.waitKey(0)
+        return face_pixel
 
+    # 判断人数
     def get_student_num(self):
 
         # 打开图片
         student_file = open(self.file_path, 'rb').read()
         # 调用百度Ai识别人数
-        student_num = self.client_baidu_body.bodyAnalysis(student_file)['person_num']
+        self.student_info_class = self.client_baidu_body.bodyAnalysis(student_file)
+        student_num = self.student_info_class['person_num']
+        
+        self.student_num_class = student_num
+        return student_num
 
-        print("当前识别到的人体数为: "+str(student_num))
+    # 判断抬头率
+    def get_headup_rate(self):
+        
+        # 初始化抬头率
+        headup_rate = 0.0
+        for i in range(0, self.student_num_class):
+            student_nose_y = self.student_info_class['person_info'][0]['body_parts']['nose']['y']
+            student_nose_x = self.student_info_class['person_info'][0]['body_parts']['nose']['x']
+            if student_nose_x is not 0.0 and student_nose_y is not 0.0:
+                self.headup_student = self.headup_student + 1
+        headup_rate = self.headup_student/self.student_num_class
+        return headup_rate
+
+    # 判断出勤率
+    def attendence(self):
+        
+        # 获得出勤率
+        attendence = self.face_num_class/self.student_num_class
+        return attendence
+
+
 
     
 

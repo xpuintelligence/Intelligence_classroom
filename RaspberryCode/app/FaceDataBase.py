@@ -27,3 +27,4 @@ class FaceDataBase:
             conn.rollback()
         finally:
             conn.close()
+
