@@ -2,14 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d14ac80a-8dac-460a-8629-7acf0b2d71a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/wisdom_android/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wisdom_common/wisdom_common.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_dao/wisdom_manager_dao.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_interface/wisdom_manager_interface.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_pojo/wisdom_manager_pojo.iml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/junitgenerator-prj-settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/app/FaceDetect.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/app/FaceReco.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/app/FaceSearch.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/app/LoadDataBase.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/app/LoadVideo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/faces/0.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/faces/1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/faces/2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/faces/3.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/faces/4.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RaspberryCode/image/test.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/a.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_android/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_common/wisdom_common.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_common/wisdom_common.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_dao/wisdom_manager_dao.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_dao/wisdom_manager_dao.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_interface/wisdom_manager_interface.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_interface/wisdom_manager_interface.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_pojo/wisdom_manager_pojo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_pojo/wisdom_manager_pojo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/target/tomcat/logs/access_log.2019-04-25" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/target/tomcat/logs/access_log.2019-04-25" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/target/tomcat/work/Tomcat/localhost/_/org/apache/jsp/index_jsp.class" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/target/tomcat/work/Tomcat/localhost/_/org/apache/jsp/index_jsp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/target/tomcat/work/Tomcat/localhost/_/org/apache/jsp/index_jsp.java" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/target/tomcat/work/Tomcat/localhost/_/org/apache/jsp/index_jsp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/wisdom_manager_service.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/wisdom_manager_service.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wisdom_web/wisdom_web.iml" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/wisdom_manager/target/" />
@@ -40,10 +57,27 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="145" column="25" lean-forward="true" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -54,12 +88,43 @@
   </component>
   <component name="MavenProjectNavigator">
     <treeState>
-      <expand />
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="wisdom_manager_service Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="wisdom_manager_service Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="wisdom_manager_service Maven Webapp" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="tomcat7" type="36feed69:MavenProjectsStructure$PluginNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="wisdom_web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="wisdom_web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="wisdom_web" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Plugins" type="7aea1407:MavenProjectsStructure$PluginsNode" />
+          <item name="tomcat7" type="36feed69:MavenProjectsStructure$PluginNode" />
+        </path>
+      </expand>
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-12" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-5" />
     <option name="width" value="1170" />
     <option name="height" value="1776" />
   </component>
@@ -73,81 +138,128 @@
         <subPane>
           <expand>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_common" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
               <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager_dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager_dao" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager_interface" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager_interface" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager_pojo" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_manager_pojo" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
               <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
               <item name="wisdom_manager_service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
               <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
               <item name="wisdom_manager_service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
               <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
               <item name="wisdom_manager_service" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
-              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
-              <item name="wisdom_manager_service" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
-              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
-              <item name="wisdom_manager_service" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="git_wisdom" type="b2602c69:ProjectViewProjectNode" />
-              <item name="git_wisdom" type="462c0819:PsiDirectoryNode" />
-              <item name="wisdom_manager" type="462c0819:PsiDirectoryNode" />
-              <item name="wisdom_manager_service" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_git" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wisdom_git" type="462c0819:PsiDirectoryNode" />
+              <item name="wisdom_web" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="spring" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556192456277" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1556334743558" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\27548\Desktop\wisdom_git\wisdom_common" />
+      <recent name="C:\Users\27548\Desktop\wisdom_git\wisdom_manager\wisdom_manager_pojo" />
+      <recent name="C:\Users\27548\Desktop\wisdom_git\wisdom_manager\wisdom_manager_interface" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -175,6 +287,7 @@
       <workItem from="1556176608098" duration="397000" />
       <workItem from="1556177024961" duration="715000" />
       <workItem from="1556190571179" duration="1845000" />
+      <workItem from="1556197593023" duration="5570000" />
     </task>
     <task id="LOCAL-00001" summary="宁大力和罗少淇的代码整合，哈哈哈哈">
       <created>1556177141408</created>
@@ -190,17 +303,23 @@
       <option name="project" value="LOCAL" />
       <updated>1556191568122</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="第二次宁大力和罗少淇的代码整合，哈哈哈哈">
+      <created>1556197735138</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1556197735138</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3052000" />
+    <option name="totallyTimeSpent" value="8622000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1839" height="1191" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1839" height="1191" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19539584" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2728804" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -208,27 +327,27 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info id="Web" order="7" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Messages" visible="true" weight="0.3291506" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3291506" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3291506" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.3291506" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="bottom" id="Spring" order="12" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info active="true" anchor="bottom" id="Messages" order="14" visible="true" weight="0.3291506" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" visible="true" weight="0.17181359" />
+      <window_info anchor="right" id="Maven" order="5" weight="0.33679354" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Database" order="8" weight="0.3295901" />
@@ -236,6 +355,58 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/web" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/web" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="宁大力和罗少淇的代码整合，哈哈哈哈" />
@@ -269,7 +440,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml" />
     <entry file="file://$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/src/main/resources/spring/applicationContext-dao.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -281,6 +451,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="572">
           <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/a.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="145" column="25" lean-forward="true" selection-start-line="145" selection-start-column="25" selection-end-line="145" selection-end-column="25" />
         </state>
       </provider>
     </entry>
