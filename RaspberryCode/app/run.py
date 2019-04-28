@@ -83,5 +83,5 @@ if __name__ == "__main__":
     img = cv2.putText(img, "student_num: "+str(student_num), (145, 306), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
     
     img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
-    cv2.imshow("detial",img2)
-    cv2.waitKey(0)
+    #cv2.imshow("detial",img2)
+    #cv2.waitKey(0)

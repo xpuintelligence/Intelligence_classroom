@@ -30,15 +30,12 @@ class FaceSearch:
                 # print(face_id)
                 time.sleep(0.3) # 同时调用次数太多导致api 故加300毫秒延迟  
 
-                # 数据库信息
-                host = "127.0.0.1"
-                user = "root"
-                database = "Wisdom_Class"
-                password = "123456"
-
-                # 调用数据库
-                faceDataBase = FaceDataBase(host, user, database, password) # 初始化数据库
+                faceDataBase = self.initdatabase()
                 student_id = str(face_id)
+                # 判断学生出勤情况
+                self.get_headup_rate_each_student(student_id)
+                print(str(student_id)+"的出勤情况已登记")
+
                 student_name = faceDataBase.get_student_name(student_id) # 返回学生姓名
                 if student_name is not None:
                     student_name_list.append(student_name)
@@ -47,5 +44,33 @@ class FaceSearch:
             except Exception:
                 pass
         return student_name_list
+
+
+    # 初始化数据库
+    def initdatabase(self):
+        # 数据库信息
+        host = "127.0.0.1"
+        user = "root"
+        database = "Wisdom_Class"
+        password = "123456"
+
+        # 调用数据库
+        faceDataBase = FaceDataBase(host, user, database, password) # 初始化数据
+        return faceDataBase
+
+    # 每个学生的抬头率
+    def get_headup_rate_each_student(self, student_id):
+
+        faceDataBase = self.initdatabase()
+        student_id_list = faceDataBase.get_student_id_all()
+        if student_id in student_id_list:
+            attendence = 1
+            faceDataBase.attendence_insert(attendence, student_id)
+        elif student_id not in student_id_list:
+            attendence = 0
+            faceDataBase.attendence_insert(attendence, student_id)
+        
+
+           
         
  
