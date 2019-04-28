@@ -13,7 +13,6 @@ from FaceDetect import FaceDetect
 from PIL import Image, ImageDraw, ImageFont
 
 
-
 if __name__ == "__main__":
 
     # face++的api地址密码 用于人脸识别
@@ -43,7 +42,7 @@ if __name__ == "__main__":
     # 分割人脸存储到指定文件夹
     face_pixel = faceDetect.detect(faces)
     student_num = faceDetect.get_student_num()
-    #print(face_pixel)
+    # print(face_pixel)
     print("当前识别到的人体数为: "+str(student_num))
 
     # 测试图片格式为BASE64

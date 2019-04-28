@@ -1,5 +1,4 @@
 import pymysql
-import time
 
 
 class FaceDataBase:
@@ -19,7 +18,7 @@ class FaceDataBase:
         data = (student_id)
         cursor = conn.cursor()
         try:
-            result=cursor.execute(sql%data)
+            cursor.execute(sql%data)
             ret = cursor.fetchone()
             student_name = ret[0]
             return student_name

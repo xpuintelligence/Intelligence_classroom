@@ -58,7 +58,7 @@ class FaceDetect:
             width = face_rectangle['width']
             height = face_rectangle['height']
             face_pixel_info = str(left)+","+str(top)+","+str(width)+","+str(height)
-            #print(face_pixel_info)
+            # print(face_pixel_info)
             face_pixel.append(face_pixel_info)
 
             # 准备截取人脸 获取需要截取的区域坐标
@@ -91,7 +91,6 @@ class FaceDetect:
     def get_headup_rate(self):
         
         # 初始化抬头率
-        headup_rate = 0.0
         for i in range(0, self.student_num_class):
             student_nose_y = self.student_info_class['person_info'][0]['body_parts']['nose']['y']
             student_nose_x = self.student_info_class['person_info'][0]['body_parts']['nose']['x']
