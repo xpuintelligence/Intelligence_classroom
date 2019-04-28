@@ -5,7 +5,7 @@
         <form class="form-signin">
           <label for="inputUsername" class="sr-only">username</label>
           <input
-            type="email"
+            type="username"
             id="inputUsername"
             class="form-control"
             placeholder="用户名"
@@ -52,19 +52,40 @@ export default {
       } else {
         this.who = "学生";
       }
-    }
-  }
+    },
+  },
+
 };
 </script>
 
 <style scope>
-.v-enter,
-.v-leave-to {
-  opacity: 0;
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
 }
-
-.v-enter-active,
-.v-leave-active {
-  transition: all 1s ease;
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 </style>

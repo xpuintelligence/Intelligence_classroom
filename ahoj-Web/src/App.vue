@@ -1,15 +1,20 @@
 <template>
   <transition>
     <div id="app" v-if="flag">
-      <img src="./assets/logo.png" style="width: 100px; heigh: 100px;" alt="logo.png">
-      <h1>智慧教室</h1>
+      <img src="./assets/logo.png" style="width: 200px; heigh: 200px;" alt="logo.png">
+      <!-- <h1 class="display-1">智慧教室</h1> -->
+      <br>
+
       <router-link to="Login">
         <button class="btn btn-primary">登录</button>
       </router-link>
+
       <router-link to="Signin">
         <button class="btn btn-primary" disabled>注册</button>
       </router-link>
-      <router-view/>
+      <router-view></router-view>
+
+      <p class="mt-5 mb-3 text-muted fixed-bottom">&copy; 2019 xpu's i-class</p>
     </div>
   </transition>
 </template>
