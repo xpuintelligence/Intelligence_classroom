@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <img src="https://raw.githubusercontent.com/xpuintelligence/Intelligence_classroom/master/logo/logo-without-background.png">
     <router-view/>
   </div>
 </template>
