@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="edu.xpu.tim.myfaceapplication">
 
     <uses-permission android:name="android.permission.CAMERA" />
@@ -12,24 +13,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@android:style/Theme">
+        android:theme="@android:style/Theme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:launchMode="singleTask"
             android:name=".MainActivity"
             android:screenOrientation="landscape">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".StdRegAty">
+        <activity android:name=".StdRegAty"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AppleAty"></activity>
+        <activity android:name=".AppleAty"
+            android:launchMode="singleTask"/>
     </application>
 
 </manifest>

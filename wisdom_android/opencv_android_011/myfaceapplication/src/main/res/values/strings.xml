@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">MyFaceApplication</string>
+    <string name="app_name">SmartClass</string>
+    <string name="stu_id">学号</string>
+    <string name="stu_pwd">密码</string>
+    <string name="stu_face">开始采集人脸（采集人脸时手机平放）</string>
+    <string name="xxxxxx">XXXXXX</string>
 </resources>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,16 +13,16 @@
         android:text=""
         android:inputType="number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="Autofill" />
+        android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/stu_pwd"
         android:hint="@string/stu_pwd"
+        android:text=""
         android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:ignore="Autofill"/>
+        android:autofillHints="" />
 
     <Button
         android:onClick="toFace"

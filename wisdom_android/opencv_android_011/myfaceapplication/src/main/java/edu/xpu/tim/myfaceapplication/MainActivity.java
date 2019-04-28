@@ -2,13 +2,9 @@ package edu.xpu.tim.myfaceapplication;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -39,12 +35,9 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private CameraBridgeViewBase openCvCameraView;
-
     private static final int NOT_NOTICE = 2;//如果勾选了不再询问
-    private AlertDialog alertDialog;
-    private AlertDialog mDialog;
 
-    private String name;
+    private String pwd;
     private String id;
     private int pictureNum = 0;
 
@@ -55,6 +48,9 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     private Mat mRgba; //图像容器
     private Mat mGray;
     private int absoluteFaceSize = 0;
+
+    //图片采集张数
+    private static final int PICTURE_COUNT = 2;
 
     private void initializeOpenCVDependencies() {
         try {
@@ -83,18 +79,14 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myRequetPermission();
-        new Thread(()->{
-            accessToken = AuthService.getAuth();
-        }).start();
-
+        new Thread(()-> accessToken = AuthService.getAuth()).start();
 
         openCvCameraView = findViewById(R.id.javaCameraView);
         openCvCameraView.setCameraIndex(1); //摄像头索引        -1/0：后置双摄     1：前置
         openCvCameraView.setCvCameraViewListener(this);
 
-
         Intent intent = getIntent();
-        name = intent.getStringExtra("name");
+        pwd = intent.getStringExtra("pwd");
         id = intent.getStringExtra("id");
     }
 
@@ -143,13 +135,16 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         Rect[] facesArray = faces.toArray();
         if (facesArray.length > 0){
             pictureNum++;
-            if(pictureNum < 6){
+            if(pictureNum < PICTURE_COUNT){
                 //保存至本地
                 Bitmap mBitmap = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.RGB_565);
                 Utils.matToBitmap(mRgba, mBitmap);
-                ImgSaveUtils.saveImageToGallery(getApplicationContext(), mBitmap, name, id);
+                ImgSaveUtils.saveImageToGallery(getApplicationContext(), mBitmap, id, pwd);
             }else{
-                startActivity(new Intent(getApplicationContext(), AppleAty.class));
+                Intent intent = new Intent(getApplicationContext(), AppleAty.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
+                onStop();
             }
 
             Log.i(TAG, "检测到人脸");
@@ -170,50 +165,6 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == 1) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (grantResults[i] == PERMISSION_GRANTED) {//选择了“始终允许”
-                } else {
-                    if (!ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[i])){//用户选择了禁止不再询问
-
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setTitle("permission")
-                                .setMessage("点击允许才可以使用我们的app哦")
-                                .setPositiveButton("去允许", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        if (mDialog != null && mDialog.isShowing()) {
-                                            mDialog.dismiss();
-                                        }
-                                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                        Uri uri = Uri.fromParts("package", getPackageName(), null);//注意就是"package",不用改成自己的包名
-                                        intent.setData(uri);
-                                        startActivityForResult(intent, NOT_NOTICE);
-                                    }
-                                });
-                        mDialog = builder.create();
-                        mDialog.setCanceledOnTouchOutside(false);
-                        mDialog.show();
-                    }else {//选择禁止
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                        builder.setTitle("permission")
-                                .setMessage("点击允许才可以使用我们的app哦")
-                                .setPositiveButton("去允许", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        if (alertDialog != null && alertDialog.isShowing()) {
-                                            alertDialog.dismiss();
-                                        }
-                                        ActivityCompat.requestPermissions(MainActivity.this,
-                                                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                                    }
-                                });
-                        alertDialog = builder.create();
-                        alertDialog.setCanceledOnTouchOutside(false);
-                        alertDialog.show();
-                    }
-                }
-            }
-        }
     }
 
     @Override

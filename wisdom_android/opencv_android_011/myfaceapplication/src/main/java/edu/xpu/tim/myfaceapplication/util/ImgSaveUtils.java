@@ -19,12 +19,12 @@ public class ImgSaveUtils {
     private static String accessToken;
     private static boolean flag = false;
     //保存文件到指定路径
-    public static boolean saveImageToGallery(Context context, Bitmap bmp, String name, String id) {
+    public static void saveImageToGallery(Context context, Bitmap bmp,  String id, String pwd) {
         // 首先保存图片
         String storePath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "dearxy";
         File appDir = new File(storePath);
         if (!appDir.exists()) {
-            boolean mkdir = appDir.mkdir();
+            if(appDir.mkdir()) throw new RuntimeException("新建文件夹失败");
         }
         String fileName = System.currentTimeMillis() + ".jpg";
         File file = new File(appDir, fileName);
@@ -35,9 +35,6 @@ public class ImgSaveUtils {
             fos.flush();
             fos.close();
 
-            //把文件插入到系统图库
-            //MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), fileName, null);
-
             //保存图片后发送广播通知更新数据库
             Uri uri = Uri.fromFile(file);
 
@@ -45,34 +42,24 @@ public class ImgSaveUtils {
             if (isSuccess) {
 
                 new Thread(()->{
-                    String base64 = null;
-                    try {
-                        base64 = bitmapToBase64(bmp);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    String base64;
+                    base64 = bitmapToBase64(bmp);
                     if(!flag){
-                        new Thread(()->{
-                            accessToken = AuthService.getAuth();
-                        }).start();
+                        new Thread(()-> accessToken = AuthService.getAuth()).start();
                         flag = true;
                     }
 
-                    String add = FaceAdd.add(base64, accessToken, "wisdom_class", id, name);
+                    String add = FaceAdd.add(base64, accessToken, "wisdom_class", id, pwd);
                     Integer error_code = JSONObject.parseObject(add).getInteger("error_code");
                     System.out.println("error_code:"+error_code);
                 }).start();
-                return true;
-            } else {
-                return false;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
     }
 
-    private static String bitmapToBase64(Bitmap bitmap) throws IOException {
+    private static String bitmapToBase64(Bitmap bitmap){
         String result = null;
         ByteArrayOutputStream baos = null;
         try {
