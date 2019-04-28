@@ -9,6 +9,7 @@ from FaceDataBase import FaceDataBase
 student_name_list = []
 
 
+
 class FaceSearch:
 
     def __init__(self,facefolder,imageType,groupIdList,client_baidu_face):
@@ -33,8 +34,8 @@ class FaceSearch:
                 faceDataBase = self.initdatabase()
                 student_id = str(face_id)
                 # 判断学生出勤情况
-                self.get_headup_rate_each_student(student_id)
-                print(str(student_id)+"的出勤情况已登记")
+                #self.get_headup_rate_each_student(student_id)
+                #print(str(student_id)+"的出勤情况已登记")
 
                 student_name = faceDataBase.get_student_name(student_id) # 返回学生姓名
                 if student_name is not None:
@@ -49,10 +50,10 @@ class FaceSearch:
     # 初始化数据库
     def initdatabase(self):
         # 数据库信息
-        host = "127.0.0.1"
+        host = "101.132.78.78"
         user = "root"
-        database = "Wisdom_Class"
-        password = "123456"
+        database = "team_model"
+        password = "nanshen166013"
 
         # 调用数据库
         faceDataBase = FaceDataBase(host, user, database, password) # 初始化数据
@@ -64,11 +65,7 @@ class FaceSearch:
         faceDataBase = self.initdatabase()
         student_id_list = faceDataBase.get_student_id_all()
         if student_id in student_id_list:
-            attendence = 1
-            faceDataBase.attendence_insert(attendence, student_id)
-        elif student_id not in student_id_list:
-            attendence = 0
-            faceDataBase.attendence_insert(attendence, student_id)
+            faceDataBase.attendence_insert(student_id)
         
 
            
