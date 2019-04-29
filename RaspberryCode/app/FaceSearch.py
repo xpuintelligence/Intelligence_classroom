@@ -9,7 +9,6 @@ from FaceDataBase import FaceDataBase
 student_name_list = []
 
 
-
 class FaceSearch:
 
     def __init__(self,facefolder,imageType,groupIdList,client_baidu_face):

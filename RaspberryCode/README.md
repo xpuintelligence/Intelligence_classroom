@@ -22,7 +22,7 @@
 
 # 运行方法
 
-	1.确认安装opencv
+	1.确认安装opencv 
 	pip3 install opencv-python
 	2.确认安装百度云开放平台
 	pip3 install baidu-aip
@@ -380,4 +380,4 @@
 
 	修复了bug
 	添加了每次识别结束后删除faces文件夹下面待识别图片的功能
-
+	添加了多次识别功能
