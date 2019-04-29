@@ -85,3 +85,8 @@ if __name__ == "__main__":
     img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
     #cv2.imshow("detial",img2)
     #cv2.waitKey(0)
+
+    # 删除faces文件夹的待识别面部
+    os.chdir("../faces")
+    os.system("rm -rf *.jpg")
+    print("清除临时文件完毕")
