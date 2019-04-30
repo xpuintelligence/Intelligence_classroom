@@ -16,28 +16,34 @@ from PIL import Image, ImageDraw, ImageFont
 from LoadVideo import LoadVideo
 from Wisdom import Wisdom
 
+# 获取图片
+def get_image(user, ip, password):
+    LoadVideo.load(user, ip, password)
 
-def get_image():
-    LoadVideo.load()
-
+# 识别程序
 def run_program():
-    print(1)
     Wisdom.run_wisdom()
     clean()
 
+# 清除缓存
 def clean():
     os.chdir("../image")
     os.system("rm -rf *.jpg")
     print("清除完毕")
 
 if __name__ == "__main__":
-
+    print("输入网络摄像头的用户名: ",end = "")
+    user = input()
+    print("输入网络摄像头的ip地址：",end = "")
+    password = input()
+    print("请输入网络摄像头的ip地址: ",end = "")
+    ip = input()
     while(1):
         localtime = time.strftime("%H-%M-%S")
         newtime = localtime.split('-')
         if(int(newtime[2])%10==0):
             print()
-            get_image()
+            get_image(user, ip, password)
             print("图片获取完毕")
             print("开始识别")
             print()
