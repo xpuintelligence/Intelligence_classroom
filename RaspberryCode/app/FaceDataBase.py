@@ -51,10 +51,12 @@ class FaceDataBase:
 
     def attendence_insert(self, student_id):
         conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
-        sql = "INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `student_id`, `status`) VALUES ('%s', '%s', 'attend');"
+        sql = "INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `status`) VALUES ('%s','%s', '%s', 'attend');"
+        # INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `status`) VALUES ('2019-4-30 20:29', '100120190422101000', '41609030209', 'attend');
         cursor = conn.cursor()
-        attendence_id = time.strftime('%Y-%m-%d %H-%m')
-        data = (attendence_id, student_id)
+        attendence_id = time.strftime('%Y-%m-%d %H:%M')
+        courseitem_id = "100120190422101000"
+        data = (attendence_id, courseitem_id, student_id)
         try:
             cursor.execute(sql%data)
             conn.commit()

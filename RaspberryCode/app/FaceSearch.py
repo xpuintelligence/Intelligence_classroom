@@ -34,8 +34,8 @@ class FaceSearch:
                     faceDataBase = self.initdatabase()
                     student_id = str(face_id)
                     # 判断学生出勤情况
-                    #self.get_headup_rate_each_student(student_id)
-                    #print(str(student_id)+"的出勤情况已登记")
+                    self.get_headup_rate_each_student(student_id)
+                    print(str(student_id)+"的出勤情况已登记")
 
                     student_name = faceDataBase.get_student_name(student_id) # 返回学生姓名
                     if student_name is not None:
