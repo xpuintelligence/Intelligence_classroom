@@ -96,15 +96,21 @@ class FaceDetect:
             student_nose_x = self.student_info_class['person_info'][0]['body_parts']['nose']['x']
             if student_nose_x is not 0.0 and student_nose_y is not 0.0:
                 self.headup_student = self.headup_student + 1
-        headup_rate = self.headup_student/self.student_num_class
-        return headup_rate
+        try:
+            headup_rate = self.headup_student/self.student_num_class
+            return headup_rate
+        except Exception:
+            pass
 
     # 判断出勤率
     def attendence(self):
         
         # 获得出勤率
-        attendence = self.face_num_class/self.student_num_class
-        return attendence
+        try:
+            attendence = self.face_num_class/self.student_num_class
+            return attendence
+        except Exception:
+            pass
 
 
         
