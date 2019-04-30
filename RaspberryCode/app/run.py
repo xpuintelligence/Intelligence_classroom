@@ -34,7 +34,7 @@ def clean():
 if __name__ == "__main__":
     print("输入网络摄像头的用户名: ",end = "")
     user = input()
-    print("输入网络摄像头的ip地址：",end = "")
+    print("输入网络摄像头密码：",end = "")
     password = input()
     print("请输入网络摄像头的ip地址: ",end = "")
     ip = input()
