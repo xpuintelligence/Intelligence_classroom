@@ -14,13 +14,7 @@
           >
           <p></p>
           <label for="inputPassword" class="sr-only">Password</label>
-          <input
-            type="password"
-            id="inputPassword"
-            class="form-control"
-            placeholder="密码"
-            required
-          >
+          <input type="password" id="inputPassword" class="form-control" placeholder="密码" required>
           <div class="checkbox">
             <label>
               <input type="checkbox" value="isTeacher" @change="changeWho">我是教师
@@ -29,7 +23,6 @@
           <button class="btn btn-lg btn-primary btn-block" type="submit">以{{who}}的身份登录</button>
         </form>
       </div>
-      <!-- /container -->
     </div>
   </transition>
 </template>
@@ -53,9 +46,8 @@ export default {
       } else {
         this.who = "学生";
       }
-    },
-  },
-
+    }
+  }
 };
 </script>
 
@@ -79,7 +71,7 @@ export default {
 .form-signin .form-control:focus {
   z-index: 2;
 }
-.form-signin input[type="email"] {
+.form-signin input[type="username"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
