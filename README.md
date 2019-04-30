@@ -2,7 +2,7 @@
 
 > 智慧教室 Web 端。
 
-## Build Setup
+## Build Setup，请使用 ahoj-web-new 工程
 
 ``` bash
 # 安装依赖

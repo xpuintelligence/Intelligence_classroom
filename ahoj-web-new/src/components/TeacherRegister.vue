@@ -1,7 +1,9 @@
 <template>
   <div>
     <Index></Index>
-    <h1>Register page!</h1>
+
+    <h1>teacher register page!</h1>
+
   </div>
 </template>
 
@@ -9,8 +11,12 @@
   import Index from "@/components/Index";
 
   export default {
-    name: "Register",
-    components: {Index}
+    name: "TeacherRegister",
+    components: {Index},
+    data() {
+      return {}
+    },
+    methods: {},
   }
 </script>
 

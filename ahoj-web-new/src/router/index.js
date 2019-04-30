@@ -2,9 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
-import Register from '@/components/Register'
+import StudentRegister from '@/components/StudentRegister'
+import TeacherRegister from '@/components/TeacherRegister'
+import resource from 'vue-resource/dist/vue-resource.esm'
 
 Vue.use(Router);
+Vue.use(resource);
 
 export default new Router({
   routes: [
@@ -19,9 +22,14 @@ export default new Router({
       component: Login
     },
     {
-      path: '/Register',
-      name: 'Register',
-      component: Register
+      path: '/StudentRegister',
+      name: 'StudentRegister',
+      component: StudentRegister
+    },
+    {
+      path: '/TeacherRegister',
+      name: 'TeacherRegister',
+      component: TeacherRegister
     },
   ]
 })

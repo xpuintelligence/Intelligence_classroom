@@ -1,15 +1,30 @@
 <template>
   <div>
+
     <img alt="logo.png" src="../assets/logo.png" style="width: 200px">
     <br>
-    <router-link to="Login">
-      <button class="btn btn-primary">登录</button>
-    </router-link>
 
-    <router-link to="Register">
-      <button class="btn btn-primary">注册</button>
-    </router-link>
-    <router-view></router-view>
+    <div class="container">
+      <router-link to="Login">
+        <button type="button" class="btn btn-primary">登录</button>
+      </router-link>
+
+      <router-link to="/">
+        <button type="button" class="btn btn-primary" disabled>注册</button>
+      </router-link>
+
+      <!--
+      <router-link to="StudentRegister">
+        <button type="button" class="btn btn-primary">学生注册</button>
+      </router-link>
+
+      <router-link to="TeacherRegister">
+        <button type="button" class="btn btn-primary">教师注册</button>
+      </router-link>
+      -->
+
+    </div>
+
   </div>
 </template>
 
@@ -18,10 +33,7 @@
     name: "Index",
     components: {},
     data() {
-      return {
-        btn_login: false,
-        btn_register: false,
-      }
+      return {}
     },
     methods: {},
   }
