@@ -1,10 +1,11 @@
 package com.smart.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TbCourseitemExample {
+public class TbCourseitemExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
