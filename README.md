@@ -1,23 +1,8 @@
-# 智慧教室 Web 端
+# 智慧教室
 
-> 智慧教室 Web 端。
+push 到自己的 branch 去。后面合并。
 
-## Build Setup，请使用 ahoj-web-new 工程
+## Logo
 
-``` bash
-# 安装依赖
-npm install
+<img src="https://raw.githubusercontent.com/xpuintelligence/Intelligence_classroom/master/logo/logo-without-background.png" style="width:200px;">
 
-# 测试运行，访问：http://localhost:8080
-npm run dev 或 npm start
-
-# 编译
-npm run build
-# built files are meant to be served over an HTTP server.
-# Opening index.html over file:// won't work.
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
----
