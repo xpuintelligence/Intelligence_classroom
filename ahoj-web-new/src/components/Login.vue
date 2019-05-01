@@ -18,6 +18,12 @@
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">{{who}}登录</button>
       </form>
+
+      <transition name="alert" translate mode="in-out">=
+          <div v-if="connFail" class="alert-danger form-control">
+            sorry, the web server error!
+          </div>=
+      </transition>
     </div>
 
   </div>
@@ -34,25 +40,54 @@
         who: "学生",
         input_username: "",
         input_password: "",
+        input_who: 1,
+        connFail: false,
       };
     },
     methods: {
       changeWho() {
         if (this.who === "学生") {
           this.who = "教师";
+          this.input_who = 2;
         } else {
           this.who = "学生";
+          this.input_who = 1;
         }
       },
-      onSubmit: function () {
+      onSubmit: async function () {
         console.log("login...");
         console.log(this.input_username);
         console.log(this.input_password);
-        console.log(this.who);
-        this.$http.post('http://api.komavideo.com/news/list',).then(function (result) {
-          console.log(result);
+        console.log(this.input_who);
+        // this.$http.post('http://api.komavideo.com/news/list',).then(function (result) {
+        //   console.log(result);
+        // });
+        this.$http.post(
+          "http://jsonplaceholder.typicode.com/posts",
+          // "http://47.103.14.73/wisdom_web/login/all",
+          {
+            account: this.input_username,
+            password: this.input_password,
+            status: this.input_who
+          },
+          {
+            emulateJSON: true
+          }
+        ).then((data) => {
+          console.log(data);
         });
-      },
+
+        try {
+          let data = await this.$http.post("http://47.103.14.73/wisdom_web/login/all", {
+            account: this.input_username,
+            password: this.input_password,
+            status: this.input_who
+          }, {emulateJSON: true});
+          console.log(data);
+        } catch (e) {
+          this.connFail = true;
+        }
+      },  // onSubmit()
     },
     directives: { // 自定义私有指令
       'focus': {
@@ -99,5 +134,21 @@
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+
+  .alert-enter-active {
+    transition: all .3s ease;
+  }
+
+  .alert-leave-active {
+    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+
+  .alert-enter, .alert-leave-to
+    /* .slide-fade-leave-active for below version 2.1.8 */
+  {
+    transform: translateY(-10px);
+    opacity: 0;
   }
 </style>
