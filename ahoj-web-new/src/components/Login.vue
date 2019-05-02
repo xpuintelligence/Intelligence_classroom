@@ -54,39 +54,41 @@
           this.input_who = 1;
         }
       },
-      onSubmit: async function () {
-        console.log("login...");
-        console.log(this.input_username);
-        console.log(this.input_password);
-        console.log(this.input_who);
-        // this.$http.post('http://api.komavideo.com/news/list',).then(function (result) {
-        //   console.log(result);
+      onSubmit: function () {
+        // this.$http.post(
+        //   "http://jsonplaceholder.typicode.com/posts",
+        //   // "http://47.103.14.73/wisdom_web/login/all",
+        //   {
+        //     account: this.input_username,
+        //     password: this.input_password,
+        //     status: this.input_who
+        //   },
+        //   {
+        //     emulateJSON: true
+        //   }
+        // ).then((data) => {
+        //   console.log(data);
         // });
-        this.$http.post(
-          "http://jsonplaceholder.typicode.com/posts",
-          // "http://47.103.14.73/wisdom_web/login/all",
-          {
-            account: this.input_username,
-            password: this.input_password,
-            status: this.input_who
-          },
-          {
-            emulateJSON: true
-          }
-        ).then((data) => {
-          console.log(data);
-        });
 
-        try {
-          let data = await this.$http.post("http://47.103.14.73/wisdom_web/login/all", {
-            account: this.input_username,
-            password: this.input_password,
-            status: this.input_who
-          }, {emulateJSON: true});
-          console.log(data);
-        } catch (e) {
+        this.$jsonp('http://47.103.14.73'+'/wisdom_web/login/all',{
+          account: this.input_username,
+          password: this.input_password,
+          status: this.input_who
+        }).then(json=>{
+          console.log(json);
+        }).catch(err=>{
           this.connFail = true;
-        }
+        })
+        // try {
+        //   let data = await this.$http.post("http://47.103.14.73/wisdom_web/login/all", {
+        //     account: this.input_username,
+        //     password: this.input_password,
+        //     status: this.input_who
+        //   }, {emulateJSON: true});
+        //   console.log(data);
+        // } catch (e) {
+        //   this.connFail = true;
+        // }
       },  // onSubmit()
     },
     directives: { // 自定义私有指令
@@ -138,11 +140,11 @@
 
 
   .alert-enter-active {
-    transition: all .3s ease;
+    transition: all 1s ease;
   }
 
   .alert-leave-active {
-    transition: all .5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: all 2s cubic-bezier(1.0, 0.5, 0.8, 1.0);
   }
 
   .alert-enter, .alert-leave-to

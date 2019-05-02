@@ -5,9 +5,12 @@ import Login from '@/components/Login'
 import StudentRegister from '@/components/StudentRegister'
 import TeacherRegister from '@/components/TeacherRegister'
 import resource from 'vue-resource/dist/vue-resource.esm'
+import VueJsonp from 'vue-jsonp'
+
 
 Vue.use(Router);
 Vue.use(resource);
+Vue.use(VueJsonp);
 
 export default new Router({
   routes: [
