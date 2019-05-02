@@ -2,17 +2,13 @@
 
 from aip import AipFace
 from aip import AipBodyAnalysis
-import base64
 import os
 import cv2
-import requests
 import numpy as np
-import threading
-from json import JSONDecoder
 from FaceSearch import FaceSearch
 from FaceDetect import FaceDetect
 from PIL import Image, ImageDraw, ImageFont
-from LoadVideo import LoadVideo
+
 
 
 class Wisdom:
@@ -90,8 +86,8 @@ class Wisdom:
                 img = cv2.putText(img, "student_num: "+str(student_num), (145, 306), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
                 
                 img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
-                #cv2.imshow("detial",img2)
-                #cv2.waitKey(0)
+                # cv2.imshow("detial",img2)
+                # cv2.waitKey(0)
 
                 # 删除faces文件夹的待识别面部
                 os.chdir("../faces")
