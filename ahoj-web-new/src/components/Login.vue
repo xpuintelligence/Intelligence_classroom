@@ -20,9 +20,9 @@
       </form>
 
       <transition name="alert" translate mode="in-out">=
-          <div v-if="connFail" class="alert-danger form-control">
-            sorry, the web server error!
-          </div>=
+        <div v-if="connFail" :class="alert_color">
+          {{msg}}
+        </div>
       </transition>
     </div>
 
@@ -42,6 +42,12 @@
         input_password: "",
         input_who: 1,
         connFail: false,
+        msg: "未知错误!",
+        alert_color: "alert-danger form-control",
+        alert_color_arr: [
+          "alert-danger form-control", // 错误
+          "alert-success form-control", // msg === true
+        ],
       };
     },
     methods: {
@@ -54,7 +60,8 @@
           this.input_who = 1;
         }
       },
-      onSubmit: function () {
+      onSubmit: async function () {
+        this.connFail = true;
         // this.$http.post(
         //   "http://jsonplaceholder.typicode.com/posts",
         //   // "http://47.103.14.73/wisdom_web/login/all",
@@ -69,26 +76,33 @@
         // ).then((data) => {
         //   console.log(data);
         // });
-
-        this.$jsonp('http://47.103.14.73'+'/wisdom_web/login/all',{
-          account: this.input_username,
-          password: this.input_password,
-          status: this.input_who
-        }).then(json=>{
-          console.log(json);
-        }).catch(err=>{
-          this.connFail = true;
-        })
-        // try {
-        //   let data = await this.$http.post("http://47.103.14.73/wisdom_web/login/all", {
-        //     account: this.input_username,
-        //     password: this.input_password,
-        //     status: this.input_who
-        //   }, {emulateJSON: true});
-        //   console.log(data);
-        // } catch (e) {
+        // this.$jsonp('http://47.103.14.73'+'/wisdom_web/login/all',{
+        //   account: this.input_username,
+        //   password: this.input_password,
+        //   status: this.input_who
+        // }).then(json=>{
+        //   console.log(json);
+        // }).catch(err=>{
         //   this.connFail = true;
-        // }
+        // })
+        try {
+          let res = await this.$http.post("http://47.103.14.73/wisdom_web/login/all", {
+            account: this.input_username,
+            password: this.input_password,
+            status: this.input_who
+          }, {emulateJSON: true});
+          // console.log(res.data);
+          if (res.data.msg === "true") {
+            this.alert_color = this.alert_color_arr[1];
+            this.msg = "你好 , " + res.data.data.name;
+          } else {
+            this.alert_color = this.alert_color_arr[0];
+            this.msg = res.data.msg;
+          }
+        } catch (e) {
+          // console.log(e);
+          this.msg = "抱歉 , 出了点问题!";
+        }
       },  // onSubmit()
     },
     directives: { // 自定义私有指令
