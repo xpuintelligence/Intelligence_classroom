@@ -26,16 +26,14 @@
 	├── app
 	│   ├── FaceDataBase.py
 	│   ├── FaceDetect.py
-	│   ├── FaceReco.py
 	│   ├── FaceSearch.py
-	│   ├── LoadDataBase.py
 	│   ├── LoadVideo.py
 	│   ├── Wisdom.py 
 	│   └── run.py
 	├── faces
 	│   └── README.md
 	├── image
-		 └── README.md
+		└── README.md
 	
 
 # 运行方法
