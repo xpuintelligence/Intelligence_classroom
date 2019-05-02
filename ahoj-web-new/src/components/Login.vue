@@ -3,7 +3,7 @@
     <Index></Index>
 
     <div class="container" v-on:submit.prevent="onSubmit">
-      <form class="form-signin" action.pravite="https://www.baidu.com">
+      <form class="form-signin" action.pravite="#">
         <label for="inputUsername" class="sr-only">username</label>
         <input type="username" id="inputUsername" v-model="input_username" class="form-control" placeholder="用户名"
                required v-focus>
@@ -17,10 +17,11 @@
           </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">{{who}}登录</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" disabled>忘记密码</button>
       </form>
 
-      <transition name="alert" translate mode="in-out">=
-        <div v-if="connFail" :class="alert_color">
+      <transition name="alert" translate mode="in-out">
+        <div v-if="connFail" :class="alert_color" class="">
           {{msg}}
         </div>
       </transition>
