@@ -5,6 +5,7 @@ import os
 import time
 from LoadVideo import LoadVideo
 from Wisdom import Wisdom
+import getpass
 
 
 # 获取图片
@@ -34,7 +35,7 @@ def author():
     print("账号: ", end="")
     account = input()
     print("密码: ", end="")
-    password_login = input()
+    password_login = getpass.getpass()
     if account == "admin" and password_login == "123":
         return 1
     else:
@@ -55,7 +56,7 @@ if __name__ == "__main__":
             print("输入网络摄像头的用户名: ", end="")
             user = input()
             print("输入网络摄像头密码：", end="")
-            password = input()
+            password = getpass.getpass()
             print("请输入网络摄像头的ip地址: ", end="")
             ip = input()
             try:
