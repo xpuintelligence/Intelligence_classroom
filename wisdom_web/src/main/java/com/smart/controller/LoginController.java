@@ -13,13 +13,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/login")
-//@SessionAttributes(value = {"tbStudent","tbTeacher"})
+@SessionAttributes(value = {"tbStudent","tbTeacher"})
 public class LoginController {
 
     @Autowired
@@ -46,7 +47,7 @@ public class LoginController {
             //将获取到的值存进session中
             tbStudent = (TbStudent) result.getData();
             model.addAttribute("tbStudent",tbStudent);
-            Object student = request.getSession().getAttribute("tbStudent");
+
         }else if (requestLogin.getStatus() == 2){
             //老师，封装一下账号密码
             TbTeacher tbTeacher = new TbTeacher();
@@ -55,6 +56,9 @@ public class LoginController {
             //调用service层
             result = teacherLoginService.teacherLoginOfWeb(tbTeacher);
             System.out.println(result);
+            //将获取到的teacherInfo放进session种
+            tbTeacher = (TbTeacher) result.getData();
+            model.addAttribute("tbTeacher",tbTeacher);
 
         }
         return result;

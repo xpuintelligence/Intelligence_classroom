@@ -3,25 +3,25 @@ package com.smart.pojo;
 import java.io.Serializable;
 
 public class TbCourse implements Serializable {
-    private String id;
+    private String id;//课程id
 
-    private String name;
+    private String name;//课程名称
 
-    private Integer year;
+    private Integer year;//课程所在年份
 
-    private String semeter;
+    private String semeter;//课程所在学期
 
-    private String courseNote;
+    private String courseNote;//课程详情
 
-    private Integer attendanceTotalScore;
+    private Integer attendanceTotalScore;//课程考情所在占期末总分比
 
-    private Integer leaveScore;
+    private Integer leaveScore;//请假分数
 
-    private Integer attendScore;
+    private Integer attendScore;//考勤分数
 
-    private Integer lateAttendScore;
+    private Integer lateAttendScore;//迟到分数
 
-    private Integer headUpScore;
+    private Integer headUpScore;//抬头率所占课堂考勤分数
 
     private static final long serialVersionUID = 1L;
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.mapper.WCourseInfoMapper">
+    <resultMap id="CourseInfo" type="com.smart.pojo.WCourseInfo">
+        <result column="time" property="classTime"/>
+        <!--配置一下course的信息-->
+        <association property="tbCourse">
+            <id property="id" column="course_id"/>
+            <result property="name" column="course_name"/>
+            <result property="year" column="course_year"/>
+            <result property="semeter" column="semeter"/>
+            <result property="courseNote" column="course_note"/>
+            <result property="attendanceTotalScore" column="attendance_total_score"/>
+            <result property="leaveScore" column="leave_score"/>
+            <result property="attendScore" column="attend_score"/>
+            <result property="lateAttendScore" column="late_attend_score"/>
+            <result property="headUpScore" column="head_up_score"/>
+        </association>
+        <!--tbTeacher-->
+        <association property="tbTeacher">
+            <id property="" column=""/>
+        </association>
+    </resultMap>
+</mapper>

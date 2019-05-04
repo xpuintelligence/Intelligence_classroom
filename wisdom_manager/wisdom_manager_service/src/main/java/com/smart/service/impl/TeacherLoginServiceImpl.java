@@ -1,13 +1,13 @@
 package com.smart.service.impl;
 
+import com.smart.mapper.TbCourseitemMapper;
 import com.smart.mapper.TbTeacherMapper;
-import com.smart.pojo.TbTeacher;
-import com.smart.pojo.TbTeacherExample;
-import com.smart.pojo.WisdomResult;
+import com.smart.pojo.*;
 import com.smart.service.TeacherLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,8 +16,17 @@ public class TeacherLoginServiceImpl implements TeacherLoginService {
     @Autowired
     private TbTeacherMapper tbTeacherMapper;
 
+    @Autowired
+    private TbCourseitemMapper tbCourseitemMapper;
     @Override
     public WisdomResult teacherLoginOfWeb(TbTeacher tbTeacher) {
+        TbCourseitem tbCourseitem = new TbCourseitem();
+        TbCourseitemExample tbCourseitemExample = new TbCourseitemExample();
+        TbCourseitemExample.Criteria criteria1 = tbCourseitemExample.createCriteria();
+        criteria1.andTimeNotEqualTo(new Date());
+        List<TbCourseitem> tbCourseitems = tbCourseitemMapper.selectByExample(tbCourseitemExample);
+        System.out.println(tbCourseitems.size());
+
         TbTeacherExample tbTeacherExample = new TbTeacherExample();
         //附加条件
         TbTeacherExample.Criteria criteria = tbTeacherExample.createCriteria();
