@@ -1,36 +1,31 @@
 package edu.xpu.tim.myfaceapplication;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
-public class StdRegAty extends Activity {
+import com.alibaba.fastjson.JSONObject;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import cz.msebera.android.httpclient.Header;
+import edu.xpu.tim.myfaceapplication.config.AppConfig;
+
+public class StdRegAty extends AppCompatActivity {
     private EditText et_id;
     private EditText et_pwd;
-    private SharedPreferences first;
     private static final String TAG = "StdRegAty";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
-        if(first.getBoolean("isFirst", false)){
-            //如果不是第一次登陆就直接跳转主页面
-            String stu_id = first.getString("stu_id", "");
-            String stu_pwd = first.getString("stu_pwd", "");
-
-            Intent intent = new Intent(getApplicationContext(), AppleAty.class);
-            intent.putExtra("id", stu_id);
-            intent.putExtra("pwd", stu_pwd);
-
-            startActivity(intent);
-        }
-
         //是第一次则正常加载
         setContentView(R.layout.activity_std_reg_aty);
         et_id = findViewById(R.id.stu_id);
@@ -38,22 +33,92 @@ public class StdRegAty extends Activity {
     }
 
     public void toFace(View v){
+        someInfoLogin(true, new Intent(getApplicationContext(), MainActivity.class));
+    }
+
+
+    public void toTeacher(View v){
+        someInfoLogin(false, new Intent(getApplicationContext(), TeacherAty.class));
+    }
+
+    private void someInfoLogin(boolean isStu, Intent atyIntent){
         String pwd = et_pwd.getText().toString();
         String id = et_id.getText().toString();
+
+        //先检测是否为空
+        if(TextUtils.isEmpty(pwd) || TextUtils.isEmpty(id)) {
+            Toast.makeText(getApplicationContext(), "请输入完整信息", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SharedPreferences first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = first.edit();
-        edit.putString("stu_id", id);
-        edit.putString("stu_pwd", pwd);
+        if(isStu){
+            edit.putString("stu_id", id);
+            edit.putString("stu_pwd", pwd);
+            //1表示学生 2表示老师
+            edit.putInt("status", 1);
+        }else{
+            edit.putString("tea_id", id);
+            edit.putString("tea_pwd", pwd);
+            //1表示学生 2表示老师
+            edit.putInt("status", 2);
+        }
         //以后都不再是首次登录
-        edit.putBoolean("isFirst", true);
+        edit.putBoolean("isFirst", false);
 
-        if(edit.commit()) Log.i(TAG,"edit.commit() success!!!");
+        atyIntent.putExtra("pwd", pwd);
+        atyIntent.putExtra("id", id);
 
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("pwd", pwd);
-        intent.putExtra("id", id);
 
-        //先结束掉此Activity
-        startActivity(intent);
-        onStop();
+        //调用远程登录方法
+        //AsyncHttp开源项目提交数据到服务器
+        if(AppConfig.netWork){
+            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+            //准备数据包
+            RequestParams params = new RequestParams();
+            params.put("account",id);
+            params.put("password",pwd);
+
+            //学生\老师登陆
+            params.put("status", isStu ? 1:2);
+
+            //准备请求地址
+            asyncHttpClient.post(AppConfig.loginAddress, params, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    try{
+                        String retStr = new String(responseBody);
+
+                        Log.i(TAG, retStr);
+                        JSONObject retJson = JSONObject.parseObject(retStr);
+                        Integer status = retJson.getInteger("status");
+                        if(1 == status){
+                            edit.putString("retStr", retStr);
+                            if(edit.commit()) Log.i(TAG,"edit.commit() success!!!");
+
+                            Toast.makeText(StdRegAty.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            //先结束掉此Activity
+                            startActivity(atyIntent);
+                            finish();
+                        }else if(0 == status){
+                            Toast.makeText(StdRegAty.this, "用户名或密码不正确", Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Web端严重错误！！！", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    Toast.makeText(getApplicationContext(), "网络堵塞", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }else{
+            //无网络状态下演示用
+            startActivity(atyIntent);
+            finish();
+        }
     }
 }

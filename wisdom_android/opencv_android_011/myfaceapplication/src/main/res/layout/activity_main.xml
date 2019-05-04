@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
+    <!-- 人脸特征检测 -->
     <org.opencv.android.JavaCameraView
         android:id="@+id/javaCameraView"
         android:layout_width="match_parent"

@@ -1,7 +1,6 @@
 package edu.xpu.tim.myfaceapplication;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import org.opencv.android.CameraBridgeViewBase;
@@ -27,30 +27,26 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+import edu.xpu.tim.myfaceapplication.config.AppConfig;
 import edu.xpu.tim.myfaceapplication.util.AuthService;
 import edu.xpu.tim.myfaceapplication.util.ImgSaveUtils;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
-
-public class MainActivity extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
+public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private CameraBridgeViewBase openCvCameraView;
     private static final int NOT_NOTICE = 2;//如果勾选了不再询问
 
     private String pwd;
     private String id;
     private int pictureNum = 0;
-
     private String accessToken;
 
     private static final String TAG = "MainActivity";
     private CascadeClassifier cascadeClassifier = null; //级联分类器
     private Mat mRgba; //图像容器
-    private Mat mGray;
+    private Mat mGray; //图像容器
     private int absoluteFaceSize = 0;
-
-    //图片采集张数
-    private static final int PICTURE_COUNT = 2;
 
     private void initializeOpenCVDependencies() {
         try {
@@ -77,6 +73,8 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
         myRequetPermission();
         new Thread(()-> accessToken = AuthService.getAuth()).start();
@@ -135,16 +133,16 @@ public class MainActivity extends Activity implements CameraBridgeViewBase.CvCam
         Rect[] facesArray = faces.toArray();
         if (facesArray.length > 0){
             pictureNum++;
-            if(pictureNum < PICTURE_COUNT){
+            if(pictureNum < AppConfig.pictureCount){
                 //保存至本地
                 Bitmap mBitmap = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.RGB_565);
                 Utils.matToBitmap(mRgba, mBitmap);
                 ImgSaveUtils.saveImageToGallery(getApplicationContext(), mBitmap, id, pwd);
             }else{
-                Intent intent = new Intent(getApplicationContext(), AppleAty.class);
-                intent.putExtra("id", id);
+                Intent intent = new Intent(getApplicationContext(), StudentAty.class);
+                //intent.putExtra("id", id);
                 startActivity(intent);
-                onStop();
+                finish();
             }
 
             Log.i(TAG, "检测到人脸");

@@ -13,3 +13,8 @@ RoWe98: https://github.com/RoWe98
 ahojcn: https://github.com/ahojcn
 
 MrDalili: https://github.com/MrDalili
+
+
+# Android端的功能
+* 人脸检测+人脸照片上传
+* 学生登录
