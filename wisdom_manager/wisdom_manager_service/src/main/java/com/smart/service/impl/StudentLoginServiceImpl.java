@@ -41,8 +41,10 @@ public class StudentLoginServiceImpl implements StudentLoginService, Serializabl
     }
 
     @Override
-    public boolean studentLoginOfWX(TbStudent tbStudent) {
-        return false;
+    public WisdomResult studentLoginOfWX(TbStudent tbStudent) {
+        WisdomResult wisdomResult= null;
+
+        return wisdomResult;
     }
 
 

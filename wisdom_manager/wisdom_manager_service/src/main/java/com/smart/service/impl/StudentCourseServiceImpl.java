@@ -1,11 +1,29 @@
 package com.smart.service.impl;
 
+import com.smart.mapper.TbStudentMapper;
 import com.smart.pojo.TbStudent;
+import com.smart.pojo.WCourseInfo;
 import com.smart.pojo.WisdomResult;
 import com.smart.service.StudentCourseService;
+import com.smart.utils.DateUtils;
+import org.apache.ibatis.annotations.Param;
+import org.joda.time.DateTime;
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
-public class StudentCourseServiceImpl implements StudentCourseService {
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
+@Service
+public class StudentCourseServiceImpl implements StudentCourseService, Serializable {
+    //定义时间格式
+    @Value("yyyy-MM-dd HH:mm:ss")
+    private String DATE_FORMAT_TOSTRING ;
+    @Autowired
+    private TbStudentMapper tbStudentMapper;
     /**
      * 获取一段区间内的课程
      * @param tbStudent 要查询的学生
@@ -36,7 +54,22 @@ public class StudentCourseServiceImpl implements StudentCourseService {
      */
     @Override
     public WisdomResult getCourseOfToday(TbStudent tbStudent) {
-        return null;
+        //获取当前时间
+        DateTime currentTime = DateUtils.getCurrentTime();
+        //获取时间段
+        Map<String, DateTime> map = DateUtils.spellTime(currentTime);
+        //获取课程信息列表
+        List<WCourseInfo> wCourseInfoList = tbStudentMapper.selectWCourseInfo(tbStudent.getClassId(),
+                map.get("current").toString(DATE_FORMAT_TOSTRING), map.get("tomorrow").toString(DATE_FORMAT_TOSTRING));
+        //定义返回值
+        WisdomResult wisdomResult ;
+        //判断返回值是否为空
+        if (wCourseInfoList.size() == 0){
+            wisdomResult = new WisdomResult(1,"该时间段中无课程信息",wCourseInfoList);
+        }else {
+            wisdomResult = new WisdomResult(2,"true",wCourseInfoList);
+        }
+        return wisdomResult;
     }
 
     /**
@@ -60,8 +93,14 @@ public class StudentCourseServiceImpl implements StudentCourseService {
         return null;
     }
 
+    /**
+     *
+     * @param tbStudent
+     * @return
+     */
     @Override
     public WisdomResult getCourseThisWeek(TbStudent tbStudent) {
         return null;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.smart.utils;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 /**
  * 
  */
-public class JsonUtils {
+public class JsonUtils implements Serializable {
 
     // 定义jackson对象
     private static final ObjectMapper MAPPER = new ObjectMapper();
@@ -35,7 +36,7 @@ public class JsonUtils {
      * 将json结果集转化为对象
      * 
      * @param jsonData json数据
-     * @param clazz 对象中的object类型
+
      * @return
      */
     public static <T> T jsonToPojo(String jsonData, Class<T> beanType) {

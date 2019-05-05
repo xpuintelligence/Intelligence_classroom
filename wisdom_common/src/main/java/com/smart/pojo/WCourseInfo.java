@@ -1,12 +1,13 @@
 package com.smart.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author LM_Code
  * @create 2019-05-05-15:27
  */
-public class WCourseInfo {
+public class WCourseInfo implements Serializable {
     String id;
     Date time;
     String courseId;

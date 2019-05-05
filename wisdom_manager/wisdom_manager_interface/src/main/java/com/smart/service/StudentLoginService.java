@@ -15,5 +15,5 @@ public interface StudentLoginService {
     /**
      * 通过web端登陆学生端
      */
-    boolean studentLoginOfWX(TbStudent tbStudent);
+    WisdomResult studentLoginOfWX(TbStudent tbStudent);
 }

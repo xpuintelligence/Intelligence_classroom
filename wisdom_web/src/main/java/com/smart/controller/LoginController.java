@@ -28,7 +28,7 @@ public class LoginController {
     @Autowired
     private TeacherLoginService teacherLoginService;
     //,method = RequestMethod.POST
-    @RequestMapping(value = "all")
+    @RequestMapping("/all")
     @ResponseBody
     public WisdomResult webAppLogin(RequestLogin requestLogin, Model model, HttpServletRequest request){
         System.out.println(requestLogin);
@@ -45,8 +45,7 @@ public class LoginController {
             result = studentLoginService.studentLoginOfWeb(tbStudent);
             //将获取到的值存进session中
             tbStudent = (TbStudent) result.getData();
-            model.addAttribute("tbStudent",tbStudent);
-            Object student = request.getSession().getAttribute("tbStudent");
+            request.getSession().setAttribute("tbStudent",tbStudent);
         }else if (requestLogin.getStatus() == 2){
             //老师，封装一下账号密码
             TbTeacher tbTeacher = new TbTeacher();
@@ -60,6 +59,19 @@ public class LoginController {
         return result;
     }
 
+    @RequestMapping("/weixinLogin")
+    @ResponseBody
+    public WisdomResult weiXinLogin(String openId , String account , String password,HttpServletRequest request){
+        //取出数据分装起来
+        TbStudent tbStudent = new TbStudent();
+        tbStudent.setWexinId(openId);
+        tbStudent.setId(account);
+        tbStudent.setPassword(password);
+        //调用service层登陆方法
+        WisdomResult wisdomResult = studentLoginService.studentLoginOfWX(tbStudent);
+
+        return wisdomResult;
+    }
     @RequestMapping("test")
     private void test(ModelMap modelMap){
         System.out.println(modelMap.get("tbStudent"));

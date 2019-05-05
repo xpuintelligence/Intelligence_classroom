@@ -8,10 +8,11 @@ import com.smart.service.TeacherLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class TeacherLoginServiceImpl implements TeacherLoginService {
+public class TeacherLoginServiceImpl implements TeacherLoginService, Serializable {
 
     @Autowired
     private TbTeacherMapper tbTeacherMapper;
