@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.mapper.TbAttendanceMapper">
+  <resultMap id="BaseResultMap" type="com.smart.pojo.TbAttendance">
+    <id column="attendance_id" jdbcType="VARCHAR" property="attendanceId" />
+    <result column="courseitem_id" jdbcType="VARCHAR" property="courseitemId" />
+    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="head_up_rate" jdbcType="DOUBLE" property="headUpRate" />
+    <result column="goal" jdbcType="INTEGER" property="goal" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    attendance_id, courseitem_id, student_id, create_date, status, head_up_rate, goal
+  </sql>
+  <select id="selectByExample" parameterType="com.smart.pojo.TbAttendanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_attendance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_attendance
+    where attendance_id = #{attendanceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tb_attendance
+    where attendance_id = #{attendanceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.smart.pojo.TbAttendanceExample">
+    delete from tb_attendance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.smart.pojo.TbAttendance">
+    insert into tb_attendance (attendance_id, courseitem_id, student_id, 
+      create_date, status, head_up_rate, 
+      goal)
+    values (#{attendanceId,jdbcType=VARCHAR}, #{courseitemId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, #{headUpRate,jdbcType=DOUBLE}, 
+      #{goal,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smart.pojo.TbAttendance">
+    insert into tb_attendance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attendanceId != null">
+        attendance_id,
+      </if>
+      <if test="courseitemId != null">
+        courseitem_id,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="headUpRate != null">
+        head_up_rate,
+      </if>
+      <if test="goal != null">
+        goal,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attendanceId != null">
+        #{attendanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="courseitemId != null">
+        #{courseitemId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="headUpRate != null">
+        #{headUpRate,jdbcType=DOUBLE},
+      </if>
+      <if test="goal != null">
+        #{goal,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.smart.pojo.TbAttendanceExample" resultType="java.lang.Long">
+    select count(*) from tb_attendance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_attendance
+    <set>
+      <if test="record.attendanceId != null">
+        attendance_id = #{record.attendanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.courseitemId != null">
+        courseitem_id = #{record.courseitemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null">
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.headUpRate != null">
+        head_up_rate = #{record.headUpRate,jdbcType=DOUBLE},
+      </if>
+      <if test="record.goal != null">
+        goal = #{record.goal,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_attendance
+    set attendance_id = #{record.attendanceId,jdbcType=VARCHAR},
+      courseitem_id = #{record.courseitemId,jdbcType=VARCHAR},
+      student_id = #{record.studentId,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=CHAR},
+      head_up_rate = #{record.headUpRate,jdbcType=DOUBLE},
+      goal = #{record.goal,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smart.pojo.TbAttendance">
+    update tb_attendance
+    <set>
+      <if test="courseitemId != null">
+        courseitem_id = #{courseitemId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        student_id = #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="headUpRate != null">
+        head_up_rate = #{headUpRate,jdbcType=DOUBLE},
+      </if>
+      <if test="goal != null">
+        goal = #{goal,jdbcType=INTEGER},
+      </if>
+    </set>
+    where attendance_id = #{attendanceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smart.pojo.TbAttendance">
+    update tb_attendance
+    set courseitem_id = #{courseitemId,jdbcType=VARCHAR},
+      student_id = #{studentId,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=CHAR},
+      head_up_rate = #{headUpRate,jdbcType=DOUBLE},
+      goal = #{goal,jdbcType=INTEGER}
+    where attendance_id = #{attendanceId,jdbcType=VARCHAR}
+  </update>
+</mapper>
