@@ -30,5 +30,5 @@ public interface TbStudentMapper {
 
     int updateByPrimaryKey(TbStudent record);
 
-    WCourseInfo selectWCourseInfo(String id);
+    List<WCourseInfo> selectWCourseInfo(@Param("classId")String classId , @Param("start") String start , @Param("end") String end);
 }

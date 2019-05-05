@@ -4,13 +4,14 @@ import com.smart.pojo.WisdomResult;
 import org.joda.time.DateTime;
 import org.junit.Test;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 专门用来计算时间的时间类
  */
-public class DateUtils {
+public class DateUtils implements Serializable {
 
     //定义时间格式
     private String DATE_FORMAT_TOSTRING = "yyyy-MM-dd HH:mm:ss";

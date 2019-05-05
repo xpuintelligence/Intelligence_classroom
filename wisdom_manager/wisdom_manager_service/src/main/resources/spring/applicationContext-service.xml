@@ -19,5 +19,10 @@
     <dubbo:protocol name="dubbo" port="20880" />
     <!-- 声明需要暴露的服务接口 -->
     <!--<dubbo:service interface="com.taotao.service.TestService" ref="testServiceImpl" />-->
-
+    <!--学生登陆-->
+    <dubbo:service interface="com.smart.service.StudentLoginService" ref="studentLoginServiceImpl" />
+    <!--老师登陆-->
+    <dubbo:service interface="com.smart.service.TeacherLoginService" ref="teacherLoginServiceImpl" />
+    <!--学生课程信息-->
+    <dubbo:service interface="com.smart.service.StudentCourseService" ref="studentCourseServiceImpl" />
 </beans>

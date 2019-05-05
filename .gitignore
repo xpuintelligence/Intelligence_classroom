@@ -7,3 +7,9 @@
 *.iml
 out
 gen
+/wisdom_manager/wisdom_manager_service/target/
+/wisdom_manager/wisdom_manager_pojo/target/
+/wisdom_manager/wisdom_manager_dao/target/
+/wisdom_manager/wisdom_manager_interface/target/
+/wisdom_common/target/
+/wisdom_web/target/

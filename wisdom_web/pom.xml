@@ -12,6 +12,10 @@
     <artifactId>wisdom_web</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
         <!--mybatis分页-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>

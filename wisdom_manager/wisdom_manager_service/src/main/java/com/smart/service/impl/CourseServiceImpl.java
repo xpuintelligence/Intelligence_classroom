@@ -6,10 +6,11 @@ import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import org.junit.Test;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CourseServiceImpl implements CourseService {
+public class CourseServiceImpl implements CourseService, Serializable {
     private DateTime opentime;//开学时间
     private DateTime recessTime;//放假时间
     public CourseServiceImpl() {

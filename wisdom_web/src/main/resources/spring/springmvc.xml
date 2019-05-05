@@ -21,6 +21,9 @@
     <dubbo:application name="wisdom-manager-web"/>
     <dubbo:registry protocol="zookeeper" address="47.103.14.73:2181"/>
     <!--<dubbo:reference interface="com.taotao.service.TestService" id="testService"/>-->
+    <dubbo:reference interface="com.smart.service.StudentLoginService" id="studentLoginService" timeout="10000"/>
+    <dubbo:reference interface="com.smart.service.TeacherLoginService" id="teacherLoginService" timeout="10000"/>
+    <dubbo:reference interface="com.smart.service.StudentCourseService" id="studentCourseService" timeout="10000"/>
     <!--使用分页查询ItItem对应的服务接口-->
     <!--配置本地资源不被拦截-->
     <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>

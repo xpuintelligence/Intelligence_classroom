@@ -123,5 +123,24 @@ public class TbStudent implements Serializable {
 
     public void setIdentityId(String identityId) {
         this.identityId = identityId == null ? null : identityId.trim();
+
+    }
+
+    @Override
+    public String toString() {
+        return "TbStudent{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", picture='" + picture + '\'' +
+                ", classId='" + classId + '\'' +
+                ", professionId='" + professionId + '\'' +
+                ", collegeId='" + collegeId + '\'' +
+                ", password='" + password + '\'' +
+                ", wexinId='" + wexinId + '\'' +
+                ", phoneCode='" + phoneCode + '\'' +
+                ", email='" + email + '\'' +
+                ", identityId='" + identityId + '\'' +
+                '}';
     }
 }
