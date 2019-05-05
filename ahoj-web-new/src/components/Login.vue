@@ -1,6 +1,8 @@
 <template>
   <div class="components-Login">
-    <Index></Index>
+    <!-- <Index></Index> -->
+    <img alt="logo.png" src="../assets/logo.png" style="width: 200px">
+    <br />
 
     <div class="container" v-on:submit.prevent="onSubmit">
       <form class="form-signin" action.pravite="#">
