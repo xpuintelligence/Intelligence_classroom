@@ -1,7 +1,7 @@
 {
   "name": "i-class",
   "version": "1.0.0",
-  "description": "i-class web proj.",
+  "description": "i-class web project.",
   "author": "ahojcn <hanoi_ahoj@icloud.com>",
   "private": true,
   "scripts": {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="components-Login">
     <Index></Index>
 
     <div class="container" v-on:submit.prevent="onSubmit">
@@ -163,7 +163,6 @@
   }
 
   .alert-enter, .alert-leave-to
-    /* .slide-fade-leave-active for below version 2.1.8 */
   {
     transform: translateY(-10px);
     opacity: 0;
