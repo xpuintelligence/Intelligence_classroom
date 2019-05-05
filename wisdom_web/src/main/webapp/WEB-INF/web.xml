@@ -4,8 +4,6 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
-    <!--配置dispatcherservlet前端控制器-->
-    <!--url拦截器-->
     <display-name>wisdom-manager-web</display-name>
 
     <!-- 解决post乱码 -->
