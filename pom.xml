@@ -113,7 +113,7 @@
             </dependency>
             <dependency>
                 <groupId>com.github.miemiedev</groupId>
-                    <artifactId>mybatis-paginator</artifactId>
+                <artifactId>mybatis-paginator</artifactId>
                 <version>${mybatis.paginator.version}</version>
             </dependency>
             <dependency>
@@ -139,7 +139,6 @@
                 <artifactId>spring-context</artifactId>
                 <version>${spring.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>

@@ -2,9 +2,8 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbPosition;
 import com.smart.pojo.TbPositionExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TbPositionMapper {
     long countByExample(TbPositionExample example);

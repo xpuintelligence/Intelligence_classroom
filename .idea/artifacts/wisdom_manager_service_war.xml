@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="wisdom_manager_service:war">
+    <output-path>$PROJECT_DIR$/wisdom_manager/wisdom_manager_service/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>wisdom_manager_service</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="wisdom_manager_service.war">
+      <element id="artifact" artifact-name="wisdom_manager_service:war exploded" />
+    </root>
+  </artifact>
+</component>

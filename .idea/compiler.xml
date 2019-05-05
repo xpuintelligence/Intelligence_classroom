@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="wisdom_common" />
+        <module name="wisdom_manager_dao" />
+        <module name="wisdom_manager_interface" />
+        <module name="wisdom_manager_pojo" />
+        <module name="wisdom_manager_service" />
+        <module name="wisdom_web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="git_wisdom" target="1.8" />
+      <module name="wisdom_common" target="1.8" />
+      <module name="wisdom_manager" target="1.8" />
+      <module name="wisdom_manager_dao" target="1.8" />
+      <module name="wisdom_manager_interface" target="1.8" />
+      <module name="wisdom_manager_pojo" target="1.8" />
+      <module name="wisdom_manager_service" target="1.8" />
+      <module name="wisdom_web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

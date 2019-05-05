@@ -13,6 +13,7 @@
     <result column="wexin_id" jdbcType="VARCHAR" property="wexinId" />
     <result column="phone_code" jdbcType="VARCHAR" property="phoneCode" />
     <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="identity_id" jdbcType="VARCHAR" property="identityId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,7 +75,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, name, sex, picture, class_id, profession_id, college_id, password, wexin_id, 
-    phone_code, email
+    phone_code, email, identity_id
   </sql>
   <select id="selectByExample" parameterType="com.smart.pojo.TbStudentExample" resultMap="BaseResultMap">
     select
@@ -110,11 +111,11 @@
     insert into tb_student (id, name, sex, picture, 
       class_id, profession_id, college_id, 
       password, wexin_id, phone_code, 
-      email)
+      email, identity_id)
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{picture,jdbcType=VARCHAR}, 
       #{classId,jdbcType=VARCHAR}, #{professionId,jdbcType=VARCHAR}, #{collegeId,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{wexinId,jdbcType=VARCHAR}, #{phoneCode,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR})
+      #{email,jdbcType=VARCHAR}, #{identityId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.smart.pojo.TbStudent">
     insert into tb_student
@@ -152,6 +153,9 @@
       <if test="email != null">
         email,
       </if>
+      <if test="identityId != null">
+        identity_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -186,6 +190,9 @@
       </if>
       <if test="email != null">
         #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="identityId != null">
+        #{identityId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -231,6 +238,9 @@
       <if test="record.email != null">
         email = #{record.email,jdbcType=VARCHAR},
       </if>
+      <if test="record.identityId != null">
+        identity_id = #{record.identityId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +258,8 @@
       password = #{record.password,jdbcType=VARCHAR},
       wexin_id = #{record.wexinId,jdbcType=VARCHAR},
       phone_code = #{record.phoneCode,jdbcType=VARCHAR},
-      email = #{record.email,jdbcType=VARCHAR}
+      email = #{record.email,jdbcType=VARCHAR},
+      identity_id = #{record.identityId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +297,9 @@
       <if test="email != null">
         email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="identityId != null">
+        identity_id = #{identityId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -300,7 +314,18 @@
       password = #{password,jdbcType=VARCHAR},
       wexin_id = #{wexinId,jdbcType=VARCHAR},
       phone_code = #{phoneCode,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR}
+      email = #{email,jdbcType=VARCHAR},
+      identity_id = #{identityId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectWCourseInfo" resultType="com.smart.pojo.WCourseInfo">
+    select tb_courseitem.* , tb_teacher.name as teacher_name ,tb_course.name as course_name ,tb_course.course_note ,tb_course.attendance_total_score ,tb_course.leave_score ,tb_course.attend_score ,tb_course.late_attend_score ,tb_course.head_up_score
+    from tb_course_class ,tb_courseitem ,tb_teacher ,tb_course
+    where tb_course_class.class_id = #{classId}
+    and tb_courseitem.course_id = tb_course_class.course_id
+    and tb_courseitem.teacher_id = tb_teacher.id
+    and tb_course.id = tb_courseitem.course_id
+    and tb_courseitem.time between #{start} and #{end}
+  </select>
 </mapper>

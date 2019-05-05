@@ -7,6 +7,9 @@
     <!--配置dispatcherservlet前端控制器-->
     <!--url拦截器-->
     <display-name>wisdom-manager-web</display-name>
+    <welcome-file-list>
+        <welcome-file>login.html</welcome-file>
+    </welcome-file-list>
 
     <!-- 解决post乱码 -->
     <filter>
