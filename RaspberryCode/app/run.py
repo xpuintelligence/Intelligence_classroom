@@ -59,20 +59,27 @@ if __name__ == "__main__":
             password = getpass.getpass()
             print("请输入网络摄像头的ip地址: ", end="")
             ip = input()
-            try:
-                while True:
-                    localtime = time.strftime("%H-%M-%S")
-                    newtime = localtime.split('-')
-                    if(int(newtime[2])%10==0):
-                        print()
-                        get_image(user, ip, password)
-                        print("图片获取完毕")
-                        print("开始识别")
-                        print()
-                        run_program()
-                        print("识别结束 开始清除缓存")
-                        time.sleep(1)
-            except KeyboardInterrupt:
-                pass
+            print("你输入的内容为："+user+":"+password+"@"+ip+",请检查!")
+            print("是否有误?(Y/N)")
+            passflag = input()
+            if(passflag == "N" or passflag == "n"):
+                try:
+                    while True:
+                        localtime = time.strftime("%H-%M-%S")
+                        newtime = localtime.split('-')
+                        if(int(newtime[2])%10==0):
+                            print()
+                            get_image(user, ip, password)
+                            print("图片获取完毕")
+                            print("开始识别")
+                            print()
+                            run_program()
+                            print("识别结束 开始清除缓存")
+                            time.sleep(1)
+                except KeyboardInterrupt:
+                    pass
+            else:
+                print("程序退出，欢迎使用!")
+                
     else:
         print("登陆失败")
