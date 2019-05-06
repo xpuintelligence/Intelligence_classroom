@@ -11,6 +11,7 @@ student_name_list = []
 # 测试用列表 是要更改的 目前希望是每个教室应该在的学生对应一个表 
 # 这样可以获得这个教室里面所有学生的学号信息 
 student_acutal_list = ['41609050203','41609050201','41604090109']
+# 出勤学生学号信息的列表
 student_id_list = []
 
 class FaceSearch:
@@ -79,18 +80,24 @@ class FaceSearch:
 
     # 判断当前学号是否在该班级学号列表中
     def judge_id_In_Not(self, student_id_list):
-        faceDataBase = self.initdatabase()
-        student_left = list(set(student_acutal_list)-set(student_id_list))
-        if len(student_left):
+        faceDataBase = self.initdatabase() # 初始化数据库对象
+        # 利用当前教室学生的学号和检测到的学生的学号求补集
+        student_left = list(set(student_acutal_list)-set(student_id_list)) 
+        # 低头学生学号信息的列表
+        student_headown_list = []
+        # 如果补集存在（没有抬头的学生存在）
+        if len(student_left):             
             for student_left_name in student_left:
                 try:
-                    print(student_left_name)
-                    student_name = faceDataBase.get_student_name(str(student_left_name))
-                    print("当前一直低头的学生为:"+str(student_name))
+                    # 返回当前低头的学生的id
+                    student_headown_name = faceDataBase.get_student_name(str(student_left_name))
+                    # 将低头学生的id保存到低头学生的列表中
+                    student_headown_list.append(student_headown_name)
                 except Exception:
                     os.chdir("../faces")
                     os.system("rm -rf *.jpg")
                     pass
+            print("当前低头的学生为:"+str(student_headown_list))
         
 
         
