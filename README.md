@@ -18,3 +18,7 @@ MrDalili: https://github.com/MrDalili
 # Android端的功能
 * 人脸检测+人脸照片上传
 * 学生登录
+* 学生个人信息展示
+* 主页面缓存
+
+
