@@ -1,9 +1,10 @@
 <template>
-  <transition enter-active-class="lightSpeedIn">
+  <!-- <transition enter-active-class="lightSpeedIn"> -->
+  <transition enter-active-class="fadeInRight">
     <div v-show="flag" class="components-Login animated">
-
       <div class="container" v-on:submit.prevent="onSubmit">
         <form class="form-signin" action.pravite="#">
+          
           <transition enter-active-class="bounceIn">
             <div v-if="connFail" :class="alert_color" class="animated">{{msg}}</div>
           </transition>

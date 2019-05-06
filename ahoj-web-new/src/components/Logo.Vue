@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition enter-active-class="rubberBand">
+    <transition enter-active-class="flip">
       <img
         v-show="flag"
         alt="logo.png"
