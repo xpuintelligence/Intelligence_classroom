@@ -30,7 +30,7 @@ public class DateUtils implements Serializable {
         //向前推x个月
         DateTime month = dateTime.minusMonths(x);
         //计算该月的第一天
-        map.put("first",month.dayOfMonth().withMinimumValue());
+        map.put("start",month.dayOfMonth().withMinimumValue());
         //计算该月的最后一天
         map.put("end",month.dayOfMonth().withMaximumValue());
         //返回
@@ -45,7 +45,7 @@ public class DateUtils implements Serializable {
         //向前x个星期
         DateTime week = dateTime.minusWeeks(x);
         //计算月初
-        map.put("first",week.dayOfWeek().withMinimumValue());
+        map.put("start",week.dayOfWeek().withMinimumValue());
         //计算月末
         map.put("end",week.dayOfWeek().withMaximumValue());
         return map;
@@ -59,7 +59,7 @@ public class DateUtils implements Serializable {
         //向前推x个月
         DateTime month = dateTime.plusMonths(x);
         //计算该月的第一天
-        map.put("first",month.dayOfMonth().withMinimumValue());
+        map.put("start",month.dayOfMonth().withMinimumValue());
         //计算该月的最后一天
         map.put("end",month.dayOfMonth().withMaximumValue());
         //返回
@@ -74,7 +74,7 @@ public class DateUtils implements Serializable {
         //向前x个星期
         DateTime week = dateTime.plusWeeks(x);
         //计算月初
-        map.put("first",week.dayOfWeek().withMinimumValue());
+        map.put("start",week.dayOfWeek().withMinimumValue());
         //计算月末
         map.put("end",week.dayOfWeek().withMaximumValue());
         return map;
@@ -100,8 +100,8 @@ public class DateUtils implements Serializable {
         DateTime tomorrowDay = new DateTime(tomorrow.getYear(), tomorrow.getMonthOfYear(), tomorrow.getDayOfMonth()
                 , 0, 0);
         //添加进map中
-        map.put("current", beginDay);
-        map.put("tomorrow", tomorrowDay);
+        map.put("start", beginDay);
+        map.put("end", tomorrowDay);
         return map;
     }
 

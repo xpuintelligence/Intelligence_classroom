@@ -25,4 +25,5 @@
     <dubbo:service interface="com.smart.service.TeacherLoginService" ref="teacherLoginServiceImpl" />
     <!--学生课程信息-->
     <dubbo:service interface="com.smart.service.StudentCourseService" ref="studentCourseServiceImpl" />
+
 </beans>
