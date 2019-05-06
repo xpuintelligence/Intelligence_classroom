@@ -136,11 +136,12 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
             if(pictureNum < AppConfig.pictureCount){
                 //保存至本地
                 Bitmap mBitmap = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.RGB_565);
-                Utils.matToBitmap(mRgba, mBitmap);
-                ImgSaveUtils.saveImageToGallery(getApplicationContext(), mBitmap, id, pwd);
+                if(AppConfig.netWork){
+                    Utils.matToBitmap(mRgba, mBitmap);
+                    ImgSaveUtils.saveImageToGallery(getApplicationContext(), mBitmap, id, pwd);
+                }
             }else{
                 Intent intent = new Intent(getApplicationContext(), StudentAty.class);
-                //intent.putExtra("id", id);
                 startActivity(intent);
                 finish();
             }

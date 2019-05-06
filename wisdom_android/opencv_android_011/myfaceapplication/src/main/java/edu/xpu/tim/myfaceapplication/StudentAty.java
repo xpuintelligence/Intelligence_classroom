@@ -1,28 +1,34 @@
 package edu.xpu.tim.myfaceapplication;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONObject;
+import edu.xpu.tim.myfaceapplication.fragment.student.SFragmentHome;
+import edu.xpu.tim.myfaceapplication.fragment.student.SFragmentMain;
+import edu.xpu.tim.myfaceapplication.fragment.student.SFragmentMy;
+
 
 public class StudentAty extends AppCompatActivity {
-    private static final String TAG = "StudentAty";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_aty);
-
-        TextView viewById = findViewById(R.id.stuInfo);
-        SharedPreferences first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
-        String retStr = first.getString("retStr", "");
-        Log.i(TAG, retStr);
-        JSONObject jsonObject = JSONObject.parseObject(retStr);
-        JSONObject data = jsonObject.getJSONObject("data");
-        Log.i(TAG, data.toJSONString());
-        viewById.setText(data.getString("name") + " " + data.getString("id"));
+        BottomBar bottomBar = findViewById(R.id.bottom_bar);
+        bottomBar.setContainer(R.id.fl_container_student)
+                .setTitleBeforeAndAfterColor("#999999", "#ff5d5e")
+                .addItem(SFragmentHome.class,
+                        "首页",
+                        R.drawable.item1_before,
+                        R.drawable.item1_after)
+                .addItem(SFragmentMain.class,
+                        "数据",
+                        R.drawable.item2_before,
+                        R.drawable.item2_after)
+                .addItem(SFragmentMy.class,
+                        "我的",
+                        R.drawable.item3_before,
+                        R.drawable.item3_after)
+                .build();
     }
 }

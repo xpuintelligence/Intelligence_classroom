@@ -1,6 +1,7 @@
 package edu.xpu.tim.myfaceapplication.config;
 
 public interface AppConfig {
+
     //网络控制
     boolean netWork = true;
 
@@ -9,6 +10,4 @@ public interface AppConfig {
 
     //登录请求地址
     String loginAddress = "http://47.103.14.73/wisdom_web/login/all";
-
-
 }

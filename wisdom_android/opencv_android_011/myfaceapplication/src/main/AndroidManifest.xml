@@ -31,12 +31,14 @@
             android:name=".StdRegAty"
             android:launchMode="singleTask">
         </activity>
-        <activity android:name=".StudentAty"
-            android:label="智慧教室（学生版）"
+
+        <activity
+            android:name=".StudentAty"
             android:launchMode="singleTask">
         </activity>
-        <activity android:name=".TeacherAty"
-            android:label="智慧教室（教师版）"
+
+        <activity
+            android:name=".TeacherAty"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
