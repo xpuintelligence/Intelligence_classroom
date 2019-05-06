@@ -1,50 +1,46 @@
 <template>
-  <div class="components-Login">
-    <!-- <Index></Index> -->
-    <img alt="logo.png" src="../assets/logo.png" style="width: 200px">
-    <br>
+  <transition enter-active-class="lightSpeedIn">
+    <div v-show="flag" class="components-Login animated">
 
-    <div class="container" v-on:submit.prevent="onSubmit">
-      <form class="form-signin" action.pravite="#">
-        <!-- <transition name="alert" translate mode="in-out">
-          <div v-if="connFail" :class="alert_color" class>{{msg}}</div>
-        </transition> -->
-        <transition enter-active-class="bounceIn">
-          <div v-if="connFail" :class="alert_color" class="animated">{{msg}}</div>
-        </transition>
-        <p></p>
+      <div class="container" v-on:submit.prevent="onSubmit">
+        <form class="form-signin" action.pravite="#">
+          <transition enter-active-class="bounceIn">
+            <div v-if="connFail" :class="alert_color" class="animated">{{msg}}</div>
+          </transition>
+          <p></p>
 
-        <label for="inputUsername" class="sr-only">username</label>
-        <input
-          type="username"
-          id="inputUsername"
-          v-model="input_username"
-          class="form-control"
-          placeholder="用户名"
-          required
-          v-focus
-        >
-        <p></p>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input
-          type="password"
-          id="inputPassword"
-          v-model="input_password"
-          class="form-control"
-          placeholder="密码"
-          required
-        >
+          <label for="inputUsername" class="sr-only">username</label>
+          <input
+            type="username"
+            id="inputUsername"
+            v-model="input_username"
+            class="form-control"
+            placeholder="用户名"
+            required
+            v-focus
+          >
+          <p></p>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input
+            type="password"
+            id="inputPassword"
+            v-model="input_password"
+            class="form-control"
+            placeholder="密码"
+            required
+          >
 
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="isTeacher" @change="changeWho">我是教师
-          </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">{{who}}登录</button>
-        <button class="btn btn-lg btn-primary btn-block" type="button" disabled>忘记密码</button>
-      </form>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" value="isTeacher" @change="changeWho">我是教师
+            </label>
+          </div>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">{{who}}登录</button>
+          <button class="btn btn-lg btn-primary btn-block" type="button" disabled>忘记密码</button>
+        </form>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -55,6 +51,7 @@ export default {
   components: { Index },
   data() {
     return {
+      flag: false,
       who: "学生",
       input_username: "",
       input_password: "",
@@ -68,6 +65,9 @@ export default {
       ]
     };
   },
+  mounted() {
+    this.flag = true;
+  },
   methods: {
     changeWho() {
       if (this.who === "学生") {
@@ -80,29 +80,6 @@ export default {
     },
     onSubmit: async function() {
       this.connFail = true;
-      // this.$http.post(
-      //   "http://jsonplaceholder.typicode.com/posts",
-      //   // "http://47.103.14.73/wisdom_web/login/all",
-      //   {
-      //     account: this.input_username,
-      //     password: this.input_password,
-      //     status: this.input_who
-      //   },
-      //   {
-      //     emulateJSON: true
-      //   }
-      // ).then((data) => {
-      //   console.log(data);
-      // });
-      // this.$jsonp('http://47.103.14.73'+'/wisdom_web/login/all',{
-      //   account: this.input_username,
-      //   password: this.input_password,
-      //   status: this.input_who
-      // }).then(json=>{
-      //   console.log(json);
-      // }).catch(err=>{
-      //   this.connFail = true;
-      // })
       try {
         let res = await this.$http.post(
           "wisdom_web/login/all",
@@ -110,10 +87,10 @@ export default {
             account: this.input_username,
             password: this.input_password,
             status: this.input_who
-          },{}
+          },
+          {}
           // { emulateJSON: true }
         );
-        // console.log(res.data);
         if (res.data.msg === "true") {
           this.alert_color = this.alert_color_arr[1];
           this.msg = "你好 , " + res.data.data.name;
@@ -172,19 +149,5 @@ export default {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.alert-enter-active {
-  transition: all 1s ease;
-}
-
-.alert-leave-active {
-  transition: all 2s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.alert-enter,
-.alert-leave-to {
-  transform: translateY(-10px);
-  opacity: 0;
 }
 </style>
