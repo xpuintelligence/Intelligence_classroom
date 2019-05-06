@@ -2,8 +2,9 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbCourseitem;
 import com.smart.pojo.TbCourseitemExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TbCourseitemMapper {
     long countByExample(TbCourseitemExample example);

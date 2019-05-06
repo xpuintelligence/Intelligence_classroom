@@ -2,8 +2,9 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbProfessionitem;
 import com.smart.pojo.TbProfessionitemExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TbProfessionitemMapper {
     long countByExample(TbProfessionitemExample example);

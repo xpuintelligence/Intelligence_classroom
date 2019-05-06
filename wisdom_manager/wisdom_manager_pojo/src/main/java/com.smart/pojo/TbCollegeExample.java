@@ -1,10 +1,9 @@
 package com.smart.pojo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TbCollegeExample implements Serializable {
+public class TbCollegeExample {
     protected String orderByClause;
 
     protected boolean distinct;

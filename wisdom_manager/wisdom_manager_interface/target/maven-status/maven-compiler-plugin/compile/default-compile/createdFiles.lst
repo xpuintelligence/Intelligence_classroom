@@ -1,6 +1,1 @@
-com\smart\service\OfficeLoginService.class
-com\smart\service\StudentLoginService.class
-com\smart\service\StudentCourseService.class
-com\smart\service\CourseService.class
 com\smart\service\impl\test.class
-com\smart\service\TeacherLoginService.class

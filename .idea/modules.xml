@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/git_wisdom.iml" filepath="$PROJECT_DIR$/.idea/git_wisdom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wisdom.iml" filepath="$PROJECT_DIR$/wisdom.iml" />
       <module fileurl="file://$PROJECT_DIR$/wisdom_common/wisdom_common.iml" filepath="$PROJECT_DIR$/wisdom_common/wisdom_common.iml" />
       <module fileurl="file://$PROJECT_DIR$/wisdom_manager/wisdom_manager.iml" filepath="$PROJECT_DIR$/wisdom_manager/wisdom_manager.iml" />
       <module fileurl="file://$PROJECT_DIR$/wisdom_manager/wisdom_manager_dao/wisdom_manager_dao.iml" filepath="$PROJECT_DIR$/wisdom_manager/wisdom_manager_dao/wisdom_manager_dao.iml" />

@@ -2,10 +2,9 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbStudent;
 import com.smart.pojo.TbStudentExample;
-import java.util.List;
-
-import com.smart.pojo.WCourseInfo;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TbStudentMapper {
     long countByExample(TbStudentExample example);
@@ -29,7 +28,4 @@ public interface TbStudentMapper {
     int updateByPrimaryKeySelective(TbStudent record);
 
     int updateByPrimaryKey(TbStudent record);
-
-    //自己添加的方法
-    List<WCourseInfo> selectWCourseInfo(@Param("classId")String classId , @Param("start") String start , @Param("end") String end);
 }

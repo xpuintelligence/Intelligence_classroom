@@ -25,8 +25,6 @@ public class TbStudent implements Serializable {
 
     private String email;
 
-    private String identityId;
-
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -115,32 +113,5 @@ public class TbStudent implements Serializable {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
-    }
-
-    public String getIdentityId() {
-        return identityId;
-    }
-
-    public void setIdentityId(String identityId) {
-        this.identityId = identityId == null ? null : identityId.trim();
-
-    }
-
-    @Override
-    public String toString() {
-        return "TbStudent{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", sex='" + sex + '\'' +
-                ", picture='" + picture + '\'' +
-                ", classId='" + classId + '\'' +
-                ", professionId='" + professionId + '\'' +
-                ", collegeId='" + collegeId + '\'' +
-                ", password='" + password + '\'' +
-                ", wexinId='" + wexinId + '\'' +
-                ", phoneCode='" + phoneCode + '\'' +
-                ", email='" + email + '\'' +
-                ", identityId='" + identityId + '\'' +
-                '}';
     }
 }

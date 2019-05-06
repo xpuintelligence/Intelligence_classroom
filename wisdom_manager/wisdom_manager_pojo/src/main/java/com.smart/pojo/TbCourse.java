@@ -7,7 +7,7 @@ public class TbCourse implements Serializable {
 
     private String name;
 
-    private String year;
+    private Integer year;
 
     private String semeter;
 
@@ -41,12 +41,12 @@ public class TbCourse implements Serializable {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getYear() {
+    public Integer getYear() {
         return year;
     }
 
-    public void setYear(String year) {
-        this.year = year == null ? null : year.trim();
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
     public String getSemeter() {
