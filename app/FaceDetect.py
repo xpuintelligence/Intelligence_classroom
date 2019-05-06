@@ -68,11 +68,7 @@ class FaceDetect:
             facebase = "../faces/" + str(i) + ".jpg"
             print("saving.....")
             cv2.imwrite(facebase, cropImg)
-            #cv2.rectangle(img, (left, top), (left + width, top + height), (0, 255, 0), 2)
-
-        #img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
-        #cv2.imshow("detial",img2)
-        #cv2.waitKey(0)
+        
         return face_pixel
 
     # 判断人数
@@ -81,11 +77,16 @@ class FaceDetect:
         # 打开图片
         student_file = open(self.file_path, 'rb').read()
         # 调用百度Ai识别人数
-        self.student_info_class = self.client_baidu_body.bodyAnalysis(student_file)
-        student_num = self.student_info_class['person_num']
-        
-        self.student_num_class = student_num
-        return student_num
+        try:
+            self.student_info_class = self.client_baidu_body.bodyAnalysis(student_file)
+            student_num = self.student_info_class['person_num']
+            
+            self.student_num_class = student_num
+            return student_num
+        except Exception:
+            os.chdir("../faces")
+            os.system("rm -rf *.jpg")
+            pass
 
     # 判断抬头率
     def get_headup_rate(self):

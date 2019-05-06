@@ -13,6 +13,24 @@ from PIL import Image, ImageDraw, ImageFont
 
 class Wisdom:
 
+    def drawInfo(img,student_name_list,headup_rate,attendence,student_num):
+
+        # 利用pillow包输出中文
+        pil_im = Image.fromarray(img)
+        draw = ImageDraw.Draw(pil_im)
+        font = ImageFont.truetype("STHeiti Light.ttc", 80, encoding="utf-8")
+        draw.text((145, 406), "student: "+str(student_name_list), (0, 255, 0), font=font)
+        img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
+                
+        img = cv2.putText(img, "headupRate: "+str(headup_rate), (145, 106), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
+        img = cv2.putText(img, "Attendence: "+str(attendence), (145, 206), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
+        img = cv2.putText(img, "student_num: "+str(student_num), (145, 306), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
+                
+        img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
+        # cv2.imshow("detial",img2)
+        # cv2.waitKey(0)
+
+
     def run_wisdom():
 
         # face++的api地址密码 用于人脸识别
@@ -33,7 +51,7 @@ class Wisdom:
         client_baidu_face = AipFace(APP_ID_FACE, API_KEY_FACE, SECRET_KEY_FACE) 
         # 实例化人体分析对象
         client_baidu_body = AipBodyAnalysis(APP_ID_BODY, API_KEY_BODY, SECRET_KEY_BODY) 
-
+    
         # 测试图片的文件位置
         for filename in os.listdir("../image/"):
             if filename.endswith('.jpg'):
@@ -75,19 +93,8 @@ class Wisdom:
                     cv2.rectangle(img, (left, top), (left + width, top + height), (0, 255, 0), 2)
 
                 # 利用pillow包输出中文
-                pil_im = Image.fromarray(img)
-                draw = ImageDraw.Draw(pil_im)
-                font = ImageFont.truetype("STHeiti Light.ttc", 80, encoding="utf-8")
-                draw.text((145, 406), "student: "+str(student_name_list), (0, 255, 0), font=font)
-                img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
                 
-                img = cv2.putText(img, "headupRate: "+str(headup_rate), (145, 106), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
-                img = cv2.putText(img, "Attendence: "+str(attendence), (145, 206), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
-                img = cv2.putText(img, "student_num: "+str(student_num), (145, 306), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
-                
-                img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
-                # cv2.imshow("detial",img2)
-                # cv2.waitKey(0)
+                Wisdom.drawInfo(img,student_name_list,headup_rate,attendence,student_num)
 
                 # 删除faces文件夹的待识别面部
                 os.chdir("../faces")

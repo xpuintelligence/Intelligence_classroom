@@ -1,0 +1,5 @@
+/image/*.jpg
+/app/__pycache__/*.pyc
+test.jpg
+test.json
+app/test.json

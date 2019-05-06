@@ -1,5 +1,5 @@
 # -*-coding:utf-8 -*-
-
+# 十一点也不可爱的人
 from aip import AipFace
 import base64
 import os
@@ -8,6 +8,10 @@ from FaceDataBase import FaceDataBase
 
 student_name_list = []
 
+# 测试用列表 是要更改的 目前希望是每个教室应该在的学生对应一个表 
+# 这样可以获得这个教室里面所有学生的学号信息 
+student_acutal_list = ['41609050203','41609050201','41604090109']
+student_id_list = []
 
 class FaceSearch:
 
@@ -33,6 +37,7 @@ class FaceSearch:
 
                     faceDataBase = self.initdatabase()
                     student_id = str(face_id)
+                    student_id_list.append(student_id)
                     # 判断学生出勤情况
                     self.get_headup_rate_each_student(student_id)
                     print(str(student_id)+"的出勤情况已登记")
@@ -43,7 +48,11 @@ class FaceSearch:
                         print("识别成功，已存储")
 
                 except Exception:
+                    os.chdir("../faces")
+                    os.system("rm -rf *.jpg")
                     pass
+        
+        self.judge_id_In_Not(student_id_list)
         return student_name_list
 
 
@@ -54,7 +63,7 @@ class FaceSearch:
         user = "root"
         database = "team_model"
         password = "nanshen166013"
-
+        
         # 调用数据库
         faceDataBase = FaceDataBase(host, user, database, password) # 初始化数据
         return faceDataBase
@@ -66,6 +75,24 @@ class FaceSearch:
         student_id_list = faceDataBase.get_student_id_all()
         if student_id in student_id_list:
             faceDataBase.attendence_insert(student_id)
+
+
+    # 判断当前学号是否在该班级学号列表中
+    def judge_id_In_Not(self, student_id_list):
+        faceDataBase = self.initdatabase()
+        student_left = list(set(student_acutal_list)-set(student_id_list))
+        if len(student_left):
+            for student_left_name in student_left:
+                try:
+                    print(student_left_name)
+                    student_name = faceDataBase.get_student_name(str(student_left_name))
+                    print("当前一直低头的学生为:"+str(student_name))
+                except Exception:
+                    os.chdir("../faces")
+                    os.system("rm -rf *.jpg")
+                    pass
+        
+
         
 
            
