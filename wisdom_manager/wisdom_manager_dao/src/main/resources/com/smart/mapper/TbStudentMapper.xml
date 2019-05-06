@@ -319,8 +319,9 @@
     where id = #{id,jdbcType=VARCHAR}
   </update>
 
+<!--自己添加的方法-->
   <select id="selectWCourseInfo" resultType="com.smart.pojo.WCourseInfo">
-    select tb_courseitem.* , tb_teacher.name as teacher_name ,tb_course.name as course_name ,tb_course.course_note ,tb_course.attendance_total_score ,tb_course.leave_score ,tb_course.attend_score ,tb_course.late_attend_score ,tb_course.head_up_score
+    select tb_courseitem.id, tb_courseitem.time, tb_courseitem.course_id, tb_courseitem.classroom_id, tb_courseitem.teacher_id, tb_teacher.name as teacher_name ,tb_course.name as course_name ,tb_course.course_note ,tb_course.attendance_total_score ,tb_course.leave_score ,tb_course.attend_score ,tb_course.late_attend_score ,tb_course.head_up_score
     from tb_course_class ,tb_courseitem ,tb_teacher ,tb_course
     where tb_course_class.class_id = #{classId}
     and tb_courseitem.course_id = tb_course_class.course_id
