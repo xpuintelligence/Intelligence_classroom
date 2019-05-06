@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smart.mapper.TbCourseitemHomeworkMapper">
+  <resultMap id="BaseResultMap" type="com.smart.pojo.TbCourseitemHomework">
+    <id column="courseitem_id" jdbcType="VARCHAR" property="courseitemId" />
+    <id column="student_id" jdbcType="VARCHAR" property="studentId" />
+    <result column="upload_time" jdbcType="TIMESTAMP" property="uploadTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="homework_url" jdbcType="VARCHAR" property="homeworkUrl" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    courseitem_id, student_id, upload_time, update_time, homework_url
+  </sql>
+  <select id="selectByExample" parameterType="com.smart.pojo.TbCourseitemHomeworkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_courseitem_homework
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_courseitem_homework
+    where courseitem_id = #{courseitemId,jdbcType=VARCHAR}
+      and student_id = #{studentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from tb_courseitem_homework
+    where courseitem_id = #{courseitemId,jdbcType=VARCHAR}
+      and student_id = #{studentId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.smart.pojo.TbCourseitemHomeworkExample">
+    delete from tb_courseitem_homework
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.smart.pojo.TbCourseitemHomework">
+    insert into tb_courseitem_homework (courseitem_id, student_id, upload_time, 
+      update_time, homework_url)
+    values (#{courseitemId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{homeworkUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.smart.pojo.TbCourseitemHomework">
+    insert into tb_courseitem_homework
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="courseitemId != null">
+        courseitem_id,
+      </if>
+      <if test="studentId != null">
+        student_id,
+      </if>
+      <if test="uploadTime != null">
+        upload_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="homeworkUrl != null">
+        homework_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="courseitemId != null">
+        #{courseitemId,jdbcType=VARCHAR},
+      </if>
+      <if test="studentId != null">
+        #{studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homeworkUrl != null">
+        #{homeworkUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.smart.pojo.TbCourseitemHomeworkExample" resultType="java.lang.Long">
+    select count(*) from tb_courseitem_homework
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_courseitem_homework
+    <set>
+      <if test="record.courseitemId != null">
+        courseitem_id = #{record.courseitemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentId != null">
+        student_id = #{record.studentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.uploadTime != null">
+        upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.homeworkUrl != null">
+        homework_url = #{record.homeworkUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_courseitem_homework
+    set courseitem_id = #{record.courseitemId,jdbcType=VARCHAR},
+      student_id = #{record.studentId,jdbcType=VARCHAR},
+      upload_time = #{record.uploadTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      homework_url = #{record.homeworkUrl,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smart.pojo.TbCourseitemHomework">
+    update tb_courseitem_homework
+    <set>
+      <if test="uploadTime != null">
+        upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="homeworkUrl != null">
+        homework_url = #{homeworkUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where courseitem_id = #{courseitemId,jdbcType=VARCHAR}
+      and student_id = #{studentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smart.pojo.TbCourseitemHomework">
+    update tb_courseitem_homework
+    set upload_time = #{uploadTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      homework_url = #{homeworkUrl,jdbcType=VARCHAR}
+    where courseitem_id = #{courseitemId,jdbcType=VARCHAR}
+      and student_id = #{studentId,jdbcType=VARCHAR}
+  </update>
+</mapper>
