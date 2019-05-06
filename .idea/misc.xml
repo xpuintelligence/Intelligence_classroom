@@ -4,9 +4,8 @@
     <file type="web" url="file://$PROJECT_DIR$/wisdom_manager/wisdom_manager_service" />
     <file type="web" url="file://$PROJECT_DIR$/wisdom_web" />
   </component>
-  <component name="JUnitGeneratorProjectSettings">
-    <option name="outputFilePattern" value="${SOURCEPATH}/../../test/java/${PACKAGE}/${FILENAME}" />
-    <option name="selectedTemplateKey" value="JUnit 4" />
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="ES6" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -15,7 +14,5 @@
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/classes" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

@@ -6,16 +6,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="wisdom_common" />
-        <module name="wisdom_manager_dao" />
-        <module name="wisdom_manager_interface" />
-        <module name="wisdom_manager_pojo" />
         <module name="wisdom_manager_service" />
         <module name="wisdom_web" />
+        <module name="wisdom_manager_dao" />
+        <module name="wisdom_common" />
+        <module name="wisdom_manager_pojo" />
+        <module name="wisdom_manager_interface" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="git_wisdom" target="1.8" />
+      <module name="wisdom" target="1.8" />
       <module name="wisdom_common" target="1.8" />
       <module name="wisdom_manager" target="1.8" />
       <module name="wisdom_manager_dao" target="1.8" />
