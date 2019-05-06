@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.smart.pojo.TbCourse">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="year" jdbcType="INTEGER" property="year" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
     <result column="semeter" jdbcType="CHAR" property="semeter" />
     <result column="course_note" jdbcType="VARCHAR" property="courseNote" />
     <result column="attendance_total_score" jdbcType="INTEGER" property="attendanceTotalScore" />
@@ -110,7 +110,7 @@
       semeter, course_note, attendance_total_score, 
       leave_score, attend_score, late_attend_score, 
       head_up_score)
-    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
       #{semeter,jdbcType=CHAR}, #{courseNote,jdbcType=VARCHAR}, #{attendanceTotalScore,jdbcType=INTEGER}, 
       #{leaveScore,jdbcType=INTEGER}, #{attendScore,jdbcType=INTEGER}, #{lateAttendScore,jdbcType=INTEGER}, 
       #{headUpScore,jdbcType=INTEGER})
@@ -157,7 +157,7 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="year != null">
-        #{year,jdbcType=INTEGER},
+        #{year,jdbcType=VARCHAR},
       </if>
       <if test="semeter != null">
         #{semeter,jdbcType=CHAR},
@@ -198,7 +198,7 @@
         name = #{record.name,jdbcType=VARCHAR},
       </if>
       <if test="record.year != null">
-        year = #{record.year,jdbcType=INTEGER},
+        year = #{record.year,jdbcType=VARCHAR},
       </if>
       <if test="record.semeter != null">
         semeter = #{record.semeter,jdbcType=CHAR},
@@ -230,7 +230,7 @@
     update tb_course
     set id = #{record.id,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
-      year = #{record.year,jdbcType=INTEGER},
+      year = #{record.year,jdbcType=VARCHAR},
       semeter = #{record.semeter,jdbcType=CHAR},
       course_note = #{record.courseNote,jdbcType=VARCHAR},
       attendance_total_score = #{record.attendanceTotalScore,jdbcType=INTEGER},
@@ -249,7 +249,7 @@
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="year != null">
-        year = #{year,jdbcType=INTEGER},
+        year = #{year,jdbcType=VARCHAR},
       </if>
       <if test="semeter != null">
         semeter = #{semeter,jdbcType=CHAR},
@@ -278,7 +278,7 @@
   <update id="updateByPrimaryKey" parameterType="com.smart.pojo.TbCourse">
     update tb_course
     set name = #{name,jdbcType=VARCHAR},
-      year = #{year,jdbcType=INTEGER},
+      year = #{year,jdbcType=VARCHAR},
       semeter = #{semeter,jdbcType=CHAR},
       course_note = #{courseNote,jdbcType=VARCHAR},
       attendance_total_score = #{attendanceTotalScore,jdbcType=INTEGER},

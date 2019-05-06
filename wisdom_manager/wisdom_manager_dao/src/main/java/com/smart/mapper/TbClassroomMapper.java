@@ -2,9 +2,8 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbClassroom;
 import com.smart.pojo.TbClassroomExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TbClassroomMapper {
     long countByExample(TbClassroomExample example);

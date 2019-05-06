@@ -1,9 +1,10 @@
 package com.smart.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TbCourseExample {
+public class TbCourseExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -254,52 +255,62 @@ public class TbCourseExample {
             return (Criteria) this;
         }
 
-        public Criteria andYearEqualTo(Integer value) {
+        public Criteria andYearEqualTo(String value) {
             addCriterion("year =", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearNotEqualTo(Integer value) {
+        public Criteria andYearNotEqualTo(String value) {
             addCriterion("year <>", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearGreaterThan(Integer value) {
+        public Criteria andYearGreaterThan(String value) {
             addCriterion("year >", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearGreaterThanOrEqualTo(Integer value) {
+        public Criteria andYearGreaterThanOrEqualTo(String value) {
             addCriterion("year >=", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearLessThan(Integer value) {
+        public Criteria andYearLessThan(String value) {
             addCriterion("year <", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearLessThanOrEqualTo(Integer value) {
+        public Criteria andYearLessThanOrEqualTo(String value) {
             addCriterion("year <=", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearIn(List<Integer> values) {
+        public Criteria andYearLike(String value) {
+            addCriterion("year like", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearNotLike(String value) {
+            addCriterion("year not like", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearIn(List<String> values) {
             addCriterion("year in", values, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearNotIn(List<Integer> values) {
+        public Criteria andYearNotIn(List<String> values) {
             addCriterion("year not in", values, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearBetween(Integer value1, Integer value2) {
+        public Criteria andYearBetween(String value1, String value2) {
             addCriterion("year between", value1, value2, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearNotBetween(Integer value1, Integer value2) {
+        public Criteria andYearNotBetween(String value1, String value2) {
             addCriterion("year not between", value1, value2, "year");
             return (Criteria) this;
         }

@@ -2,9 +2,8 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbOfficer;
 import com.smart.pojo.TbOfficerExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TbOfficerMapper {
     long countByExample(TbOfficerExample example);

@@ -2,9 +2,8 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbProfession;
 import com.smart.pojo.TbProfessionExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface TbProfessionMapper {
     long countByExample(TbProfessionExample example);

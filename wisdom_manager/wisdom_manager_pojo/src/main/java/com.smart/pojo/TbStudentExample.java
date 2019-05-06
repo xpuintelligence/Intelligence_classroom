@@ -1,9 +1,10 @@
 package com.smart.pojo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TbStudentExample {
+public class TbStudentExample implements Serializable {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -871,6 +872,76 @@ public class TbStudentExample {
 
         public Criteria andEmailNotBetween(String value1, String value2) {
             addCriterion("email not between", value1, value2, "email");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdIsNull() {
+            addCriterion("identity_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdIsNotNull() {
+            addCriterion("identity_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdEqualTo(String value) {
+            addCriterion("identity_id =", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdNotEqualTo(String value) {
+            addCriterion("identity_id <>", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdGreaterThan(String value) {
+            addCriterion("identity_id >", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdGreaterThanOrEqualTo(String value) {
+            addCriterion("identity_id >=", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdLessThan(String value) {
+            addCriterion("identity_id <", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdLessThanOrEqualTo(String value) {
+            addCriterion("identity_id <=", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdLike(String value) {
+            addCriterion("identity_id like", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdNotLike(String value) {
+            addCriterion("identity_id not like", value, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdIn(List<String> values) {
+            addCriterion("identity_id in", values, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdNotIn(List<String> values) {
+            addCriterion("identity_id not in", values, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdBetween(String value1, String value2) {
+            addCriterion("identity_id between", value1, value2, "identityId");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdentityIdNotBetween(String value1, String value2) {
+            addCriterion("identity_id not between", value1, value2, "identityId");
             return (Criteria) this;
         }
     }
