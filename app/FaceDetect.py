@@ -98,6 +98,9 @@ class FaceDetect:
             if student_nose_x is not 0.0 and student_nose_y is not 0.0:
                 self.headup_student = self.headup_student + 1
         try:
+            # 修复了一个bug 抬头人数判断问题
+            if self.headup_student > self.face_num_class:
+                self.headup_student = self.face_num_class
             headup_rate = self.headup_student/self.student_num_class
             return headup_rate
         except Exception:

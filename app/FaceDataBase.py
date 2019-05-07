@@ -1,8 +1,6 @@
 import pymysql
 import time
 
-student_id_class = []
-
 class FaceDataBase:
 
     def __init__(self, host, user, database, password):
@@ -32,8 +30,26 @@ class FaceDataBase:
     # 获得当前班级所有学生的学号
 
     def get_student_id_all(self):
+        student_id_class = []
         conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
         sql = "select id from tb_student;"
+        cursor = conn.cursor()
+        try:
+            cursor.execute(sql)
+            results = cursor.fetchall()
+            for student_id in results:
+                student_id_class.append(student_id[0])
+            return student_id_class
+        except Exception as e:
+            conn.rollback()
+        finally:
+            conn.close()
+
+    # 获得当前班级所有学生的学号_debug 本地数据库
+    def get_student_id_all_debug(self):
+        student_id_class = []
+        conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
+        sql = "select id from tb_student_debug1;"
         cursor = conn.cursor()
         try:
             cursor.execute(sql)
@@ -63,4 +79,5 @@ class FaceDataBase:
         except Exception as e:
             conn.rollback()
         finally:
+            print("连接关闭")
             conn.close()

@@ -1,16 +1,15 @@
 # -*-coding:utf-8 -*-
-# 十一点也不可爱的人
 from aip import AipFace
 import base64
 import os
 import time
 from FaceDataBase import FaceDataBase
 
-student_name_list = []
-
 # 测试用列表 是要更改的 目前希望是每个教室应该在的学生对应一个表 
+ # 教室目前所在的学生
+student_actual_list = []
 # 这样可以获得这个教室里面所有学生的学号信息 
-student_acutal_list = ['41609050203','41609050201','41604090109']
+student_name_list = []
 # 出勤学生学号信息的列表
 student_id_list = []
 
@@ -40,7 +39,7 @@ class FaceSearch:
                     student_id = str(face_id)
                     student_id_list.append(student_id)
                     # 判断学生出勤情况
-                    self.get_headup_rate_each_student(student_id)
+                    self.get_headup_rate_each_student(student_id, faceDataBase)
                     print(str(student_id)+"的出勤情况已登记")
 
                     student_name = faceDataBase.get_student_name(student_id) # 返回学生姓名
@@ -57,9 +56,10 @@ class FaceSearch:
         return student_name_list
 
 
-    # 初始化数据库
+    # 初始化数据库对象 服务器数据库
     def initdatabase(self):
         # 数据库信息
+        print("调用服务器数据库")
         host = "101.132.78.78"
         user = "root"
         database = "team_model"
@@ -69,10 +69,23 @@ class FaceSearch:
         faceDataBase = FaceDataBase(host, user, database, password) # 初始化数据
         return faceDataBase
 
-    # 每个学生的抬头率
-    def get_headup_rate_each_student(self, student_id):
+    # 初始化数据库对象_Debug 本地数据库
+    def initdatabase_debug(self):
+        print("调用本地debug数据库")
+        # 数据库信息
+        host = "127.0.0.1"
+        user = "root"
+        database = "Wisdom_Class"
+        password = "123456"
+        
+        # 调用数据库
+        faceDataBase_debug = FaceDataBase(host, user, database, password) # 初始化数据
+        return faceDataBase_debug
 
-        faceDataBase = self.initdatabase()
+    # 每个学生的抬头率
+    def get_headup_rate_each_student(self, student_id, faceDataBase):
+
+        #faceDataBase = self.initdatabase()
         student_id_list = faceDataBase.get_student_id_all()
         if student_id in student_id_list:
             faceDataBase.attendence_insert(student_id)
@@ -80,9 +93,18 @@ class FaceSearch:
 
     # 判断当前学号是否在该班级学号列表中
     def judge_id_In_Not(self, student_id_list):
-        faceDataBase = self.initdatabase() # 初始化数据库对象
+        # 目前教室里真实存在的学生
+        student_actual_list_now = []
+        # 初始化数据库对象_服务器
+        faceDataBase = self.initdatabase()
+        # 初始化数据库对象_debug
+        faceDataBase_debug = self.initdatabase_debug() 
         # 利用当前教室学生的学号和检测到的学生的学号求补集
-        student_left = list(set(student_acutal_list)-set(student_id_list)) 
+        student_actual_list = faceDataBase_debug.get_student_id_all_debug() # 当前使用的是本地测试数据库
+        for actual_student in student_actual_list:
+            if actual_student is not None:
+                student_actual_list_now.append(actual_student)
+        student_left = list(set(student_actual_list_now)-set(student_id_list)) 
         # 低头学生学号信息的列表
         student_headown_list = []
         # 如果补集存在（没有抬头的学生存在）
