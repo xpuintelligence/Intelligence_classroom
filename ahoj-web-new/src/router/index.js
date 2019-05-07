@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import resource from 'vue-resource'
+
 import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Logo from '@/components/Logo'
 import Regist from '@/components/Regist'
-import resource from 'vue-resource'
 
 
 Vue.use(Router);

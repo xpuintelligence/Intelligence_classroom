@@ -52,7 +52,7 @@ export default {
   components: { Index, Regist },
   data() {
     return {
-      flag: false,
+      flag: false, // 页面动画控制
       who: "学生",
       input_username: "",
       input_password: "",
@@ -94,7 +94,13 @@ export default {
         );
         if (res.data.msg === "true") {
           this.alert_color = this.alert_color_arr[1];
-          this.msg = "你好 , " + res.data.data.name;
+          this.msg = "你好," + res.data.data.name + ",正在跳转...";
+          function jmpUrl() {
+            if (res.data.status == 1) {
+            } else {
+            }
+          }
+          setTimeout(jmpUrl, 3000);
         } else {
           this.alert_color = this.alert_color_arr[0];
           this.msg = res.data.msg;
