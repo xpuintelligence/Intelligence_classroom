@@ -1,9 +1,7 @@
 package com.smart.service.impl;
 
 import com.smart.mapper.TbStudentMapper;
-import com.smart.pojo.TbStudent;
-import com.smart.pojo.TbStudentExample;
-import com.smart.pojo.WisdomResult;
+import com.smart.pojo.*;
 import com.smart.service.StudentLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +14,7 @@ import java.util.List;
 public class StudentLoginServiceImpl implements StudentLoginService, Serializable {
     @Autowired
     private TbStudentMapper tbStudentMapper ;
+
 
     /**
      * 通过对应tbS
@@ -42,9 +41,19 @@ public class StudentLoginServiceImpl implements StudentLoginService, Serializabl
 
     @Override
     public WisdomResult studentLoginOfWX(TbStudent tbStudent) {
-        WisdomResult wisdomResult= null;
-
-        return wisdomResult;
+        //拿到student以后，判断openid是不是在数据库中存在
+        String openid = tbStudent.getWexinId();
+        //创建查询实例
+        TbStudentExample tbStudentExample = new TbStudentExample();
+        TbStudentExample.Criteria studentExampleCriteria = tbStudentExample.createCriteria();
+        //去数据库中查询是否存在
+        studentExampleCriteria.andWexinIdEqualTo(openid);
+        List<TbStudent> tbStudents = tbStudentMapper.selectByExample(tbStudentExample);
+        //如果学生表中没有这个人
+        if (tbStudents.size() == 0){
+            return new WisdomResult(0,"该用户不为学生或未绑定",null);
+        }
+        return new WisdomResult(1,"true",tbStudents.get(0));
     }
 
 

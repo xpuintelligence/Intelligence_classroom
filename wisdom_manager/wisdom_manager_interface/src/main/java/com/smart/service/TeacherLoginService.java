@@ -12,4 +12,9 @@ public interface TeacherLoginService {
      */
     public WisdomResult teacherLoginOfWeb(TbTeacher tbTeacher);
 
+    /**
+     * 老师通过openid登陆
+     */
+    public WisdomResult teacherLoginOfWX(TbTeacher tbTeacher);
+
 }

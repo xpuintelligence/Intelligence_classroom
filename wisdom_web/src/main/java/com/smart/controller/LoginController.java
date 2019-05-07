@@ -1,11 +1,20 @@
 package com.smart.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smart.pojo.RequestLogin;
 import com.smart.pojo.TbStudent;
 import com.smart.pojo.TbTeacher;
 import com.smart.pojo.WisdomResult;
 import com.smart.service.StudentLoginService;
 import com.smart.service.TeacherLoginService;
+import com.smart.service.WXLoginService;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+
+import okhttp3.Response;
+import org.apache.http.client.methods.HttpPost;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -27,6 +38,9 @@ public class LoginController {
 
     @Autowired
     private TeacherLoginService teacherLoginService;
+
+    @Autowired
+    private WXLoginService wxLoginService;
     //,method = RequestMethod.POST
     @RequestMapping("/all")
     @ResponseBody
@@ -59,22 +73,30 @@ public class LoginController {
         return result;
     }
 
+    /**
+     * 微信小程序登陆，先要调用微信官网的api，固定参数
+     * @param appid 小程序的id
+     * @param secret 小程序的appSecret
+     * @param js_code 登陆时获取的code
+     * @return 返回值
+     */
     @RequestMapping("/weixinLogin")
     @ResponseBody
-    public WisdomResult weiXinLogin(String openId , String account , String password,HttpServletRequest request){
-        //取出数据分装起来
-        TbStudent tbStudent = new TbStudent();
-        tbStudent.setWexinId(openId);
-        tbStudent.setId(account);
-        tbStudent.setPassword(password);
-        //调用service层登陆方法
-        WisdomResult wisdomResult = studentLoginService.studentLoginOfWX(tbStudent);
-
-        return wisdomResult;
+    public WisdomResult weiXinLogin(String appid , String secret , String js_code , String grant_type, HttpServletRequest request)
+    throws Exception{
+        WisdomResult login = wxLoginService.login(appid, secret, js_code, grant_type);
+        return login;
     }
+
     @RequestMapping("test")
     private void test(ModelMap modelMap){
         System.out.println(modelMap.get("tbStudent"));
     }
 
+    @Test
+    public void fun(){
+        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET" +
+                "&js_code=JSCODE&grant_type=authorization_code";
+        HttpPost httpPost = new HttpPost();
+    }
 }
