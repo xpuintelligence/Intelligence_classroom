@@ -6,16 +6,11 @@
     android:orientation="vertical"
     tools:context=".StudentAty">
 
-    <FrameLayout
-        android:id="@+id/fl_container_student"
+    <com.itheima.view.BridgeWebView
+        android:id="@+id/wv_stu_home"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
-    <cn.edu.xpu.smartclassroom.core.activity.BottomBar
-        android:background="#FFFFFF"
-        android:id="@+id/bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:layout_gravity="bottom" />
+        android:layout_height="match_parent">
+
+    </com.itheima.view.BridgeWebView>
+
 </LinearLayout>

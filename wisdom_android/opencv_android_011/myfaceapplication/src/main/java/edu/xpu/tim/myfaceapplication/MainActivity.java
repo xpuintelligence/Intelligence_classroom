@@ -146,8 +146,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 finish();
             }
 
-            Log.i(TAG, "检测到人脸");
-            Log.i(TAG, "accessToken:"+accessToken);
+            Log.i(AppConfig.TAG, "检测到人脸");
+            Log.i(AppConfig.TAG, "accessToken:"+accessToken);
             for (Rect aFacesArray : facesArray) {    //用框标记
                 Imgproc.rectangle(mRgba, aFacesArray.tl(), aFacesArray.br(), new Scalar(0, 255, 0, 255), 3);
             }

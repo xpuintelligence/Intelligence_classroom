@@ -10,4 +10,6 @@ public interface AppConfig {
 
     //登录请求地址
     String loginAddress = "http://47.103.14.73/wisdom_web/login/all";
+
+    String TAG = "MyAppConfig";
 }

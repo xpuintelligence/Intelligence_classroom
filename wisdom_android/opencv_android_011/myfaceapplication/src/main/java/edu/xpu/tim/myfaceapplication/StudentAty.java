@@ -1,34 +1,46 @@
 package edu.xpu.tim.myfaceapplication;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-import edu.xpu.tim.myfaceapplication.fragment.student.SFragmentHome;
-import edu.xpu.tim.myfaceapplication.fragment.student.SFragmentMain;
-import edu.xpu.tim.myfaceapplication.fragment.student.SFragmentMy;
+import edu.xpu.tim.myfaceapplication.config.AppConfig;
+import static android.view.KeyEvent.KEYCODE_BACK;
 
 
 public class StudentAty extends AppCompatActivity {
+    private static final String TAG = "StudentAty";
 
+    private WebView webView;
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_aty);
-        BottomBar bottomBar = findViewById(R.id.bottom_bar);
-        bottomBar.setContainer(R.id.fl_container_student)
-                .setTitleBeforeAndAfterColor("#999999", "#ff5d5e")
-                .addItem(SFragmentHome.class,
-                        "首页",
-                        R.drawable.item1_before,
-                        R.drawable.item1_after)
-                .addItem(SFragmentMain.class,
-                        "数据",
-                        R.drawable.item2_before,
-                        R.drawable.item2_after)
-                .addItem(SFragmentMy.class,
-                        "我的",
-                        R.drawable.item3_before,
-                        R.drawable.item3_after)
-                .build();
+        webView = findViewById(R.id.wv_stu_home);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("https://www.baidu.com");
+        webView.setWebViewClient(new WebViewClient(){
+            public boolean shouldOverrideUrlLoading(WebView view, String url){
+                view.loadUrl(url);
+                return true;
+            }
+        });
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode == KEYCODE_BACK)
+            Log.i(AppConfig.TAG, "监听到退出按键");
+        Log.i(TAG, webView.toString());
+        if ((keyCode == KEYCODE_BACK) && webView.canGoBack()) {
+            webView.goBack();
+            Log.i(AppConfig.TAG, "WEB返回键");
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
