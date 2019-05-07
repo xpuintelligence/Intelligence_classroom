@@ -21,19 +21,14 @@
 
 # 文件树
 
-		.
-	├── README.md
-	├── app
-	│   ├── FaceDataBase.py
-	│   ├── FaceDetect.py
-	│   ├── FaceSearch.py
-	│   ├── LoadVideo.py
-	│   ├── Wisdom.py 
-	│   └── run.py
-	├── faces
-	│   └── README.md
-	├── image
-		└── README.md
+	├── FaceDataBase.py  
+	├── FaceDetect.py
+	├── FaceSearch.py
+	├── LoadVideo.py
+	├── Wisdom.py
+	├── debugFunc.py
+	├── deleteCache.py
+	└── run.py
 	
 
 # 运行方法
