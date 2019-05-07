@@ -2,11 +2,12 @@
   <div>
     <transition enter-active-class="flip">
       <img
-        v-show="flag"
+        v-if="flag"
         alt="logo.png"
         src="../assets/logo.png"
         style="width: 200px"
         class="animated"
+        onclick="window.open('#')"
       >
     </transition>
     <br>
@@ -15,11 +16,11 @@
 
 <script>
 export default {
-  name: 'Logo',
+  name: "Logo",
   data() {
     return {
-      flag: false,
-    }
+      flag: false
+    };
   },
   mounted() {
     this.flag = true;

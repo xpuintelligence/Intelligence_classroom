@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Logo from '@/components/Logo'
+import Regist from '@/components/Regist'
 import resource from 'vue-resource'
 
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/Logo',
       name: 'Logo',
       component: Logo
+    }, 
+    {
+      path: '/Regist',
+      name: 'Regist',
+      component: Regist
     },
   ]
 })

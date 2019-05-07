@@ -4,7 +4,6 @@
     <div v-show="flag" class="components-Login animated">
       <div class="container" v-on:submit.prevent="onSubmit">
         <form class="form-signin" action.pravite="#">
-          
           <transition enter-active-class="bounceIn">
             <div v-if="connFail" :class="alert_color" class="animated">{{msg}}</div>
           </transition>
@@ -46,10 +45,11 @@
 
 <script>
 import Index from "@/components/Index";
+import Regist from "@/components/Regist";
 
 export default {
   name: "Login",
-  components: { Index },
+  components: { Index, Regist },
   data() {
     return {
       flag: false,

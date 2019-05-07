@@ -6,8 +6,8 @@
           <button type="button" class="btn btn-outline-primary">登录</button>
         </router-link>
 
-        <router-link to="/">
-          <button type="button" class="btn btn-outline-primary" disabled>注册</button>
+        <router-link to="/Regist">
+          <button type="button" class="btn btn-outline-primary">注册</button>
         </router-link>
       </div>
     </transition>
