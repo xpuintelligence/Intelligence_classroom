@@ -65,7 +65,7 @@ public class CourseServiceImpl implements CourseService, Serializable {
         DateTime targetWeekEnd = targetWeek.dayOfWeek().withMaximumValue();
         //放进map
         Map<String,DateTime> map = new HashMap<>();
-        map.put("first",targetWeekBegin);
+        map.put("start",targetWeekBegin);
         map.put("end",targetWeekEnd);
         System.out.println(map);
         System.out.println(1);
@@ -111,7 +111,7 @@ public class CourseServiceImpl implements CourseService, Serializable {
            }
        }
         //存入map
-        map.put("first",begin);
+        map.put("start",begin);
         map.put("end",end);
         return map;
     }

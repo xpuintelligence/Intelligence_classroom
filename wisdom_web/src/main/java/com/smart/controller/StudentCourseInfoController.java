@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * 查询学生课程信息的controller
  */
 @Controller
-@RequestMapping("/course")
+@RequestMapping("/studentCourseInfo")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class StudentCourseInfoController {
     @Autowired

@@ -43,7 +43,7 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
     @Override
     public WisdomResult getCourseOfSpellTime(TbStudent tbStudent, Map<String, DateTime> map) {
         System.out.println(map);
-        List<WCourseInfo> wCourseInfos = tbStudentMapper.selectWCourseInfo(tbStudent.getClassId(), map.get("first").toString(DATE_FORMAT_TOSTRING),
+        List<WCourseInfo> wCourseInfos = tbStudentMapper.selectWCourseInfo(tbStudent.getClassId(), map.get("start").toString(DATE_FORMAT_TOSTRING),
                 map.get("end").toString(DATE_FORMAT_TOSTRING));
         return new WisdomResult(1,"true",wCourseInfos);
     }
