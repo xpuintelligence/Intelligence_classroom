@@ -20,7 +20,8 @@ class FaceSearch:
         self.facefolder = facefolder   # 获取图片的文件夹
         self.client_baidu_face = client_baidu_face 
         self.imageType = imageType
-        self.groupIdList = groupIdList         
+        self.groupIdList = groupIdList 
+
 
     # 人脸搜索
     def search(self):
@@ -32,7 +33,6 @@ class FaceSearch:
                 try:
                     result = self.client_baidu_face.search(image, self.imageType, self.groupIdList);  # 调用人脸搜索在人脸库中搜索人脸返回json值
                     face_id = result['result']['user_list'][0]['user_id']   # 对JSON进行分析获取图片ID(学号)
-                    # print(face_id)
                     time.sleep(0.3) # 同时调用次数太多导致api 故加300毫秒延迟  
 
                     faceDataBase = self.initdatabase()
@@ -69,6 +69,7 @@ class FaceSearch:
         faceDataBase = FaceDataBase(host, user, database, password) # 初始化数据
         return faceDataBase
 
+
     # 初始化数据库对象_Debug 本地数据库
     def initdatabase_debug(self):
         print("调用本地debug数据库")
@@ -82,6 +83,7 @@ class FaceSearch:
         faceDataBase_debug = FaceDataBase(host, user, database, password) # 初始化数据
         return faceDataBase_debug
 
+
     # 每个学生的抬头率
     def get_headup_rate_each_student(self, student_id, faceDataBase):
 
@@ -91,8 +93,11 @@ class FaceSearch:
             faceDataBase.attendence_insert(student_id)
 
 
+
     # 判断当前学号是否在该班级学号列表中
     def judge_id_In_Not(self, student_id_list):
+        # 低头学生学号信息的列表
+        student_headown_list = []
         # 目前教室里真实存在的学生
         student_actual_list_now = []
         # 初始化数据库对象_服务器
@@ -105,21 +110,31 @@ class FaceSearch:
             if actual_student is not None:
                 student_actual_list_now.append(actual_student)
         student_left = list(set(student_actual_list_now)-set(student_id_list)) 
-        # 低头学生学号信息的列表
-        student_headown_list = []
-        # 如果补集存在（没有抬头的学生存在）
-        if len(student_left):             
+        # 如果补集存在（没有抬头的学生存在)
+        if len(student_left) or len(student_left) <= len(student_actual_list)/2:             
             for student_left_name in student_left:
-                try:
-                    # 返回当前低头的学生的id
-                    student_headown_name = faceDataBase.get_student_name(str(student_left_name))
-                    # 将低头学生的id保存到低头学生的列表中
-                    student_headown_list.append(student_headown_name)
-                except Exception:
-                    os.chdir("../faces")
-                    os.system("rm -rf *.jpg")
-                    pass
+                # 返回当前低头的学生的id
+                student_headown_name = faceDataBase.get_student_name(str(student_left_name))
+                # 将低头学生的id保存到低头学生的列表中
+                student_headown_list.append(student_headown_name)
+
+                student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
             print("当前低头的学生为:"+str(student_headown_list))
+
+    
+    
+    # 判断是不是大家都在写作业做题
+    def if_all_write(self, student_actual_list, student_headown_list):
+        # 当前教室人数
+        judge_student_num = len(student_actual_list)
+        # 判断当前低头人数是否多于全班人数的一半
+        if(len(student_headown_list)>judge_student_num/2):
+            student_headown_list = []
+            return student_headown_list
+        else:
+            return student_headown_list
+
+
         
 
         
