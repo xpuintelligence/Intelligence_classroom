@@ -36,6 +36,7 @@ public class WXLoginServiceImpl implements WXLoginService, Serializable {
      */
     @Override
     public WisdomResult login(String appid, String secret, String js_code, String grant_type) throws Exception {
+        //定义一个标志，判断是学生还是老师
         //获取openid的url
         String url = "https://api.weixin.qq.com/sns/jscode2session?appid="+appid+
                 "&secret="+secret+ "&js_code="+js_code;

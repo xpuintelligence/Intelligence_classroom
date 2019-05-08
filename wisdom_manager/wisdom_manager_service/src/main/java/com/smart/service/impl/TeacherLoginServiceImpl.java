@@ -49,6 +49,6 @@ public class TeacherLoginServiceImpl implements TeacherLoginService, Serializabl
         if (tbTeachers.size() == 0){
             return new WisdomResult(0,openid,null);
         }
-        return new WisdomResult(1,openid,tbTeachers.get(0));
+        return new WisdomResult(2,openid,tbTeachers.get(0));
     }
 }

@@ -51,19 +51,23 @@ grant_type|授权类型，此处只需填写 authorization_code
 ### _返回值_
 name|describe
 ----|------
-status|返回值状态 1--->成功  0--->失败
+status|返回值状态 0--->未绑定 1--->学生 2--->老师 
 msg|服务器去腾讯api中获取的openid
 data|null
 ### 返回值样本
 ```json
-用户第一次登陆的情况:
-    {"status":0,
-    "msg":获取到的openid,
-    "data":null }
-用户非第一次登陆的情况:
+学生第一次登陆:
     {"status":1,
     "msg":获取到的openid,
+    "data":null }
+老师第一次登陆:
+    {"status":2,
+    "msg":获取到的openid,
     "data":null}
+该用户未绑定:
+        {"status":2,
+        "msg":获取到的openid,
+        "data":null}
 ```
 ----
 ## 微信小程序绑定用户与openid
