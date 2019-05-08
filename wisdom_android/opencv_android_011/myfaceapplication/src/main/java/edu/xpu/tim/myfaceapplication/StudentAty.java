@@ -11,7 +11,6 @@ import android.webkit.WebViewClient;
 import edu.xpu.tim.myfaceapplication.config.AppConfig;
 import static android.view.KeyEvent.KEYCODE_BACK;
 
-
 public class StudentAty extends AppCompatActivity {
     private static final String TAG = "StudentAty";
 
@@ -23,7 +22,8 @@ public class StudentAty extends AppCompatActivity {
         setContentView(R.layout.activity_student_aty);
         webView = findViewById(R.id.wv_stu_home);
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("https://www.baidu.com");
+        webView.loadUrl("http://106.12.202.93/#/");
+        //webView.loadUrl("https://www.baidu.com");
         webView.setWebViewClient(new WebViewClient(){
             public boolean shouldOverrideUrlLoading(WebView view, String url){
                 view.loadUrl(url);
@@ -31,6 +31,7 @@ public class StudentAty extends AppCompatActivity {
             }
         });
     }
+
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(keyCode == KEYCODE_BACK)

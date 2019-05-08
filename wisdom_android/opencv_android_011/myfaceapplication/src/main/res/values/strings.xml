@@ -2,11 +2,12 @@
     <string name="app_name">智慧教室</string>
     <string name="stu_id">学号/工号</string>
     <string name="stu_pwd">密码</string>
-    <string name="stu_face">开始采集人脸（采集人脸时手机平放）</string>
+    <string name="stu_face">学生登录</string>
     <string name="xxxxxx">学生端</string>
     <string name="title_activity_teacher_aty">TeacherAty</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_activity_student_aty">StudentAty</string>
     <string name="teacherlogin">教师登录</string>
+    <string name="forgetpwd">忘记密码</string>
 </resources>

@@ -28,16 +28,19 @@
             android:screenOrientation="landscape">
         </activity>
         <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".StdRegAty"
             android:launchMode="singleTask">
         </activity>
 
         <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".StudentAty"
             android:launchMode="singleTask">
         </activity>
 
         <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".TeacherAty"
             android:launchMode="singleTask">
             <intent-filter>

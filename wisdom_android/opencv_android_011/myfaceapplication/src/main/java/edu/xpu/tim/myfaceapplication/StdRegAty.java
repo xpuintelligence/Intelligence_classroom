@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -33,15 +34,19 @@ public class StdRegAty extends AppCompatActivity {
     }
 
     public void toFace(View v){
-        someInfoLogin(true, new Intent(getApplicationContext(), MainActivity.class));
+        Button regTeaBtn = findViewById(R.id.regTeaBtn);
+        regTeaBtn.setEnabled(false);
+        someInfoLogin(true, new Intent(getApplicationContext(), MainActivity.class), regTeaBtn);
     }
 
 
     public void toTeacher(View v){
-        someInfoLogin(false, new Intent(getApplicationContext(), TeacherAty.class));
+        Button regStuBtn = findViewById(R.id.regStuBtn);
+        regStuBtn.setEnabled(false);
+        someInfoLogin(false, new Intent(getApplicationContext(), TeacherAty.class), regStuBtn);
     }
 
-    private void someInfoLogin(boolean isStu, Intent atyIntent){
+    private void someInfoLogin(boolean isStu, Intent atyIntent, Button btn){
         String pwd = et_pwd.getText().toString();
         String id = et_id.getText().toString();
 
@@ -103,6 +108,7 @@ public class StdRegAty extends AppCompatActivity {
                             finish();
                         }else if(0 == status){
                             Toast.makeText(StdRegAty.this, "用户名或密码不正确", Toast.LENGTH_SHORT).show();
+                            btn.setEnabled(true);
                         }
                     }catch (Exception e){
                         e.printStackTrace();
