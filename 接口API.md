@@ -22,12 +22,77 @@ msg|返回的消息信息
 data|查询到的学生信息对象，对应数据库中的tb_student的各个值
 ### 返回值样本
 ```json
-账号密码正确情况：
+账号密码正确情况:
     {"status":1,
     "msg":"true",
     "data":{"id":"41609050128","name":"宁大力","sex":"male","picture":"","classId":"080902201601","professionId":"080902","collegeId":"06","password":"00000","wexinId":"","phoneCode":"","email":null}}
     
-账号或密码错误情况：
+账号或密码错误情况:
+    {"status":0,
+    "msg":"账号或密码错误",
+    "data":null}
+```
+----
+## 微信小程序登陆
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73/wisdom_web/login/weixinLogin
+
+### _需传输的参数_
+name|describe
+----|------
+appid|小程序id
+secret|小程序的appSecret
+js_code|登陆时获取的code
+grant_type|授权类型，此处只需填写 authorization_code
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  0--->失败
+msg|服务器去腾讯api中获取的openid
+data|null
+### 返回值样本
+```json
+用户第一次登陆的情况:
+    {"status":0,
+    "msg":获取到的openid,
+    "data":null }
+用户非第一次登陆的情况:
+    {"status":1,
+    "msg":获取到的openid,
+    "data":null}
+```
+----
+## 微信小程序绑定用户与openid
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73/wisdom_web/wx/bindOpenid
+
+### _需传输的参数_
+name|describe
+----|------
+account|绑定的账号
+password|绑定的密码
+status|绑定人员的类型：1-->学生、2-->老师
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  0--->失败
+msg|成功或错误消息
+data|null
+### 返回值样本
+```json
+用户绑定的账号密码正确:
+    {"status":1,
+    "msg":"true",
+    "data":null }
+用户绑定的账号或密码错误:
     {"status":0,
     "msg":"账号或密码错误",
     "data":null}

@@ -47,8 +47,8 @@ public class TeacherLoginServiceImpl implements TeacherLoginService, Serializabl
         List<TbTeacher> tbTeachers = tbTeacherMapper.selectByExample(tbTeacherExample);
         //如果学生表中没有这个人
         if (tbTeachers.size() == 0){
-            return new WisdomResult(0,"该用户不为教师或未绑定",null);
+            return new WisdomResult(0,openid,null);
         }
-        return new WisdomResult(1,"true",tbTeachers.get(0));
+        return new WisdomResult(1,openid,tbTeachers.get(0));
     }
 }

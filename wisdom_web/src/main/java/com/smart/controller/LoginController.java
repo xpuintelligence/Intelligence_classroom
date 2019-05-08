@@ -1,6 +1,5 @@
 package com.smart.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.smart.pojo.RequestLogin;
 import com.smart.pojo.TbStudent;
 import com.smart.pojo.TbTeacher;
@@ -8,25 +7,14 @@ import com.smart.pojo.WisdomResult;
 import com.smart.service.StudentLoginService;
 import com.smart.service.TeacherLoginService;
 import com.smart.service.WXLoginService;
-import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-
-import okhttp3.Response;
-import org.apache.http.client.methods.HttpPost;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.Map;
-
 @Controller
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/login")
@@ -85,18 +73,8 @@ public class LoginController {
     public WisdomResult weiXinLogin(String appid , String secret , String js_code , String grant_type, HttpServletRequest request)
     throws Exception{
         WisdomResult login = wxLoginService.login(appid, secret, js_code, grant_type);
+        //将openid存到session中去
+        request.getSession().setAttribute("openid",login.getMsg());
         return login;
-    }
-
-    @RequestMapping("test")
-    private void test(ModelMap modelMap){
-        System.out.println(modelMap.get("tbStudent"));
-    }
-
-    @Test
-    public void fun(){
-        String url = "https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET" +
-                "&js_code=JSCODE&grant_type=authorization_code";
-        HttpPost httpPost = new HttpPost();
     }
 }

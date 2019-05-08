@@ -1,9 +1,9 @@
 package com.smart.service.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.smart.pojo.TbStudent;
-import com.smart.pojo.TbTeacher;
-import com.smart.pojo.WisdomResult;
+import com.smart.mapper.TbStudentMapper;
+import com.smart.mapper.TbTeacherMapper;
+import com.smart.pojo.*;
 
 import com.smart.service.StudentLoginService;
 import com.smart.service.TeacherLoginService;
@@ -25,6 +25,12 @@ public class WXLoginServiceImpl implements WXLoginService, Serializable {
 
     @Autowired
     private TeacherLoginService teacherLoginService;
+
+    @Autowired
+    private TbStudentMapper tbStudentMapper;
+
+    @Autowired
+    private TbTeacherMapper tbTeacherMapper;
     /**
      * 进行登陆操作
      */
@@ -61,8 +67,49 @@ public class WXLoginServiceImpl implements WXLoginService, Serializable {
         }
         //判断一下是不是在老师中，如果不是在老师中，那么要告诉微信端这个人没有绑定
         if (result.getStatus() == 0 ) {
-            result = new WisdomResult(0,"无该人员信息，请进行账号密码绑定",null);
+            result = new WisdomResult(0,(String) tmpMap.get("openid"),null);
         }
         return result;
     }
+
+    @Override
+    public WisdomResult bindOpenidWithAccount(String openid, String account, String password ,int status) {
+        WisdomResult wisdomResult = null;
+        int i = 0;
+        //判断是老师还是学生
+        if (status == 1){
+            //学生
+            TbStudentExample tbStudentExample = new TbStudentExample();
+            TbStudentExample.Criteria criteria = tbStudentExample.createCriteria();
+            //添加条件
+            criteria.andIdEqualTo(account);
+            criteria.andPasswordEqualTo(password);
+            //创建需要修改的实例
+            TbStudent tbStudent = new TbStudent();
+            tbStudent.setWexinId(openid);
+            //插入数据
+            i = tbStudentMapper.updateByExampleSelective(tbStudent, tbStudentExample);
+        }else if (status == 2){
+            //老师
+            TbTeacherExample tbTeacherExample = new TbTeacherExample();
+            TbTeacherExample.Criteria criteria = tbTeacherExample.createCriteria();
+            //添加条件
+            criteria.andIdEqualTo(account);
+            criteria.andPasswordEqualTo(password);
+            //创建需要修改的实例
+            TbTeacher tbTeacher = new TbTeacher();
+            tbTeacher.setWexinId(openid);
+            //插入数据
+            i = tbTeacherMapper.updateByExampleSelective(tbTeacher, tbTeacherExample);
+        }
+        //判断是否插入成功
+        if (i == 1){
+            wisdomResult = new WisdomResult(1,"true",null);
+        }else {
+            wisdomResult = new WisdomResult(0,"账号或密码错误",null);
+        }
+        return wisdomResult;
+    }
+
+
 }

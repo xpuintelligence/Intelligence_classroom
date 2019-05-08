@@ -51,9 +51,9 @@ public class StudentLoginServiceImpl implements StudentLoginService, Serializabl
         List<TbStudent> tbStudents = tbStudentMapper.selectByExample(tbStudentExample);
         //如果学生表中没有这个人
         if (tbStudents.size() == 0){
-            return new WisdomResult(0,"该用户不为学生或未绑定",null);
+            return new WisdomResult(0,openid,null);
         }
-        return new WisdomResult(1,"true",tbStudents.get(0));
+        return new WisdomResult(1,openid,tbStudents.get(0));
     }
 
 
