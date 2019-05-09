@@ -14,10 +14,26 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false;
 
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
+});
+
+
+router.beforeEach((to, from, next) => {
+  if(to.path === '/'){
+    localStorage.removeItem('userData');
+  }
+  let user = localStorage.getItem('userData');
+  if(!user && to.path !== '/'){
+    next({
+      path: '/'
+    })
+  }else{
+    next();
+  }
 });

@@ -1,20 +1,17 @@
 <template>
   <div>
-    <div>
+    <div class="img-logo">
       <transition enter-active-class="flip">
         <img v-if="flag" alt="logo.png" src="../assets/logo.png" style="width: 200px" class="animated"
              onclick="window.open('#')">
       </transition>
       <br>
     </div>
-    <transition enter-active-class="fadeInRight">
+    <transition enter-active-class="fadeInUp">
       <div v-show="flag" class="components-Login animated">
         <div class="container" v-on:submit.prevent="onSubmit">
           <form class="form-signin" action.pravite="#">
 
-            <transition enter-active-class="bounceIn">
-              <el-alert center v-if="connFail" :title="msg" :type="alert_color" :closable="false"></el-alert>
-            </transition>
             <p></p>
 
             <el-input placeholder="用户名" v-model="input_username" clearable v-focus></el-input>
@@ -51,11 +48,6 @@
         input_who: 1,
         connFail: false,
         msg: "未知错误!",
-        alert_color: "info form-control",
-        alert_color_arr: [
-          "error form-control", // 错误
-          "success form-control" // msg === true
-        ]
       };
     },
     mounted() {
@@ -72,6 +64,10 @@
         }
       },
       onSubmit: async function () {
+        if (this.input_username === "" || this.input_password === "") {
+          this.$message.error('用户名或密码不能为空');
+          return false;
+        }
         this.connFail = true;
         try {
           let res = await this.$http.post(
@@ -84,25 +80,24 @@
             {}
             // { emulateJSON: true }
           );
+
           if (res.data.msg === "true") {
-            // this.alert_color = this.alert_color_arr[1];
-            // this.msg = "你好," + res.data.data.name + ",正在跳转...";
+            console.log(res);
+            localStorage.setItem('userData', JSON.stringify(res.data.data));
+
             if (res.data.status === 1) {
               this.$router.push('Student');
             } else if (res.data.status === 2) {
               this.$router.push('Teacher');
             } else {
-              this.alert_color = this.alert_color_arr[0];
-              this.msg = "功能尚未开放，敬请期待。";
+              this.$message.warning("功能尚未开放");
             }
 
           } else {
-            this.alert_color = this.alert_color_arr[0];
-            this.msg = res.data.msg;
+            this.$message.error(res.data.msg);
           }
         } catch (e) {
-          // console.log(e);
-          this.msg = "抱歉,出了点问题!";
+          this.$message.warning("抱歉，出了点问题");
         }
       } // onSubmit()
     },
@@ -151,5 +146,15 @@
     margin-bottom: 10px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+  }
+
+
+  .img-logo {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
   }
 </style>
