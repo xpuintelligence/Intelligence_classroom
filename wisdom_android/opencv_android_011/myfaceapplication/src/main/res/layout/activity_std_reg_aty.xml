@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,16 +10,15 @@
 
 
     <LinearLayout
-        android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        >
+        android:padding="20dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/logo"/>
+            android:src="@drawable/logo" />
 
     </LinearLayout>
 
@@ -27,65 +27,75 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:padding="10dp"
         android:orientation="vertical"
+        android:padding="10dp"
         tools:ignore="UselessParent">
 
         <EditText
-            style="@style/InputBoxStyle"
             android:id="@+id/stu_id"
-            android:paddingLeft="15dp"
+            style="@style/InputBoxStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/stu_id"
             android:inputType="number"
+            android:paddingLeft="15dp"
             tools:ignore="Autofill" />
 
 
         <EditText
-            style="@style/InputBoxStyle"
-            android:paddingLeft="15dp"
             android:id="@+id/stu_pwd"
+            style="@style/InputBoxStyle"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:hint="@string/stu_pwd"
             android:inputType="textPassword"
+            android:paddingLeft="15dp"
             tools:ignore="Autofill" />
 
 
-        <Button
+        <!--<Button-->
+        <!--android:id="@+id/regStuBtn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:background="@drawable/border_line_while"-->
+        <!--android:onClick="toFace"-->
+        <!--android:text="@string/stu_face"-->
+        <!--android:textColor="#FFFFFF" />-->
+
+        <com.xuexiang.xui.widget.button.CountDownButton
             android:id="@+id/regStuBtn"
+            style="@style/Button.Blue"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/border_line_while"
             android:onClick="toFace"
             android:text="@string/stu_face"
-            android:textColor="#FFFFFF" />
+            app:cdbt_countDown="5000" />
 
-        <Button
+        <com.xuexiang.xui.widget.button.CountDownButton
             android:id="@+id/regTeaBtn"
+            style="@style/Button.Blue"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/border_line_while"
-            android:gravity="center"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
             android:onClick="toTeacher"
             android:text="@string/teacherlogin"
-            android:textColor="#FFFFFF" />
+            app:cdbt_countDown="20000" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp">
+
             <TextView
-                android:textSize="12sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:text="@string/forgetpwd" />
+                android:text="@string/forgetpwd"
+                android:textSize="12sp" />
         </RelativeLayout>
     </LinearLayout>
 </LinearLayout>

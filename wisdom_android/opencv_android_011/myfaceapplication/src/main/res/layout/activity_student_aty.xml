@@ -4,13 +4,202 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".StudentAty">
 
-    <com.itheima.view.BridgeWebView
-        android:id="@+id/wv_stu_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </com.itheima.view.BridgeWebView>
+    <LinearLayout
+        android:background="@drawable/border_input_box"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp">
+        <ImageView
+            android:src="@drawable/logo"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:paddingTop="20dp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <!--<LinearLayout-->
+                <!--android:background="@drawable/border_input_box"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_weight="3">-->
+                <!---->
+            <!--</LinearLayout>-->
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:text="学号"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:text="41604090109"
+                    android:layout_width="0dp"
+                    android:gravity="center_vertical"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:text="姓名"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:text="张三"
+                    android:gravity="center_vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:gravity="center"
+                    android:text="班级"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:gravity="center_vertical"
+                    android:text="热动力工程1701班"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+                <TextView
+                    android:gravity="center"
+                    android:text="积分"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:text="⭐⭐⭐⭐"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_height="0dp">
+            <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                style="@style/RoundButton.Auto"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_input_box"
+                android:layout_height="match_parent"
+                android:text="考勤信息" />
+            <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                android:layout_marginLeft="5dp"
+                style="@style/RoundButton.Auto"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_input_box"
+                android:layout_height="match_parent"
+                android:text="课堂作业" />
+            <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                android:layout_marginLeft="5dp"
+                android:paddingLeft="5dp"
+                style="@style/RoundButton.Auto"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_input_box"
+                android:layout_height="match_parent"
+                android:text="课堂内容" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_height="0dp">
+            <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                style="@style/RoundButton.Auto"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_input_box"
+                android:layout_height="match_parent"
+                android:text="课程评价" />
+            <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+                android:layout_marginLeft="5dp"
+                style="@style/RoundButton.Auto"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/border_input_box"
+                android:layout_height="match_parent"
+                android:text="课外活动" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_height="0dp">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_height="0dp">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_height="0dp">
+        </LinearLayout>
+
+
+    </LinearLayout>
 
 </LinearLayout>

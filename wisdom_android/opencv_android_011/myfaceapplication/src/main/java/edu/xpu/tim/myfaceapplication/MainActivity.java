@@ -1,10 +1,15 @@
 package edu.xpu.tim.myfaceapplication;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
@@ -31,16 +36,17 @@ import edu.xpu.tim.myfaceapplication.config.AppConfig;
 import edu.xpu.tim.myfaceapplication.util.AuthService;
 import edu.xpu.tim.myfaceapplication.util.ImgSaveUtils;
 
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private CameraBridgeViewBase openCvCameraView;
-    private static final int NOT_NOTICE = 2;//如果勾选了不再询问
 
     private String pwd;
     private String id;
     private int pictureNum = 0;
     private String accessToken;
+
+    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 0;
+
+    private SharedPreferences.Editor edit;
 
     private static final String TAG = "MainActivity";
     private CascadeClassifier cascadeClassifier = null; //级联分类器
@@ -70,13 +76,22 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         openCvCameraView.enableView();
     }
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] {Manifest.permission.CAMERA}, 1);
+            }
+        }
 
+        SharedPreferences first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
+        edit = first.edit();
+        requestPermission();
         setContentView(R.layout.activity_main);
-        myRequetPermission();
+        //TODO 权限动态获取
         new Thread(()-> accessToken = AuthService.getAuth()).start();
 
         openCvCameraView = findViewById(R.id.javaCameraView);
@@ -142,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 }
             }else{
                 Intent intent = new Intent(getApplicationContext(), StudentAty.class);
+                edit.putBoolean("isFirst", false);
+                edit.commit();
                 startActivity(intent);
                 finish();
             }
@@ -155,22 +172,55 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         return mRgba;
     }
 
-    private void myRequetPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+    private void requestPermission() {
+        Log.i(TAG,"requestPermission");
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.i(TAG,"checkSelfPermission");
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.CAMERA)) {
+                Log.i(TAG,"shouldShowRequestPermissionRationale");
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            } else {
+                Log.i(TAG,"requestPermissions");
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.CAMERA},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+            }
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.i(TAG,"onRequestPermissionsResult granted");
+
+                } else {
+                    Log.i(TAG,"onRequestPermissionsResult denied");
+                    showWaringDialog();
+                }
+            }
+        }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == NOT_NOTICE){
-            myRequetPermission();//由于不知道是否选择了允许所以需要再次判断
-        }
+    private void showWaringDialog() {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle("警告！")
+                .setMessage("请前往设置->应用->PermissionDemo->权限中打开相关权限，否则功能无法正常运行！")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 一般情况下如果用户不授权的话，功能是无法运行的，做退出处理
+                        finish();
+                    }
+                }).show();
     }
 }

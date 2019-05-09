@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.xuexiang.xui.XUI;
 
 import cz.msebera.android.httpclient.Header;
 import edu.xpu.tim.myfaceapplication.config.AppConfig;
@@ -29,6 +30,7 @@ public class StdRegAty extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //是第一次则正常加载
         setContentView(R.layout.activity_std_reg_aty);
+
         et_id = findViewById(R.id.stu_id);
         et_pwd = findViewById(R.id.stu_pwd);
     }
@@ -70,7 +72,8 @@ public class StdRegAty extends AppCompatActivity {
             edit.putInt("status", 2);
         }
         //以后都不再是首次登录
-        edit.putBoolean("isFirst", false);
+        //留到人脸识别在做
+        //edit.putBoolean("isFirst", false);
 
         atyIntent.putExtra("pwd", pwd);
         atyIntent.putExtra("id", id);

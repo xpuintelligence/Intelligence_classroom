@@ -1,47 +1,38 @@
 package edu.xpu.tim.myfaceapplication;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.KeyEvent;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-
-import edu.xpu.tim.myfaceapplication.config.AppConfig;
-import static android.view.KeyEvent.KEYCODE_BACK;
 
 public class StudentAty extends AppCompatActivity {
     private static final String TAG = "StudentAty";
 
-    private WebView webView;
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_aty);
-        webView = findViewById(R.id.wv_stu_home);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl("http://106.12.202.93/#/");
-        //webView.loadUrl("https://www.baidu.com");
-        webView.setWebViewClient(new WebViewClient(){
-            public boolean shouldOverrideUrlLoading(WebView view, String url){
-                view.loadUrl(url);
-                return true;
-            }
-        });
+
     }
 
+    public void onBackPressed() {
+        new AlertDialog.Builder(this).setTitle("确认退出吗？")
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“确认”后的操作
+                        StudentAty.this.finish();
+                    }
+                })
+                .setNegativeButton("返回", new DialogInterface.OnClickListener() {
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode == KEYCODE_BACK)
-            Log.i(AppConfig.TAG, "监听到退出按键");
-        Log.i(TAG, webView.toString());
-        if ((keyCode == KEYCODE_BACK) && webView.canGoBack()) {
-            webView.goBack();
-            Log.i(AppConfig.TAG, "WEB返回键");
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // 点击“返回”后的操作,这里不设置没有任何操作
+                    }
+                }).show();
     }
 }

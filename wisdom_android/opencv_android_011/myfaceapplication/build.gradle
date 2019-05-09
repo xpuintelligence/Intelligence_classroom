@@ -40,6 +40,12 @@ dependencies {
     implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.57'
     implementation 'com.github.open-android:BridgeWebView:v1.0'
 
+    implementation 'com.github.xuexiangjys:XUI:1.0.3'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+
 
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
