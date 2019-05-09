@@ -17,13 +17,48 @@
               <span slot="title">个人信息</span>
             </el-menu-item>
 
-            <!--CourseInfo-->
-            <el-menu-item index="CourseInfo">
-              <i class="el-icon-date"></i>
-              <span slot="title">考勤信息</span>
+            <el-submenu index="CourseInfo">
+              <template slot="title">
+                <i class="el-icon-date"></i>
+                <span slot="title">考勤信息</span>
+              </template>
+              <el-menu-item index="CourseInfo">概览</el-menu-item>
+              <el-menu-item index="考勤查询">考勤查询</el-menu-item>
+            </el-submenu>
+
+            <el-submenu index="Homework">
+              <template slot="title">
+                <i class="el-icon-edit"></i>
+                <span slot="title">课堂作业</span>
+              </template>
+              <el-menu-item index="查看作业" disabled>查看作业</el-menu-item>
+              <el-menu-item index="提交作业" disabled>提交作业</el-menu-item>
+            </el-submenu>
+
+            <el-submenu index="课堂内容">
+              <template slot="title">
+                <i class="el-icon-chat-dot-round"></i>
+                <span slot="title">课堂内容</span>
+              </template>
+              <el-menu-item index="查看作业" disabled>课前预习</el-menu-item>
+              <el-menu-item index="提交作业" disabled>课后答疑</el-menu-item>
+            </el-submenu>
+
+            <el-menu-item index="课程评价">
+              <i class="el-icon-star-off"></i>
+              <span slot="title">课程评价</span>
             </el-menu-item>
 
-            <el-submenu index="2">
+            <el-submenu index="活动">
+              <template slot="title">
+                <i class="el-icon-basketball"></i>
+                <span slot="title">课外活动</span>
+              </template>
+              <el-menu-item index="发布活动" disabled>发布活动</el-menu-item>
+              <el-menu-item index="活动报名" disabled>发布活动</el-menu-item>
+            </el-submenu>
+
+            <el-submenu index="2" disabled>
               <template slot="title">
                 <i class="el-icon-location"></i>
                 <span slot="title">TestList</span>
@@ -42,32 +77,6 @@
               </el-submenu>
             </el-submenu>
 
-
-            <el-submenu index="Homework">
-              <template slot="title">
-                <i class="el-icon-edit"></i>
-                <span slot="title">课堂作业</span>
-              </template>
-              <el-menu-item index="查看作业" disabled>查看作业</el-menu-item>
-              <el-menu-item index="提交作业" disabled>提交作业</el-menu-item>
-            </el-submenu>
-
-            <el-submenu index="活动">
-              <template slot="title">
-                <i class="el-icon-basketball"></i>
-                <span slot="title">课外活动</span>
-              </template>
-              <el-menu-item index="发布活动" disabled>发布活动</el-menu-item>
-              <el-menu-item index="活动报名" disabled>发布活动</el-menu-item>
-            </el-submenu>
-
-            <!--<router-link to="/Student/ShowInfo">-->
-            <!--<el-menu-item index="ShowInfo">-->
-            <!--<i class="el-icon-user-solid"></i>-->
-            <!--<span slot="title">个人信息</span>-->
-            <!--</el-menu-item>-->
-            <!--</router-link>-->
-
           </el-menu>
         </div>
       </el-aside>
@@ -78,30 +87,6 @@
             <i v-show="!isCollapse" class="el-icon-d-arrow-left"></i>
             <i v-show="isCollapse" class="el-icon-d-arrow-right"></i>
           </div>
-
-          <!--<el-menu default-active="1" class="el-menu-demo tab-page" mode="horizontal" @select="handleSelect"-->
-          <!--active-text-color="#409EFF">-->
-          <!--<el-menu-item index="ShowInfo">个人信息</el-menu-item>-->
-
-          <!--<el-submenu index="2">-->
-          <!--<template slot="title">我的工作台</template>-->
-          <!--<el-menu-item index="2-1">选项1</el-menu-item>-->
-          <!--<el-menu-item index="2-2">选项2</el-menu-item>-->
-          <!--<el-menu-item index="2-3">选项3</el-menu-item>-->
-          <!--<el-submenu index="2-4">-->
-          <!--<template slot="title">选项4</template>-->
-          <!--<el-menu-item index="2-4-1">选项1</el-menu-item>-->
-          <!--<el-menu-item index="2-4-2">选项2</el-menu-item>-->
-          <!--<el-menu-item index="2-4-3">选项3</el-menu-item>-->
-          <!--</el-submenu>-->
-          <!--</el-submenu>-->
-
-          <!--<el-menu-item index="3">消息中心-->
-          <!--</el-menu-item>-->
-          <!--<el-menu-item index="4">-->
-          <!--<a href="#">订单管理</a>-->
-          <!--</el-menu-item>-->
-          <!--</el-menu>-->
 
           <div class="app-header-userinfo">
             <el-dropdown trigger="hover" :hide-on-click="false">
@@ -116,7 +101,7 @@
         </el-header>
 
         <el-main class="app-body">
-          <transition name="fade" mode="out-in">
+          <transition name="fade" mode="out-in" translate="yes">
             <router-view></router-view>
           </transition>
         </el-main>
@@ -184,6 +169,15 @@
 </script>
 
 <style lang="scss">
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .25s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
   html {
     height: 100%;
   }
@@ -198,7 +192,7 @@
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
   }
 
   .app {
