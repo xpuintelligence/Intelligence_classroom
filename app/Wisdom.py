@@ -8,27 +8,30 @@ import numpy as np
 from FaceSearch import FaceSearch
 from FaceDetect import FaceDetect
 from PIL import Image, ImageDraw, ImageFont
+from GetJudge import GetJudge
 
 
 
 class Wisdom:
 
-    def drawInfo(img,student_name_list,headup_rate,attendence,student_num):
+    def drawInfo(img,student_name_list,headup_rate,attendence,student_num,image_height,image_width,filename):
 
+        output_path = "../output/"+filename
         # 利用pillow包输出中文
         pil_im = Image.fromarray(img)
         draw = ImageDraw.Draw(pil_im)
-        font = ImageFont.truetype("STHeiti Light.ttc", 80, encoding="utf-8")
-        draw.text((145, 406), "student: "+str(student_name_list), (0, 255, 0), font=font)
+        font = ImageFont.truetype("STHeiti Light.ttc", 50, encoding="utf-8")
+        draw.text((int(image_width*(1/10)), int(image_height*(1/5))), "student: "+str(student_name_list), (0, 255, 0), font=font)
         img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
                 
-        img = cv2.putText(img, "headupRate: "+str(headup_rate), (145, 106), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
-        img = cv2.putText(img, "Attendence: "+str(attendence), (145, 206), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
-        img = cv2.putText(img, "student_num: "+str(student_num), (145, 306), cv2.FONT_HERSHEY_SIMPLEX, 3, (0, 255, 0), 6)
+        img = cv2.putText(img, "headupRate: "+str(headup_rate), (int(image_width*(1/10)), int(image_height*(1/5)+100)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
+        img = cv2.putText(img, "Attendence: "+str(attendence), (int(image_width*(1/10)), int(image_height*(1/5)+200)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
+        img = cv2.putText(img, "student_num: "+str(student_num), (int(image_width*(1/10)), int(image_height*(1/5)+300)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
                 
         img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
-        # cv2.imshow("detial",img2)
-        # cv2.waitKey(0)
+
+        # 保存处理之后的图片
+        cv2.imwrite(output_path,img2)
 
 
     def run_wisdom():
@@ -51,6 +54,9 @@ class Wisdom:
         client_baidu_face = AipFace(APP_ID_FACE, API_KEY_FACE, SECRET_KEY_FACE) 
         # 实例化人体分析对象
         client_baidu_body = AipBodyAnalysis(APP_ID_BODY, API_KEY_BODY, SECRET_KEY_BODY) 
+
+        # 实例化判断类的对象
+        getJudge = GetJudge()
     
         # 测试图片的文件位置
         for filename in os.listdir("../image/"):
@@ -72,16 +78,28 @@ class Wisdom:
                 facefolder = "../faces/" # 存储的位置
                 faceSearch = FaceSearch(facefolder, imageType, groupIdList, client_baidu_face) # 实例化人脸搜索对象
                 student_name_list = [] # 初始化人名列表
-                student_name_list = faceSearch.search()    # 人脸库人脸搜素
-                print(student_name_list)
+                student_name_list ,student_headown_list= faceSearch.search()    # 人脸库人脸搜素
+                print("当前识别到的学生为："+str(student_name_list))
+                # 当前学生的单个考勤查询
+                getJudge.student_attendance_Judge(student_name_list)
+                if len(student_headown_list):
+                    print("低头的学生为: "+str(student_headown_list))
+                # 检测学生是不是睡觉或不认真听课
+                getJudge.sleepJudge(student_headown_list)
 
                 headup_rate = faceDetect.get_headup_rate()
                 print("班级当前抬头率为："+str(headup_rate))
                 attendence = faceDetect.attendence()
                 print("出勤率为: "+str(attendence))
 
-                # 显示图片
+                # 读取图片
                 img = cv2.imread(file_path, cv2.IMREAD_COLOR)
+                # 获取图片的尺寸
+                imgsize = img.shape
+                # 图片的高
+                image_height = imgsize[0]
+                # 图片宽
+                image_width = imgsize[1]
                 for i in range(0,len(face_pixel)):
                     face_rectangle = list(face_pixel[i].split(","))
                     left = int(face_rectangle[0])
@@ -94,7 +112,7 @@ class Wisdom:
 
                 # 利用pillow包输出中文
                 
-                Wisdom.drawInfo(img,student_name_list,headup_rate,attendence,student_num)
+                # Wisdom.drawInfo(img,student_name_list,headup_rate,attendence,student_num,image_height,image_width,filename)
 
                 # 删除faces文件夹的待识别面部
                 os.chdir("../faces")

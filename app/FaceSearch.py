@@ -52,8 +52,8 @@ class FaceSearch:
                     os.system("rm -rf *.jpg")
                     pass
         
-        self.judge_id_In_Not(student_id_list)
-        return student_name_list
+        student_headown_list = self.judge_id_In_Not(student_id_list)
+        return student_name_list, student_headown_list
 
 
     # 初始化数据库对象 服务器数据库
@@ -106,9 +106,13 @@ class FaceSearch:
         faceDataBase_debug = self.initdatabase_debug() 
         # 利用当前教室学生的学号和检测到的学生的学号求补集
         student_actual_list = faceDataBase_debug.get_student_id_all_debug() # 当前使用的是本地测试数据库
+        # 输出当前教室应该有的学生
+        #print(student_actual_list)
         for actual_student in student_actual_list:
             if actual_student is not None:
                 student_actual_list_now.append(actual_student)
+        # 输出当前教室实际存在的学生
+        #print(student_actual_list_now)
         student_left = list(set(student_actual_list_now)-set(student_id_list)) 
         # 如果补集存在（没有抬头的学生存在)
         if len(student_left) or len(student_left) <= len(student_actual_list)/2:             
@@ -119,10 +123,10 @@ class FaceSearch:
                 student_headown_list.append(student_headown_name)
 
                 student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
-            print("当前低头的学生为:"+str(student_headown_list))
+            # print("当前低头的学生为:"+str(student_headown_list))
+            return student_headown_list
+            
 
-    
-    
     # 判断是不是大家都在写作业做题
     def if_all_write(self, student_actual_list, student_headown_list):
         # 当前教室人数
