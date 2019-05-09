@@ -12,28 +12,44 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.use(ElementUI);
 
+
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
+Vue.http.options.xhr = { withCredentials: true};
+Vue.http.options.root = 'http://101.132.78.78:8080/';
+Vue.http.options.emulateJSON = true;
+
 Vue.config.productionTip = false;
 
+// import axios from 'axios'
+// Vue.prototype.$http = axios;
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+//
+// let axiosInstance = axios.create({
+//   baseURL: 'http://47.103.14.73/',
+//   timeout: 1000,
+//   headers: {'application/x-wwww-form-urlencoded': 'foobar'}
+// });
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {App},
   template: '<App/>'
 });
 
 
-router.beforeEach((to, from, next) => {
-  if(to.path === '/'){
-    localStorage.removeItem('userData');
-  }
-  let user = localStorage.getItem('userData');
-  if(!user && to.path !== '/'){
-    next({
-      path: '/'
-    })
-  }else{
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.path === '/') {
+//     localStorage.removeItem('userData');
+//   }
+//   let user = localStorage.getItem('userData');
+//   if (!user && to.path !== '/') {
+//     next({
+//       path: '/'
+//     })
+//   } else {
+//     next();
+//   }
+// });

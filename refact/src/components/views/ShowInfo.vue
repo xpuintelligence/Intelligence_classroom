@@ -27,6 +27,7 @@
         </div>
       </div>
     </el-card>
+
   </div>
 </template>
 
@@ -55,8 +56,8 @@
     methods: {},
     mounted: function () {
       this.flag = true;
-      this.userData = JSON.parse(localStorage.getItem('userData') || '[]');
-      console.log(this.userData);
+      this.userData = JSON.parse(sessionStorage.getItem('userData'));
+      // console.log(this.userData);
     },
   }
 </script>

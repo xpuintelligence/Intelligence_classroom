@@ -14,7 +14,7 @@
 
             <p></p>
 
-            <el-input placeholder="用户名" v-model="input_username" clearable v-focus></el-input>
+            <el-input placeholder="用户名" v-model="input_username" @keyup.native.enter="onSubmit" clearable v-focus></el-input>
 
             <p></p>
 
@@ -65,26 +65,24 @@
       },
       onSubmit: async function () {
         if (this.input_username === "" || this.input_password === "") {
-          this.$message.error('用户名或密码不能为空');
+          this.$message.error("用户名或密码不能为空");
           return false;
         }
-        this.connFail = true;
+
         try {
-          let res = await this.$http.post(
-            "wisdom_web/login/all",
-            {
+          let res = await this.$http.post("wisdom_web/login/all", {
               account: this.input_username,
               password: this.input_password,
               status: this.input_who
             },
+            // {withCredentials: true}
             {}
-            // { emulateJSON: true }
           );
 
           if (res.data.msg === "true") {
             console.log(res);
-            localStorage.setItem('userData', JSON.stringify(res.data.data));
-
+            // localStorage.setItem('userData', JSON.stringify(res.data.data));
+            sessionStorage.setItem('userData', JSON.stringify(res.data.data));
             if (res.data.status === 1) {
               this.$router.push('Student');
             } else if (res.data.status === 2) {
@@ -92,7 +90,6 @@
             } else {
               this.$message.warning("功能尚未开放");
             }
-
           } else {
             this.$message.error(res.data.msg);
           }

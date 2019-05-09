@@ -25,6 +25,16 @@
     <el-progress :percentage="50" status="exception"></el-progress>
 
     <hr>
+
+    {{data}}
+
+    <hr>
+    <div v-for="(val,key) in data">
+      {{key}} --- {{val}}
+      <p v-for="(v, key) in val">
+        {{v}} === {{key}}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -34,7 +44,7 @@
     data() {
       return {
         flag: false,
-        test: 1,
+        data: {},
       }
     },
     computed: {
@@ -42,21 +52,22 @@
         return parseInt(Math.random() * 100);
       }
     },
-    async mounted() {
-      try {
-        let res = await this.$http.post(
-          "wisdom_web/studentCourseInfo/thisMonth",
-          {},
-          {}
-        );
-        if (res.data.msg === "true") {
-          console.log(res.data.data);
-        } else {
-          this.$message.error(res.data.msg);
-        }
-      } catch (e) {
-        this.$message.error("抱歉，服务器出了点问题");
-      }
+    mounted() {
+      // wisdom_web/studentCourseInfo/thisWeek
+      // this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {
+      // }).then(function (res) {
+      //   console.log(res);
+      // }).catch(function (err) {
+      //   console.log("err");
+      //   console.log(err);
+      // })
+      this.$http.get('wisdom_web/studentCourseInfo/thisWeek', {
+        emulateJSON: true, withCredentials: true
+      }).then(res => {
+        console.log(res);
+        this.data = res.data.data;
+        console.log(this.data.data)
+      });
     },
     methods: {},
   }

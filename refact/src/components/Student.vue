@@ -17,22 +17,22 @@
               <span slot="title">个人信息</span>
             </el-menu-item>
 
-            <el-submenu index="CourseInfo">
+            <el-submenu index="考勤信息">
               <template slot="title">
                 <i class="el-icon-date"></i>
                 <span slot="title">考勤信息</span>
               </template>
               <el-menu-item index="CourseInfo">概览</el-menu-item>
-              <el-menu-item index="考勤查询">考勤查询</el-menu-item>
+              <el-menu-item index="GetCourseInfo">考勤查询</el-menu-item>
             </el-submenu>
 
-            <el-submenu index="Homework">
+            <el-submenu index="课堂作业">
               <template slot="title">
                 <i class="el-icon-edit"></i>
                 <span slot="title">课堂作业</span>
               </template>
-              <el-menu-item index="查看作业" disabled>查看作业</el-menu-item>
-              <el-menu-item index="提交作业" disabled>提交作业</el-menu-item>
+              <el-menu-item index="GetHomework">查看作业</el-menu-item>
+              <el-menu-item index="PushHomework">提交作业</el-menu-item>
             </el-submenu>
 
             <el-submenu index="课堂内容">
@@ -40,11 +40,11 @@
                 <i class="el-icon-chat-dot-round"></i>
                 <span slot="title">课堂内容</span>
               </template>
-              <el-menu-item index="查看作业" disabled>课前预习</el-menu-item>
-              <el-menu-item index="提交作业" disabled>课后答疑</el-menu-item>
+              <el-menu-item index="ClassPreview">课前预习</el-menu-item>
+              <el-menu-item index="AnsweringQuestions">课后答疑</el-menu-item>
             </el-submenu>
 
-            <el-menu-item index="课程评价">
+            <el-menu-item index="Evaluation">
               <i class="el-icon-star-off"></i>
               <span slot="title">课程评价</span>
             </el-menu-item>
@@ -54,29 +54,9 @@
                 <i class="el-icon-basketball"></i>
                 <span slot="title">课外活动</span>
               </template>
-              <el-menu-item index="发布活动" disabled>发布活动</el-menu-item>
-              <el-menu-item index="活动报名" disabled>发布活动</el-menu-item>
+              <el-menu-item index="PushActivities">发布活动</el-menu-item>
+              <el-menu-item index="JoinActivities">活动报名</el-menu-item>
             </el-submenu>
-
-            <el-submenu index="2" disabled>
-              <template slot="title">
-                <i class="el-icon-location"></i>
-                <span slot="title">TestList</span>
-              </template>
-              <el-menu-item-group>
-                <span slot="title">分组一</span>
-                <el-menu-item index="2-1">选项1</el-menu-item>
-                <el-menu-item index="2-2">选项2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="2-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="2-4">
-                <span slot="title">选项4</span>
-                <el-menu-item index="2-4-1">选项1</el-menu-item>
-              </el-submenu>
-            </el-submenu>
-
           </el-menu>
         </div>
       </el-aside>
@@ -159,10 +139,11 @@
       },
     },
     mounted() {
-      this.userData = JSON.parse(localStorage.getItem('userData') || '[]');
+      // this.userData = JSON.parse(localStorage.getItem('userData') || '[]');
       // console.log(this.userData);
+      this.userData = JSON.parse(sessionStorage.getItem('userData'));
       this.$message.success('你好，' + this.userData.name);
-      this.flag = true;
+      console.log(this.userData);
     },
     components: {},
   }
