@@ -97,20 +97,7 @@
     name: "Student",
     data() {
       return {
-        userData: {
-          classId: '',
-          collegeId: '',
-          email: '',
-          id: '',
-          identityId: '',
-          name: '',
-          password: '',
-          phoneCode: '',
-          picture: '',
-          professionId: '',
-          sex: '',
-          wexinId: '',
-        },
+        userData: {},
         isCollapse: true,
       }
     },
@@ -121,7 +108,7 @@
       logout: function () {
         this.$confirm('确认退出?', '提示', {})
           .then(() => {
-            localStorage.removeItem('userData');
+            sessionStorage.removeItem('userData');
             this.$router.push('/');
           })
           .catch(() => {

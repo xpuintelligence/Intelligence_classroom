@@ -85,7 +85,10 @@
           );
 
           if (res.data.msg === "true") {
+            console.log("=== res ===");
             console.log(res);
+            console.log("=== res.data ===");
+            console.log(res.data);
             // localStorage.setItem('userData', JSON.stringify(res.data.data));
             sessionStorage.setItem('userData', JSON.stringify(res.data.data));
             if (res.data.status === 1) {

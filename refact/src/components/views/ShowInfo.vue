@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div v-loading="loading" element-loading-text="拼命加载中"
+       element-loading-spinner="el-icon-loading">
+
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>概览</span>
@@ -10,13 +12,13 @@
 
       <div class="container">
         <div class="row clearfix">
-          <div class="col-md-4 column">
+          <div class="col-md-3 column">
             <el-card :body-style="{ padding: '0px' }">
               <img :src="userData.picture" style="width: 100%;"><br>
             </el-card>
           </div>
 
-          <div class="col-md-4 column">
+          <div class="col-md-5 column">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>基本信息</span>
@@ -49,22 +51,32 @@
       </div>
     </el-card>
 
-    <el-divider></el-divider>
+    <el-divider><i class="el-icon-more"></i></el-divider>
 
     <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span>今日上课状态</span>
       </div>
       <div class="text item">
-        <label>总成绩</label>
-        <el-divider direction="vertical"></el-divider>
-        <el-progress type="circle" :percentage="todayCourse.attendanceTotalScore" :width="200" status="text">
-          {{todayCourse.attendanceTotalScore}}分
-        </el-progress>
+        <el-row :gutter="12">
+          <el-col :span="12">
+            <el-card shadow="always">
+              <label>总成绩</label>
+              <el-divider direction="vertical"></el-divider>
+              <el-progress type="circle" :percentage="todayCourse.attendanceTotalScore" :width="200" status="text">
+                {{todayCourse.attendanceTotalScore}}分
+              </el-progress>
+            </el-card>
+          </el-col>
+          <el-col :span="12">
+            <el-card shadow="hover">
+              <label>抬头率</label>
+              <el-divider direction="vertical"></el-divider>
+              <el-progress type="circle" :percentage="todayCourse.headUpScore" :width="200"></el-progress>
+            </el-card>
+          </el-col>
+        </el-row>
 
-        <label>抬头率</label>
-        <el-divider direction="vertical"></el-divider>
-        <el-progress type="circle" :percentage="todayCourse.headUpScore" :width="200"></el-progress>
       </div>
     </el-card>
 
@@ -80,6 +92,7 @@
         },
         todayCourse: { // 今天的课程信息
         },
+        loading: true,
       }
     },
     computed: {
@@ -94,16 +107,22 @@
 
       this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
         this.todayCourse = res.data.data.data[0];
+        this.loading = false; // loading 关闭
         console.log(this.todayCourse);
       }).catch(err => {
         console.log("err-------");
         console.log(err);
-        this.$message.error("抱歉，服务器出错");
-      })
+        this.$message.error("server error!");
+      });
+
     },
   }
 </script>
 
 <style scoped>
+
+  body {
+    margin: 0;
+  }
 
 </style>
