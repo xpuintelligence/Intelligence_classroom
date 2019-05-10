@@ -2,7 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import VueResource from 'vue-resource'
-
 Vue.use(VueResource);
 Vue.http.options.root = 'http://101.132.78.78:8080/';
 Vue.http.interceptors.push(function(request, next) {//拦截器
