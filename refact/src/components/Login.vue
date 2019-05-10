@@ -14,7 +14,8 @@
 
             <p></p>
 
-            <el-input placeholder="用户名" v-model="input_username" @keyup.native.enter="onSubmit" clearable v-focus></el-input>
+            <el-input placeholder="用户名" v-model="input_username" @keyup.native.enter="onSubmit" clearable
+                      v-focus></el-input>
 
             <p></p>
 
@@ -76,7 +77,11 @@
               status: this.input_who
             },
             // {withCredentials: true}
-            {}
+            {
+              emulateJSON: true,
+              withCredentials: true,
+              credentials: true
+            }
           );
 
           if (res.data.msg === "true") {

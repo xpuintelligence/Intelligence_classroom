@@ -30,7 +30,7 @@
 
     <hr>
     <div v-for="(val,key) in data">
-      {{key}} --- {{val}}
+      <!--{{key}} -&#45;&#45; {{val}}-->
       <p v-for="(v, key) in val">
         {{v}} === {{key}}
       </p>
@@ -61,13 +61,19 @@
       //   console.log("err");
       //   console.log(err);
       // })
-      this.$http.get('wisdom_web/studentCourseInfo/thisWeek', {
-        emulateJSON: true, withCredentials: true
+
+      this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {
+        // emulateJSON: true,
+        // credentials: true
       }).then(res => {
         console.log(res);
         this.data = res.data.data;
-        console.log(this.data.data)
-      });
+        // console.log(this.data.data)
+      }).catch(err => {
+        console.log("err-------");
+        console.log(err);
+        this.$message.error("抱歉，服务器出错");
+      })
     },
     methods: {},
   }

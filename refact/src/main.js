@@ -13,13 +13,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
 
 
-import VueResource from 'vue-resource'
-Vue.use(VueResource);
-Vue.http.options.xhr = { withCredentials: true};
-Vue.http.options.root = 'http://101.132.78.78:8080/';
-Vue.http.options.emulateJSON = true;
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = true;
 
 // import axios from 'axios'
 // Vue.prototype.$http = axios;
