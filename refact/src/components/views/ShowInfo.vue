@@ -80,10 +80,15 @@
       </div>
     </el-card>
 
+    <hr>
+    <div id='myChart' style='width:300px; height:300px' disabled></div>
+    <hr>
+
   </div>
 </template>
 
 <script>
+
   export default {
     name: "ShowInfo",
     data() {
@@ -101,8 +106,29 @@
         return d.toLocaleTimeString();
       }
     },
-    methods: {},
+    methods: {
+      drawLine() {
+        // 基于准备好的dom，初始化echarts实例
+        let myChart = this.$echarts.init(document.getElementById('myChart'), 'macarons');
+        // 绘制图表
+        myChart.setOption({
+          title: {text: '哈哈哈哈哈哈哈哈哈哈'},
+          tooltip: {},
+          xAxis: {
+            data: ["1", "2", "3", "4", "5", "6"]
+          },
+          yAxis: {},
+          series: [{
+            name: 'name',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+          }]
+        });
+      },
+    },
     mounted: function () {
+      this.drawLine();
+
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
 
       this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {

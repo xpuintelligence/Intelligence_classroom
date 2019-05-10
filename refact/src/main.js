@@ -13,6 +13,12 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = true;
 
+// 图表
+import echarts from 'echarts'
+import 'echarts/theme/macarons.js'
+
+Vue.prototype.$echarts = echarts;
+
 // import axios from 'axios'
 // Vue.prototype.$http = axios;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -28,7 +34,7 @@ new Vue({
   el: '#app',
   router,
   components: {App},
-  template: '<App/>'
+  template: '<App/>',
 });
 
 
