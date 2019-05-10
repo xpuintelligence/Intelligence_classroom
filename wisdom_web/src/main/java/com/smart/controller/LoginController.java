@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/login")
 //@SessionAttributes(value = {"tbStudent","tbTeacher"})
 public class LoginController {
-
     @Autowired
     private StudentLoginService studentLoginService;
 
@@ -61,6 +60,7 @@ public class LoginController {
         return result;
     }
 
+
     /**
      * 微信小程序登陆，先要调用微信官网的api，固定参数
      * @param appid 小程序的id
@@ -75,6 +75,17 @@ public class LoginController {
         WisdomResult login = wxLoginService.login(appid, secret, js_code, grant_type);
         //将openid存到session中去
         request.getSession().setAttribute("openid",login.getMsg());
+        //判断是否登陆成功
+        if (login.getStatus() == 1) {
+            request.getSession().setAttribute("student",(TbStudent)login.getData());
+            request.getSession().setAttribute("status",1);
+        }else if (login.getStatus() == 2) {
+            request.getSession().setAttribute("teacher",(TbTeacher)login.getData());
+            request.getSession().setAttribute("status",2);
+        }
+        //将sessionid存进结果
+        login.setData(request.getSession().getId());
         return login;
     }
+
 }

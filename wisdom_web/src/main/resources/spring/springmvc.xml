@@ -26,8 +26,8 @@
     <dubbo:reference interface="com.smart.service.StudentCourseService" id="studentCourseService" timeout="10000"/>
     <dubbo:reference interface="com.smart.service.WXLoginService" id="wXLoginService" timeout="10000"/>
     <!--使用分页查询ItItem对应的服务接口-->
-    <!--配置本地资源不被拦截-->
-    <mvc:resources location="/WEB-INF/js/" mapping="/js/**"/>
-    <mvc:resources location="/WEB-INF/css/" mapping="/css/**"/>
 
+    <mvc:cors>
+        <mvc:mapping path="/**" allowed-origins="*" allow-credentials="true" max-age="1800" allowed-methods="GET,POST,OPTIONS"/>
+    </mvc:cors>
 </beans>

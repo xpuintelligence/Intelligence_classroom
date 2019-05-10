@@ -623,5 +623,62 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 }
 ```
 ----
+## 查询固定某一天的课程信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73/wisdom_web/studentCourseInfo/oneday
 
+### _需传输的参数_
+name|describe
+----|------
+datetime|2019-10-10这样的也可以加时分秒 2019-10-10 00:00:00这种
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  （目前没有查不出来的情况）
+msg|true
+data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
+### 返回值样本
+```json
+{
+    "status": 1,
+    "msg": "true",
+    "data": [
+        {
+            "id": "20190506100000",
+            "time": 1557108000000,
+            "courseId": "1009",
+            "courseName": "软件项目管理",
+            "courseNote": null,
+            "attendanceTotalScore": 60,
+            "leaveScore": 20,
+            "attendScore": 20,
+            "lateAttendScore": 10,
+            "headUpScore": 40,
+            "classroomId": "1110",
+            "teacherId": "17",
+            "teacherName": "陈金广"
+        },
+        {
+            "id": "20190509100000",
+            "time": 1557367200000,
+            "courseId": "1009",
+            "courseName": "软件项目管理",
+            "courseNote": null,
+            "attendanceTotalScore": 60,
+            "leaveScore": 20,
+            "attendScore": 20,
+            "lateAttendScore": 10,
+            "headUpScore": 40,
+            "classroomId": "1110",
+            "teacherId": "17",
+            "teacherName": "陈金广"
+        }
+    ]
+}
+```
+----
 

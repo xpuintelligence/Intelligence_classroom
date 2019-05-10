@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/studentCourseInfo")
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = {"*", "null"})
 public class StudentCourseInfoController {
     @Autowired
     private StudentCourseService studentCourseService;
@@ -143,5 +143,21 @@ public class StudentCourseInfoController {
         WisdomResult result = studentCourseService.getCourseOfThisSemester(student);
         return result;
     }
+
+    /**
+     * 获取某一天的课程
+     */
+    @RequestMapping("/oneday")
+    @ResponseBody
+    public WisdomResult getCourseListOneday(HttpServletRequest request , DateTime datetime){
+        //获取学生信息
+        //先获取学生信息
+        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        //调用方法，获取返回值
+        WisdomResult result = studentCourseService.getCourseOfDay(student,datetime);
+        return result;
+    }
+
+
 
 }

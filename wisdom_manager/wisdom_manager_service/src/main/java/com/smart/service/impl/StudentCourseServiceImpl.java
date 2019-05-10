@@ -79,8 +79,6 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
 
     /**
      * 这个学期的课程
-     * @param tbStudent
-     * @return
      */
     @Override
     public WisdomResult getCourseOfThisSemester(TbStudent tbStudent) {
@@ -105,8 +103,6 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
 
     /**
      * 获取这个星期的课程
-     * @param tbStudent
-     * @return
      */
     @Override
     public WisdomResult getCourseThisWeek(TbStudent tbStudent) {
@@ -161,7 +157,7 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
     public WisdomResult getCourseFrontOfXWeek(TbStudent tbStudent, Integer n) {
         //获取该天前n个星期的起始值
         Map<String, DateTime> map = DateUtils.subXWeekDay(DateUtils.getCurrentTime(), n);
-        //返回结果集
+        //返回结果集co
         return getCourseOfSpellTime(tbStudent,map);
     }
 
