@@ -45,7 +45,7 @@
 
 	bug是由于百度云ai开放平台的人脸识别库中的部分bugs
 
-[解决方法](https://rowe98.github.io/2019/05/01/Fix-Bug-Baidu-Aip/)
+[解决方法](http://120.79.148.86/2019/05/10/Fix-Bug-Baidu-Aip/)
 
 
 # 2019-4-25

@@ -2,11 +2,15 @@
 
 class GetJudge:
 
-    def __init__(self):
+    def __init__(self,sleepdict,student_attendancedict):
+
+        # 初始化睡觉判断和出勤判断字典
+        #self.sleepdict = dict()
+        #self.student_attendancedict = dict()
         # 学生睡觉的字典
-        self.sleepdict = dict()
+        self.sleepdict = sleepdict
         # 学生识别情况的字典
-        self.student_attendancedict = dict()
+        self.student_attendancedict = student_attendancedict
 
     # 判断学生是不是在睡觉或者不认真听讲
     def sleepJudge(self, student_headown_list):

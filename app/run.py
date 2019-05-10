@@ -7,6 +7,9 @@ from LoadVideo import LoadVideo
 from Wisdom import Wisdom
 import getpass
 
+# 初始化睡觉判断和出勤判断字典
+sleepdict = dict()
+student_attendancedict = dict()
 
 # 获取图片
 def get_image(user, ip, password):
@@ -14,8 +17,10 @@ def get_image(user, ip, password):
 
 
 # 识别程序
-def run_program():
-    Wisdom.run_wisdom()
+def run_program(sleepdict,student_attendancedict):
+    sleepdict_run = sleepdict
+    student_attendancedict_run = student_attendancedict
+    Wisdom.run_wisdom(sleepdict_run,student_attendancedict_run)
     clean()
 
 
@@ -60,9 +65,9 @@ if __name__ == "__main__":
             print("请输入网络摄像头的ip地址: ", end="")
             ip = input()
             print("你输入的内容为："+user+":"+password+"@"+ip+",请检查!")
-            print("是否有误?(Y/N)")
+            print("是否继续?(Y/N)")
             passflag = input()
-            if(passflag == "N" or passflag == "n"):
+            if(passflag == "y" or passflag == "Y"):
                 try:
                     while True:
                         localtime = time.strftime("%H-%M-%S")
@@ -73,7 +78,7 @@ if __name__ == "__main__":
                             print("图片获取完毕")
                             print("开始识别")
                             print()
-                            run_program()
+                            run_program(sleepdict,student_attendancedict)
                             print("识别结束 开始清除缓存")
                             time.sleep(1)
                 except KeyboardInterrupt:

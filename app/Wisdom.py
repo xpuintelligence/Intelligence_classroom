@@ -34,7 +34,7 @@ class Wisdom:
         cv2.imwrite(output_path,img2)
 
 
-    def run_wisdom():
+    def run_wisdom(sleepdict,student_attendancedict):
 
         # face++的api地址密码 用于人脸识别
         face_http_url = "https://api-cn.faceplusplus.com/facepp/v3/detect"
@@ -56,7 +56,7 @@ class Wisdom:
         client_baidu_body = AipBodyAnalysis(APP_ID_BODY, API_KEY_BODY, SECRET_KEY_BODY) 
 
         # 实例化判断类的对象
-        getJudge = GetJudge()
+        getJudge = GetJudge(sleepdict,student_attendancedict)
     
         # 测试图片的文件位置
         for filename in os.listdir("../image/"):
