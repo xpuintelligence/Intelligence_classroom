@@ -111,7 +111,7 @@
           sex: '',
           wexinId: '',
         },
-        isCollapse: false,
+        isCollapse: true,
       }
     },
     methods: {

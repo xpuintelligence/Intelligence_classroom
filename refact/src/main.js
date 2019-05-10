@@ -35,16 +35,16 @@ new Vue({
 });
 
 
-// router.beforeEach((to, from, next) => {
-//   if (to.path === '/') {
-//     localStorage.removeItem('userData');
-//   }
-//   let user = localStorage.getItem('userData');
-//   if (!user && to.path !== '/') {
-//     next({
-//       path: '/'
-//     })
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.path === '/') {
+    localStorage.removeItem('userData');
+  }
+  let user = sessionStorage.getItem('userData');
+  if (!user && to.path !== '/') {
+    next({
+      path: '/'
+    })
+  } else {
+    next();
+  }
+});

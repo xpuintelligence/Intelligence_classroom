@@ -2,7 +2,8 @@
   <div>
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <el-button style="padding: 3px 0" type="text">
+        <span>概览</span>
+        <el-button style="padding: 3px 0;float: right;" type="text">
           {{new Date()}}
         </el-button>
       </div>
@@ -20,7 +21,7 @@
               <div slot="header" class="clearfix">
                 <span>基本信息</span>
               </div>
-              <div class="text item" style="font-size: 13px">
+              <div class="text item" style="font-size: 12px">
                 学号：{{userData.id}}<br>
                 姓名：{{userData.name}}<br>
                 班级：{{userData.classId}}<br>
@@ -48,17 +49,24 @@
       </div>
     </el-card>
 
-    {{userData}}
+    <el-divider></el-divider>
 
-    <hr>
+    <el-card class="box-card">
+      <div slot="header" class="clearfix">
+        <span>今日上课状态</span>
+      </div>
+      <div class="text item">
+        <label>总成绩</label>
+        <el-divider direction="vertical"></el-divider>
+        <el-progress type="circle" :percentage="todayCourse.attendanceTotalScore" :width="200" status="text">
+          {{todayCourse.attendanceTotalScore}}分
+        </el-progress>
 
-    {{todayCourse}}
-
-    <hr>
-
-    <label>今日上课状态</label>
-    <el-divider direction="vertical"></el-divider>
-    <el-progress type="circle" :percentage="20" :width="200"></el-progress>
+        <label>抬头率</label>
+        <el-divider direction="vertical"></el-divider>
+        <el-progress type="circle" :percentage="todayCourse.headUpScore" :width="200"></el-progress>
+      </div>
+    </el-card>
 
   </div>
 </template>
