@@ -9,6 +9,7 @@ from FaceSearch import FaceSearch
 from FaceDetect import FaceDetect
 from PIL import Image, ImageDraw, ImageFont
 from GetJudge import GetJudge
+from Upload import Upload
 
 
 
@@ -32,6 +33,9 @@ class Wisdom:
 
         # 保存处理之后的图片
         cv2.imwrite(output_path,img2)
+        # 准备上传七牛云
+        upload = Upload()
+        upload.upload(output_path,filename)
 
 
     def run_wisdom(sleepdict,student_attendancedict):
@@ -112,7 +116,7 @@ class Wisdom:
 
                 # 利用pillow包输出中文
                 
-                # Wisdom.drawInfo(img,student_name_list,headup_rate,attendence,student_num,image_height,image_width,filename)
+                Wisdom.drawInfo(img,student_name_list,headup_rate,attendence,student_num,image_height,image_width,filename)
 
                 # 删除faces文件夹的待识别面部
                 os.chdir("../faces")

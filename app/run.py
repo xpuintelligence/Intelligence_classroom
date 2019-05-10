@@ -28,6 +28,8 @@ def run_program(sleepdict,student_attendancedict):
 def clean():
     os.chdir("../image")
     os.system("rm -rf *.jpg")
+    os.chdir("../output")
+    os.system("rm -rf *.jpg")
     print("清除完毕")
 
 
