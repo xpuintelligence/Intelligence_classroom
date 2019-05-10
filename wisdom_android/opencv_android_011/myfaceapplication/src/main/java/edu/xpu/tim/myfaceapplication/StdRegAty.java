@@ -16,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.xuexiang.xui.XUI;
 
 import cz.msebera.android.httpclient.Header;
 import edu.xpu.tim.myfaceapplication.config.AppConfig;
@@ -70,6 +69,8 @@ public class StdRegAty extends AppCompatActivity {
             edit.putString("tea_pwd", pwd);
             //1表示学生 2表示老师
             edit.putInt("status", 2);
+            //老师登录无需刷脸
+            edit.putBoolean("isFirst", false);
         }
         //以后都不再是首次登录
         //留到人脸识别在做
@@ -122,6 +123,7 @@ public class StdRegAty extends AppCompatActivity {
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                     Toast.makeText(getApplicationContext(), "网络堵塞", Toast.LENGTH_SHORT).show();
+                    btn.setEnabled(true);
                 }
             });
         }else{

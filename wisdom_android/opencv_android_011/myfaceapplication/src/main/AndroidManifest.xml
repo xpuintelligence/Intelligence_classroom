@@ -18,27 +18,31 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:label="人脸信息采集（请保持手机横向放置）"
             android:name=".MainActivity"
+            android:label="人脸信息采集（请保持手机横向放置）"
             android:launchMode="singleTask"
-            android:screenOrientation="landscape">
-        </activity>
+            android:screenOrientation="landscape" />
         <activity
-            android:theme="@style/AppTheme"
             android:name=".StdRegAty"
-            android:launchMode="singleTask">
-        </activity>
-
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme" />
         <activity
-            android:theme="@style/AppTheme"
             android:name=".StudentAty"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".TeacherAty"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme">
         </activity>
 
         <activity
-            android:theme="@style/AppTheme"
-            android:name=".TeacherAty"
-            android:launchMode="singleTask">
+            android:name=".student.StuCheckInfoAty"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme">
+        </activity>
+
+        <activity android:name=".FirstRunAty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

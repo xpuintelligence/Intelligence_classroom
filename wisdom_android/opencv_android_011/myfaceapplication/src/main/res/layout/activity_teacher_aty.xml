@@ -3,7 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".TeacherAty">
 
+
+    <com.xuexiang.xui.widget.textview.MarqueeTextView
+        android:id="@+id/teaAty_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="#88dddddd"
+        app:mtv_isAutoFit="true"
+        app:mtv_isAutoDisplay="true"/>
 </LinearLayout>

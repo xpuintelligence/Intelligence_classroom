@@ -82,7 +82,7 @@
             android:layout_marginTop="15dp"
             android:onClick="toTeacher"
             android:text="@string/teacherlogin"
-            app:cdbt_countDown="20000" />
+            app:cdbt_countDown="5000" />
 
         <RelativeLayout
             android:layout_width="match_parent"

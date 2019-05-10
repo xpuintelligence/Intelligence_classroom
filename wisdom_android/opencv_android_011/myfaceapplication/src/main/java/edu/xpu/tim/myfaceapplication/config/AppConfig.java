@@ -9,7 +9,7 @@ public interface AppConfig {
     int pictureCount = 10;
 
     //登录请求地址
-    String loginAddress = "http://47.103.14.73/wisdom_web/login/all";
+    String loginAddress = "http://101.132.78.78:8080/wisdom_web/login/all";
 
     String TAG = "MyAppConfig";
 }
