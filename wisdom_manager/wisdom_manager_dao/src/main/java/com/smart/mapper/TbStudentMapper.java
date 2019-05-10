@@ -1,10 +1,9 @@
 package com.smart.mapper;
 
-import com.smart.pojo.TbStudent;
-import com.smart.pojo.TbStudentExample;
+import com.smart.pojo.*;
+
 import java.util.List;
 
-import com.smart.pojo.WCourseInfo;
 import org.apache.ibatis.annotations.Param;
 
 public interface TbStudentMapper {
@@ -30,6 +29,9 @@ public interface TbStudentMapper {
 
     int updateByPrimaryKey(TbStudent record);
 
-//    字节添加的方法
+//    自己添加的方法
     List<WCourseInfo> selectWCourseInfo(@Param("classId")String classId , @Param("start") String start , @Param("end") String end);
+    StudentInfo selectStudentInfo(String wexin_id);//用openId查
+    StudentInfo selectStudentIdAndPassword(@Param("id") String id, @Param("password") String password);
+    AttendanceItem selectAttendanceItem(@Param("studentId") String studentId, @Param("start") String start, @Param("end") String end);
 }
