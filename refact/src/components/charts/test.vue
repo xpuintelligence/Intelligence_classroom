@@ -7,6 +7,18 @@
 
 <script>
   import HighCharts from 'highcharts'
+  import HighChartsExport from 'highcharts/modules/exporting'
+  HighChartsExport(HighCharts);
+
+  HighCharts.setOptions({
+    lang: {
+      printChart:"打印图表",
+      downloadJPEG: "下载JPEG 图片" ,
+      downloadPDF: "下载PDF文档"  ,
+      downloadPNG: "下载PNG图片"  ,
+      downloadSVG: "下载SVG矢量图"
+    }
+  });
 
   export default {
     name: "test.vue",
@@ -35,9 +47,10 @@
 
       setTimeout(() => {
         HighCharts.chart(this.id, this.option);
-        this.loading = false;
+        this.loading = this.option.series[0].data.length === 0 || this.option.series[1].data.length === 0;
       }, 500);
-      // HighCharts.chart(this.id, this.option)
+      // HighCharts.chart(this.id, this.option);
+      // this.loading = false;
     },
   }
 </script>

@@ -13,16 +13,29 @@
     name: "Charts",
     data: function () {
       return {
+        userData: {},
         thisSemesterTotalInfo: {},
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
 
         thisSemesterCharts: {
+          navigation: {
+            buttonOptions: {
+              text: '导出',
+              enabled: true,
+            }
+          },
+          exporting: {
+            // url: 'http://127.0.0.1:3000'
+          },
+          credits: {
+            enabled: false, // 右下角的 highcharts 标识去掉
+          },
           chart: {
-            type: 'line'
+            type: 'line'  // 图表类型
           },
           title: {
-            text: '学期总智慧课堂成绩'
+            text: ''
           },
           subtitle: {
             text: '数据来源: 智慧教室云服务'
@@ -69,11 +82,15 @@
         },
       }
     },
-    components: {
-      XChart
-    },
+    components:
+      {
+        XChart
+      }
+    ,
     mounted() {
-      this.okok = false;
+      // 获取用户数据
+      this.userData = JSON.parse(sessionStorage.getItem('userData'));
+
       // 获取学期的上课信息
       this.$http.post('wisdom_web/studentCourseInfo/thisSemester', {}).then(res => {
         this.thisSemesterTotalInfo = res.data.data;
@@ -84,6 +101,7 @@
           this.thisSemesterCharts.series[0].data.push(res.body.data[i].headUpScore);  // 专注度
           this.thisSemesterCharts.series[1].data.push(res.body.data[i].attendScore);  // 考勤
         }
+        this.thisSemesterCharts.title.text = '智慧教室-学期总成绩-' + this.userData.name;
         // console.log("attendTotalScore");
         // console.log(this.attendTotalScore);
         // console.log("headUpScore");
