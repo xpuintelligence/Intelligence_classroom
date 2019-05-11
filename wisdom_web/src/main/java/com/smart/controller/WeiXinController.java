@@ -1,6 +1,7 @@
 package com.smart.controller;
 
 
+import com.smart.pojo.StudentInfo;
 import com.smart.pojo.TbStudent;
 import com.smart.pojo.TbTeacher;
 import com.smart.pojo.WisdomResult;
@@ -34,7 +35,7 @@ public class WeiXinController {
         //判断该人为老师还是学生，把对应的变量存入session中
         if (wisdomResult.getStatus() == 1){
             request.getSession().setAttribute("status",1);
-            request.getSession().setAttribute("student",(TbStudent)wisdomResult.getData());
+            request.getSession().setAttribute("student",(StudentInfo)wisdomResult.getData());
         }else if (wisdomResult.getStatus() == 2){
             request.getSession().setAttribute("status",2);
             request.getSession().setAttribute("student",(TbTeacher)wisdomResult.getData());

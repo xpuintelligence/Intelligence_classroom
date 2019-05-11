@@ -1,9 +1,6 @@
 package com.smart.controller;
 
-import com.smart.pojo.RequestLogin;
-import com.smart.pojo.TbStudent;
-import com.smart.pojo.TbTeacher;
-import com.smart.pojo.WisdomResult;
+import com.smart.pojo.*;
 import com.smart.service.StudentLoginService;
 import com.smart.service.TeacherLoginService;
 import com.smart.service.WXLoginService;
@@ -45,8 +42,8 @@ public class LoginController {
             //调用service层,获取到结果
             result = studentLoginService.studentLoginOfWeb(tbStudent);
             //将获取到的值存进session中
-            tbStudent = (TbStudent) result.getData();
-            request.getSession().setAttribute("tbStudent",tbStudent);
+            StudentInfo studentInfo= (StudentInfo) result.getData();
+            request.getSession().setAttribute("student",studentInfo);
         }else if (requestLogin.getStatus() == 2){
             //老师，封装一下账号密码
             TbTeacher tbTeacher = new TbTeacher();
@@ -77,7 +74,7 @@ public class LoginController {
         request.getSession().setAttribute("openid",login.getMsg());
         //判断是否登陆成功
         if (login.getStatus() == 1) {
-            request.getSession().setAttribute("student",(TbStudent)login.getData());
+            request.getSession().setAttribute("student",(StudentInfo)login.getData());
             request.getSession().setAttribute("status",1);
         }else if (login.getStatus() == 2) {
             request.getSession().setAttribute("teacher",(TbTeacher)login.getData());

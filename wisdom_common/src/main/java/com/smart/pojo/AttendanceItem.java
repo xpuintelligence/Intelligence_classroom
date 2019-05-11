@@ -1,11 +1,13 @@
 package com.smart.pojo;
 
 
+import java.io.Serializable;
+
 /**
  * @author LM_Code
  * @create 2019-05-09-20:45
  */
-public class AttendanceItem {
+public class AttendanceItem implements Serializable {
     String attendance_id;//考勤id
     String courseitem_id;//这一节课的id
     String name;//课程名

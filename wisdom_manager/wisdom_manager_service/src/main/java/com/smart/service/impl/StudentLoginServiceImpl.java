@@ -21,18 +21,13 @@ public class StudentLoginServiceImpl implements StudentLoginService, Serializabl
      */
     @Override
     public WisdomResult studentLoginOfWeb(TbStudent tbStudent) {
-        TbStudentExample tbStudentExample = new TbStudentExample();
-        TbStudentExample.Criteria criteria = tbStudentExample.createCriteria();
-        //判断账号密码是否存在
-        criteria.andIdEqualTo(tbStudent.getId());
-        criteria.andPasswordEqualTo(tbStudent.getPassword());
-        //获取查询条件
-        List<TbStudent> tbStudents = tbStudentMapper.selectByExample(tbStudentExample);
-        //new一个结果集
+
+        //查询结果
+        StudentInfo studentInfo = tbStudentMapper.selectStudentIdAndPassword(tbStudent.getId(), tbStudent.getPassword());
         //查看查出来几条记录
-        if (tbStudents.size() == 1){
+        if (studentInfo != null){
             //1条记录则返回改记录所对应的pojo
-            WisdomResult result = WisdomResult.ok(tbStudents.get(0));
+            WisdomResult result = WisdomResult.ok(studentInfo);
             return result;
         }
         //不是一条记录返回false
@@ -40,20 +35,16 @@ public class StudentLoginServiceImpl implements StudentLoginService, Serializabl
     }
 
     @Override
-    public WisdomResult studentLoginOfWX(TbStudent tbStudent) {
+    public WisdomResult studentLoginOfWX(StudentInfo studentInfo) {
         //拿到student以后，判断openid是不是在数据库中存在
-        String openid = tbStudent.getWexinId();
-        //创建查询实例
-        TbStudentExample tbStudentExample = new TbStudentExample();
-        TbStudentExample.Criteria studentExampleCriteria = tbStudentExample.createCriteria();
+        String openid = studentInfo.getWeixinId();
         //去数据库中查询是否存在
-        studentExampleCriteria.andWexinIdEqualTo(openid);
-        List<TbStudent> tbStudents = tbStudentMapper.selectByExample(tbStudentExample);
+        studentInfo = tbStudentMapper.selectStudentInfo(openid);
         //如果学生表中没有这个人
-        if (tbStudents.size() == 0){
+        if (studentInfo == null){
             return new WisdomResult(0,openid,null);
         }
-        return new WisdomResult(1,openid,tbStudents.get(0));
+        return new WisdomResult(1,openid,studentInfo);
     }
 
 

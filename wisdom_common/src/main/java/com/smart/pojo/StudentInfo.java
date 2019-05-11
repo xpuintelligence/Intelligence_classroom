@@ -18,6 +18,15 @@ public class StudentInfo implements Serializable {
     String professionName;
     String collegeId;
     String collegeName;
+    String weixinId;
+
+    public String getWeixinId() {
+        return weixinId;
+    }
+
+    public void setWeixinId(String weixinId) {
+        this.weixinId = weixinId;
+    }
 
     public String getId() {
         return id;
@@ -106,6 +115,8 @@ public class StudentInfo implements Serializable {
     public void setCollegeName(String collegeName) {
         this.collegeName = collegeName;
     }
+
+
 
     @Override
     public String toString() {

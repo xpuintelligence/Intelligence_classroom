@@ -1,6 +1,7 @@
 package com.smart.service;
 
-import com.smart.pojo.TbStudent;
+import com.smart.pojo.StudentInfo;
+
 import com.smart.pojo.WisdomResult;
 import org.joda.time.DateTime;
 
@@ -13,68 +14,82 @@ public interface StudentCourseService {
 
     /**
      *  获取一位同学某段时间内有哪一些课程
-     * @param tbStudent 要查询的学生
+     * @param studentInfo 要查询的学生
      * @param begin 开始时间
      * @param end 结束时间
-     * @return 返回查询结果
+     * @return 返回查询结果R
      */
-    public WisdomResult getCourseOfSpellTime(TbStudent tbStudent , DateTime begin , DateTime end);
+    public WisdomResult getCourseOfSpellTime(StudentInfo studentInfo , DateTime begin , DateTime end);
+
+    /**
+     *  因为joda-time不能进行序列化，所以只能进行字符串型的时间传输
+     * @param begin 开始时间的字符串
+     * @param end 结束时间的字符串
+     */
+    public WisdomResult getCourseOfSpellTime(StudentInfo studentInfo , String begin , String end);
 
     /**
      *  获取一位同学某段时间内有哪一些课程
-     * @param tbStudent 要查询的学生
+     * @param studentInfo 要查询的学生
      * @return 返回查询结果
      */
-    public WisdomResult getCourseOfSpellTime(TbStudent tbStudent , Map<String,DateTime> map);
+    public WisdomResult getCourseOfSpellTime(StudentInfo studentInfo , Map<String,DateTime> map);
+
     /**
      *  获取某一天有哪些课程
-     * @param tbStudent 需要查询的学生
+     * @param studentInfo 需要查询的学生
      * @param day 某一天的时间
      * @return 查询结果
      */
-    public WisdomResult getCourseOfDay(TbStudent tbStudent , DateTime day);
+    public WisdomResult getCourseOfDay(StudentInfo studentInfo , DateTime day);
+
+    /**
+     * 因为joda-time不支持序列化，所以时间参数不可以之间传递，要到这边了以后才能传递
+     * @param day 字符串形式的时间
+     */
+    public WisdomResult getCourseOfDay(StudentInfo studentInfo , String day);
 
     /**
      * 获取今天有哪些课程
      */
-    public  WisdomResult getCourseOfToday(TbStudent tbStudent);
+    public  WisdomResult getCourseOfToday(StudentInfo studentInfo);
 
     /**
      * 获取这个学期的课程，从开学到学期末
      */
-    public WisdomResult getCourseOfThisSemester(TbStudent tbStudent);
+    public WisdomResult getCourseOfThisSemester(StudentInfo studentInfo);
 
     /**
      * 获取第n周的课程,从开学第一个星期算起
      */
-    public WisdomResult getCourseInXWeek(TbStudent tbStudent , Integer n);
+    public WisdomResult getCourseInXWeek(StudentInfo studentInfo , Integer n);
 
     /**
      * 获取本周有哪些课程
      */
-    public WisdomResult getCourseThisWeek(TbStudent tbStudent);
+    public WisdomResult getCourseThisWeek(StudentInfo studentInfo);
 
     /**
      * 获得该学的课程
      */
-    public WisdomResult getCourseThisMonth(TbStudent tbStudent);
+    public WisdomResult getCourseThisMonth(StudentInfo studentInfo);
 
     /**
      * 获取该学期第x个月的课程
      */
-    public WisdomResult getCourseInXMonth(TbStudent tbStudent , Integer n);
+    public WisdomResult getCourseInXMonth(StudentInfo studentInfo , Integer n);
 
     /**
      *  获取该学生前n个星期的课程信息
      */
-    public WisdomResult getCourseFrontOfXMonth(TbStudent tbStudent , Integer n);
+    public WisdomResult getCourseFrontOfXMonth(StudentInfo studentInfo , Integer n);
 
     /**
      * 获取该学生前n个月的课程信息
-     * @param tbStudent
+     * @param studentInfo
      * @param n
      * @return
      */
-    public WisdomResult getCourseFrontOfXWeek(TbStudent tbStudent , Integer n);
+    public WisdomResult getCourseFrontOfXWeek(StudentInfo studentInfo , Integer n);
 
 }

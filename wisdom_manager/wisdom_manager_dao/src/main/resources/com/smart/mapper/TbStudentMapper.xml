@@ -343,6 +343,7 @@
      and tb_courseitem.teacher_id = tb_teacher.id
      and tb_course.id = tb_courseitem.course_id
      and tb_courseitem.time between #{start} and #{end}
+     group by tb_courseitem.time
   </select>
   <select id="selectStudentInfo" resultType="com.smart.pojo.StudentInfo">
     select tb_student.id, tb_student.name, tb_student.sex, tb_student.phone_code as phone, tb_student.email, tb_class.id as classId, tb_class.name as className, tb_profession.id as professionId, tb_profession.name as professionName, tb_college.id as collegeId, tb_college.name as collegeName
