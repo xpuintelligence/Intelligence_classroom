@@ -32,10 +32,10 @@ class Wisdom:
         img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
 
         # 保存处理之后的图片
-        cv2.imwrite(output_path,img2)
+        # cv2.imwrite(output_path,img2)
         # 准备上传七牛云
         upload = Upload()
-        upload.upload(output_path,filename)
+        # upload.upload(output_path,filename)
 
 
     def run_wisdom(sleepdict,student_attendancedict):
@@ -85,11 +85,18 @@ class Wisdom:
                 student_name_list ,student_headown_list= faceSearch.search()    # 人脸库人脸搜素
                 print("当前识别到的学生为："+str(student_name_list))
                 # 当前学生的单个考勤查询
-                getJudge.student_attendance_Judge(student_name_list)
+                student_attendancedict = getJudge.student_attendance_Judge(student_name_list)
+                print("当前学生出勤情况为: "+str(student_attendancedict))
                 if len(student_headown_list):
                     print("低头的学生为: "+str(student_headown_list))
                 # 检测学生是不是睡觉或不认真听课
-                getJudge.sleepJudge(student_headown_list)
+                sleepdict = getJudge.sleepJudge(student_headown_list)
+
+                # 防止输出为空 
+                if sleepdict is not None:
+                    sleepdict_actual = sleepdict
+
+                    print("当前低头或睡觉学生情况为: "+str(sleepdict_actual))
 
                 headup_rate = faceDetect.get_headup_rate()
                 print("班级当前抬头率为："+str(headup_rate))
@@ -125,3 +132,6 @@ class Wisdom:
                 student_name_list.clear()
                 print("人名已经清除")
                 print()
+
+        
+        return sleepdict_actual, student_attendancedict

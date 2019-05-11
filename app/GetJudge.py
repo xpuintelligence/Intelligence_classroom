@@ -21,12 +21,14 @@ class GetJudge:
                 else:
                     self.sleepdict[student_name] = 1
 
-            print(self.sleepdict)
+            #print(self.sleepdict)
 
             # 判断学生多次低头的情况是不是在睡觉
             for student_name in self.sleepdict.keys():
                 if(self.sleepdict[student_name]) >=3:
                     print("请提醒"+student_name+"同学，该同学可能正在睡觉")
+            
+            return self.sleepdict
         
 
     # 判断学生出勤情况的查询
@@ -39,7 +41,28 @@ class GetJudge:
                 else:
                     self.student_attendancedict[student_name] = 1
 
-            print(self.student_attendancedict)
+            return self.student_attendancedict
+
+
+    # 该学生本节课的抬头（认真听课）分数
+    def each_student_headupRate(student_attendancedict_end,reco_time):
+
+        # 学生分数的字典
+        student_score_dict = dict()
+        # 对每个学生的分数进行判断
+        for student_name in student_attendancedict_end.keys():
+            student_score = (student_attendancedict_end[student_name]/reco_time)*40
+
+            student_score_dict[student_name] = student_score
+
+        return student_score_dict
+
+
+        
+
+
+
+
 
 
                 
