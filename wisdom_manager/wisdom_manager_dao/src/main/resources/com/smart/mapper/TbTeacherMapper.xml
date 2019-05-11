@@ -287,4 +287,28 @@
       position_id = #{positionId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+<!--  自己写的方法-->
+  <select id="selectTeacherInfo" parameterType="java.lang.String" resultType="com.smart.pojo.TeacherInfo">
+    SELECT tb_teacher.*, tb_college.name as college_name, tb_position.name as position_name
+    from tb_teacher, tb_college, tb_position
+    where tb_teacher.wexin_id = #{wexin_id}
+        and tb_teacher.college_id = tb_college.id
+        and tb_teacher.position_id = tb_position.id
+
+  </select>
+  <select id="selectTeacherIdAndPassword" resultType="com.smart.pojo.TeacherInfo">
+    SELECT tb_teacher.*, tb_college.name as college_name, tb_position.name as position_name
+    from tb_teacher, tb_college, tb_position
+    where tb_teacher.id = #{id} and tb_teacher.password = #{password}
+        and tb_teacher.college_id = tb_college.id
+        and tb_teacher.position_id = tb_position.id
+
+  </select>
+  <select id="selectTeacherInfoById" resultType="com.smart.pojo.TeacherInfo">
+    SELECT tb_teacher.*, tb_college.name as college_name, tb_position.name as position_name
+    from tb_teacher, tb_college, tb_position
+    where tb_teacher.id = #{id}
+        and tb_teacher.college_id = tb_college.id
+        and tb_teacher.position_id = tb_position.id
+  </select>
 </mapper>
