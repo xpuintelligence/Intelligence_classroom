@@ -14,9 +14,9 @@ Vue.use(ElementUI);
 Vue.config.productionTip = true;
 
 // 图表 ECharts
-// import echarts from 'echarts'
-// import 'echarts/theme/macarons.js'
-// Vue.prototype.$echarts = echarts;
+import echarts from 'echarts'
+import 'echarts/theme/macarons.js'
+Vue.prototype.$echarts = echarts;
 
 // HighCharts
 import HighCharts from 'highcharts';

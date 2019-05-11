@@ -1,6 +1,7 @@
 <template>
-  <div class="x-bar">
-    <div :id="id" :option="option"></div>
+  <div>
+    <div :id="id" :option="option" class="x-bar" v-loading="loading" element-loading-text="拼命加载中"
+         element-loading-spinner="el-icon-loading"></div>
   </div>
 </template>
 
@@ -9,6 +10,11 @@
 
   export default {
     name: "test.vue",
+    data() {
+      return {
+        loading: true,
+      }
+    },
     // 验证类型
     props: {
       id: {
@@ -24,7 +30,14 @@
       }
     },
     mounted() {
-      HighCharts.chart(this.id, this.option)
+      console.log("======");
+      console.log(this.option);
+
+      setTimeout(() => {
+        HighCharts.chart(this.id, this.option);
+        this.loading = false;
+      }, 500);
+      // HighCharts.chart(this.id, this.option)
     },
   }
 </script>

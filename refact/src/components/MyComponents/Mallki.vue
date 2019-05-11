@@ -1,9 +1,9 @@
 <template>
-  <a :class="className" class="link--mallki" href="#">
+  <div :class="className" class="link--mallki" href="/">
     {{ text }}
     <span :data-letters="text"/>
     <span :data-letters="text"/>
-  </a>
+  </div>
 </template>
 
 <script>
@@ -15,7 +15,7 @@
       },
       text: {
         type: String,
-        default: 'vue-element-admin'
+        default: ''
       }
     }
   }
@@ -25,7 +25,7 @@
   /* Mallki */
   .link--mallki {
     font-weight: 800;
-    color: #4dd9d5;
+    color: #3888fa;
     font-family: 'Dosis', sans-serif;
     -webkit-transition: color 0.5s 0.25s;
     transition: color 0.5s 0.25s;
@@ -48,7 +48,7 @@
     width: 100%;
     height: 6px;
     margin: -3px 0 0 0;
-    background: #3888fa;
+    background: pink;
     position: absolute;
     left: 0;
     top: 50%;
@@ -80,7 +80,7 @@
     position: absolute;
     left: 0;
     width: 100%;
-    color: #3888fa;
+    color: pink;
     -webkit-transition: -webkit-transform 0.5s;
     transition: transform 0.5s;
   }

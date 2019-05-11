@@ -126,11 +126,12 @@
       },
     },
     mounted() {
-      // this.userData = JSON.parse(localStorage.getItem('userData') || '[]');
-      // console.log(this.userData);
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
-      this.$message.success('你好，' + this.userData.name);
-      console.log(this.userData);
+      this.$notify({
+        message: '你好，'+this.userData.name,
+        type: 'success'
+      });
+      // console.log(this.userData);
     },
     components: {},
   }

@@ -9,7 +9,7 @@
     <state-of-class></state-of-class>
 
     <hr>
-    <!--<div id='myChart' style='width:300px; height:300px' disabled></div>-->
+    <!--<div id='myChart' style='width:300px; height:300px'></div>-->
     <hr>
     <div>
       <charts></charts>
@@ -174,6 +174,7 @@
       // },
     },
     mounted: function () {
+      this.loading = false;
 
       // myvue.other.title.text = '2010 ~ 2016 年太阳能行业就业人员发展情况';
       // myvue.other.subtitle.text = '数据来源：thesolarfoundation.com';
@@ -183,22 +184,22 @@
 
       // this.drawLine();
 
-      this.userData = JSON.parse(sessionStorage.getItem('userData'));
-
-      this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
-        // console.log(res.data.data.data.length);
-        if (res.data.data.data.length === 0) {
-          console.log('今天周末木有课哟，好好享受周末吧~');
-          this.loading = false;
-        }
-        this.todayCourse = res.data.data.data[0];
-        this.loading = false; // loading 关闭
-        console.log(this.todayCourse);
-      }).catch(err => {
-        console.log("err-------");
-        console.log(err);
-        this.$message.error("server error!");
-      });
+      // this.userData = JSON.parse(sessionStorage.getItem('userData'));
+      //
+      // this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
+      //   // console.log(res.data.data.data.length);
+      //   if (res.data.data.data.length === 0) {
+      //     console.log('今天周末木有课哟，好好享受周末吧~');
+      //     this.loading = false;
+      //   }
+      //   this.todayCourse = res.data.data.data[0];
+      //   this.loading = false; // loading 关闭
+      //   console.log(this.todayCourse);
+      // }).catch(err => {
+      //   console.log("err-------");
+      //   console.log(err);
+      //   this.$message.error("server error!");
+      // });
     },
     components: {
       Charts,
