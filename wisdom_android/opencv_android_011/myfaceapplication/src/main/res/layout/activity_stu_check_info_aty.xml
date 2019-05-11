@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".student.StuCheckInfoAty">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/stuAty_checkAtyRv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="学生考勤信息"/>
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

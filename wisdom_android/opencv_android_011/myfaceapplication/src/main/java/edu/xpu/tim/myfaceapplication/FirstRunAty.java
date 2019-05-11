@@ -49,11 +49,12 @@ public class FirstRunAty extends AppCompatActivity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         CookieUtils.setCookies(CookieUtils.getCookie(FirstRunAty.this));
+                        XToast.success(getContext(), "更新Session成功！！！").show();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                        XToast.success(getContext(), "更新Session失败！！！").show();
                     }
                 });
 
@@ -75,17 +76,12 @@ public class FirstRunAty extends AppCompatActivity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         CookieUtils.setCookies(CookieUtils.getCookie(FirstRunAty.this));
-                        runOnUiThread(()-> {
-                                XToast.success(getContext(), "跟新Session成功！！！").show();
-                        });
-
+                        XToast.success(getContext(), "更新Session成功！！！").show();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        runOnUiThread(()-> {
-                            XToast.error(getContext(), "更新Session失败！！！").show();
-                        });
+                        XToast.error(getContext(), "更新Session失败！！！").show();
                     }
                 });
 

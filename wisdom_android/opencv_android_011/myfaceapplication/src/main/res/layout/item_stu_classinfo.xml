@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/item_ClassName"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="kafka源码剖析"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:paddingLeft="6dp"
+            android:id="@+id/item_ClassAddress"
+            android:layout_gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/colorPrimary"
+            android:text="D1121" />
+
+        <TextView
+            android:id="@+id/item_ClassTime"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="right"
+            android:layout_toRightOf="@id/item_ClassAddress"
+            android:paddingLeft="6dp"
+            android:text="2018年12月12日" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="15sp"
+            android:background="@drawable/border_input_box"
+            android:padding="3dp"
+            android:id="@+id/item_ClassTeacherName"
+            android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:text="扫地憎老师" />
+        <TextView
+            android:paddingLeft="10dp"
+            android:id="@+id/item_ClassDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:singleLine="false"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:text="kafka源码剖析源码剖析让同学们明白Kafka的工作原理, 并对Kafka进行性能优化，Kafka在高并发下的吞吐量控制...."/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/item_ClassGoalScore"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/item_ClassHeadUp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/item_ClassCheck"
+                android:src="@drawable/stu_check"
+                android:layout_width="32dp"
+                android:layout_height="32dp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
