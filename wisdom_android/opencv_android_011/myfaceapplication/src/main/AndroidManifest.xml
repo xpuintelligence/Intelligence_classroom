@@ -18,6 +18,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:theme="@style/AppTheme"
             android:name=".MainActivity"
             android:label="人脸信息采集（请保持手机横向放置）"
             android:launchMode="singleTask"

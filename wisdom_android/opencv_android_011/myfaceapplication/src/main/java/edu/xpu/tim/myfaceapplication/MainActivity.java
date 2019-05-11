@@ -81,16 +81,17 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(new String[] {Manifest.permission.CAMERA}, 1);
             }
         }
-
         SharedPreferences first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
         edit = first.edit();
         requestPermission();
         setContentView(R.layout.activity_main);
+
         //TODO 权限动态获取
         new Thread(()-> accessToken = AuthService.getAuth()).start();
 

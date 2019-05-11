@@ -16,9 +16,15 @@ import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.xuexiang.xui.widget.dialog.DialogLoader;
+import com.xuexiang.xui.widget.toast.XToast;
 
 import cz.msebera.android.httpclient.Header;
 import edu.xpu.tim.myfaceapplication.config.AppConfig;
+import edu.xpu.tim.myfaceapplication.util.net.CookieUtils;
+import edu.xpu.tim.myfaceapplication.util.net.FinalAsyncHttpClient;
+
+import static com.xuexiang.xui.XUI.getContext;
 
 public class StdRegAty extends AppCompatActivity {
     private EditText et_id;
@@ -83,7 +89,9 @@ public class StdRegAty extends AppCompatActivity {
         //调用远程登录方法
         //AsyncHttp开源项目提交数据到服务器
         if(AppConfig.netWork){
-            AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+            AsyncHttpClient asyncHttpClient = new FinalAsyncHttpClient().getAsyncHttpClient();
+            CookieUtils.saveCookie(asyncHttpClient,StdRegAty.this);
+            //AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
             //准备数据包
             RequestParams params = new RequestParams();
             params.put("account",id);
@@ -106,23 +114,25 @@ public class StdRegAty extends AppCompatActivity {
                             edit.putString("retStr", retStr);
                             if(edit.commit()) Log.i(TAG,"edit.commit() success!!!");
 
-                            Toast.makeText(StdRegAty.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            XToast.success(getContext(), "登录成功").show();
+                            CookieUtils.setCookies(CookieUtils.getCookie(StdRegAty.this));
                             //先结束掉此Activity
                             startActivity(atyIntent);
                             finish();
                         }else if(0 == status){
-                            Toast.makeText(StdRegAty.this, "用户名或密码不正确", Toast.LENGTH_SHORT).show();
-                            btn.setEnabled(true);
+                            XToast.error(getContext(), "用户名或密码不正确").show();
                         }
                     }catch (Exception e){
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Web端严重错误！！！", Toast.LENGTH_SHORT).show();
+                        XToast.error(getContext(), "Web端严重错误！！！").show();
+                    }finally {
+                        btn.setEnabled(true);
                     }
                 }
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    Toast.makeText(getApplicationContext(), "网络堵塞", Toast.LENGTH_SHORT).show();
+                    XToast.error(getContext(), "网络堵塞").show();
                     btn.setEnabled(true);
                 }
             });

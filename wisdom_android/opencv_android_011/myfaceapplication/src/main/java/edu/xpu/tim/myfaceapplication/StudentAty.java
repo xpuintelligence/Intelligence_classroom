@@ -26,23 +26,25 @@ public class StudentAty extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_aty);
-
-        SimpleGuideBanner guideBanner = findViewById(R.id.stuLoopView);
-        guideBanner.setAutoScrollEnable(true)
-            .setIndicatorWidth(6)
-            .setIndicatorHeight(6)
-            .setIndicatorGap(12)
-            .setIndicatorCornerRadius(10f)
-            .setSelectAnimClass(ZoomInEnter.class)
-            .barPadding(0, 5, 0, 0)
-            .setSource(getUsertGuides())
-            .startScroll();
-
         initStudentInfo();
     }
 
     //登陆后的信息展示
     private void initStudentInfo() {
+
+        //轮播图
+        SimpleGuideBanner guideBanner = findViewById(R.id.stuLoopView);
+        guideBanner.setAutoScrollEnable(true)
+                .setIndicatorWidth(6)
+                .setIndicatorHeight(6)
+                .setIndicatorGap(12)
+                .setIndicatorCornerRadius(10f)
+                .setSelectAnimClass(ZoomInEnter.class)
+                .barPadding(0, 5, 0, 0)
+                .setSource(getUsertGuides())
+                .startScroll();
+
+
         TextView stuAty_id = findViewById(R.id.stuAty_id);
         TextView stuAty_name = findViewById(R.id.stuAty_name);
         TextView stuAty_class = findViewById(R.id.stuAty_class);

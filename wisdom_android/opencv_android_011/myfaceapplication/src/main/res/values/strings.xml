@@ -10,4 +10,7 @@
     <string name="title_activity_student_aty">StudentAty</string>
     <string name="teacherlogin">教师登录</string>
     <string name="forgetpwd">忘记密码</string>
+    <string name="tip_infos">重要提示</string>
+    <string name="content_simple_confirm_dialog">请注意：在人脸采集时必须将手机横向放置！必须横向放置！必须横向放置！</string>
+    <string name="lab_submit">确认</string>
 </resources>
