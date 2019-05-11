@@ -48,8 +48,8 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
     @Override
     public WisdomResult getCourseOfSpellTime(StudentInfo studentInfo, String begin, String end) {
         //进行格式转换
-        DateTime startTime = new DateTime(begin);
-        DateTime endTime = new DateTime(end);
+        DateTime startTime = DateUtils.stringToDatetime(begin);
+        DateTime endTime = DateUtils.stringToDatetime(end);
         //返回结果集
         return getCourseOfSpellTime(studentInfo,startTime,endTime);
     }
@@ -83,7 +83,7 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
     public WisdomResult getCourseOfDay(StudentInfo studentInfo, String day) {
 
         //进行格式转换
-        DateTime dateTime = new DateTime(day);
+        DateTime dateTime = DateUtils.stringToDatetime(day);
         //返回结果集
         return getCourseOfDay(studentInfo,dateTime);
     }
