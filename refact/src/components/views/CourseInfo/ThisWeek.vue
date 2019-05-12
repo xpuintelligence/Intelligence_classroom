@@ -1,24 +1,45 @@
 <template>
   <div>
     <el-card>
-      <x-chart id="high" class="high" :option="thisSemesterCharts"></x-chart>
+      <div slot="header" class="cell">
+        <Mallki class-name="date" :text="chartTittle"></Mallki>
+        <el-button style="padding: 3px 0;float: right;" type="text">
+          <Mallki class-name="date" :text="new Date().toDateString()"></Mallki>
+        </el-button>
+      </div>
+
+      <div class="text item">
+        <el-col :span="16">
+          <el-card body-style="padding: 0px;">
+            <x-chart id="high" class="high" :option="thisWeekChart"></x-chart>
+          </el-card>
+        </el-col>
+
+        <el-col :span="8">
+          <el-card>
+
+          </el-card>
+        </el-col>
+      </div>
     </el-card>
   </div>
 </template>
 
 <script>
   import XChart from '@/components/charts/test'
+  import Mallki from "@/components/MyComponents/Mallki";
 
   export default {
-    name: "Charts",
-    data: function () {
+    name: "ThisWeek",
+    data() {
       return {
         userData: {},
-        thisSemesterTotalInfo: {},
+        thisWeekData: {},
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
 
-        thisSemesterCharts: {
+        chartTittle: '',
+        thisWeekChart: {
           navigation: {
             buttonOptions: {
               text: '导出',
@@ -80,38 +101,30 @@
               color: 'LightPink'
             }
           ]
-        },
+        },  // 本周数据的spline图
       }
     },
-    components: {
-      XChart
-    },
     mounted() {
-      // 获取用户数据
+      // 从本地获取用户信息
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
 
-      // 获取学期的上课信息
-      this.$http.post('wisdom_web/studentCourseInfo/thisSemester', {}).then(res => {
-        this.thisSemesterTotalInfo = res.data.data;
+      // 获取本周上课数据
+      this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {}).then(res => {
+        console.log(res);
+        this.thisWeekData = res.data.data;
         for (let i = 0; i < res.data.data.length; i++) {
-          // this.attendTotalScore.push(res.body.data[i].attendScore);
-          // this.headUpScore.push(res.body.data[i].headUpScore);
-          // this.thisSemesterCharts.series[0].data.push(Math.random()*100);  // 专注度
-          // this.thisSemesterCharts.series[1].data.push(Math.random()*100);  // 考勤
-          this.thisSemesterCharts.series[0].data.push(res.body.data[i].headUpScore);  // 专注度
-          this.thisSemesterCharts.series[1].data.push(res.body.data[i].attendScore);  // 考勤
+          this.thisWeekChart.series[0].data.push(res.body.data[i].headUpScore);  // 专注度
+          this.thisWeekChart.series[1].data.push(res.body.data[i].attendScore);  // 考勤
         }
-        this.thisSemesterCharts.title.text = '智慧教室-学期总成绩-' + this.userData.name;
-
-        // console.log("attendTotalScore");
-        // console.log(this.attendTotalScore);
-        // console.log("headUpScore");
-        // console.log(this.headUpScore);
+        // this.thisWeekChart.title.text = '智慧教室-本周上课状态-' + this.userData.name;
+        this.chartTittle = this.userData.name + '-本周上课状态';
       }).catch(err => {
-        console.log("--------err-------");
+        console.log("err-------");
         console.log(err);
-      });
-    }
+        this.$message.error("抱歉，服务器出错");
+      })
+    },
+    components: {Mallki, XChart}
   }
 </script>
 

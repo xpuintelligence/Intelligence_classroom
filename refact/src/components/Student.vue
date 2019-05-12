@@ -196,8 +196,9 @@
         width: 66px !important;
       }
 
+      /* 侧边栏宽度 */
       &-expanded {
-        width: 230px !important;
+        width: 12% !important;
       }
     }
 

@@ -13,6 +13,11 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = true;
 
+// 音频
+// import AudioVisual from 'vue-audio-visual'
+// Vue.use(AudioVisual);
+
+
 // 图表 ECharts
 // import echarts from 'echarts'
 // import 'echarts/theme/macarons.js'

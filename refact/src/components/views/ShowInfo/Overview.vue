@@ -39,7 +39,7 @@
               <div slot="header" class="clearfix">
                 <span>今日课程</span>
               </div>
-              <div class="text item" style="font-size: 12px" v-if="!isWeekend">
+              <div class="text item" style="font-size: 12px">
                 {{todayCourse}}
               </div>
             </el-card>
@@ -61,22 +61,21 @@
       return {
         userData: {},
         todayCourse: {},
-        isWeekend: true,
       }
     },
     mounted() {
       // 获取用户数据
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
 
-      if (new Date().getDay() === 6 || new Date().getDay() === 7) { // 如果是周末就不获取信息了
+      // console.log(new Date().getDay());  周六是6 周日是0
+      if (new Date().getDay() === 6 || new Date().getDay() === 0) { // 如果是周末就不获取信息了
         this.todayCourse = '今天没有课哦~';
-        this.isWeekend = false;
         return;
       }
       // 获取今天课程信息
       this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
           this.todayCourse = res.data.data;
-          console.log(res.data.data[0])
+          // console.log(res.data.data[0])
       }).catch(err => {
         console.log("--------err-------");
         console.log(err);

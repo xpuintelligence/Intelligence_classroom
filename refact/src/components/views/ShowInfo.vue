@@ -8,9 +8,9 @@
 
     <state-of-class></state-of-class>
 
-    <hr>
+    <!--<hr>-->
     <!--<div id='myChart' style='width:300px; height:300px'></div>-->
-    <hr>
+    <!--<hr>-->
     <div>
       <charts></charts>
       <!--<x-chart id="highcharts" class="high" :option="option"></x-chart>-->
@@ -145,10 +145,6 @@
       }
     },
     computed: {
-      courseDate() {
-        let d = new Date(this.todayCourse.time);
-        return d.toLocaleTimeString();
-      }
     },
     beforeCreate: function () {
       // myvue = this;
@@ -174,7 +170,10 @@
       // },
     },
     mounted: function () {
-      this.loading = false;
+
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
 
       // myvue.other.title.text = '2010 ~ 2016 年太阳能行业就业人员发展情况';
       // myvue.other.subtitle.text = '数据来源：thesolarfoundation.com';

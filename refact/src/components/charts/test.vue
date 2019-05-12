@@ -50,7 +50,7 @@
       HighCharts.chart(this.id, this.option);
       setTimeout(() => {
         HighCharts.chart(this.id, this.option);
-        console.log(this.option.series[0].data.length);
+        // console.log(this.option.series[0].data.length);
       }, 2000);
     },
   }

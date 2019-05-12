@@ -1,46 +1,52 @@
 <template>
   <div>
-    <el-progress type="circle" :percentage="0"></el-progress>
-    <el-progress type="circle" :percentage="25"></el-progress>
-    <el-progress type="circle" :percentage="randomNumber" color="#8e71c7"></el-progress>
-    <el-progress type="circle" :percentage="100" status="success"></el-progress>
-    <el-progress type="circle" :percentage="50" status="exception"></el-progress>
-    <el-progress type="circle" :percentage="100" status="text">Done</el-progress>
+    <!--<el-progress type="circle" :percentage="0"></el-progress>-->
+    <!--<el-progress type="circle" :percentage="25"></el-progress>-->
+    <!--<el-progress type="circle" :percentage="randomNumber" color="#8e71c7"></el-progress>-->
+    <!--<el-progress type="circle" :percentage="100" status="success"></el-progress>-->
+    <!--<el-progress type="circle" :percentage="50" status="exception"></el-progress>-->
+    <!--<el-progress type="circle" :percentage="100" status="text">Done</el-progress>-->
 
-    <hr>
+    <!--<hr>-->
 
-    <el-progress :text-inside="true" :stroke-width="18" :percentage="0"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="18" :percentage="70"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="18" :percentage="80"
-                 color="rgba(142, 113, 199, 0.7)"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="18" :percentage="100" status="success"></el-progress>
-    <el-progress :text-inside="true" :stroke-width="18" :percentage="50" status="exception"></el-progress>
+    <!--<el-progress :text-inside="true" :stroke-width="18" :percentage="0"></el-progress>-->
+    <!--<el-progress :text-inside="true" :stroke-width="18" :percentage="70"></el-progress>-->
+    <!--<el-progress :text-inside="true" :stroke-width="18" :percentage="80"-->
+                 <!--color="rgba(142, 113, 199, 0.7)"></el-progress>-->
+    <!--<el-progress :text-inside="true" :stroke-width="18" :percentage="100" status="success"></el-progress>-->
+    <!--<el-progress :text-inside="true" :stroke-width="18" :percentage="50" status="exception"></el-progress>-->
 
-    <hr>
+    <!--<hr>-->
 
-    <el-progress :percentage="0"></el-progress>
-    <el-progress :percentage="70"></el-progress>
-    <el-progress :percentage="80" color="#8e71c7"></el-progress>
-    <el-progress :percentage="100" status="success"></el-progress>
-    <el-progress :percentage="50" status="exception"></el-progress>
+    <!--<el-progress :percentage="0"></el-progress>-->
+    <!--<el-progress :percentage="70"></el-progress>-->
+    <!--<el-progress :percentage="80" color="#8e71c7"></el-progress>-->
+    <!--<el-progress :percentage="100" status="success"></el-progress>-->
+    <!--<el-progress :percentage="50" status="exception"></el-progress>-->
 
-    <hr>
+    <!--<hr>-->
 
-    {{data}}
+    <!--{{data}}-->
 
-    <hr>
-    <div v-for="(val,key) in data">
-      <!--{{key}} -&#45;&#45; {{val}}-->
-      <p v-for="(v, key) in val">
-        {{v}} === {{key}}
-      </p>
-    </div>
+    <!--<hr>-->
+    <!--<div v-for="(val,key) in data">-->
+      <!--&lt;!&ndash;{{key}} -&#45;&#45; {{val}}&ndash;&gt;-->
+      <!--<p v-for="(v, key) in val">-->
+        <!--{{v}} === {{key}}-->
+      <!--</p>-->
+    <!--</div>-->
+
+    <ThisWeek></ThisWeek>
+
+
   </div>
 </template>
 
 <script>
+  import ThisWeek from "@/components/views/CourseInfo/ThisWeek";
   export default {
     name: "CourseInfo",
+    components: {ThisWeek},
     data() {
       return {
         flag: false,
@@ -62,18 +68,18 @@
       //   console.log(err);
       // })
 
-      this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {
-        // emulateJSON: true,
-        // credentials: true
-      }).then(res => {
-        console.log(res);
-        this.data = res.data.data;
-        // console.log(this.data.data)
-      }).catch(err => {
-        console.log("err-------");
-        console.log(err);
-        this.$message.error("抱歉，服务器出错");
-      })
+      // this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {
+      //   // emulateJSON: true,
+      //   // credentials: true
+      // }).then(res => {
+      //   console.log(res);
+      //   this.data = res.data.data;
+      //   // console.log(this.data.data)
+      // }).catch(err => {
+      //   console.log("err-------");
+      //   console.log(err);
+      //   this.$message.error("抱歉，服务器出错");
+      // })
     },
     methods: {},
   }

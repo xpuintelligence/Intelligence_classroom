@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <div class="img-logo">
       <transition enter-active-class="flip">
         <img v-if="flag" alt="logo.png" src="../assets/logo.png" style="width: 200px" class="animated"
@@ -7,6 +8,7 @@
       </transition>
       <br>
     </div>
+
     <transition enter-active-class="fadeInUp">
       <div v-show="flag" class="components-Login animated">
         <div class="container" v-on:submit.prevent="onSubmit">
@@ -31,13 +33,10 @@
         </div>
       </div>
     </transition>
-
   </div>
-
 </template>
 
 <script>
-
   export default {
     name: "Login",
     data() {

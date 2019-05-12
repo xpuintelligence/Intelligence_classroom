@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card">
+  <el-card class="box-card" v-if="isWeekend === false">
     <div slot="header" class="clearfix">
       <span>今日上课状态</span>
     </div>
@@ -31,10 +31,17 @@
     name: "StateOfClass",
     data() {
       return {
+        isWeekend: false,
         todayCourse: {}
       }
     },
     mounted() {
+
+      // 如果是周六、周日就不显示这一栏
+      if (new Date().getDay() === 6 || new Date().getDay() === 0) {
+        this.isWeekend = true;
+        return;
+      }
 
       // 获取今天的上课状态信息
       this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
