@@ -34,6 +34,7 @@
     <dubbo:reference interface="com.smart.service.TeacherLoginService" id="teacherLoginService" timeout="10000"/>
     <dubbo:reference interface="com.smart.service.StudentCourseService" id="studentCourseService" timeout="10000"/>
     <dubbo:reference interface="com.smart.service.WXLoginService" id="wXLoginService" timeout="10000"/>
+    <dubbo:reference interface="com.smart.service.StudentAttendanceService" id="studentAttendanceService" timeout="10000"/>
     <!--使用分页查询ItItem对应的服务接口-->
 
     <mvc:cors>

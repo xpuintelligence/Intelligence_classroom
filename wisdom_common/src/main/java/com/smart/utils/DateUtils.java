@@ -164,7 +164,6 @@ public class DateUtils implements Serializable {
         stringBuilder.append(s.substring(0,index));
         stringBuilder.append("T");
         stringBuilder.append(s.substring(index+1));
-        System.out.println(stringBuilder.toString());
         DateTime dateTime = new DateTime(stringBuilder.toString());
         return dateTime;
     }

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/wx")
-public class WeiXinController {
+public class WeiXinLoginController {
     @Autowired
     private WXLoginService wxLoginService;
     /**
