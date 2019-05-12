@@ -5,7 +5,7 @@
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/login/all
+url|http://47.103.14.73:8080/wisdom_web/login/all
 
 ### _需传输的参数_
 name|describe
@@ -52,7 +52,7 @@ data|查询到的学生信息对象，对应数据库中的tb_student的各个�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/login/weixinLogin
+url|http://47.103.14.73:8080/wisdom_web/login/weixinLogin
 
 ### _需传输的参数_
 name|describe
@@ -89,7 +89,7 @@ data|null
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/wx/bindOpenid
+url|http://47.103.14.73:8080/wisdom_web/wx1/bindOpenid
 
 ### _需传输的参数_
 name|describe
@@ -134,7 +134,7 @@ data|null
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/wxGetPersonInfo/getStudentInfo
+url|http://47.103.14.73:8080/wisdom_web/wxGetPersonInfo/getStudentInfo
 
 ### _需传输的参数_
 name|describe
@@ -177,7 +177,7 @@ data|null
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/thisWeek
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisWeek
 
 ### _需传输的参数_
 name|describe
@@ -235,7 +235,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/thisMonth
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisMonth
 ### _需传输的参数_
 name|describe
 ----|------
@@ -291,7 +291,7 @@ data|（List集合）每一节课课程的信息，该节课老师的信息，�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/thisWeek
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisWeek
 
 ### _需传输的参数_
 name|describe
@@ -350,7 +350,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/frontXWeek
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/frontXWeek
 
 ### _需传输的参数_
 name|describe
@@ -408,7 +408,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/frontXMonth
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/frontXMonth
 
 ### _需传输的参数_
 name|describe
@@ -466,7 +466,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/xMonth
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/xMonth
 
 ### _需传输的参数_
 name|describe
@@ -524,7 +524,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/xWeek
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/xWeek
 
 ### _需传输的参数_
 name|describe
@@ -582,7 +582,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/today
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/today
 
 ### _需传输的参数_
 name|describe
@@ -640,7 +640,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
  name|describe
  ----|------
  method|post
- url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/oneday
+ url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/oneday
  
  ### _需传输的参数_
  name|describe
@@ -698,7 +698,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/thisSemester
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisSemester
 
 ### _需传输的参数_
 name|describe
@@ -756,7 +756,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studentCourseInfo/oneday
+url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/oneday
 
 ### _需传输的参数_
 name|describe
@@ -814,7 +814,7 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
 name|describe
 ----|------
 method|post
-url|http://101.132.78.78:8080/wisdom_web/studetnAttendance/getCourseOfStudentWithSpellTime
+url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getCourseOfStudentWithSpellTime
 
 ### _需传输的参数_
 name|describe
