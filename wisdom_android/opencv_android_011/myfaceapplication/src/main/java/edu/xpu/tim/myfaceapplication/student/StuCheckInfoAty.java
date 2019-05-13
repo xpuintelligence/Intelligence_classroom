@@ -1,7 +1,6 @@
 package edu.xpu.tim.myfaceapplication.student;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,7 +17,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 import com.xuexiang.xui.widget.toast.XToast;
 
 import java.text.SimpleDateFormat;
@@ -85,18 +83,14 @@ public class StuCheckInfoAty extends AppCompatActivity {
                 XToast.success(getContext(), "数据获取成功").show();
 
                 myAdapter.setOnItemClickListener((view, position, data1) ->{
-                    //XToast.info(getContext(), "position= "+ position +" ,您点击了：" + data1).show();
-                    new MaterialDialog.Builder(getContext())
-                            .iconRes(R.drawable.icon_tip)
-                            .title(R.string.kaoqin_infos)
-                            .content("出勤总分:"+data1.getAttendanceTotalScore()+"\t"+
-                            "缺勤扣分:"+data1.getLeaveScore()+"\t"+
-                            "出勤得分:" + data1.getAttendScore()+"\t"+
-                            "迟到扣分:"+data1.getLateAttendScore()+"\t"+
-                            "抬头得分:"+data1.getHeadUpScore())
-                            .positiveText(R.string.lab_submit)
-                            .show();
-
+                    Intent intent = new Intent(getContext(), CheckSpecificInfoAty.class);
+                    intent.putExtra("data",
+                            "出勤总分:"+data1.getAttendanceTotalScore()+"\n"+
+                            "缺勤扣分:"+data1.getLeaveScore()+"\n"+
+                            "出勤得分:" + data1.getAttendScore()+"\n"+
+                            "迟到扣分:"+data1.getLateAttendScore()+"\n"+
+                            "抬头得分:"+data1.getHeadUpScore());
+                    startActivity(intent);
                 });
             }
 
