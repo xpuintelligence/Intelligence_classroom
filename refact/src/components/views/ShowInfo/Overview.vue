@@ -40,7 +40,11 @@
                 <span>今日课程</span>
               </div>
               <div class="text item" style="font-size: 12px">
-                {{todayCourse}}
+                <!--{{todayCourse}}-->
+                课程：{{todayCourse.courseName}}<br>
+                时间：{{new Date(todayCourse.time).toLocaleTimeString()}}<br>
+                地点：{{todayCourse.classroomId}}<br>
+                老师：{{todayCourse.teacherName}}<br>
               </div>
             </el-card>
           </div>
@@ -74,8 +78,8 @@
       }
       // 获取今天课程信息
       this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
-          this.todayCourse = res.data.data;
-          // console.log(res.data.data[0])
+          this.todayCourse = res.data.data.data[0];
+          // console.log(res.data.data.data[0])
       }).catch(err => {
         console.log("--------err-------");
         console.log(err);

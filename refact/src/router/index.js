@@ -2,9 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import VueResource from 'vue-resource'
+
 Vue.use(VueResource);
-Vue.http.options.root = 'http://101.132.78.78:8080/';
-Vue.http.interceptors.push(function(request, next) {//拦截器
+// Vue.http.options.root = 'http://101.132.78.78:8080/'; http://47.103.14.73:8080
+Vue.http.options.root = 'http://47.103.14.73:8080';
+Vue.http.interceptors.push(function (request, next) {//拦截器
 // 跨域携带cookie
   request.credentials = true;
   next()
@@ -35,6 +37,7 @@ import PushActivities from "@/components/views/PushActivities" // 发布活动
 import JoinActivities from "@/components/views/JoinActivities" // 活动报名
 
 // import NotFound from "@/components/404" // 404 page
+import testChart from "@/components/testChart"
 
 Vue.use(Router);
 
@@ -111,13 +114,18 @@ export default new Router({
           path: 'JoinActivities',
           name: 'JoinActivities',
           component: JoinActivities,
-        }
+        },
       ],
     },
     {
       path: '/Teacher',
       name: 'Teacher',
       component: Teacher,
+    },
+    { // test~~~~~~~~~~~~
+      path: '/testChart',
+      name: 'testChart',
+      component: testChart,
     },
   ],
 })

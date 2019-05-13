@@ -38,15 +38,19 @@
 
     <ThisWeek></ThisWeek>
 
+    <hr>
+
+    <ThisMonth></ThisMonth>
 
   </div>
 </template>
 
 <script>
   import ThisWeek from "@/components/views/CourseInfo/ThisWeek";
+  import ThisMonth from "@/components/views/CourseInfo/ThisMonth";
   export default {
     name: "CourseInfo",
-    components: {ThisWeek},
+    components: {ThisWeek,ThisMonth},
     data() {
       return {
         flag: false,
@@ -54,9 +58,6 @@
       }
     },
     computed: {
-      randomNumber() {
-        return parseInt(Math.random() * 100);
-      }
     },
     mounted() {
       // wisdom_web/studentCourseInfo/thisWeek

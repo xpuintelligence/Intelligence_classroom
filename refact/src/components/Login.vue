@@ -41,7 +41,7 @@
     name: "Login",
     data() {
       return {
-        flag: false, // 页面动画控制
+        flag: false, // 页面 动画控制
         who: "学生",
         input_username: "",
         input_password: "",
@@ -54,7 +54,7 @@
       this.flag = true;
     },
     methods: {
-      changeWho() {
+      changeWho() { // 选择
         if (this.who === "学生") {
           this.who = "教师";
           this.input_who = 2;
@@ -63,7 +63,8 @@
           this.input_who = 1;
         }
       },
-      onSubmit: async function () {
+      onSubmit: async function () { // 提交
+        // 账号密码不能为空
         if (this.input_username === "" || this.input_password === "") {
           this.$message.error("用户名或密码不能为空");
           return false;
@@ -75,7 +76,6 @@
               password: this.input_password,
               status: this.input_who
             },
-            // {withCredentials: true}
             {
               emulateJSON: true,
               withCredentials: true,
@@ -84,11 +84,10 @@
           );
 
           if (res.data.msg === "true") {
-            console.log("=== res ===");
-            console.log(res);
-            console.log("=== res.data ===");
-            console.log(res.data);
-            // localStorage.setItem('userData', JSON.stringify(res.data.data));
+            // console.log("=== res ===");
+            // console.log(res);
+            // console.log("=== res.data ===");
+            // console.log(res.data);
             sessionStorage.setItem('userData', JSON.stringify(res.data.data));
             if (res.data.status === 1) {
               this.$router.push('Student');
@@ -107,7 +106,7 @@
     },
     directives: {
       // 自定义私有指令
-      focus: {
+      focus: { // 打开后自动锁定
         inserted: el => {
           el.focus();
         }

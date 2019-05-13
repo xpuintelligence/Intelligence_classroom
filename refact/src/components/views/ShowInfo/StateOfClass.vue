@@ -1,7 +1,9 @@
 <template>
   <el-card class="box-card" v-if="isWeekend === false">
     <div slot="header" class="clearfix">
-      <span>今日上课状态</span>
+      <span>
+        <Mallki class-name="title" text="今日上课状态"></Mallki>
+      </span>
     </div>
     <div class="text item">
       <el-row :gutter="12">
@@ -9,16 +11,16 @@
           <el-card>
             <label>总成绩</label>
             <el-divider direction="vertical"></el-divider>
-            <!--<el-progress type="circle" :percentage="todayCourse.attendanceTotalScore" :width="200" status="text">-->
-            <!--{{todayCourse.attendanceTotalScore}}分-->
-            <!--</el-progress>-->
+            <el-progress type="circle" :percentage="todayCourse.attendanceTotalScore" :width="200" status="text">
+            {{todayCourse.attendanceTotalScore}}分
+            </el-progress>
           </el-card>
         </el-col>
         <el-col :span="12">
           <el-card>
             <label>抬头率</label>
             <el-divider direction="vertical"></el-divider>
-            <!--<el-progress type="circle" :percentage="todayCourse.headUpScore" :width="200"></el-progress>-->
+            <el-progress type="circle" :percentage="todayCourse.headUpScore" :width="200"></el-progress>
           </el-card>
         </el-col>
       </el-row>
@@ -27,8 +29,10 @@
 </template>
 
 <script>
+  import Mallki from "@/components/MyComponents/Mallki";
   export default {
     name: "StateOfClass",
+    components: {Mallki},
     data() {
       return {
         isWeekend: false,
@@ -45,8 +49,8 @@
 
       // 获取今天的上课状态信息
       this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
-        this.todayCourse = res.data.data;
-        // console.log(res.data.data)
+        this.todayCourse = res.data.data.data[0];
+        // console.log(res)
       }).catch(err => {
         console.log("--------err-------");
         console.log(err);

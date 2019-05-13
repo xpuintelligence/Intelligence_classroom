@@ -39,13 +39,10 @@
             useHTML: true
           },
           subtitle: {
-            text: '数据来源: 智慧教室云服务'
+            text: '智慧云提供计算服务'
           },
           xAxis: {
-            // categories: [
-            //   '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
-            // ],
-            categories: this.attendTotalScore,
+            categories: [],
             crosshair: true
           },
           yAxis: {
@@ -75,7 +72,7 @@
               data: []
             },
             {
-              name: '考勤',
+              name: '考勤总分',
               data: [],
               color: 'LightPink'
             }
@@ -93,13 +90,17 @@
       // 获取学期的上课信息
       this.$http.post('wisdom_web/studentCourseInfo/thisSemester', {}).then(res => {
         this.thisSemesterTotalInfo = res.data.data;
+        // console.log(res.body.data[0]);
         for (let i = 0; i < res.data.data.length; i++) {
           // this.attendTotalScore.push(res.body.data[i].attendScore);
           // this.headUpScore.push(res.body.data[i].headUpScore);
           // this.thisSemesterCharts.series[0].data.push(Math.random()*100);  // 专注度
           // this.thisSemesterCharts.series[1].data.push(Math.random()*100);  // 考勤
-          this.thisSemesterCharts.series[0].data.push(res.body.data[i].headUpScore);  // 专注度
-          this.thisSemesterCharts.series[1].data.push(res.body.data[i].attendScore);  // 考勤
+          // X轴
+          this.thisSemesterCharts.xAxis.categories.push(this.thisSemesterTotalInfo[0].courseName + new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString());
+          // Y轴
+          this.thisSemesterCharts.series[0].data.push(this.thisSemesterTotalInfo[i].headUpScore);  // 专注度
+          this.thisSemesterCharts.series[1].data.push(this.thisSemesterTotalInfo[i].attendanceTotalScore);  // 考勤总分
         }
         this.thisSemesterCharts.title.text = '智慧教室-学期总成绩-' + this.userData.name;
 

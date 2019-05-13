@@ -4,22 +4,22 @@
       <div slot="header" class="cell">
         <Mallki class-name="date" :text="chartTittle"></Mallki>
         <el-button style="padding: 3px 0;float: right;" type="text">
-          <Mallki class-name="date" :text="new Date().toDateString()"></Mallki>
+          <Mallki class-name="date" :text="thisWeekTime"></Mallki>
         </el-button>
       </div>
 
       <div class="text item">
-        <el-col :span="16">
-          <el-card body-style="padding: 0px;">
-            <x-chart id="high" class="high" :option="thisWeekChart"></x-chart>
-          </el-card>
-        </el-col>
+        <el-row :span="16">
+          <x-chart id="high" class="high" :option="thisWeekChart"></x-chart>
+        </el-row>
 
-        <el-col :span="8">
+        <el-row :span="8">
           <el-card>
-
+            <h1>
+              哈啊啊啊啊啊
+            </h1>
           </el-card>
-        </el-col>
+        </el-row>
       </div>
     </el-card>
   </div>
@@ -37,6 +37,7 @@
         thisWeekData: {},
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
+        thisWeekTime: '',
 
         chartTittle: '',
         thisWeekChart: {
@@ -53,24 +54,23 @@
             enabled: false, // 右下角的 highcharts 标识去掉
           },
           chart: {
-            type: 'spline'  // 图表类型
+            type: 'line',  // 图表类型
+            borderColor: 'DeepSkyBlue',
+            borderRadius: 20,
+            borderWidth: 2,
           },
           title: {
             text: '',
             useHTML: true
           },
           subtitle: {
-            text: '数据来源: 智慧教室云服务'
+            text: ''
           },
           xAxis: {
-            // categories: [
-            //   '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'
-            // ],
-            categories: this.attendTotalScore,
+            categories: [],
             crosshair: true
           },
           yAxis: {
-            min: 0,
             title: {
               text: '分数'
             }
@@ -91,38 +91,66 @@
           },
           series: [
             {
-              name: '专注度',
-              // data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 500, 194.1, 95.6, 54.4]
+              name: '',
+              data: [],
+              color: 'LightPink'
+            },
+            {
+              name: '',
               data: []
             },
             {
-              name: '考勤',
+              name: '',
               data: [],
-              color: 'LightPink'
-            }
+              color: 'LightCoral'
+            },
           ]
         },  // 本周数据的spline图
       }
     },
-    mounted() {
+    async mounted() {
       // 从本地获取用户信息
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
 
       // 获取本周上课数据
-      this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {}).then(res => {
-        console.log(res);
+      await this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {}).then(res => {
         this.thisWeekData = res.data.data;
-        for (let i = 0; i < res.data.data.length; i++) {
-          this.thisWeekChart.series[0].data.push(res.body.data[i].headUpScore);  // 专注度
-          this.thisWeekChart.series[1].data.push(res.body.data[i].attendScore);  // 考勤
-        }
-        // this.thisWeekChart.title.text = '智慧教室-本周上课状态-' + this.userData.name;
-        this.chartTittle = this.userData.name + '-本周上课状态';
       }).catch(err => {
-        console.log("err-------");
+        console.log("---err---");
         console.log(err);
         this.$message.error("抱歉，服务器出错");
-      })
+      });
+
+      // 处理本周上课数据 生成表格
+      this.chartTittle = this.userData.name + '-本周上课状态';
+
+      this.thisWeekTime =
+        new Date(this.thisWeekData[0].time).toLocaleDateString()
+        + " - " +
+        new Date(this.thisWeekData[this.thisWeekData.length - 1].time).toLocaleDateString();
+
+      this.thisWeekChart.subtitle.text = '智慧云提供计算服务';
+
+      this.thisWeekChart.series[0].name = '考勤总分';
+      this.thisWeekChart.series[1].name = '专注度';
+      this.thisWeekChart.series[2].name = '迟到扣分';
+
+      for (let i = 0; i < this.thisWeekData.length; i++) {
+        this.thisWeekChart.xAxis.categories.push(
+          this.thisWeekData[0].courseName
+          + "(" +
+          new Date(this.thisWeekData[i].time).toLocaleDateString()
+          + ")"
+        );
+        // this.thisWeekChart.series[0].data.push(this.thisWeekData[i].attendanceTotalScore);  // 考勤总分
+        // this.thisWeekChart.series[1].data.push(this.thisWeekData[i].headUpScore);  // 专注度，抬头分
+        // this.thisWeekChart.series[2].data.push(-this.thisWeekData[i].lateAttendScore);  // 迟到扣的分数
+        this.thisWeekChart.series[0].data.push(Math.random()%100);  // 考勤总分
+        this.thisWeekChart.series[1].data.push(Math.random()%100);  // 专注度，抬头分
+        this.thisWeekChart.series[2].data.push(-Math.random()%100);  // 迟到扣的分数
+
+      } // for
+
     },
     components: {Mallki, XChart}
   }
