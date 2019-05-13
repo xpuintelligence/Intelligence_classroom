@@ -9,10 +9,11 @@ public interface AppConfig {
     int pictureCount = 3;
 
     //登录请求地址
-    String loginAddress = "http://101.132.78.78:8080/wisdom_web/login/all";
+    String loginAddress = "http://47.103.14.73:8080/wisdom_web/login/all";
 
 
     //获取本月的课程信息
-    String classInfoAddress = "http://101.132.78.78:8080/wisdom_web/studentCourseInfo/thisMonth";
+    String classInfoAddress = "http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisMonth";
+
     String TAG = "MyAppConfig";
 }

@@ -16,8 +16,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.xuexiang.xui.widget.dialog.DialogLoader;
+import com.xuexiang.xui.widget.dialog.LoadingDialog;
 import com.xuexiang.xui.widget.toast.XToast;
+
 
 import cz.msebera.android.httpclient.Header;
 import edu.xpu.tim.myfaceapplication.config.AppConfig;
@@ -27,6 +28,7 @@ import edu.xpu.tim.myfaceapplication.util.net.FinalAsyncHttpClient;
 import static com.xuexiang.xui.XUI.getContext;
 
 public class StdRegAty extends AppCompatActivity {
+
     private EditText et_id;
     private EditText et_pwd;
     private static final String TAG = "StdRegAty";
@@ -41,11 +43,16 @@ public class StdRegAty extends AppCompatActivity {
     }
 
     public void toFace(View v){
+
         Button regTeaBtn = findViewById(R.id.regTeaBtn);
         regTeaBtn.setEnabled(false);
         someInfoLogin(true, new Intent(getApplicationContext(), MainActivity.class), regTeaBtn);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
     public void toTeacher(View v){
         Button regStuBtn = findViewById(R.id.regStuBtn);

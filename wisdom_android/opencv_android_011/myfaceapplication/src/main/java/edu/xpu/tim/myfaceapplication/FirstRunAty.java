@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
@@ -34,27 +35,28 @@ public class FirstRunAty extends AppCompatActivity {
         }else{
             int status = first.getInt("status", -1);
             if(status == 1){
-
                 AsyncHttpClient asyncHttpClient = new FinalAsyncHttpClient().getAsyncHttpClient();
                 CookieUtils.saveCookie(asyncHttpClient,FirstRunAty.this);
                 RequestParams params = new RequestParams();
                 String retStr = first.getString("retStr", "");
                 String id = JSONObject.parseObject(retStr).getJSONObject("data").getString("id");
-                String password = JSONObject.parseObject(retStr).getJSONObject("data").getString("password");
+                String stu_pwd = first.getString("stu_pwd", "");
+                //String password = JSONObject.parseObject(retStr).getJSONObject("data").getString("password");
                 params.put("account", id);
-                params.put("password",password);
+                params.put("password",stu_pwd);
                 //学生\老师登陆
                 params.put("status", 1);
                 asyncHttpClient.post(AppConfig.loginAddress, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        CookieUtils.setCookies(CookieUtils.getCookie(FirstRunAty.this));
-                        XToast.success(getContext(), "更新Session成功！！！").show();
+                        CookieUtils.setCookies(CookieUtils.getCookie(getApplicationContext()));
+                        Log.i(AppConfig.TAG, new String(responseBody));
+                        XToast.success(getContext(), "学生端更新Session成功!").show();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        XToast.success(getContext(), "更新Session失败！！！").show();
+                        XToast.success(getContext(), "学生端更新Session失败！！！statusCode= " + statusCode).show();
                     }
                 });
 
@@ -67,21 +69,23 @@ public class FirstRunAty extends AppCompatActivity {
                 RequestParams params = new RequestParams();
                 String retStr = first.getString("retStr", "");
                 String id = JSONObject.parseObject(retStr).getJSONObject("data").getString("id");
-                String password = JSONObject.parseObject(retStr).getJSONObject("data").getString("password");
+                String tea_pwd = first.getString("tea_pwd", "");
+
+                //String password = JSONObject.parseObject(retStr).getJSONObject("data").getString("password");
                 params.put("account", id);
-                params.put("password",password);
+                params.put("password",tea_pwd);
                 //学生\老师登陆
                 params.put("status", 2);
                 asyncHttpClient.post(AppConfig.loginAddress, params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         CookieUtils.setCookies(CookieUtils.getCookie(FirstRunAty.this));
-                        XToast.success(getContext(), "更新Session成功！！！").show();
+                        XToast.success(getContext(), "教师端更新Session成功!").show();
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        XToast.error(getContext(), "更新Session失败！！！").show();
+                        XToast.error(getContext(), "教师端更新Session失败!").show();
                     }
                 });
 

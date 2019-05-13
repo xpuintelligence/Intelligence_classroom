@@ -14,10 +14,13 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.xuexiang.xui.widget.banner.anim.select.ZoomInEnter;
 import com.xuexiang.xui.widget.banner.widget.banner.SimpleGuideBanner;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import java.util.ArrayList;
 
 import edu.xpu.tim.myfaceapplication.student.StuCheckInfoAty;
+
+import static com.xuexiang.xui.XUI.getContext;
 
 public class StudentAty extends AppCompatActivity {
     private static final String TAG = "StudentAty";
@@ -48,6 +51,7 @@ public class StudentAty extends AppCompatActivity {
         TextView stuAty_id = findViewById(R.id.stuAty_id);
         TextView stuAty_name = findViewById(R.id.stuAty_name);
         TextView stuAty_class = findViewById(R.id.stuAty_class);
+        TextView stuAty_collegeName = findViewById(R.id.collegeName);
 
         //积分模块
         TextView stuAty_jifen = findViewById(R.id.stuAty_jifen);
@@ -61,6 +65,7 @@ public class StudentAty extends AppCompatActivity {
             stuAty_id.setText(stu.getString("id"));
             stuAty_name.setText(stu.getString("name"));
             stuAty_class.setText(stu.getString("className"));
+            stuAty_collegeName.setText(stu.getString("collegeName"));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -70,7 +75,7 @@ public class StudentAty extends AppCompatActivity {
     //返回退出确认
     public void onBackPressed() {
         new AlertDialog.Builder(this).setTitle("确认退出吗？")
-                .setIcon(android.R.drawable.ic_dialog_info)
+                .setIcon(R.drawable.icon_tip)
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -84,6 +89,14 @@ public class StudentAty extends AppCompatActivity {
                         // 点击“返回”后的操作,这里不设置没有任何操作
                     }
                 }).show();
+
+
+
+//        new MaterialDialog.Builder(getContext())
+//                .content(R.string.tip_bluetooth_permission)
+//                .positiveText(R.string.lab_yes)
+//                .negativeText(R.string.lab_no)
+//                .show();
     }
 
 

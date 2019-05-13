@@ -14,10 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 import com.xuexiang.xui.widget.toast.XToast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,48 +34,23 @@ import edu.xpu.tim.myfaceapplication.util.ui.DividerItemDecoration;
 
 import static com.xuexiang.xui.XUI.getContext;
 
+
 public class StuCheckInfoAty extends AppCompatActivity {
-    private SharedPreferences first;
+    private MyRecyclerViewAdapter myAdapter;
     private RecyclerView stuAty_checkAtyRv;
     private List<AttendanceItem> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getData();
         setContentView(R.layout.activity_stu_check_info_aty);
-
-        first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
-        initData();
 
         //通过findViewById拿到RecyclerView实例
         stuAty_checkAtyRv = findViewById(R.id.stuAty_checkAtyRv);
 
         //设置RecyclerView管理器
         stuAty_checkAtyRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        //初始化适配器
-        MyRecyclerViewAdapter myAdapter = new MyRecyclerViewAdapter(list);
-        //设置添加或删除item时的动画，这里使用默认动画
-        stuAty_checkAtyRv.setItemAnimator(new DefaultItemAnimator());
-        //设置适配器
-        stuAty_checkAtyRv.setAdapter(myAdapter);
-        //添加横线
-        stuAty_checkAtyRv.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        getData();
-    }
-
-    private void initData() {
-        AttendanceItem attendanceItem = new AttendanceItem();
-        attendanceItem.setName("Kafka源码剖析");
-        attendanceItem.setClassroom_id("A1010");
-        attendanceItem.setTime("2018年02月30日 14:00");
-        attendanceItem.setTeacher_name("Tim老师");
-        attendanceItem.setCourse_node("kafka源码剖析源码剖析让同学们明白Kafka的工作原理, 并对Kafka进行性能优化，Kafka在高并发下的吞吐量控制");
-        attendanceItem.setGoal("总分：88.9");
-        attendanceItem.setHead_up_rate("抬头率：90.7%");
-        //TODO 出勤判断 attendanceItem.set
-        for (int i = 0; i < 100; i++) {
-            list.add(attendanceItem);
-        }
     }
 
     private void getData() {
@@ -82,12 +61,49 @@ public class StuCheckInfoAty extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String classInfoStr = new String(responseBody);
                 Log.i(AppConfig.TAG, classInfoStr);
-                XToast.info(getContext(), classInfoStr).show();
+                //展示获得的数据
+                JSONObject jsonObject = JSONObject.parseObject(classInfoStr);
+                JSONArray data = jsonObject.getJSONArray("data");
+                for (int i = 0; i < data.size(); i++) {
+                    AttendanceItem object = data.getObject(i, AttendanceItem.class);
+                    list.add(object);
+                    Log.i(AppConfig.TAG, object.toString());
+                }
+
+                //初始化适配器
+                myAdapter = new MyRecyclerViewAdapter(list);
+
+                //设置添加或删除item时的动画，这里使用默认动画
+                stuAty_checkAtyRv.setItemAnimator(new DefaultItemAnimator());
+
+                //设置适配器
+                stuAty_checkAtyRv.setAdapter(myAdapter);
+
+                //添加横线
+                stuAty_checkAtyRv.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+                Log.i(AppConfig.TAG, data.toString());
+                XToast.success(getContext(), "数据获取成功").show();
+
+                myAdapter.setOnItemClickListener((view, position, data1) ->{
+                    //XToast.info(getContext(), "position= "+ position +" ,您点击了：" + data1).show();
+                    new MaterialDialog.Builder(getContext())
+                            .iconRes(R.drawable.icon_tip)
+                            .title(R.string.kaoqin_infos)
+                            .content("出勤总分:"+data1.getAttendanceTotalScore()+"\t"+
+                            "缺勤扣分:"+data1.getLeaveScore()+"\t"+
+                            "出勤得分:" + data1.getAttendScore()+"\t"+
+                            "迟到扣分:"+data1.getLateAttendScore()+"\t"+
+                            "抬头得分:"+data1.getHeadUpScore())
+                            .positiveText(R.string.lab_submit)
+                            .show();
+
+                });
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                XToast.error(getContext(), "请求网络数据失败：" + statusCode).show();
+                finish();
             }
         });
     }
@@ -96,8 +112,10 @@ public class StuCheckInfoAty extends AppCompatActivity {
 
 class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder> {
     private List<AttendanceItem> list;
+    private OnItemClickListener onItemClickListener;
 
-    public MyRecyclerViewAdapter(List<AttendanceItem> list) {
+
+    MyRecyclerViewAdapter(List<AttendanceItem> list) {
         this.list = list;
     }
 
@@ -110,14 +128,23 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
 
     @Override
     public void onBindViewHolder(MyRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.item_ClassName.setText(list.get(position).getName());
-        holder.item_ClassAddress.setText(list.get(position).getClassroom_id());
-        holder.item_ClassTime.setText(list.get(position).getTime() + "");
-        holder.item_ClassTeacherName.setText(list.get(position).getTeacher_name());
-        holder.item_ClassDescription.setText(list.get(position).getCourse_node());
-        holder.item_ClassGoalScore.setText(list.get(position).getGoal());
-        holder.item_ClassHeadUp.setText(list.get(position).getHead_up_rate());
-        holder.item_ClassCheck.setImageResource(R.drawable.stu_check);
+        holder.item_ClassName.setText(list.get(position).getCourseName());
+        holder.item_ClassAddress.setText(list.get(position).getTeacherName() + " " + list.get(position).getClassroomId());
+        holder.item_ClassTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(list.get(position).getTime()));
+        if(list.get(position).getCourseNote() == null ||
+                list.get(position).getCourseNote().equals("")){
+            holder.item_ClassDescription.setText("暂无课程描述...");
+        }
+
+        holder.item_ClassCheck.setImageResource(list.get(position).getAttendScore() < 1.0 ? R.drawable.nopass : R.drawable.pass);
+
+
+
+        //设置List监听事件
+        int adapterPosition = holder.getAdapterPosition();
+        if (onItemClickListener != null) {
+            holder.itemView.setOnClickListener(new MyOnClickListener(position, list.get(adapterPosition)));
+        }
     }
 
     @Override
@@ -129,21 +156,44 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
         TextView item_ClassName;
         TextView item_ClassAddress;
         TextView item_ClassTime;
-        TextView item_ClassTeacherName;
         TextView item_ClassDescription;
-        TextView item_ClassGoalScore;
-        TextView item_ClassHeadUp;
         ImageView item_ClassCheck;
         ViewHolder(View itemView) {
             super(itemView);
             item_ClassName = itemView.findViewById(R.id.item_ClassName);
             item_ClassAddress = itemView.findViewById(R.id.item_ClassAddress);
             item_ClassTime = itemView.findViewById(R.id.item_ClassTime);
-            item_ClassTeacherName = itemView.findViewById(R.id.item_ClassTeacherName);
             item_ClassDescription = itemView.findViewById(R.id.item_ClassDescription);
-            item_ClassGoalScore = itemView.findViewById(R.id.item_ClassGoalScore);
-            item_ClassHeadUp = itemView.findViewById(R.id.item_ClassHeadUp);
             item_ClassCheck = itemView.findViewById(R.id.item_ClassCheck);
         }
     }
+
+
+    /**
+     * 设置点击事件
+     */
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position, AttendanceItem data);
+    }
+
+    private class MyOnClickListener implements View.OnClickListener {
+        private int position;
+        private AttendanceItem data;
+
+        public MyOnClickListener(int position, AttendanceItem data) {
+            this.position = position;
+            this.data = data;
+        }
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.onItemClick(v, position, data);
+        }
+    }
+
 }
