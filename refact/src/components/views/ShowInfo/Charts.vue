@@ -97,17 +97,15 @@
           // this.thisSemesterCharts.series[0].data.push(Math.random()*100);  // 专注度
           // this.thisSemesterCharts.series[1].data.push(Math.random()*100);  // 考勤
           // X轴
-          this.thisSemesterCharts.xAxis.categories.push(this.thisSemesterTotalInfo[0].courseName + new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString());
+          this.thisSemesterCharts.xAxis.categories.push(this.thisSemesterTotalInfo[0].courseName
+            + '(' +
+            new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString() + ')'
+          );
           // Y轴
           this.thisSemesterCharts.series[0].data.push(this.thisSemesterTotalInfo[i].headUpScore);  // 专注度
           this.thisSemesterCharts.series[1].data.push(this.thisSemesterTotalInfo[i].attendanceTotalScore);  // 考勤总分
         }
         this.thisSemesterCharts.title.text = '智慧教室-学期总成绩-' + this.userData.name;
-
-        // console.log("attendTotalScore");
-        // console.log(this.attendTotalScore);
-        // console.log("headUpScore");
-        // console.log(this.headUpScore);
       }).catch(err => {
         console.log("--------err-------");
         console.log(err);

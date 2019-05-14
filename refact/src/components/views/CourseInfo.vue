@@ -36,11 +36,19 @@
       <!--</p>-->
     <!--</div>-->
 
+    <Today></Today>
+
+    <hr>
+
     <ThisWeek></ThisWeek>
 
     <hr>
 
     <ThisMonth></ThisMonth>
+
+    <hr>
+
+    <ThisSemester></ThisSemester>
 
   </div>
 </template>
@@ -48,9 +56,12 @@
 <script>
   import ThisWeek from "@/components/views/CourseInfo/ThisWeek";
   import ThisMonth from "@/components/views/CourseInfo/ThisMonth";
+  import ThisSemester from "@/components/views/CourseInfo/ThisSemester";
+  import Today from "@/components/views/CourseInfo/Today";
+
   export default {
     name: "CourseInfo",
-    components: {ThisWeek,ThisMonth},
+    components: {Today, ThisSemester, ThisWeek,ThisMonth},
     data() {
       return {
         flag: false,

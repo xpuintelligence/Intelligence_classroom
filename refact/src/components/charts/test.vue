@@ -8,8 +8,10 @@
 <script>
   import HighCharts from 'highcharts'
   import HighChartsExport from 'highcharts/modules/exporting'
+  import HeapMap from 'highcharts/modules/heatmap'
 
   HighChartsExport(HighCharts);
+  HeapMap(HighCharts);
 
   HighCharts.setOptions({
     lang: {

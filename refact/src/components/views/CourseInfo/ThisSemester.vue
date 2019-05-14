@@ -4,13 +4,13 @@
       <div slot="header" class="cell">
         <Mallki class-name="date" :text="chartTittle"></Mallki>
         <el-button style="padding: 3px 0;float: right;" type="text">
-          <Mallki class-name="date" :text="thisMonthTime"></Mallki>
+          <Mallki class-name="date" :text="thisSemesterTime"></Mallki>
         </el-button>
       </div>
 
       <div class="text item">
         <el-row :span="16">
-          <x-chart id="thisMonthChart" class="thisMonthChart" :option="thisMonthChart"></x-chart>
+          <x-chart id="thisSemesterChart" class="thisSemesterChart" :option="thisSemesterChart"></x-chart>
         </el-row>
 
         <el-row :span="8">
@@ -30,17 +30,17 @@
   import Mallki from "@/components/MyComponents/Mallki";
 
   export default {
-    name: "ThisMonth",
+    name: "ThisSemester",
     data() {
       return {
         userData: {},
-        thisMonthData: {},
+        thisSemesterData: {},
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
-        thisMonthTime: '',  // 本月时间段
+        thisSemesterTime: '',  // 本月时间段
 
         chartTittle: '',
-        thisMonthChart: {
+        thisSemesterChart: {
           navigation: {
             buttonOptions: {
               text: '导出',
@@ -114,8 +114,8 @@
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
 
       // 获取本周上课数据
-      await this.$http.post('wisdom_web/studentCourseInfo/thisMonth', {}).then(res => {
-        this.thisMonthData = res.data.data;
+      await this.$http.post('wisdom_web/studentCourseInfo/thisSemester', {}).then(res => {
+        this.thisSemesterData = res.data.data;
       }).catch(err => {
         console.log("---err---");
         console.log(err);
@@ -123,35 +123,35 @@
       });
 
       // 处理本月上课数据 生成表格
-      this.chartTittle = this.userData.name + '-本月上课状态';
+      this.chartTittle = this.userData.name + '-本学期上课状态';
 
       // 拼接成本月的时间段
-      this.thisMonthTime =
-        new Date(this.thisMonthData[0].time).toLocaleDateString()
+      this.thisSemesterTime =
+        new Date(this.thisSemesterData[0].time).toLocaleDateString()
         + " - " +
-        new Date(this.thisMonthData[this.thisMonthData.length - 1].time).toLocaleDateString();
+        new Date(this.thisSemesterData[this.thisSemesterData.length - 1].time).toLocaleDateString();
 
-      this.thisMonthChart.subtitle.text = '智慧云提供计算服务';  // 表格副标题
+      this.thisSemesterChart.subtitle.text = '智慧云提供计算服务';  // 表格副标题
 
       // this.thisMonthChart.yAxis.min = -50; // y轴最小
 
-      this.thisMonthChart.series[0].name = '考勤总分';
-      this.thisMonthChart.series[1].name = '专注度';
-      this.thisMonthChart.series[2].name = '迟到扣分';
+      this.thisSemesterChart.series[0].name = '考勤总分';
+      this.thisSemesterChart.series[1].name = '专注度';
+      this.thisSemesterChart.series[2].name = '迟到扣分';
 
-      for (let i = 0; i < this.thisMonthData.length; i++) {
-        this.thisMonthChart.xAxis.categories.push(
-          this.thisMonthData[0].courseName
+      for (let i = 0; i < this.thisSemesterData.length; i++) {
+        this.thisSemesterChart.xAxis.categories.push(
+          this.thisSemesterData[0].courseName
           + "(" +
-          new Date(this.thisMonthData[i].time).toLocaleDateString()
+          new Date(this.thisSemesterData[i].time).toLocaleDateString()
           + ")"
         );
         // this.thisMonthChart.series[0].data.push(this.thisMonthData[i].attendanceTotalScore);  // 考勤总分
         // this.thisMonthChart.series[1].data.push(this.thisMonthData[i].headUpScore);  // 专注度，抬头分
         // this.thisMonthChart.series[2].data.push(-this.thisMonthData[i].lateAttendScore);  // 迟到扣的分数
-        this.thisMonthChart.series[0].data.push(Math.random()*100);  // 考勤总分
-        this.thisMonthChart.series[1].data.push(Math.random()*100);  // 专注度，抬头分
-        this.thisMonthChart.series[2].data.push(-Math.random()*100);  // 迟到扣的分数
+        this.thisSemesterChart.series[0].data.push(Math.random() * 100);  // 考勤总分
+        this.thisSemesterChart.series[1].data.push(Math.random() * 100);  // 专注度，抬头分
+        this.thisSemesterChart.series[2].data.push(-Math.random() * 100);  // 迟到扣的分数
       } // for
     },
     components: {Mallki, XChart}
