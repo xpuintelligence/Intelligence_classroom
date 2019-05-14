@@ -104,5 +104,14 @@ public interface TbStudentMapper {
      * @param end
      * @return
      */
-    StageAttendanceCollect queryStageAttendanceCollectByIdStartEnd(@Param("id")String id,@Param("start")String start,@Param("start")String end);
+    StageAttendanceCollect queryStageAttendanceCollectByIdStartEnd(@Param("id")String id,@Param("start")String start,@Param("end")String end);
+
+    /**
+     * 通过课程id，开始时间，结束时间查询本课考勤的汇总信息
+     * @param course_id
+     * @param start
+     * @param end
+     * @return
+     */
+    StageAttendanceCollect queryStageAttendanceCollectByCourseIdStartEnd(@Param("course_id")String course_id,@Param("start")String start,@Param("end")String end);
 }
