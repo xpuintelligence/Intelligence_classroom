@@ -4,3 +4,4 @@ test.jpg
 test.json
 app/test.json
 /output/*.jpg
+/app/testsql.py

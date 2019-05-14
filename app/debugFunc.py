@@ -12,13 +12,15 @@ from GetJudge import GetJudge
 sleepdict = dict()
 student_attendancedict = dict()
 
-sleepdict_end, student_attendancedict_end = Wisdom.run_wisdom(sleepdict,student_attendancedict)
+sleepdict_end, student_attendancedict_end, student_id_list_actual= Wisdom.run_wisdom(sleepdict,student_attendancedict)
 
 print()
 print("识别结束当前每个学生的出勤情况为：")
 print(str(student_attendancedict_end))
 print("本次识别中低头的学生情况为：")
 print(str(sleepdict_end))
+print("学号信息为:")
+print(student_id_list_actual)
 
 # 识别次数 目前设置为4次
 

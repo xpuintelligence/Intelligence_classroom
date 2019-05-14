@@ -12,6 +12,8 @@ student_actual_list = []
 student_name_list = []
 # 出勤学生学号信息的列表
 student_id_list = []
+# 出勤学生信息防止重复
+student_id_list_actual = []
 
 class FaceSearch:
 
@@ -47,13 +49,18 @@ class FaceSearch:
                         student_name_list.append(student_name)
                         print("识别成功，已存储")
 
+                    # 防止重复
+                    for student_id in student_id_list:
+                        if student_id not in student_id_list_actual:
+                            student_id_list_actual.append(student_id)
+
                 except Exception:
                     os.chdir("../faces")
                     os.system("rm -rf *.jpg")
                     pass
         
         student_headown_list = self.judge_id_In_Not(student_id_list)
-        return student_name_list, student_headown_list
+        return student_name_list, student_headown_list, student_id_list_actual
 
 
     # 初始化数据库对象 服务器数据库
@@ -64,6 +71,7 @@ class FaceSearch:
         user = "root"
         database = "team_model"
         password = "nanshen166013"
+        
         
         # 调用数据库
         faceDataBase = FaceDataBase(host, user, database, password) # 初始化数据

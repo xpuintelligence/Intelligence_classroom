@@ -66,6 +66,8 @@ class FaceDataBase:
     # 学生出勤统计 出勤插入1 未出勤插入0
 
     def attendence_insert(self, student_id):
+        # 课程id
+        courseitem_id = self.getCourseID()
         conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
         sql = "INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `status`) VALUES ('%s','%s', '%s', 'attend');"
         # INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `status`) VALUES ('2019-4-30 20:29', '100120190422101000', '41609030209', 'attend');
@@ -80,4 +82,21 @@ class FaceDataBase:
             conn.rollback()
         finally:
             print("连接关闭")
+            conn.close()
+
+    # 获取课程id
+    def getCourseID(self):
+        conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
+        sql = "select id from tb_courseitem where time = '%s';"
+        now_date = time.strftime('%Y-%m-%d 10:00:00')
+        print(now_date)
+        cursor = conn.cursor()
+        try:
+            cursor.execute(sql%now_date)
+            ret = cursor.fetchone()
+            courseitem_id= ret[0]
+            return courseitem_id
+        except Exception as e:
+            conn.rollback()
+        finally:
             conn.close()
