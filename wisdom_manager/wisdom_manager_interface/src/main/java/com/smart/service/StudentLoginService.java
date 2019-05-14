@@ -1,5 +1,6 @@
 package com.smart.service;
 
+import com.smart.pojo.StudentInfo;
 import com.smart.pojo.TbStudent;
 import com.smart.pojo.WisdomResult;
 
@@ -13,7 +14,7 @@ public interface StudentLoginService {
     WisdomResult studentLoginOfWeb(TbStudent tbStudent);
 
     /**
-     * 通过web端登陆学生端
+     * 通过小程序端登陆学生端
      */
-    WisdomResult studentLoginOfWX(TbStudent tbStudent);
+    WisdomResult studentLoginOfWX(StudentInfo studentInfo);
 }

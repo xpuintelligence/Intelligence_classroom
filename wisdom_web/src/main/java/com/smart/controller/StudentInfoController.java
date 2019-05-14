@@ -1,5 +1,6 @@
 package com.smart.controller;
 
+import com.smart.pojo.StudentInfo;
 import com.smart.pojo.TbStudent;
 import com.smart.pojo.WisdomResult;
 import org.springframework.stereotype.Controller;
@@ -9,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
-
-@RequestMapping("/weixin")
+@Controller
 @CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("/weixin")
 public class StudentInfoController {
 
     /**
@@ -20,7 +21,7 @@ public class StudentInfoController {
     @RequestMapping("/getStudentInfo")
     @ResponseBody
     public WisdomResult getStudentInfo(HttpServletRequest request){
-        TbStudent tbStudent = (TbStudent) request.getSession().getAttribute("tbStudent");
-        return WisdomResult.ok(tbStudent);
+        StudentInfo studentInfo = (StudentInfo) request.getSession().getAttribute("student");
+        return WisdomResult.ok(studentInfo);
     }
 }

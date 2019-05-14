@@ -5,6 +5,7 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -144,7 +145,28 @@ public class DateUtils implements Serializable {
         return new WisdomResult(1,"true",null);
     }
 
+    /**
+     * 将dateTime时间类型转成字符串
+     * @param dateTime
+     * @return
+     */
+    public static String dateTimeToString (DateTime dateTime){
+        return dateTime.toString("yyyy-MM-dd HH:mm:ss");
+    }
 
+    /**
+     * 将yyyy-mm-dd 00:00:00专程yyyy-mm-ddT00:00:00
+     * @param s 字符串时间
+     */
+    public static DateTime stringToDatetime(String s){
+        int index = s.indexOf(" ");
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(s.substring(0,index));
+        stringBuilder.append("T");
+        stringBuilder.append(s.substring(index+1));
+        DateTime dateTime = new DateTime(stringBuilder.toString());
+        return dateTime;
+    }
     @Test
     public void fun1(){
         int x = 1;
@@ -153,5 +175,7 @@ public class DateUtils implements Serializable {
         final Map<String, DateTime> map = spellTime(dateTime,dateTime1);
         System.out.println();
     }
+
+
 
 }

@@ -1,14 +1,17 @@
 package com.smart.controller;
 
+import com.smart.pojo.StudentInfo;
 import com.smart.pojo.TbStudent;
 import com.smart.pojo.WisdomResult;
 import com.smart.service.StudentCourseService;
+import com.smart.utils.DateUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +36,9 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListSpellTime(DateTime begin ,DateTime end, ModelMap modelMap, HttpServletRequest request){
         //先获取学生的信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用service函数
-        WisdomResult courseOfSpellTime = studentCourseService.getCourseOfSpellTime(student, begin, end);
+        WisdomResult courseOfSpellTime = studentCourseService.getCourseOfSpellTime(student, DateUtils.dateTimeToString(begin), DateUtils.dateTimeToString(end));
         return courseOfSpellTime;
     }
 
@@ -46,7 +49,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListThisWeek(HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         System.out.println(student);
         //调用service方法，获取返回值
         WisdomResult result = studentCourseService.getCourseThisWeek(student);
@@ -60,7 +63,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListThisMonth(HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法，获取返回值
         WisdomResult result = studentCourseService.getCourseThisMonth(student);
         return result;
@@ -73,7 +76,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListFrontXWeek(Integer n , HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法，获取返回值
         WisdomResult result = studentCourseService.getCourseFrontOfXWeek(student, n);
         return result;
@@ -86,7 +89,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListFrontXMonth(Integer n , HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法，获取返回值
         WisdomResult result = studentCourseService.getCourseFrontOfXMonth(student, n);
         return result;
@@ -99,7 +102,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListXMonth(Integer n , HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法，获取返回值
         WisdomResult result = studentCourseService.getCourseInXMonth(student, n);
         return result;
@@ -112,7 +115,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListXWeek(Integer n , HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法 获取返回值
         WisdomResult result = studentCourseService.getCourseInXWeek(student, n);
         return result;
@@ -125,7 +128,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseList(HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法，获取返回值
         WisdomResult result = studentCourseService.getCourseOfToday(student);
         return result;
@@ -138,7 +141,7 @@ public class StudentCourseInfoController {
     @ResponseBody
     public WisdomResult getCourseListSemester(HttpServletRequest request){
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法，获取返回值
         WisdomResult result = studentCourseService.getCourseOfThisSemester(student);
         return result;
@@ -149,12 +152,12 @@ public class StudentCourseInfoController {
      */
     @RequestMapping("/oneday")
     @ResponseBody
-    public WisdomResult getCourseListOneday(HttpServletRequest request , DateTime datetime){
-        //获取学生信息
+    public WisdomResult getCourseListOneday(HttpServletRequest request ,@RequestParam("dateTime") DateTime datetime){
+        //转换一下时间的格式
         //先获取学生信息
-        TbStudent student = (TbStudent) request.getSession().getAttribute("tbStudent");
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         //调用方法，获取返回值
-        WisdomResult result = studentCourseService.getCourseOfDay(student,datetime);
+        WisdomResult result = studentCourseService.getCourseOfDay(student, DateUtils.dateTimeToString(datetime));
         return result;
     }
 

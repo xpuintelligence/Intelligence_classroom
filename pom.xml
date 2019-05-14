@@ -46,6 +46,7 @@
         <quartz.version>2.2.2</quartz.version>
         <lombok.version>1.16.6</lombok.version>
         <okhttp.version>3.14.1</okhttp.version>
+        <javassist-version>3.18.2-GA</javassist-version>
     </properties>
 
     <dependencyManagement>
@@ -226,6 +227,17 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>dubbo</artifactId>
                 <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>javassist</artifactId>
+                        <groupId>org.javassist</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <version>${javassist-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.zookeeper</groupId>
