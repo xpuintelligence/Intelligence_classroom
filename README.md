@@ -57,14 +57,14 @@
 
 # 运行方法
 
-	- 确认安装opencv 
-		pip3 install opencv-python
-	- 确认安装百度云开放平台
-		pip3 install baidu-aip
-	- 安装七牛云
-		pip3 install qiniu
-	- 运行
-		python3 run.py
+- 确认安装opencv 
+	```pip3 install opencv-python```
+- 确认安装百度云开放平台
+	```pip3 install baidu-aip```
+- 安装七牛云
+		```pip3 install qiniu```
+- 运行
+  ```python3 run.py```
 
 
 # 注意 部分机器测试bug解决方法
