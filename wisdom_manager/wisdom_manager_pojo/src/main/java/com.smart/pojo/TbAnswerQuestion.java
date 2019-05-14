@@ -14,6 +14,8 @@ public class TbAnswerQuestion implements Serializable {
 
     private Date time;
 
+    private String msg;
+
     private String status;
 
     private static final long serialVersionUID = 1L;
@@ -56,6 +58,14 @@ public class TbAnswerQuestion implements Serializable {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg == null ? null : msg.trim();
     }
 
     public String getStatus() {

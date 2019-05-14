@@ -9,6 +9,8 @@
     <result column="status" jdbcType="CHAR" property="status" />
     <result column="head_up_rate" jdbcType="DOUBLE" property="headUpRate" />
     <result column="goal" jdbcType="INTEGER" property="goal" />
+    <result column="sleep" jdbcType="CHAR" property="sleep" />
+    <result column="headup_score" jdbcType="INTEGER" property="headupScore" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    attendance_id, courseitem_id, student_id, create_date, status, head_up_rate, goal
+    attendance_id, courseitem_id, student_id, create_date, status, head_up_rate, goal, 
+    sleep, headup_score
   </sql>
   <select id="selectByExample" parameterType="com.smart.pojo.TbAttendanceExample" resultMap="BaseResultMap">
     select
@@ -104,10 +107,12 @@
   <insert id="insert" parameterType="com.smart.pojo.TbAttendance">
     insert into tb_attendance (attendance_id, courseitem_id, student_id, 
       create_date, status, head_up_rate, 
-      goal)
+      goal, sleep, headup_score
+      )
     values (#{attendanceId,jdbcType=VARCHAR}, #{courseitemId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR}, #{headUpRate,jdbcType=DOUBLE}, 
-      #{goal,jdbcType=INTEGER})
+      #{goal,jdbcType=INTEGER}, #{sleep,jdbcType=CHAR}, #{headupScore,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.smart.pojo.TbAttendance">
     insert into tb_attendance
@@ -133,6 +138,12 @@
       <if test="goal != null">
         goal,
       </if>
+      <if test="sleep != null">
+        sleep,
+      </if>
+      <if test="headupScore != null">
+        headup_score,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="attendanceId != null">
@@ -155,6 +166,12 @@
       </if>
       <if test="goal != null">
         #{goal,jdbcType=INTEGER},
+      </if>
+      <if test="sleep != null">
+        #{sleep,jdbcType=CHAR},
+      </if>
+      <if test="headupScore != null">
+        #{headupScore,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -188,6 +205,12 @@
       <if test="record.goal != null">
         goal = #{record.goal,jdbcType=INTEGER},
       </if>
+      <if test="record.sleep != null">
+        sleep = #{record.sleep,jdbcType=CHAR},
+      </if>
+      <if test="record.headupScore != null">
+        headup_score = #{record.headupScore,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +224,9 @@
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=CHAR},
       head_up_rate = #{record.headUpRate,jdbcType=DOUBLE},
-      goal = #{record.goal,jdbcType=INTEGER}
+      goal = #{record.goal,jdbcType=INTEGER},
+      sleep = #{record.sleep,jdbcType=CHAR},
+      headup_score = #{record.headupScore,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +252,12 @@
       <if test="goal != null">
         goal = #{goal,jdbcType=INTEGER},
       </if>
+      <if test="sleep != null">
+        sleep = #{sleep,jdbcType=CHAR},
+      </if>
+      <if test="headupScore != null">
+        headup_score = #{headupScore,jdbcType=INTEGER},
+      </if>
     </set>
     where attendance_id = #{attendanceId,jdbcType=VARCHAR}
   </update>
@@ -237,7 +268,9 @@
       create_date = #{createDate,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=CHAR},
       head_up_rate = #{headUpRate,jdbcType=DOUBLE},
-      goal = #{goal,jdbcType=INTEGER}
+      goal = #{goal,jdbcType=INTEGER},
+      sleep = #{sleep,jdbcType=CHAR},
+      headup_score = #{headupScore,jdbcType=INTEGER}
     where attendance_id = #{attendanceId,jdbcType=VARCHAR}
   </update>
 </mapper>

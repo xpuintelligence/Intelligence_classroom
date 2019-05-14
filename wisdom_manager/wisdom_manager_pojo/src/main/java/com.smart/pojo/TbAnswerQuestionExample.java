@@ -1,11 +1,10 @@
 package com.smart.pojo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TbAnswerQuestionExample implements Serializable {
+public class TbAnswerQuestionExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -443,6 +442,76 @@ public class TbAnswerQuestionExample implements Serializable {
 
         public Criteria andTimeNotBetween(Date value1, Date value2) {
             addCriterion("time not between", value1, value2, "time");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgIsNull() {
+            addCriterion("msg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgIsNotNull() {
+            addCriterion("msg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgEqualTo(String value) {
+            addCriterion("msg =", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgNotEqualTo(String value) {
+            addCriterion("msg <>", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgGreaterThan(String value) {
+            addCriterion("msg >", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgGreaterThanOrEqualTo(String value) {
+            addCriterion("msg >=", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgLessThan(String value) {
+            addCriterion("msg <", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgLessThanOrEqualTo(String value) {
+            addCriterion("msg <=", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgLike(String value) {
+            addCriterion("msg like", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgNotLike(String value) {
+            addCriterion("msg not like", value, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgIn(List<String> values) {
+            addCriterion("msg in", values, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgNotIn(List<String> values) {
+            addCriterion("msg not in", values, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgBetween(String value1, String value2) {
+            addCriterion("msg between", value1, value2, "msg");
+            return (Criteria) this;
+        }
+
+        public Criteria andMsgNotBetween(String value1, String value2) {
+            addCriterion("msg not between", value1, value2, "msg");
             return (Criteria) this;
         }
 

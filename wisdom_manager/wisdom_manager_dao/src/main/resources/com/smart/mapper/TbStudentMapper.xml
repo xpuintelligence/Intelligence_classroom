@@ -356,7 +356,7 @@
     where tb_student.id = #{id} and tb_student.password = #{password} and tb_student.class_id = tb_class.id and tb_class.profession_id = tb_profession.id and tb_profession.college_id = tb_college.id
   </select>
   <select id="selectAttendanceItem" resultType="com.smart.pojo.AttendanceItem">
-    select tb_attendance.attendance_id, tb_attendance.courseitem_id, tb_course.name, tb_courseitem.time, tb_attendance.status, tb_attendance.head_up_rate, tb_attendance.goal, tb_courseitem.teacher_id,tb_teacher.name as teacher_name, tb_courseitem.classroom_id, tb_course.course_note
+    select tb_attendance.attendance_id, tb_attendance.courseitem_id, tb_courseitem.course_id, tb_course.name, tb_courseitem.time, tb_attendance.status, tb_attendance.head_up_rate, tb_attendance.goal, tb_courseitem.teacher_id,tb_teacher.name as teacher_name, tb_courseitem.classroom_id, tb_course.course_note
     from tb_attendance, tb_courseitem, tb_course, tb_teacher, tb_classroom
     where tb_attendance.student_id = #{studentId}
           and tb_courseitem.id = tb_attendance.courseitem_id
@@ -399,5 +399,24 @@
         and tb_teacher.id = tb_courseitem.teacher_id
         and tb_classroom.id = tb_courseitem.classroom_id
         order by time asc, student_id asc
+  </select>
+  <select id="selectDaysAttendanceCollectByIDStartEnd" resultType="com.smart.pojo.DaysAttendanceCollect">
+    select date_format(tb_attendance.create_date, '%Y-%m-%d') as date , count(*) as sum, avg(goal) as avgGoal from tb_attendance
+        where tb_attendance.student_id = #{id}
+        and tb_attendance.create_date between #{start} and #{end}
+        group by date
+  </select>
+  <select id="queryStageAttendanceCollectByIdStartEnd" resultType="com.smart.pojo.StageAttendanceCollect">
+    select avg(tb_attendance.head_up_rate) as avg_head_up_rate, avg(tb_attendance.goal) as avg_goal, sum(status = 'late') as late_times, sum(status = 'attend') as attend_times, sum(status = 'leave') as leave_times, sum(status = 'absent') as absent_times
+    from tb_attendance
+    where tb_attendance.student_id = #{id}
+        and tb_attendance.create_date between #{start} and #{end}
+  </select>
+  <select id="queryStageAttendanceCollectByCourseIdStartEnd" resultType="com.smart.pojo.StageAttendanceCollect">
+    select avg(tb_attendance.head_up_rate) as avg_head_up_rate, avg(tb_attendance.goal) as avg_goal, sum(status = 'late') as late_times, sum(status = 'attend') as attend_times, sum(status = 'leave') as leave_times, sum(status = 'absent') as absent_times
+    from tb_attendance, tb_courseitem
+    where tb_attendance.courseitem_id = tb_courseitem.id
+        and tb_courseitem.course_id = #{course_id}
+        and tb_attendance.create_date between #{start} and #{end}
   </select>
 </mapper>

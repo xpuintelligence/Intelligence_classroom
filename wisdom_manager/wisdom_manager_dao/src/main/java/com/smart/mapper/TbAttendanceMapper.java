@@ -2,8 +2,9 @@ package com.smart.mapper;
 
 import com.smart.pojo.TbAttendance;
 import com.smart.pojo.TbAttendanceExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface TbAttendanceMapper {
     long countByExample(TbAttendanceExample example);

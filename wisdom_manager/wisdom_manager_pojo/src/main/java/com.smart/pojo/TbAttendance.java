@@ -18,6 +18,10 @@ public class TbAttendance implements Serializable {
 
     private Integer goal;
 
+    private String sleep;
+
+    private Integer headupScore;
+
     private static final long serialVersionUID = 1L;
 
     public String getAttendanceId() {
@@ -74,5 +78,21 @@ public class TbAttendance implements Serializable {
 
     public void setGoal(Integer goal) {
         this.goal = goal;
+    }
+
+    public String getSleep() {
+        return sleep;
+    }
+
+    public void setSleep(String sleep) {
+        this.sleep = sleep == null ? null : sleep.trim();
+    }
+
+    public Integer getHeadupScore() {
+        return headupScore;
+    }
+
+    public void setHeadupScore(Integer headupScore) {
+        this.headupScore = headupScore;
     }
 }
