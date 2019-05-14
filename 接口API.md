@@ -229,585 +229,17 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
     ]
 }
 ```
-----
-## 查询本月的课程信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisMonth
-### _需传输的参数_
-name|describe
-----|------
-无|无
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）每一节课课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
-## 查询一段时间内的课程信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisWeek
-
-### _需传输的参数_
-name|describe
-----|------
-begin|开始时间（格式要求：2018-10-10 00:00:00）
-end|结束时间（格式要求如上）
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
-## 查询相对于本周而言，前x周的考勤 
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/frontXWeek
-
-### _需传输的参数_
-name|describe
-----|------
-n|与本周相比前n周（前n周的考勤 本周为11周，那么前1周为第10周）
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
-## 查询相对于本月而言，前n月的课程信息 
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/frontXMonth
-
-### _需传输的参数_
-name|describe
-----|------
-n|与本与相比前n月（前n月的考勤 本月为本学期第3月，那么前1月为第2月）
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
-## 查询本学期第x个月的课程信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/xMonth
-
-### _需传输的参数_
-name|describe
-----|------
-n|本学期的第x个月
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
-## 查询本学期第x个周的课程信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/xWeek
-
-### _需传输的参数_
-name|describe
-----|------
-n|本学期的第x个周的考勤信息（0-20）
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
-## 查询今天的课程信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/today
-
-### _需传输的参数_
-name|describe
-----|------
-无|无
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
- ## 查询的课程信息
- ### _请求方式与url_
- name|describe
- ----|------
- method|post
- url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/oneday
- 
- ### _需传输的参数_
- name|describe
- ----|------
- dateTime|2010-10-10 00:00:00
- 
- ### _返回值_
- name|describe
- ----|------
- status|返回值状态 1--->成功  （目前没有查不出来的情况）
- msg|true
- data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
- ### 返回值样本
- ```json
- {
-     "status": 1,
-     "msg": "true",
-     "data": [
-                 {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-     ]
- }
-```
-----
-## 查询本学期所有的课程信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisSemester
-
-### _需传输的参数_
-name|describe
-----|------
-无|无
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-                {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
-----
-## 查询固定某一天的课程信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/oneday
-
-### _需传输的参数_
-name|describe
-----|------
-datetime|2019-10-10这样的也可以加时分秒 2019-10-10 00:00:00这种
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程的信息，该节课老师的信息，该节课的时间地点
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-        {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
-        },
-        {
-              "id": "20190503081000",
-              "time": 1556842200000,
-              "courseId": "1008",
-              "courseName": "企业管理与技术经济",
-              "courseNote": null,
-              "attendanceTotalScore": 60,
-              "leaveScore": 20,
-              "attendScore": 20,
-              "lateAttendScore": 10,
-              "headUpScore": 40,
-              "classroomId": "B135",
-              "teacherId": "15",
-              "teacherName": "龚东生"
-          }
-    ]
-}
-```
+### _类似请求，返回值类似_
+name|method|url|requestParams|describe
+----|------|---|----|--------
+查询本月的课程信息|post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisMonth|无|无
+查询一段时间内的课程信息|post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/getASpellTime|begin-->开始时间  end-->结束时间|无
+查询相对于本周而言，前x周的考勤 |post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/frontXWeek|n-->前n周|无
+查询相对于本月而言，前n月的课程信息 |post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/frontXMonth|n-->前n月|无
+查询本学期第x个月的课程信息|post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/xMonth|n-->第n月|无
+查询本学期第x个周的课程信息|post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/xWeek|n-->第n月|无
+查询固定一天的课程信息|post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/oneday|dateTime-->某天的日期|无
+查询本学期所有的课程信息|post|http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisSemester|无|无
 ----
 ## 查询某一段时间的考勤信息
 ### _请求方式与url_
@@ -815,7 +247,7 @@ name|describe
 ----|------
 method|post
 url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getCourseOfStudentWithSpellTime
-
+api说明|该为每节课的考勤信息+每节课的详细信息包括打分情况
 ### _需传输的参数_
 name|describe
 ----|------
@@ -868,5 +300,142 @@ data|（List集合）课程考勤信息
     ]
 }
 ```
+----
+## 查询某一段时间的考勤信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getCourseOfStudentWithSpellTime
+api说明|该为每节课的考勤信息+每节课的详细信息包括打分情况
+### _需传输的参数_
+name|describe
+----|------
+start|开始时间  2019-03-04 00:00:00   
+end|结束时间  2019-05-11 00:00:00  
+courseId|课程id  1004         
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  （目前没有查不出来的情况）
+msg|true
+data|（List集合）课程考勤信息
+### 返回值样本
+```json
+{
+    "status": 1,
+    "msg": "true",
+    "data": [
+        {
+            "attendance_id": "20190401081000-41609050128",
+            "courseitem_id": "20190401081000",
+            "name": "算法设计与分析",
+            "time": "2019-04-01 08:10:00.0",
+            "status": "attend",
+            "head_up_rate": "1",
+            "goal": "60",
+            "teacher_id": "12",
+            "teacher_name": "李婷",
+            "classroom_id": "D3102",
+            "course_node": null,
+            "student_id": null,
+            "student_name": null
+        },
+        {
+            "attendance_id": "20190405101000-41609050128",
+            "courseitem_id": "20190405101000",
+            "name": "算法设计与分析",
+            "time": "2019-04-05 10:10:00.0",
+            "status": "attend",
+            "head_up_rate": "1",
+            "goal": "60",
+            "teacher_id": "12",
+            "teacher_name": "李婷",
+            "classroom_id": "C354",
+            "course_node": null,
+            "student_id": null,
+            "student_name": null
+        }
+    ]
+}
+```
+### _类似请求，返回值类似_
+name|method|url|requestParams|describe
+----|------|---|----|--------
+查询某段时间的具体某一节课的课程信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getCourseOfStudentWithSpellTime|start-->开始时间  end-->结束时间  courseId-->课程id|通过传输来的课程id，与起始时间计算出该学生这段时间内该课程的考勤信息
+查询本周某一节课的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/oneCourseAttThisWeek|courseId-->课程id|无
+查询上一周某一节课的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/oneCourseAttLastWeek|courseId-->课程id|无
+查询本月某一节课的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/oneCourseAttThisMonth|courseId-->课程id|无
+查询上一月某一节课的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/oneCourseAttLastMonth|courseId-->课程id|无
+查询这个学期的某一节课的课程信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/oneCourseAttThisSemester|courseId-->课程id|无
+----
+## 查询该学生一段时间内的所有课程的考勤信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttThisSemester
+api说明|该为每节课的考勤信息
+### _需传输的参数_
+name|describe
+----|------
+start|开始时间  2019-03-04 00:00:00   
+end|结束时间  2019-05-11 00:00:00      
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  （目前5月份的数据没插，查不出来）
+msg|true
+data|（List集合）课程考勤信息
+### 返回值样本
+```json
+{
+    "status": 1,
+    "msg": "true",
+    "data": [
+        {
+            "attendance_id": "20190401081000-41609050128",
+            "courseitem_id": "20190401081000",
+            "name": "算法设计与分析",
+            "time": "2019-04-01 08:10:00.0",
+            "status": "attend",
+            "head_up_rate": "1",
+            "goal": "60",
+            "teacher_id": "12",
+            "teacher_name": "李婷",
+            "classroom_id": "D3102",
+            "course_node": null,
+            "student_id": null,
+            "student_name": null
+        },
+        {
+            "attendance_id": "20190401101000-41609050128",
+            "courseitem_id": "20190401101000",
+            "name": "信息安全技术",
+            "time": "2019-04-01 10:10:00.0",
+            "status": "attend",
+            "head_up_rate": "1",
+            "goal": "60",
+            "teacher_id": "13",
+            "teacher_name": "陈亮",
+            "classroom_id": "D3102",
+            "course_node": null,
+            "student_id": null,
+            "student_name": null
+        }
+    ]
+}
+
+```
+### _类似请求，返回值类似_
+name|method|url|requestParams|describe
+----|------|---|----|--------
+查询该学生开学到现在内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttThisSemester|无|无
+查询该学生本周内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttThisWeek|无|无
+查询该学生上周内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttLastWeek|无|无
+查询该学生本月内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttThisMonth|无|无
+查询该学生上月内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttLastMonth|无|无
 ----
 

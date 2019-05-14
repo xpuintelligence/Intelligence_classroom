@@ -1,7 +1,6 @@
 package com.smart.controller;
 
 import com.smart.pojo.StudentInfo;
-import com.smart.pojo.TbStudent;
 import com.smart.pojo.WisdomResult;
 import com.smart.service.StudentCourseService;
 import com.smart.utils.DateUtils;
@@ -160,7 +159,5 @@ public class StudentCourseInfoController {
         WisdomResult result = studentCourseService.getCourseOfDay(student, DateUtils.dateTimeToString(datetime));
         return result;
     }
-
-
 
 }
