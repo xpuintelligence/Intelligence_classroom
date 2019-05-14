@@ -38,7 +38,7 @@
 
     <Today></Today>
 
-    <!--<hr>-->
+    <hr>
 
     <ThisWeek></ThisWeek>
 

@@ -13,12 +13,15 @@
   import HighChartsMore from 'highcharts/highcharts-more'
 
   import SolidGauge from 'highcharts/modules/solid-gauge'
+  import ThreeCharts from 'highcharts/highcharts-3d'
 
   Map(HighCharts);
   HighChartsExport(HighCharts);
   HeapMap(HighCharts);
   HighChartsMore(HighCharts);
   SolidGauge(HighCharts);
+
+  ThreeCharts(HighCharts);
 
   HighCharts.setOptions({
     lang: {

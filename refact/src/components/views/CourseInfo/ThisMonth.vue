@@ -10,13 +10,17 @@
 
       <div class="text item">
         <el-row :span="16">
-          <x-chart id="thisMonthChart" class="thisMonthChart" :option="thisMonthChart"></x-chart>
+          <el-card>
+            <x-chart id="thisMonthChart" class="thisMonthChart" :option="thisMonthChart"></x-chart>
+          </el-card>
         </el-row>
 
         <br>
 
         <el-row :span="8">
-          <x-chart id="thisMonthHeatMapChart" class="thisMonthHeatMapChart" :option="thisMonthHeatMapChart"></x-chart>
+          <el-card>
+            <x-chart id="thisMonthHeatMapChart" class="thisMonthHeatMapChart" :option="thisMonthHeatMapChart"></x-chart>
+          </el-card>
         </el-row>
       </div>
     </el-card>
@@ -53,6 +57,9 @@
             marginTop: 40,
             marginBottom: 80,
             plotBorderWidth: 1,
+            // borderColor: 'DeepSkyBlue',
+            // borderRadius: 20,
+            // borderWidth: 1,
           },
           title: {
             text: ' '
@@ -68,7 +75,7 @@
           },
           colorAxis: {
             // min: 0,
-            minColor: '#AFEEEE',
+            minColor: '#ffffff',
           },
           legend: {
             // align: 'right',
@@ -113,9 +120,9 @@
           },
           chart: {
             type: 'spline',  // 图表类型,
-            borderColor: 'DeepSkyBlue',
-            borderRadius: 20,
-            borderWidth: 2,
+            // borderColor: 'DeepSkyBlue',
+            // borderRadius: 20,
+            // borderWidth: 1,
           },
           title: {
             text: '',
@@ -208,19 +215,16 @@
         this.thisMonthChart.series[0].data.push(this.thisMonthData[i].attendanceTotalScore);  // 考勤总分
         this.thisMonthChart.series[1].data.push(this.thisMonthData[i].headUpScore);  // 专注度，抬头分
         this.thisMonthChart.series[2].data.push(-this.thisMonthData[i].lateAttendScore);  // 迟到扣的分数
-        // this.thisMonthChart.series[0].data.push(Math.random() * 100);  // 考勤总分
-        // this.thisMonthChart.series[1].data.push(Math.random() * 100);  // 专注度，抬头分
-        // this.thisMonthChart.series[2].data.push(-Math.random() * 100);  // 迟到扣的分数
 
-        // this.thisMonthHeatMapChart.series[0].data[] = parseInt(Math.random()*100); // heatmap记录的是考勤总分
 
-        // new Date(this.thisMonthData[0].time).getDay() 获取数据是星期几的
         let row = [i, new Date(this.thisMonthData[i].time).getDay(), this.thisMonthData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
         this.thisMonthHeatMapChart.series[0].data.push(row);
 
         // 提示
         this.thisMonthHeatMapChart.tooltip.pointFormat = this.thisMonthData[i].courseName
           + '<br>'
+          + new Date(this.thisMonthData[i].time).toLocaleDateString()
+          + ' '
           + this.thisMonthHeatMapChart.yAxis.categories[new Date(this.thisMonthData[i].time).getDay()]
           + '<br>考勤总分' + this.thisMonthData[i].attendanceTotalScore + '分'
         ;

@@ -10,14 +10,16 @@
 
       <div class="text item">
         <el-row :span="16">
-          <x-chart id="high" class="high" :option="thisWeekChart"></x-chart>
+          <el-card>
+            <x-chart id="high" class="high" :option="thisWeekChart"></x-chart>
+          </el-card>
         </el-row>
+
+        <br>
 
         <el-row :span="8">
           <el-card>
-            <h1>
-              哈啊啊啊啊啊
-            </h1>
+            <x-chart id="thisWeekHeatMapChart" class="thisWeekHeatMapChart" :option="thisWeekHeatMapChart"></x-chart>
           </el-card>
         </el-row>
       </div>
@@ -55,9 +57,9 @@
           },
           chart: {
             type: 'line',  // 图表类型
-            borderColor: 'DeepSkyBlue',
-            borderRadius: 20,
-            borderWidth: 2,
+            // borderColor: 'DeepSkyBlue',
+            // borderRadius: 20,
+            // borderWidth: 1,
           },
           title: {
             text: '',
@@ -106,6 +108,66 @@
             },
           ]
         },  // 本周数据的spline图
+
+        thisWeekHeatMapChart: {
+          navigation: {
+            buttonOptions: {
+              text: '导出',
+              enabled: true,
+            }
+          },
+          credits: {
+            enabled: false, // 右下角的 highcharts 标识去掉
+          },
+          chart: {
+            type: 'heatmap',
+            marginTop: 40,
+            marginBottom: 80,
+            plotBorderWidth: 1,
+          },
+          title: {
+            text: ' '
+            // subtitle: '智慧云提供计算服务',
+          },
+          xAxis: {
+            // categories: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas', 'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+            categories: [],
+          },
+          yAxis: {
+            categories: ['0', '周一', '周二', '周三', '周四', '周五'],
+            title: null
+          },
+          colorAxis: {
+            // min: 0,
+            minColor: '#AFEEEE',
+          },
+          legend: {
+            // align: 'right',
+            // layout: 'vertical',
+            // margin: 0,
+            // verticalAlign: 'top',
+            // y: 25,
+            // symbolHeight: 280
+          },
+          tooltip: {
+            headerFormat: '',
+            pointFormat: '',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+          },
+          series: [
+            {
+              animation: true,
+              borderWidth: 0,
+              data: [],
+              dataLabels: {
+                enabled: true,
+                color: '#000000'
+              }
+            }
+          ]
+        },  // 本周数据热力图
       }
     },
     async mounted() {
@@ -137,17 +199,26 @@
 
       for (let i = 0; i < this.thisWeekData.length; i++) {
         this.thisWeekChart.xAxis.categories.push(
-          this.thisWeekData[0].courseName
+          this.thisWeekData[i].courseName
           + "(" +
           new Date(this.thisWeekData[i].time).toLocaleDateString()
           + ")"
         );
-        // this.thisWeekChart.series[0].data.push(this.thisWeekData[i].attendanceTotalScore);  // 考勤总分
-        // this.thisWeekChart.series[1].data.push(this.thisWeekData[i].headUpScore);  // 专注度，抬头分
-        // this.thisWeekChart.series[2].data.push(-this.thisWeekData[i].lateAttendScore);  // 迟到扣的分数
-        this.thisWeekChart.series[0].data.push(Math.random()%100);  // 考勤总分
-        this.thisWeekChart.series[1].data.push(Math.random()%100);  // 专注度，抬头分
-        this.thisWeekChart.series[2].data.push(-Math.random()%100);  // 迟到扣的分数
+        this.thisWeekChart.series[0].data.push(this.thisWeekData[i].attendanceTotalScore);  // 考勤总分
+        this.thisWeekChart.series[1].data.push(this.thisWeekData[i].headUpScore);  // 专注度，抬头分
+        this.thisWeekChart.series[2].data.push(-this.thisWeekData[i].lateAttendScore);  // 迟到扣的分数
+
+        let row = [i, new Date(this.thisWeekData[i].time).getDay(), this.thisWeekData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        this.thisWeekHeatMapChart.series[0].data.push(row);
+
+        // 提示
+        this.thisWeekHeatMapChart.tooltip.pointFormat = this.thisWeekData[i].courseName
+          + '<br>'
+          + new Date(this.thisWeekData[i].time).toLocaleDateString()
+          + ' '
+          + this.thisWeekHeatMapChart.yAxis.categories[new Date(this.thisWeekData[i].time).getDay()]
+          + '<br>考勤总分' + this.thisWeekData[i].attendanceTotalScore + '分'
+        ;
 
       } // for
 

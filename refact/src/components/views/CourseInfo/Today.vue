@@ -9,17 +9,17 @@
       </div>
 
       <div class="text item">
-        <el-row :span="16">
-          <x-chart id="TodayChart" class="TodayChart" :option="todayChart"></x-chart>
-        </el-row>
-
-        <el-row :span="8">
+        <el-col :span="12">
           <el-card>
-            <h1>
-              哈啊啊啊啊啊
-            </h1>
+            <x-chart class="todayState" id="todayState" :option="yibiaoCharts"></x-chart>
           </el-card>
-        </el-row>
+        </el-col>
+
+        <el-col :span="12">
+          <el-card>
+            <x-chart id="TodayChart" class="TodayChart" :option="todayChart"></x-chart>
+          </el-card>
+        </el-col>
       </div>
     </el-card>
   </div>
@@ -87,6 +87,109 @@
             },
           ]
         },  // 本周数据的spline图
+
+        yibiaoCharts: {
+          navigation: {
+            buttonOptions: {
+              text: '导出',
+              enabled: true,
+            }
+          },
+          chart: {
+            type: 'solidgauge',
+            marginTop: 50
+          },
+          colors: ['#F62366', '#9DFF02', '#0CCDD6'],
+          title: {
+            text: '状态仪表盘',
+          },
+          credits: {
+            enabled: false, // 右下角的 highcharts 标识去掉
+          },
+          tooltip: {
+            borderWidth: 0,
+            backgroundColor: 'none',
+            shadow: false,
+            style: {
+              fontSize: '16px',
+              color: 'silver',
+            },
+            pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}分</span>',
+            positioner: function (labelWidth) {
+              return {
+                x: 200 - labelWidth / 2,
+                y: 180
+              };
+            }
+          },
+          pane: {
+            startAngle: 0,
+            endAngle: 360,
+            background: [
+              // { // Track for Move
+              //   outerRadius: '112%',
+              //   innerRadius: '88%',
+              //   //Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.3).get(),
+              //   borderWidth: 0
+              // },
+              // { // Track for Exercise
+              //   outerRadius: '87%',
+              //   innerRadius: '63%',
+              //   // backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1]).setOpacity(0.3).get(),
+              //   borderWidth: 0
+              // },
+              // { // Track for Stand
+              //   outerRadius: '62%',
+              //   innerRadius: '38%',
+              //   // backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2]).setOpacity(0.3).get(),
+              //   borderWidth: 0
+              // }
+            ]
+          },
+          yAxis: {
+            min: 0,
+            max: 100,
+            lineWidth: 0,
+            tickPositions: []
+          },
+          plotOptions: {
+            solidgauge: {
+              borderWidth: '34px',
+              dataLabels: {
+                enabled: false
+              },
+              linecap: 'round',
+              stickyTracking: false
+            }
+          },
+
+          series: [
+            {
+              name: '考勤总分',
+              borderColor: '#0CCDD6',
+              data: [
+                {
+                  color: '#0CCDD6',
+                  radius: '75%',
+                  innerRadius: '75%',
+                  y: 0,
+                }
+              ]
+            },
+            {
+              name: '专注度',
+              borderColor: '#9DFF02',
+              data: [
+                {
+                  color: '#9DFF02',
+                  radius: '50%',
+                  innerRadius: '50%',
+                  y: 0,
+                }
+              ]
+            },
+          ]
+        }, // 活动仪表图
       }
     },
     async mounted() {
@@ -112,6 +215,10 @@
       this.todayChart.series[0].data.push(this.todayData.headUpScore);
       this.todayChart.series[0].data.push(-this.todayData.lateAttendScore);
       this.todayChart.series[0].data.push(this.todayData.leaveScore);
+
+
+      this.yibiaoCharts.series[0].data[0].y = this.todayData.attendanceTotalScore;
+      this.yibiaoCharts.series[1].data[0].y = this.todayData.headUpScore;
 
       // 处理本月上课数据 生成表格
       // this.chartTittle = this.userData.name + '-今天上课状态';

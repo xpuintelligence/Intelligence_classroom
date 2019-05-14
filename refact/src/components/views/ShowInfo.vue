@@ -177,9 +177,9 @@
       // myvue.other.series = myvue.data;     //数据
       // myvue.other.yAxis.title.text = '就业人数';   //数据
       // myvue.option = myvue.other;
-
+      //
       // this.drawLine();
-
+      //
       // this.userData = JSON.parse(sessionStorage.getItem('userData'));
       //
       // this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {

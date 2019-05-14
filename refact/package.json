@@ -15,6 +15,7 @@
     "element-ui": "^2.8.2",
     "fetch": "^1.1.0",
     "highcharts": "^7.1.1",
+    "jquery": "^3.4.1",
     "vue": "^2.5.2",
     "vue-highcharts": "^0.1.0",
     "vue-resource": "^1.5.1",
