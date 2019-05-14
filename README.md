@@ -1,8 +1,22 @@
-# 智慧教室
+# 智慧教室Web端
 
-push 到自己的 branch 去。后面合并。
+Vue Vue-router HighCharts Element-UI Bootstrap Vue-resource Vue-audio webpack.
 
-## Logo
+## run
 
-<img src="https://raw.githubusercontent.com/xpuintelligence/Intelligence_classroom/master/logo/logo-without-background.png" style="width:200px;">
+```
+cd refact
+
+npm install
+
+npm run dev / npm start
+```
+
+## build
+
+```
+npm run build
+```
+
+---
 
