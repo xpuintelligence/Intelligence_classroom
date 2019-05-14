@@ -11,12 +11,10 @@
     <!--<hr>-->
     <!--<div id='myChart' style='width:300px; height:300px'></div>-->
     <!--<hr>-->
-    <div>
-      <charts></charts>
-      <!--<x-chart id="highcharts" class="high" :option="option"></x-chart>-->
-      <!--<x-chart id="high" class="high" :option="option1"></x-chart>-->
-    </div>
-    <hr>
+    <el-divider><i class="el-icon-more"></i></el-divider>
+    <charts></charts>
+    <!--<x-chart id="highcharts" class="high" :option="option"></x-chart>-->
+    <!--<x-chart id="high" class="high" :option="option1"></x-chart>-->
 
   </div>
 </template>
@@ -144,8 +142,7 @@
         },
       }
     },
-    computed: {
-    },
+    computed: {},
     beforeCreate: function () {
       // myvue = this;
     },

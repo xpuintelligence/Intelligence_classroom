@@ -5,7 +5,7 @@
       <div slot="header" class="clearfix">
         <span><Mallki class-name="Overview" text="概览"></Mallki></span>
         <el-button style="padding: 3px 0;float: right;" type="text">
-          <Mallki class-name="date" :text="(new Date()).toDateString()"></Mallki>
+          <Mallki class-name="date" :text="(new Date()).toLocaleDateString()"></Mallki>
         </el-button>
       </div>
 

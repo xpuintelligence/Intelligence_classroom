@@ -97,7 +97,7 @@
           // this.thisSemesterCharts.series[0].data.push(Math.random()*100);  // 专注度
           // this.thisSemesterCharts.series[1].data.push(Math.random()*100);  // 考勤
           // X轴
-          this.thisSemesterCharts.xAxis.categories.push(this.thisSemesterTotalInfo[0].courseName
+          this.thisSemesterCharts.xAxis.categories.push(this.thisSemesterTotalInfo[i].courseName
             + '(' +
             new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString() + ')'
           );

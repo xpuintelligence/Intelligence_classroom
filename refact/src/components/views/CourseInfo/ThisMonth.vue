@@ -13,12 +13,10 @@
           <x-chart id="thisMonthChart" class="thisMonthChart" :option="thisMonthChart"></x-chart>
         </el-row>
 
+        <br>
+
         <el-row :span="8">
-          <el-card>
-            <h1>
-              哈啊啊啊啊啊
-            </h1>
-          </el-card>
+          <x-chart id="thisMonthHeatMapChart" class="thisMonthHeatMapChart" :option="thisMonthHeatMapChart"></x-chart>
         </el-row>
       </div>
     </el-card>
@@ -40,6 +38,66 @@
         thisMonthTime: '',  // 本月时间段
 
         chartTittle: '',
+        thisMonthHeatMapChart: {
+          navigation: {
+            buttonOptions: {
+              text: '导出',
+              enabled: true,
+            }
+          },
+          credits: {
+            enabled: false, // 右下角的 highcharts 标识去掉
+          },
+          chart: {
+            type: 'heatmap',
+            marginTop: 40,
+            marginBottom: 80,
+            plotBorderWidth: 1,
+          },
+          title: {
+            text: ' '
+            // subtitle: '智慧云提供计算服务',
+          },
+          xAxis: {
+            // categories: ['Alexander', 'Marie', 'Maximilian', 'Sophia', 'Lukas', 'Maria', 'Leon', 'Anna', 'Tim', 'Laura']
+            categories: [],
+          },
+          yAxis: {
+            categories: ['0', '周一', '周二', '周三', '周四', '周五'],
+            title: null
+          },
+          colorAxis: {
+            // min: 0,
+            minColor: '#AFEEEE',
+          },
+          legend: {
+            // align: 'right',
+            // layout: 'vertical',
+            // margin: 0,
+            // verticalAlign: 'top',
+            // y: 25,
+            // symbolHeight: 280
+          },
+          tooltip: {
+            headerFormat: '',
+            pointFormat: '',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+          },
+          series: [
+            {
+              animation: true,
+              borderWidth: 0,
+              data: [],
+              dataLabels: {
+                enabled: true,
+                color: '#000000'
+              }
+            }
+          ]
+        },
+
         thisMonthChart: {
           navigation: {
             buttonOptions: {
@@ -107,6 +165,7 @@
             },
           ]
         },  // 本周数据的spline图
+
       }
     },
     async mounted() {
@@ -140,19 +199,33 @@
       this.thisMonthChart.series[2].name = '迟到扣分';
 
       for (let i = 0; i < this.thisMonthData.length; i++) {
-        this.thisMonthChart.xAxis.categories.push(
-          this.thisMonthData[0].courseName
+        this.thisMonthChart.xAxis.categories.push(  // 拼接x轴
+          this.thisMonthData[i].courseName
           + "(" +
           new Date(this.thisMonthData[i].time).toLocaleDateString()
           + ")"
         );
-        // this.thisMonthChart.series[0].data.push(this.thisMonthData[i].attendanceTotalScore);  // 考勤总分
-        // this.thisMonthChart.series[1].data.push(this.thisMonthData[i].headUpScore);  // 专注度，抬头分
-        // this.thisMonthChart.series[2].data.push(-this.thisMonthData[i].lateAttendScore);  // 迟到扣的分数
-        this.thisMonthChart.series[0].data.push(Math.random()*100);  // 考勤总分
-        this.thisMonthChart.series[1].data.push(Math.random()*100);  // 专注度，抬头分
-        this.thisMonthChart.series[2].data.push(-Math.random()*100);  // 迟到扣的分数
+        this.thisMonthChart.series[0].data.push(this.thisMonthData[i].attendanceTotalScore);  // 考勤总分
+        this.thisMonthChart.series[1].data.push(this.thisMonthData[i].headUpScore);  // 专注度，抬头分
+        this.thisMonthChart.series[2].data.push(-this.thisMonthData[i].lateAttendScore);  // 迟到扣的分数
+        // this.thisMonthChart.series[0].data.push(Math.random() * 100);  // 考勤总分
+        // this.thisMonthChart.series[1].data.push(Math.random() * 100);  // 专注度，抬头分
+        // this.thisMonthChart.series[2].data.push(-Math.random() * 100);  // 迟到扣的分数
+
+        // this.thisMonthHeatMapChart.series[0].data[] = parseInt(Math.random()*100); // heatmap记录的是考勤总分
+
+        // new Date(this.thisMonthData[0].time).getDay() 获取数据是星期几的
+        let row = [i, new Date(this.thisMonthData[i].time).getDay(), this.thisMonthData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        this.thisMonthHeatMapChart.series[0].data.push(row);
+
+        // 提示
+        this.thisMonthHeatMapChart.tooltip.pointFormat = this.thisMonthData[i].courseName
+          + '<br>'
+          + this.thisMonthHeatMapChart.yAxis.categories[new Date(this.thisMonthData[i].time).getDay()]
+          + '<br>考勤总分' + this.thisMonthData[i].attendanceTotalScore + '分'
+        ;
       } // for
+
     },
     components: {Mallki, XChart}
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="di main-wrap" v-loading="audio.waiting">
+  <div class="di main-wrap" v-loading="audio.waiting" element-loading-text="拼命加载中..." element-loading-spinner="el-icon-loading">
     <!-- 这里设置了ref属性后，在vue组件中，就可以用this.$refs.audio来访问该dom元素 -->
     <audio ref="audio" class="dn"
            :src="url" :preload="audio.preload"
@@ -155,11 +155,11 @@
       },
       // 当音频开始等待
       onWaiting (res) {
-        console.log(res)
+        // console.log(res)
       },
       // 当音频开始播放
       onPlay (res) {
-        console.log(res)
+        // console.log(res)
         this.audio.playing = true
         this.audio.loading = false
 
@@ -187,8 +187,8 @@
       // 当加载语音流元数据完成后，会触发该事件的回调函数
       // 语音元数据主要是语音的长度之类的数据
       onLoadedmetadata(res) {
-        console.log('loadedmetadata')
-        console.log(res)
+        // console.log('loadedmetadata')
+        // console.log(res)
         this.audio.waiting = false
         this.audio.maxTime = parseInt(res.target.duration)
       }

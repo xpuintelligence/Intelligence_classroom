@@ -38,7 +38,7 @@
 
     <Today></Today>
 
-    <hr>
+    <!--<hr>-->
 
     <ThisWeek></ThisWeek>
 
@@ -68,8 +68,7 @@
         data: {},
       }
     },
-    computed: {
-    },
+    computed: {},
     mounted() {
       // wisdom_web/studentCourseInfo/thisWeek
       // this.$http.post('wisdom_web/studentCourseInfo/thisWeek', {

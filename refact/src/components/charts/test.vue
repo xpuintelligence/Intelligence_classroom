@@ -8,10 +8,17 @@
 <script>
   import HighCharts from 'highcharts'
   import HighChartsExport from 'highcharts/modules/exporting'
+  import Map from 'highcharts/modules/map'
   import HeapMap from 'highcharts/modules/heatmap'
+  import HighChartsMore from 'highcharts/highcharts-more'
 
+  import SolidGauge from 'highcharts/modules/solid-gauge'
+
+  Map(HighCharts);
   HighChartsExport(HighCharts);
   HeapMap(HighCharts);
+  HighChartsMore(HighCharts);
+  SolidGauge(HighCharts);
 
   HighCharts.setOptions({
     lang: {
