@@ -7,6 +7,7 @@
     <result column="from_id" jdbcType="VARCHAR" property="fromId" />
     <result column="to_id" jdbcType="VARCHAR" property="toId" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="msg" jdbcType="VARCHAR" property="msg" />
     <result column="status" jdbcType="CHAR" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, father_id, from_id, to_id, time, status
+    id, father_id, from_id, to_id, time, msg, status
   </sql>
   <select id="selectByExample" parameterType="com.smart.pojo.TbAnswerQuestionExample" resultMap="BaseResultMap">
     select
@@ -102,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.smart.pojo.TbAnswerQuestion">
     insert into tb_answer_question (id, father_id, from_id, 
-      to_id, time, status)
+      to_id, time, msg, 
+      status)
     values (#{id,jdbcType=VARCHAR}, #{fatherId,jdbcType=VARCHAR}, #{fromId,jdbcType=VARCHAR}, 
-      #{toId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{status,jdbcType=CHAR})
+      #{toId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{msg,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.smart.pojo.TbAnswerQuestion">
     insert into tb_answer_question
@@ -123,6 +126,9 @@
       </if>
       <if test="time != null">
         time,
+      </if>
+      <if test="msg != null">
+        msg,
       </if>
       <if test="status != null">
         status,
@@ -143,6 +149,9 @@
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="msg != null">
+        #{msg,jdbcType=VARCHAR},
       </if>
       <if test="status != null">
         #{status,jdbcType=CHAR},
@@ -173,6 +182,9 @@
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.msg != null">
+        msg = #{record.msg,jdbcType=VARCHAR},
+      </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=CHAR},
       </if>
@@ -188,6 +200,7 @@
       from_id = #{record.fromId,jdbcType=VARCHAR},
       to_id = #{record.toId,jdbcType=VARCHAR},
       time = #{record.time,jdbcType=TIMESTAMP},
+      msg = #{record.msg,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -208,6 +221,9 @@
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
       </if>
+      <if test="msg != null">
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
       <if test="status != null">
         status = #{status,jdbcType=CHAR},
       </if>
@@ -220,6 +236,7 @@
       from_id = #{fromId,jdbcType=VARCHAR},
       to_id = #{toId,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP},
+      msg = #{msg,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>

@@ -1,11 +1,10 @@
 package com.smart.pojo;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TbAttendanceExample implements Serializable {
+public class TbAttendanceExample {
     protected String orderByClause;
 
     protected boolean distinct;
@@ -563,6 +562,136 @@ public class TbAttendanceExample implements Serializable {
 
         public Criteria andGoalNotBetween(Integer value1, Integer value2) {
             addCriterion("goal not between", value1, value2, "goal");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepIsNull() {
+            addCriterion("sleep is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepIsNotNull() {
+            addCriterion("sleep is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepEqualTo(String value) {
+            addCriterion("sleep =", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepNotEqualTo(String value) {
+            addCriterion("sleep <>", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepGreaterThan(String value) {
+            addCriterion("sleep >", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepGreaterThanOrEqualTo(String value) {
+            addCriterion("sleep >=", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepLessThan(String value) {
+            addCriterion("sleep <", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepLessThanOrEqualTo(String value) {
+            addCriterion("sleep <=", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepLike(String value) {
+            addCriterion("sleep like", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepNotLike(String value) {
+            addCriterion("sleep not like", value, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepIn(List<String> values) {
+            addCriterion("sleep in", values, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepNotIn(List<String> values) {
+            addCriterion("sleep not in", values, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepBetween(String value1, String value2) {
+            addCriterion("sleep between", value1, value2, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andSleepNotBetween(String value1, String value2) {
+            addCriterion("sleep not between", value1, value2, "sleep");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreIsNull() {
+            addCriterion("headup_score is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreIsNotNull() {
+            addCriterion("headup_score is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreEqualTo(Integer value) {
+            addCriterion("headup_score =", value, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreNotEqualTo(Integer value) {
+            addCriterion("headup_score <>", value, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreGreaterThan(Integer value) {
+            addCriterion("headup_score >", value, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreGreaterThanOrEqualTo(Integer value) {
+            addCriterion("headup_score >=", value, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreLessThan(Integer value) {
+            addCriterion("headup_score <", value, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreLessThanOrEqualTo(Integer value) {
+            addCriterion("headup_score <=", value, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreIn(List<Integer> values) {
+            addCriterion("headup_score in", values, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreNotIn(List<Integer> values) {
+            addCriterion("headup_score not in", values, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreBetween(Integer value1, Integer value2) {
+            addCriterion("headup_score between", value1, value2, "headupScore");
+            return (Criteria) this;
+        }
+
+        public Criteria andHeadupScoreNotBetween(Integer value1, Integer value2) {
+            addCriterion("headup_score not between", value1, value2, "headupScore");
             return (Criteria) this;
         }
     }
