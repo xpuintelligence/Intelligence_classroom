@@ -13,6 +13,7 @@ import java.io.Serializable;
 public class AttendanceItem implements Serializable {
     String attendance_id;//考勤id
     String courseitem_id;//这一节课的id
+    String course_id;//课程id
     String name;//课程名
     String time;//上课时间
     String status;//到勤状态
