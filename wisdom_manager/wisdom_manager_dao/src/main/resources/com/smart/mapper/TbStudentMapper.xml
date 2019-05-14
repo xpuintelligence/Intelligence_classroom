@@ -400,4 +400,10 @@
         and tb_classroom.id = tb_courseitem.classroom_id
         order by time asc, student_id asc
   </select>
+  <select id="selectDaysAttendanceCollectByIDStartEnd" resultType="com.smart.pojo.DaysAttendanceCollect">
+    select date_format(tb_attendance.create_date, '%Y-%m-%d') as date , count(*) as sum, avg(goal) as avgGoal from tb_attendance
+        where tb_attendance.student_id = #{id}
+        and tb_attendance.create_date between #{start} and #{end}
+        group by date
+  </select>
 </mapper>

@@ -87,4 +87,13 @@ public interface TbStudentMapper {
      * @return
      */
     List<AttendanceItem> selectAttendanceItemByClassCourseStartEnd(@Param("classId") String classId,@Param("courseId") String courseId , @Param("start") String start, @Param("end") String end);
+
+    /**
+     * 通过学生id，开始时间，结束时间，查询每天的汇总情况
+     * @param id
+     * @param start
+     * @param end
+     * @return
+     */
+    List<DaysAttendanceCollect> selectDaysAttendanceCollectByIDStartEnd(@Param("id")String id,@Param("start")String start,@Param("start")String end);
 }
