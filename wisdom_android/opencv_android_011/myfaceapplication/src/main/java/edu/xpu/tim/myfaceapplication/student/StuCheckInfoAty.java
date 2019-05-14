@@ -32,7 +32,6 @@ import edu.xpu.tim.myfaceapplication.util.ui.DividerItemDecoration;
 
 import static com.xuexiang.xui.XUI.getContext;
 
-
 public class StuCheckInfoAty extends AppCompatActivity {
     private MyRecyclerViewAdapter myAdapter;
     private RecyclerView stuAty_checkAtyRv;
@@ -67,7 +66,6 @@ public class StuCheckInfoAty extends AppCompatActivity {
                     list.add(object);
                     Log.i(AppConfig.TAG, object.toString());
                 }
-
                 //初始化适配器
                 myAdapter = new MyRecyclerViewAdapter(list);
 
@@ -127,7 +125,7 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
         holder.item_ClassTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(list.get(position).getTime()));
         if(list.get(position).getCourseNote() == null ||
                 list.get(position).getCourseNote().equals("")){
-            holder.item_ClassDescription.setText("暂无课程描述...");
+            holder.item_ClassDescription.setText("大学之道：大学的宗旨，大学的最终目的。大学：在古代其含义有两种：“博学”之态；与“小学”相对的“大人之学”。古代儿童八岁上小学，主要学习“洒扫、应对、进退、礼乐射御书数”之类的文化课和基本的礼节。");
         }
 
         holder.item_ClassCheck.setImageResource(list.get(position).getAttendScore() < 1.0 ? R.drawable.nopass : R.drawable.pass);

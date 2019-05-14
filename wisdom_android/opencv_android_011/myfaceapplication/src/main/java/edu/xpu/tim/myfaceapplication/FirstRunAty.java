@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.CookieManager;
 
 import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
@@ -13,7 +14,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.xuexiang.xui.widget.toast.XToast;
 
+
+import java.util.List;
+
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.cookie.Cookie;
 import edu.xpu.tim.myfaceapplication.config.AppConfig;
 import edu.xpu.tim.myfaceapplication.util.net.CookieUtils;
 import edu.xpu.tim.myfaceapplication.util.net.FinalAsyncHttpClient;
@@ -36,7 +41,7 @@ public class FirstRunAty extends AppCompatActivity {
             int status = first.getInt("status", -1);
             if(status == 1){
                 AsyncHttpClient asyncHttpClient = new FinalAsyncHttpClient().getAsyncHttpClient();
-                CookieUtils.saveCookie(asyncHttpClient,FirstRunAty.this);
+                CookieUtils.saveCookie(asyncHttpClient,getApplicationContext());
                 RequestParams params = new RequestParams();
                 String retStr = first.getString("retStr", "");
                 String id = JSONObject.parseObject(retStr).getJSONObject("data").getString("id");
@@ -52,6 +57,13 @@ public class FirstRunAty extends AppCompatActivity {
                         CookieUtils.setCookies(CookieUtils.getCookie(getApplicationContext()));
                         Log.i(AppConfig.TAG, new String(responseBody));
                         XToast.success(getContext(), "学生端更新Session成功!").show();
+
+                        List<Cookie> cookies = CookieUtils.getCookie(getApplicationContext());
+
+                        for (Cookie cookie: cookies) {
+                            Log.i(AppConfig.TAG, cookie.getName()+":"+cookie.getValue());
+
+                        }
                     }
 
                     @Override
@@ -59,7 +71,6 @@ public class FirstRunAty extends AppCompatActivity {
                         XToast.success(getContext(), "学生端更新Session失败！！！statusCode= " + statusCode).show();
                     }
                 });
-
                 startActivity(new Intent(getApplicationContext(), StudentAty.class));
                 finish();
             }else if(status == 2){
