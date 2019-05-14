@@ -8,6 +8,7 @@ import com.smart.pojo.WisdomResult;
 import com.smart.service.WXLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/wx1")
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class WeiXinLoginController {
     @Autowired
     private WXLoginService wxLoginService;
