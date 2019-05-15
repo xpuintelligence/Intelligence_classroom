@@ -300,66 +300,6 @@ data|（List集合）课程考勤信息
     ]
 }
 ```
-----
-## 查询某一段时间的考勤信息
-### _请求方式与url_
-name|describe
-----|------
-method|post
-url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getCourseOfStudentWithSpellTime
-api说明|该为每节课的考勤信息+每节课的详细信息包括打分情况
-### _需传输的参数_
-name|describe
-----|------
-start|开始时间  2019-03-04 00:00:00   
-end|结束时间  2019-05-11 00:00:00  
-courseId|课程id  1004         
-
-### _返回值_
-name|describe
-----|------
-status|返回值状态 1--->成功  （目前没有查不出来的情况）
-msg|true
-data|（List集合）课程考勤信息
-### 返回值样本
-```json
-{
-    "status": 1,
-    "msg": "true",
-    "data": [
-        {
-            "attendance_id": "20190401081000-41609050128",
-            "courseitem_id": "20190401081000",
-            "name": "算法设计与分析",
-            "time": "2019-04-01 08:10:00.0",
-            "status": "attend",
-            "head_up_rate": "1",
-            "goal": "60",
-            "teacher_id": "12",
-            "teacher_name": "李婷",
-            "classroom_id": "D3102",
-            "course_node": null,
-            "student_id": null,
-            "student_name": null
-        },
-        {
-            "attendance_id": "20190405101000-41609050128",
-            "courseitem_id": "20190405101000",
-            "name": "算法设计与分析",
-            "time": "2019-04-05 10:10:00.0",
-            "status": "attend",
-            "head_up_rate": "1",
-            "goal": "60",
-            "teacher_id": "12",
-            "teacher_name": "李婷",
-            "classroom_id": "C354",
-            "course_node": null,
-            "student_id": null,
-            "student_name": null
-        }
-    ]
-}
-```
 ### _类似请求，返回值类似_
 name|method|url|requestParams|describe
 ----|------|---|----|--------
@@ -437,5 +377,69 @@ name|method|url|requestParams|describe
 查询该学生上周内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttLastWeek|无|无
 查询该学生本月内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttThisMonth|无|无
 查询该学生上月内的所有课程的考勤信息|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttLastMonth|无|无
+----
+## 学生查询自己的每天的考勤平均分，平均抬头，有几节课，率等（以下统称为每日统计考勤）
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfST
+api说明|查询一段时间内的每日统计考勤，以及所有天的平均值
+### _需传输的参数_
+name|describe
+----|------
+start|开始时间  2019-03-04 00:00:00   
+end|结束时间  2019-05-11 00:00:00      
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  （目前5月份的数据没插，查不出来）
+msg|true
+data|这段时间的每日统计考勤的集合
+### 返回值样本
+```json
+{
+    "status": 1,
+    "msg": "true",
+    "data": {
+        "startTime": null,--->开始时间
+        "endTime": null,--->结束时间
+        "num": 3,--->一共多少天的考勤，就是结束时间与开始时间中间有多少天
+        "headUpRateAverage": "0.55",--->num天的平均抬头率
+        "list": [--->每一个小集合是每一天的统计考勤
+            {
+                "date": "2019-04-01",--->当天日期
+                "sum": "2",--->有几节课
+                "avg_head_up_rate": "1",--->这一天的抬头率
+                "avgGoal": "60.0000"--->这一天的平均分
+            },
+            {
+                "date": "2019-04-02",
+                "sum": "3",
+                "avg_head_up_rate": "1",
+                "avgGoal": "60.0000"
+            },
+            {
+                "date": "2019-04-03",
+                "sum": "1",
+                "avg_head_up_rate": "1",
+                "avgGoal": "60.0000"
+            }
+        ],
+        "attendanceGoalAverage": "33.10"--->num天的平均考勤分数
+    }
+}
+```
+### _类似请求，返回值类似_
+name|method|url|requestParams|describe
+----|------|---|----|--------
+查询本周的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfTW|无|无
+查询上周的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfLW|无|无
+查询本月的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfTM|无|无
+查询上月的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfLM|无|无
+查询某天的每日统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfOD|oneday-->某一天的时间(2018-05-12 00:00:00)|无
+查询今天的每日统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfT|无|无
+查询开学到现在的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfTS|无|无
 ----
 
