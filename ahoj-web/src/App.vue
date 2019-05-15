@@ -20,22 +20,22 @@
     data: function () {
       return {
         flag: true,
-        audios: [
-          {
-            url: 'http://106.12.202.93/aaa.mp3',
-            controlList: 'onlyOnePlaying'
-          },
-          {
-            url: 'http://106.12.202.93/aaa.mp3',
-            controlList: 'noDownload noMuted onlyOnePlaying'
-          }, {
-            url: 'http://106.12.202.93/aaa.mp3',
-            controlList: 'noDownload noVolume noMuted onlyOnePlaying'
-          }, {
-            url: 'http://106.12.202.93/aaa.mp3',
-            controlList: 'noDownload noSpeed onlyOnePlaying'
-          }
-        ]
+        // audios: [
+        //   {
+        //     url: 'http://106.12.202.93/aaa.mp3',
+        //     controlList: 'onlyOnePlaying'
+        //   },
+        //   {
+        //     url: 'http://106.12.202.93/aaa.mp3',
+        //     controlList: 'noDownload noMuted onlyOnePlaying'
+        //   }, {
+        //     url: 'http://106.12.202.93/aaa.mp3',
+        //     controlList: 'noDownload noVolume noMuted onlyOnePlaying'
+        //   }, {
+        //     url: 'http://106.12.202.93/aaa.mp3',
+        //     controlList: 'noDownload noSpeed onlyOnePlaying'
+        //   }
+        // ]
       }
     },
     components: {

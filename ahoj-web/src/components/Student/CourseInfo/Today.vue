@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="hasData">
     <el-card>
       <div slot="header" class="cell">
         <Mallki class-name="date" :text="chartTittle"></Mallki>
@@ -22,6 +22,7 @@
         </el-col>
       </div>
     </el-card>
+    <br>
   </div>
 </template>
 
@@ -34,6 +35,7 @@
     data() {
       return {
         userData: {},
+        hasData: false,
         todayData: {},
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
@@ -61,7 +63,7 @@
             size: '80%'
           },
           xAxis: {
-            categories: ['到勤分数',  '抬头总分', '迟到分数', '请假默认分数'],
+            categories: ['到勤分数', '抬头总分', '迟到分数', '请假默认分数'],
             tickmarkPlacement: 'on',
             lineWidth: 0
           },
@@ -198,27 +200,32 @@
 
       // 获取本周上课数据
       await this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
-        this.todayData = res.data.data.data[0];
+        this.todayData = res.body.data;
       }).catch(err => {
         console.log("---err---");
         console.log(err);
         this.$message.error("抱歉，服务器出错");
       });
 
-      // 处理获取到的数据
-      this.todayTime = new Date(this.todayData.time).toLocaleDateString();
+      if (this.todayData.length === 0) { // 今天没有课程信息
+        this.hasData = false; // 本块不显示
+      } else {
+        this.hasData = true;
 
-      this.chartTittle = this.userData.name + '-今天上课状态';
+        this.todayData = this.todayData[0];
+        // 处理获取到的数据
+        this.todayTime = new Date(this.todayData.time).toLocaleDateString();
 
-      this.todayChart.series[0].data.push(this.todayData.attendScore);
-      // this.todayChart.series[0].data.push(this.todayData.attendanceTotalScore);
-      this.todayChart.series[0].data.push(this.todayData.headUpScore);
-      this.todayChart.series[0].data.push(-this.todayData.lateAttendScore);
-      this.todayChart.series[0].data.push(this.todayData.leaveScore);
+        this.chartTittle = this.userData.name + '-今天上课状态';
 
+        this.todayChart.series[0].data.push(this.todayData.attendScore);
+        this.todayChart.series[0].data.push(this.todayData.headUpScore);
+        this.todayChart.series[0].data.push(-this.todayData.lateAttendScore);
+        this.todayChart.series[0].data.push(this.todayData.leaveScore);
 
-      this.yibiaoCharts.series[0].data[0].y = this.todayData.attendanceTotalScore;
-      this.yibiaoCharts.series[1].data[0].y = this.todayData.headUpScore;
+        this.yibiaoCharts.series[0].data[0].y = this.todayData.attendanceTotalScore;
+        this.yibiaoCharts.series[1].data[0].y = this.todayData.headUpScore;
+      }
 
       // 处理本月上课数据 生成表格
       // this.chartTittle = this.userData.name + '-今天上课状态';

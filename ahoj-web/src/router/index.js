@@ -18,23 +18,23 @@ import Login from "@/components/Login"
 import Student from "@/components/Student"
 import Teacher from "@/components/Teacher"
 
-import ShowInfo from "@/components/views/ShowInfo" // 个人信息界面
-import Welcome from "@/components/views/Welcome"  // 登录后的欢迎界面
+import Welcome from "@/components/Student/Welcome"  // 登录后的欢迎界面
+import ShowInfo from "@/components/Student/ShowInfo" // 个人信息界面
 
-import CourseInfo from "@/components/views/CourseInfo" // 课堂考勤页面
-import GetCourseInfo from "@/components/views/GetCourseInfo" // 学生考勤信息查询
+import CourseInfo from "@/components/Student/CourseInfo" // 课堂考勤页面
+import GetCourseInfo from "@/components/Student/GetCourseInfo" // 学生考勤信息查询
 
-import Homework from "@/components/views/Homework" // 课堂作业
-import GetHomework from "@/components/views/GetHomework" // 查看作业
-import PushHomework from "@/components/views/PushHomework" // 提交作业
+import Homework from "@/components/Student/Homework" // 课堂作业
+import GetHomework from "@/components/Student/GetHomework" // 查看作业
+import PushHomework from "@/components/Student/PushHomework" // 提交作业
 
-import ClassPreview from "@/components/views/ClassPreview" // 课前预习
-import AnsweringQuestions from "@/components/views/AnsweringQuestions" // 课后答疑
+import ClassPreview from "@/components/Student/ClassPreview" // 课前预习
+import AnsweringQuestions from "@/components/Student/AnsweringQuestions" // 课后答疑
 
-import Evaluation from "@/components/views/Evaluation" // 课程评价
+import Evaluation from "@/components/Student/Evaluation" // 课程评价
 
-import PushActivities from "@/components/views/PushActivities" // 发布活动
-import JoinActivities from "@/components/views/JoinActivities" // 活动报名
+import PushActivities from "@/components/Student/PushActivities" // 发布活动
+import JoinActivities from "@/components/Student/JoinActivities" // 活动报名
 
 // import NotFound from "@/components/404" // 404 page
 import testChart from "@/components/testChart"
@@ -56,14 +56,14 @@ export default new Router({
       redirect: '/Student/Welcome',
       children: [
         {
-          path: 'ShowInfo',
-          name: 'ShowInfo',
-          component: ShowInfo,
-        },
-        {
           path: 'Welcome',
           name: 'Welcome',
           component: Welcome,
+        },
+        {
+          path: 'ShowInfo',
+          name: 'ShowInfo',
+          component: ShowInfo,
         },
         {
           path: 'CourseInfo',

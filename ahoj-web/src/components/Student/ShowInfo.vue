@@ -24,9 +24,9 @@
   // let myvue = {};
   import XChart from '@/components/charts/test'
   import Mallki from "@/components/MyComponents/Mallki";
-  import Overview from "@/components/views/ShowInfo/Overview";
-  import StateOfClass from "@/components/views/ShowInfo/StateOfClass";
-  import Charts from "@/components/views/ShowInfo/Charts";
+  import Overview from "@/components/Student/ShowInfo/Overview";
+  import StateOfClass from "@/components/Student/ShowInfo/StateOfClass";
+  import Charts from "@/components/Student/ShowInfo/Charts";
 
   export default {
     name: "ShowInfo",

@@ -38,15 +38,17 @@
 
     <Today></Today>
 
-    <hr>
+    <!--<hr>-->
 
     <ThisWeek></ThisWeek>
 
-    <hr>
+    <!--<hr>-->
+    <!--<br>-->
 
     <ThisMonth></ThisMonth>
 
-    <hr>
+    <!--<hr>-->
+    <!--<br>-->
 
     <ThisSemester></ThisSemester>
 
@@ -54,10 +56,10 @@
 </template>
 
 <script>
-  import ThisWeek from "@/components/views/CourseInfo/ThisWeek";
-  import ThisMonth from "@/components/views/CourseInfo/ThisMonth";
-  import ThisSemester from "@/components/views/CourseInfo/ThisSemester";
-  import Today from "@/components/views/CourseInfo/Today";
+  import ThisWeek from "@/components/Student/CourseInfo/ThisWeek";
+  import ThisMonth from "@/components/Student/CourseInfo/ThisMonth";
+  import ThisSemester from "@/components/Student/CourseInfo/ThisSemester";
+  import Today from "@/components/Student/CourseInfo/Today";
 
   export default {
     name: "CourseInfo",

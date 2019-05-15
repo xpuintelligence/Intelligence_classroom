@@ -98,7 +98,7 @@
     data() {
       return {
         userData: {},
-        isCollapse: true,
+        isCollapse: false,
       }
     },
     methods: {
@@ -198,7 +198,7 @@
 
       /* 侧边栏宽度 */
       &-expanded {
-        width: 12% !important;
+        width: 170px !important;
       }
     }
 
