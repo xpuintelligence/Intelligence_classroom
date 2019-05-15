@@ -13,5 +13,6 @@ import java.io.Serializable;
 public class DaysAttendanceCollect implements Serializable {
     String date;//日期
     String sum;//总课程数
+    String avg_head_up_rate;//平均抬头率
     String avgGoal;//平均考勤分
 }

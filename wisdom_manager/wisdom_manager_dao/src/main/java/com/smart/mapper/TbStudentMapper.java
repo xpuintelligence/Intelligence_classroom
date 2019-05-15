@@ -90,27 +90,27 @@ public interface TbStudentMapper {
 
     /**
      * 通过学生id，开始时间，结束时间，查询每天的汇总情况
-     * @param id
-     * @param start
-     * @param end
+     * @param id 学生id
+     * @param start 开始时间
+     * @param end 结束时间
      * @return
      */
     List<DaysAttendanceCollect> selectDaysAttendanceCollectByIDStartEnd(@Param("id")String id,@Param("start")String start,@Param("start")String end);
 
     /**
      * 通过学生id，开始时间，结束时间，查询所有考勤的汇总信息
-     * @param id
-     * @param start
-     * @param end
+     * @param id 学生id
+     * @param start 开始时间
+     * @param end 结束时间
      * @return
      */
     StageAttendanceCollect queryStageAttendanceCollectByIdStartEnd(@Param("id")String id,@Param("start")String start,@Param("end")String end);
 
     /**
      * 通过课程id，开始时间，结束时间查询本课考勤的汇总信息
-     * @param course_id
-     * @param start
-     * @param end
+     * @param course_id 课程id
+     * @param start 开始时间
+     * @param end 结束时间
      * @return
      */
     StageAttendanceCollect queryStageAttendanceCollectByCourseIdStartEnd(@Param("course_id")String course_id,@Param("start")String start,@Param("end")String end);
