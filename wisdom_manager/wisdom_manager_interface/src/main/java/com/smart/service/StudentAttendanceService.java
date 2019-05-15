@@ -1,8 +1,11 @@
 package com.smart.service;
 
+import com.smart.pojo.DaysAttendanceCollect;
 import com.smart.pojo.StudentInfo;
 import com.smart.pojo.WisdomResult;
 import org.joda.time.DateTime;
+
+import java.util.List;
 
 /**
  * 学生考勤接口
@@ -108,4 +111,79 @@ public interface StudentAttendanceService {
      * @param studentInfo 学生信息
      */
     public WisdomResult getThisSemesterAttendanceOfAllCoourse(StudentInfo studentInfo);
+
+    /**
+     * *****************************************************************
+     * 查询每天的考勤统计
+     * 平均得分  几节课  哪一天  平均抬头率
+     */
+
+    /**
+     * 二次计算一段时间的大概考勤
+     */
+    public WisdomResult calculateDaysAttendanceCollectList(DateTime startTime, DateTime endTime, List<DaysAttendanceCollect> list);
+
+    /**
+     * 通过学生id，查出一段时间内每一天的总体信息
+     * @param studentInfo 学生信息
+     * @param start 开始时间
+     * @param end 结束时时间
+     */
+    public WisdomResult getASpellTimeProbableAttOfEveryday(StudentInfo studentInfo,String start,String end);
+
+    /**
+     * 上面的方法重载
+     */
+    public WisdomResult getASpellTimeProbableAttOfEveryday(StudentInfo studentInfo,DateTime start,DateTime end);
+
+    /**
+     * 查询出本周的每一天的大致考勤信息
+     * @param studentInfo 学生信息
+     */
+    public WisdomResult getThisWeekProbableAttOfEveryday(StudentInfo studentInfo);
+
+    /**
+     * 查询出上一周的每一天的大致考勤信息
+     * @param studentInfo 学生信息
+     */
+    public WisdomResult getLastWeekProbableAttOfEveryday(StudentInfo studentInfo);
+
+    /**
+     * 查询出这个月每一天的大致的考勤信息
+     * @param studentInfo 学生信息
+     */
+    public WisdomResult getThisMonthProbableAttOfEveryday(StudentInfo studentInfo);
+
+    /**
+     * 查询出这个月每一天的大致考勤信息
+     * @param studentInfo 学生信息
+     * @return
+     */
+    public WisdomResult getLastMonthProbableAttOfEveryday(StudentInfo studentInfo);
+
+    /**
+     * 查询出某一天的大致考勤信息
+     * @param studentInfo 学生信息
+     */
+    public WisdomResult getOneDayProbableAttOfEveryday(StudentInfo studentInfo,String oneday);
+
+    /**
+     * 查询出某一天的大致考勤信息
+     * @param studentInfo 学生信息
+     */
+    public WisdomResult getOneDayProbableAttOfEveryday(StudentInfo studentInfo,DateTime oneday);
+
+    /**
+     * 查询出今天的大致考勤信息
+     * @param studentInfo 学生信息
+     */
+    public WisdomResult gettodayProbableAttOfEveryday(StudentInfo studentInfo);
+
+    /**
+     * 查询出这个学期每一天的考勤信息
+     * @param studentInfo 学生信息
+     */
+    public WisdomResult getThisSemesterProbableAttOfEveryday(StudentInfo studentInfo);
+
+
 }

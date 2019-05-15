@@ -99,7 +99,7 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
         //获取时间段
         Map<String, DateTime> map = DateUtils.formatSpellTime(currentTime);
         //返回结果集
-        return new WisdomResult(1,"true",getCourseOfSpellTime(studentInfo,map));
+        return getCourseOfSpellTime(studentInfo,map);
     }
 
     /**

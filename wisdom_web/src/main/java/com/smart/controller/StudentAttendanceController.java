@@ -198,6 +198,105 @@ public class StudentAttendanceController {
     }
 
 
+    /**
+     * *****************************************************************
+     * 查询每天的考勤统计
+     * 平均得分  几节课  哪一天  平均抬头率
+     */
+
+    /**
+     * 查询一段时间内的每一天的大概考勤信息以及统计这段时间的东西
+     */
+    @RequestMapping("/getProAttOfST")
+    @ResponseBody
+    public WisdomResult getASpellTimeProbableAttOfEveryday(@RequestParam("start")DateTime start,
+                                                            @RequestParam("end")DateTime end,HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.getASpellTimeProbableAttOfEveryday(studentInfo, DateUtils.dateTimeToString(start),
+                DateUtils.dateTimeToString(end));
+        return result;
+    }
+    /**
+     * 查询本周的大概考勤信息以及统计这段时间的东西
+     */
+    @RequestMapping("/getProAttOfTW")
+    @ResponseBody
+    public WisdomResult getThisWeekProbableAttOfEveryday(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.getThisWeekProbableAttOfEveryday(studentInfo);
+        return result;
+    }
+    /**
+     * 查询上一周的大概考勤信息以及统计这段时间的东西
+     */
+    @RequestMapping("/getProAttOfLW")
+    @ResponseBody
+    public WisdomResult getLastWeekProbableAttOfEveryday(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.getLastWeekProbableAttOfEveryday(studentInfo);
+        return result;
+    }
+    /**
+     * 查询本月的每一天的大概考勤信息以及统计这段时间的东西
+     */
+    @RequestMapping("/getProAttOfTM")
+    @ResponseBody
+    public WisdomResult getThisMonthProbableAttOfEveryday(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.getThisMonthProbableAttOfEveryday(studentInfo);
+        return result;
+    }
+    /**
+     * 查询上个月的每一天的大概考勤信息以及统计这段时间的东西
+     */
+    @RequestMapping("/getProAttOfLM")
+    @ResponseBody
+    public WisdomResult getLastMonthProbableAttOfEveryday(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.getLastMonthProbableAttOfEveryday(studentInfo);
+        return result;
+    }
+    /**
+     * 查询某天的考勤大致情况
+     */
+    @RequestMapping("/getProAttOfOD")
+    @ResponseBody
+    public WisdomResult getOneDayProbableAttOfEveryday(@RequestParam("oneday")DateTime oneday, HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.getOneDayProbableAttOfEveryday(studentInfo,
+                DateUtils.dateTimeToString(oneday));
+        return result;
+    }
+    /**
+     * 查询今天的考勤大致情况
+     */
+    @RequestMapping("/getProAttOfT")
+    @ResponseBody
+    public WisdomResult getTodayProbableAttOfEveryday(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.gettodayProbableAttOfEveryday(studentInfo);
+        return result;
+    }
+    /**
+     * 查询今天的考勤大致情况
+     */
+    @RequestMapping("/getProAttOfTS")
+    @ResponseBody
+    public WisdomResult getThisSemesterProbableAttOfEveryday(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service方法
+        WisdomResult result = studentAttendanceService.getThisSemesterProbableAttOfEveryday(studentInfo);
+        return result;
+    }
+
+
 
 
 
