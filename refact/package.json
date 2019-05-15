@@ -20,7 +20,7 @@
     "vue-highcharts": "^0.1.0",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
-    "tar": "^4.4.2",
+    "tar": "^4.4.2"
 
   },
   "devDependencies": {
