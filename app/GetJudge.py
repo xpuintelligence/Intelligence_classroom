@@ -1,4 +1,5 @@
 # 用于判断当前学生的状态
+from FaceDataBase import FaceDataBase
 
 class GetJudge:
 
@@ -44,18 +45,36 @@ class GetJudge:
             return self.student_attendancedict
 
 
-    # 该学生本节课的抬头（认真听课）分数
+
+    def initdatabase():
+        # 数据库信息
+        print("调用服务器数据库")
+        host = "101.132.78.78"
+        user = "root"
+        database = "team_model"
+        password = "nanshen166013"
+        faceDataBase = FaceDataBase(host, user, database, password)
+        return faceDataBase
+
+
+    # 该学生本节课的抬头（认真听课）分数,该学生本节课的抬头率
     def each_student_headupRate(student_attendancedict_end,reco_time):
 
+        # 调用数据库
+        faceDataBase = GetJudge.initdatabase()
         # 学生分数的字典
         student_score_dict = dict()
+        # 学生抬头率的字典
+        student_headuprate_dict = dict()
         # 对每个学生的分数进行判断
         for student_name in student_attendancedict_end.keys():
+            student_headuprate = student_attendancedict_end[student_name]/reco_time
             student_score = (student_attendancedict_end[student_name]/reco_time)*40
-
+            student_id = faceDataBase.get_student_id(student_name)
+            student_headuprate_dict[student_id] = student_headuprate
             student_score_dict[student_name] = student_score
 
-        return student_score_dict
+        return student_score_dict,student_headuprate_dict
 
 
         
