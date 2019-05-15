@@ -124,10 +124,10 @@ class FaceDataBase:
     def attendance_insert_attend_nosleep(self,student_id_list,student_id_headuprate_dict):
         conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
         sql = "INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `create_date`, `status`, `head_up_rate`, `goal`, `sleep`, `headup_score`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
-        #courseitem_id = self.getCourseID()
-        courseitem_id = "20190606140000"
-        #create_date = time.strftime('%Y-%m-%d 10:00:00')
-        create_date = "2019-06-14 10:00:00"
+        courseitem_id = self.getCourseID()
+        #courseitem_id = "20190606140000"
+        create_date = time.strftime('%Y-%m-%d 10:00:00')
+        #create_date = "2019-06-14 10:00:00"
         status = 'attend'
         cursor = conn.cursor()
         for student_id in student_id_list:
