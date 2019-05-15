@@ -66,6 +66,8 @@ class GetJudge:
         student_score_dict = dict()
         # 学生抬头率的字典
         student_headuprate_dict = dict()
+        # 学生id+抬头成绩的字典
+        student_id_headuprate_score_dict = dict()
         # 对每个学生的分数进行判断
         for student_name in student_attendancedict_end.keys():
             student_headuprate = student_attendancedict_end[student_name]/reco_time
@@ -73,8 +75,9 @@ class GetJudge:
             student_id = faceDataBase.get_student_id(student_name)
             student_headuprate_dict[student_id] = student_headuprate
             student_score_dict[student_name] = student_score
+            student_id_headuprate_score_dict[student_id] = student_score
 
-        return student_score_dict,student_headuprate_dict
+        return student_score_dict,student_headuprate_dict,student_id_headuprate_score_dict
 
 
         

@@ -121,7 +121,7 @@ class FaceDataBase:
 
     
     # 将不睡觉的学生插入数据库
-    def attendance_insert_attend_nosleep(self,student_id_list,student_id_headuprate_dict):
+    def attendance_insert_attend_nosleep(self,student_id_list,student_id_headuprate_dict,student_id_headuprate_score_dict):
         conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
         sql = "INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `create_date`, `status`, `head_up_rate`, `goal`, `sleep`, `headup_score`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
         courseitem_id = self.getCourseID()
@@ -135,7 +135,7 @@ class FaceDataBase:
             head_up_rate = str(student_id_headuprate_dict[student_id])
             goal = '60'
             sleep = '0'
-            headup_score = '40'
+            headup_score = student_id_headuprate_score_dict[student_id]
             data = (attendance_id,courseitem_id,student_id,create_date,status,head_up_rate,goal,sleep,headup_score)
             try:
                 cursor.execute(sql%data)

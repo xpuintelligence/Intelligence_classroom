@@ -36,14 +36,14 @@ print(student_id_list_actual)
 # 识别次数 目前设置为4次
 
 reco_time = 4
-student_score_dict,student_headuprate_dict = GetJudge.each_student_headupRate(student_attendancedict_end,reco_time)
+student_score_dict,student_headuprate_dict,student_id_headuprate_score_dict = GetJudge.each_student_headupRate(student_attendancedict_end,reco_time)
 
 print("每个学生的抬头得分情况为：")
 print(str(student_score_dict))
 print(str(student_headuprate_dict))
-
+print(str(student_id_headuprate_score_dict))
 #facedatabase = initdatabase()
-#facedatabase.attendance_insert_attend_nosleep(student_id_list_actual,student_headuprate_dict)
+#facedatabase.attendance_insert_attend_nosleep(student_id_list_actual,student_headuprate_dict,student_id_headuprate_score_dict)
 
 os.chdir("../faces")
 os.system("rm -rf *.jpg")
