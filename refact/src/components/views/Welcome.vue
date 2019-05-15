@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>智慧教室管理系统!</h2>
+    <h2>智慧教室管理系统!课表</h2>
   </div>
 </template>
 

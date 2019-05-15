@@ -177,7 +177,6 @@
       // 获取今天的上课状态信息
       await this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
         this.todayCourse = res.body.data.data[0];
-        // console.log(this.todayCourse);
       }).catch(err => {
         console.log("--------err-------");
         console.log(err);

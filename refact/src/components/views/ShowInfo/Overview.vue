@@ -15,7 +15,7 @@
           <!-- 头像 -->
           <div class="col-md-3 column">
             <el-card :body-style="{ padding: '0px' }">
-              <img :src="userData.picture" style="width: 100%;" alt="头像" />
+              <img :src="userData.picture" style="width: 100%;" alt="头像"/>
             </el-card>
           </div>
 
@@ -28,8 +28,9 @@
                 姓名：{{userData.name}}<br>
                 班级：{{userData.classId}}<br>
                 性别：{{userData.sex === "male" ? '男': '女'}}<br>
-                手机：{{userData.phoneCode}}<br>
-                <el-button icon="el-icon-key" type="text" style="color: dodgerblue" @click="changePassword">修改密码</el-button>
+                手机：{{userData.phone}}<br>
+                <el-button icon="el-icon-key" type="text" style="color: dodgerblue" @click="changePassword">修改密码
+                </el-button>
               </div>
             </el-card>
           </div>
@@ -78,24 +79,22 @@
       }
       // 获取今天课程信息
       this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
-          this.todayCourse = res.data.data.data[0];
-          // console.log(res.data.data.data[0])
+        this.todayCourse = res.data.data.data[0];
+        console.log(res)
       }).catch(err => {
         console.log("--------err-------");
         console.log(err);
-        // this.$message.error("server error!");
       });
     },
     methods: {
       changePassword() {
-
         // 验证邮箱。。。。
         this.$prompt('请输入邮箱', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
           inputErrorMessage: '邮箱格式不正确'
-        }).then(({ value }) => {
+        }).then(({value}) => {
           this.$message({
             type: 'success',
             message: '你的邮箱是: ' + value
