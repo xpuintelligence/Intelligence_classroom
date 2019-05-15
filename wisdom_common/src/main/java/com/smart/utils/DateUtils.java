@@ -84,14 +84,14 @@ public class DateUtils implements Serializable {
     /**
      * 传来一个时间，将该时间转换为00：00 ---23：59
      */
-    public static Map<String,DateTime> spellTime(DateTime dateTime){
-        return spellTime(dateTime,dateTime);
+    public static Map<String,DateTime> formatSpellTime(DateTime dateTime){
+        return formatSpellTime(dateTime,dateTime);
     }
 
     /**
      * 传来一个时间段，将该时间段转化为起始时间00：00----末尾时间+1天的00：00
      */
-    public static Map<String,DateTime> spellTime(DateTime begin,DateTime end) {
+    public static Map<String,DateTime> formatSpellTime(DateTime begin,DateTime end) {
         Map<String, DateTime> map = new HashMap<>();
         //0点
         DateTime beginDay = new DateTime(begin.getYear(), begin.getMonthOfYear(), begin.getDayOfMonth()
@@ -172,7 +172,7 @@ public class DateUtils implements Serializable {
         int x = 1;
         DateTime dateTime = new DateTime(2010,1,1,2,1);
         DateTime dateTime1 = new DateTime(2012,1,3,4,5);
-        final Map<String, DateTime> map = spellTime(dateTime,dateTime1);
+        final Map<String, DateTime> map = formatSpellTime(dateTime,dateTime1);
         System.out.println();
     }
 

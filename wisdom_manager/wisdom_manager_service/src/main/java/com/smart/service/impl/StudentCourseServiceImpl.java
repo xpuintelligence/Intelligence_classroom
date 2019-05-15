@@ -71,7 +71,7 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
     @Override
     public WisdomResult getCourseOfDay(StudentInfo studentInfo, DateTime datetime) {
         //获取时间轴
-        Map<String, DateTime> map = DateUtils.spellTime(datetime);
+        Map<String, DateTime> map = DateUtils.formatSpellTime(datetime);
         //返回结果集
         return getCourseOfSpellTime(studentInfo,map);
     }
@@ -97,7 +97,7 @@ public class StudentCourseServiceImpl implements StudentCourseService, Serializa
         //获取当前时间
         DateTime currentTime = DateUtils.getCurrentTime();
         //获取时间段
-        Map<String, DateTime> map = DateUtils.spellTime(currentTime);
+        Map<String, DateTime> map = DateUtils.formatSpellTime(currentTime);
         //返回结果集
         return new WisdomResult(1,"true",getCourseOfSpellTime(studentInfo,map));
     }
