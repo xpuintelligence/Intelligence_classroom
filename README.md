@@ -19,7 +19,7 @@
 ## run
 
 ```shell
-cd refact
+cd ahoj-web/ # 进入项目目录
 
 npm install # 安装依赖
 
