@@ -15,7 +15,7 @@ class GetJudge:
         self.sleepdict = sleepdict
         # 学生识别情况的字典
         self.student_attendancedict = student_attendancedict
-
+    
     # 判断学生是不是在睡觉或者不认真听讲
     def sleepJudge(self, student_headown_list):
         if(len(student_headown_list)):
@@ -29,7 +29,7 @@ class GetJudge:
 
             # 判断学生多次低头的情况是不是在睡觉
             for student_name in self.sleepdict.keys():
-                if(self.sleepdict[student_name]) >=1:
+                if(self.sleepdict[student_name]) >=3:
                     print("请提醒"+student_name+"同学，该同学可能正在睡觉")
                     faceDataBase = GetJudge.initdatabase()
                     student_id = faceDataBase.get_student_id(student_name)
@@ -89,17 +89,21 @@ class GetJudge:
     # 给服务器发送学生睡觉的post请求
     def post_sleep_student(student_id):
         # api地址
-        url = "http://192.168.137.1:8081/monitorStudent/setStudentStatus"
+        url = "http://47.103.14.73:8080/wisdom_web/monitorStudent/setStudentStatus"
         # 1为睡觉
         student_id = str(student_id)
         body = {"status":'1', "id":student_id}
 
         response = requests.post(url,data = body)
+        now_respone_server = response.text
+        status = '"status":1'
         print(response.text)
-        response.text = dict(response.text)
-        if response.text['status'] == 1:
-           print("已经向服务器发送了睡觉信息")
-           print(response.status_code)
+        if status in now_respone_server:
+            print("已经向服务器发送了睡觉信息")
+            print(response.status_code)
+
+    
+
 
 
 

@@ -6,6 +6,7 @@ import time
 from LoadVideo import LoadVideo
 from Wisdom import Wisdom
 import getpass
+from GetJudge import GetJudge
 
 # 初始化睡觉判断和出勤判断字典
 sleepdict = dict()
