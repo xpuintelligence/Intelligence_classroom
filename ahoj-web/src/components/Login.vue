@@ -83,7 +83,6 @@
             }
           );
 
-          // console.log(res);
 
           if (res.data.msg === "true") {
             sessionStorage.setItem('userData', JSON.stringify(res.data.data));
