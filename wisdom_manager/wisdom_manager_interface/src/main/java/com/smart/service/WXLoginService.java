@@ -14,4 +14,6 @@ public interface WXLoginService {
      * 第一次登陆，绑定openid与account
      */
     public WisdomResult bindOpenidWithAccount(String openid , String account , String password ,int status);
+
+    public String test();
 }

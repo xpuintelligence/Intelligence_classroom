@@ -2,6 +2,8 @@ package com.smart.utils;
 
 import com.smart.pojo.WisdomResult;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.junit.Test;
 
 import java.io.Serializable;
@@ -166,6 +168,14 @@ public class DateUtils implements Serializable {
         stringBuilder.append(s.substring(index+1));
         DateTime dateTime = new DateTime(stringBuilder.toString());
         return dateTime;
+    }
+
+    /**
+     * 计算俩个时间中间差多少天
+     */
+    public static int twoDayGap(DateTime start , DateTime end){
+        Period p = new Period(start, end, PeriodType.days());
+        return p.getDays();
     }
     @Test
     public void fun1(){

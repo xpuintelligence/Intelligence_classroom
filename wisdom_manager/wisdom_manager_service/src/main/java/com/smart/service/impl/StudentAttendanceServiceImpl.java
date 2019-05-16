@@ -1,9 +1,9 @@
 package com.smart.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.smart.mapper.TbStudentMapper;
-import com.smart.pojo.AttendanceItem;
-import com.smart.pojo.StudentInfo;
-import com.smart.pojo.WisdomResult;
+import com.smart.pojo.*;
 import com.smart.service.CourseService;
 import com.smart.service.StudentAttendanceService;
 import com.smart.utils.DateUtils;
@@ -262,5 +262,207 @@ public class StudentAttendanceServiceImpl implements StudentAttendanceService {
         //返回结果
         return getASpellTimeAttendanceOfAllCoourse(opentime,currentTime,studentInfo);
     }
+
+    /**
+     * *****************************************************************
+     * 查询每天的考勤统计
+     * 平均得分  几节课  哪一天  平均抬头率
+     */
+
+    /**
+     * 传进来一段时间每天的大致考勤，将其在进行计算
+     * @param startTime 开始时间
+     * @param endTime 结束时间
+     * @param list 大概考勤的链表
+     */
+    @Override
+    public WisdomResult calculateDaysAttendanceCollectList(DateTime startTime, DateTime endTime, List<DaysAttendanceCollect> list) {
+        //计算出天数
+        int num = DateUtils.twoDayGap(startTime,endTime);
+        //将短时间的数据进行格式化
+        DaysAttendanceCollectStatistic daysAttendanceCollectStatistic =
+                new DaysAttendanceCollectStatistic(num,list);
+        return WisdomResult.ok(daysAttendanceCollectStatistic);
+    }
+
+
+    /**
+     * 一段时间
+     * @param studentInfo 学生信息
+     * @param start 开始时间
+     * @param end 结束时时间
+     * @return
+     */
+    @Override
+    public WisdomResult getASpellTimeProbableAttOfEveryday(StudentInfo studentInfo, String start, String end) {
+        DateTime startTime = DateUtils.stringToDatetime(start);
+        DateTime endTime = DateUtils.stringToDatetime(end);
+        //调用mapper查询
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(), startTime.toString(DATE_FORMAT_TOSTRING),
+                endTime.toString(DATE_FORMAT_TOSTRING));
+        return calculateDaysAttendanceCollectList(startTime, endTime, list);
+
+    }
+
+    /**
+     * 上面的方法重载
+     * @param studentInfo 学生信息
+     * @param start 开始时间
+     * @param end 结束时时间
+     */
+    @Override
+    public WisdomResult getASpellTimeProbableAttOfEveryday(StudentInfo studentInfo, DateTime start, DateTime end) {
+        //调用mapper查询
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(), start.toString(DATE_FORMAT_TOSTRING),
+                end.toString(DATE_FORMAT_TOSTRING));
+        return calculateDaysAttendanceCollectList(start, end, list);
+    }
+
+    /**
+     * 本周的大致考勤
+     * @param studentInfo 学生信息
+     */
+    @Override
+    public WisdomResult getThisWeekProbableAttOfEveryday(StudentInfo studentInfo) {
+        //计算出当前日期
+        DateTime currentTime = DateUtils.getCurrentTime();
+        //计算出这周为第几周
+        Integer integer = courseServiceImpl.dayOfWeekInThisSemester(currentTime);
+        //计算出该周的起始
+        Map<String, DateTime> map = courseServiceImpl.getNWeekInThisSemester(integer);
+        //调用mapper查询对应考勤
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(),map.get("start").toString(DATE_FORMAT_TOSTRING),
+                currentTime.toString(DATE_FORMAT_TOSTRING));
+        //返回结果
+        return calculateDaysAttendanceCollectList(map.get("start"),currentTime,list);
+    }
+
+    /**
+     * 上一周的
+     * @param studentInfo 学生信息
+     */
+    @Override
+    public WisdomResult getLastWeekProbableAttOfEveryday(StudentInfo studentInfo) {
+        //计算出当前日期
+        DateTime currentTime = DateUtils.getCurrentTime();
+        //计算出这周为第几周
+        Integer integer = courseServiceImpl.dayOfWeekInThisSemester(currentTime);
+        //计算出该周的起始
+        Map<String, DateTime> map = courseServiceImpl.getNWeekInThisSemester(integer-1);
+        //调用mapper查询对应考勤
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(),map.get("start").toString(DATE_FORMAT_TOSTRING),
+                map.get("end").toString(DATE_FORMAT_TOSTRING));
+        //返回结果
+        return calculateDaysAttendanceCollectList(map.get("start"),map.get("end"),list);
+    }
+
+    /**
+     * 计算这个月的
+     * @param studentInfo 学生信息
+     */
+    @Override
+    public WisdomResult getThisMonthProbableAttOfEveryday(StudentInfo studentInfo) {
+        //计算出当前日期
+        DateTime currentTime = DateUtils.getCurrentTime();
+        //计算出这周为第几周
+        Integer integer = courseServiceImpl.dayOfMonthInThisSemester(currentTime);
+        //计算出该周的起始
+        Map<String, DateTime> map = courseServiceImpl.getNMonthInThisSemester(integer);
+        //调用mapper查询对应考勤
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(),map.get("start").toString(DATE_FORMAT_TOSTRING),
+                currentTime.toString(DATE_FORMAT_TOSTRING));
+        //返回结果
+        return calculateDaysAttendanceCollectList(map.get("start"),currentTime,list);
+    }
+
+    /**
+     * 计算上个月的
+     * @param studentInfo 学生信息
+     * @return
+     */
+    @Override
+    public WisdomResult getLastMonthProbableAttOfEveryday(StudentInfo studentInfo) {
+        //计算出当前日期
+        DateTime currentTime = DateUtils.getCurrentTime();
+        //计算出这周为第几周
+        Integer integer = courseServiceImpl.dayOfMonthInThisSemester(currentTime);
+        //计算出该周的起始
+        Map<String, DateTime> map = courseServiceImpl.getNMonthInThisSemester(integer-1);
+        //调用mapper查询对应考勤
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(),map.get("start").toString(DATE_FORMAT_TOSTRING),
+                map.get("end").toString(DATE_FORMAT_TOSTRING));
+        //返回结果
+        return calculateDaysAttendanceCollectList(map.get("start"), map.get("end"),list);
+    }
+
+    /**
+     * 重载下面的方法
+     */
+    @Override
+    public WisdomResult getOneDayProbableAttOfEveryday(StudentInfo studentInfo, String oneday) {
+        DateTime dateTime = DateUtils.stringToDatetime(oneday);
+        return getOneDayProbableAttOfEveryday(studentInfo,dateTime);
+    }
+
+    /**
+     * 计算出某一天的大概考勤
+     * @param studentInfo 学生信息
+     * @return
+     */
+    @Override
+    public WisdomResult getOneDayProbableAttOfEveryday(StudentInfo studentInfo , DateTime oneday) {
+        //将改天的时间区间计算出来
+        Map<String, DateTime> map = DateUtils.formatSpellTime(oneday);
+        //查询这段时间考勤信息
+        return getASpellTimeProbableAttOfEveryday(studentInfo, map.get("start"), map.get("end"));
+    }
+
+    /**
+     * 查询今天的
+     * @param studentInfo 学生信息
+     * @return
+     */
+    @Override
+    public WisdomResult gettodayProbableAttOfEveryday(StudentInfo studentInfo) {
+        //获取当前时间
+        DateTime time = DateUtils.getCurrentTime();
+        //计算出今天的时间区间
+        Map<String, DateTime> map = DateUtils.formatSpellTime(time);
+        //查询这段时间的考勤信息
+        return getASpellTimeProbableAttOfEveryday(studentInfo,map.get("start"),time);
+    }
+
+    /**
+     * 查询这个学生这个学期考勤信息
+     * @param page
+     * @param size
+     * @param studentInfo 学生信息
+     */
+    @Override
+    public WisdomResult getThisSemesterProbableAttOfEveryday(Integer page, Integer size, StudentInfo studentInfo) {
+        //获取开学时间
+        DateTime opentime = courseServiceImpl.getOpentime();
+        //获取当前时间
+        DateTime currentTime = DateUtils.getCurrentTime();
+        //第一次先查出来所有的
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(), opentime.toString(DATE_FORMAT_TOSTRING),
+                currentTime.toString(DATE_FORMAT_TOSTRING));
+        //计算出天数
+        int num = DateUtils.twoDayGap(opentime,currentTime);
+        //将短时间的数据进行格式化
+        DaysAttendanceCollectStatistic daysAttendanceCollectStatistic =
+                new DaysAttendanceCollectStatistic(num,list);
+        PageHelper.startPage(page,size);
+        //这次是查分页的
+        list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(), opentime.toString(DATE_FORMAT_TOSTRING),
+                currentTime.toString(DATE_FORMAT_TOSTRING));
+        PageInfo<DaysAttendanceCollect> pageInfo = new PageInfo<>(list) ;
+        //这里取出来分页的信息
+        daysAttendanceCollectStatistic.setList(pageInfo.getList());
+        //返回值
+        return WisdomResult.ok(daysAttendanceCollectStatistic);
+    }
+
+
 
 }
