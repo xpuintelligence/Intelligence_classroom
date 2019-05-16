@@ -83,6 +83,8 @@
             }
           );
 
+          // console.log(res);
+
           if (res.data.msg === "true") {
             sessionStorage.setItem('userData', JSON.stringify(res.data.data));
             if (res.data.status === 1) {
@@ -93,10 +95,10 @@
               this.$message.warning("功能尚未开放");
             }
           } else {
-            this.$message.error(res.data.msg);
+            this.$message.error(res.data.msg);  // 账号或密码错误
           }
         } catch (e) {
-          this.$message.warning("抱歉，出了点问题");
+          this.$message.warning("出了点问题");
         }
       } // onSubmit()
     },

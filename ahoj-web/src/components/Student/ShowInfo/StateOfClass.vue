@@ -19,29 +19,27 @@
         </el-col>
 
         <el-col :span="14">
-          <el-badge is-dot class="item">
-            <span>评价</span>
-            <el-rate v-model="classStar.value" disabled text-color="#ff9900" score-template="{value}"
-                     show-text></el-rate>
-          </el-badge>
+          <el-tabs v-model="teacherWord.whichIsActive">
+            <el-tab-pane label="课程评价" name="课程评价" active>
+              <el-rate v-model="classStar.value" disabled text-color="#ff9900" score-template="{value}"
+                       show-text></el-rate>
+              上课要好好表现呀！
+            </el-tab-pane>
 
-          <div class="text item" style="font-size: 12px">
-            <el-collapse accordion>
+            <el-tab-pane label="语音留言" name="语音留言">
+              <VueAudio :theUrl="teacherWord.url"></VueAudio>
+            </el-tab-pane>
 
-              <el-collapse-item title="语音消息" name="1">
-                <VueAudio :theUrl="teacherWord.url"></VueAudio>
-              </el-collapse-item>
+            <el-tab-pane label="文本留言" name="文本留言">
+              <el-alert
+                title="啊啊啊啊啊啊啊哈"
+                type="success"
+                description="这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……"
+                :closable="false">
+              </el-alert>
+            </el-tab-pane>
 
-              <el-collapse-item title="文本消息" name="2">
-                <el-alert
-                  title="啊啊啊啊啊啊啊哈"
-                  type="success"
-                  description="这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……"
-                  :closable="false">
-                </el-alert>
-              </el-collapse-item>
-            </el-collapse>
-          </div>
+          </el-tabs>
 
         </el-col>
       </el-row>
@@ -61,7 +59,7 @@
       return {
         teacherWord: {
           url: 'http://106.12.202.93/aaa.mp3',
-          whichIsActive: '1',
+          whichIsActive: '语音留言',
         },
 
         classStar: {
@@ -185,10 +183,11 @@
         if (res.body.data.length === 0) {
           this.isWeekend = true;
         } else {
-          this.todayCourse = res.body.data.data[0];
+          console.log(res.body.data);
+          this.todayCourse = res.body.data[0];
         }
       }).catch(err => {
-        console.log("--------err-------");
+        console.log("--------err in Student/ShowInfo/StateOfClass-------");
         console.log(err);
       });
 

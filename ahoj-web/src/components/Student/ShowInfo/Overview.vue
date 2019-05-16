@@ -40,8 +40,8 @@
               <span>今日课程</span>
             </div>
             <div class="text item" style="font-size: 12px">
-              <div v-if="hasCourse === false">{{todayCourse}}</div>
-              <br>
+              <div v-if="hasCourse === false">{{todayCourse}}<br></div>
+
               <div v-if="hasCourse === true">
                 课程：{{todayCourse.courseName}}<br>
                 时间：{{new Date(todayCourse.time).toLocaleTimeString()}}<br>
@@ -68,7 +68,7 @@
       return {
         userData: {},
         todayCourse: {},
-        hasCourse: false,
+        hasCourse: true,
       }
     },
     async mounted() {
@@ -93,7 +93,10 @@
       if (this.todayCourse.length === 0) {
         this.todayCourse = '今天没有课哦~';
         this.hasCourse = false;
+        return;
       }
+
+      this.todayCourse = this.todayCourse[0];
     },
     methods: {
       changePassword() {
@@ -116,6 +119,7 @@
         });
 
       },
+
     },
   }
 </script>

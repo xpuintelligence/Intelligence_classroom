@@ -8,7 +8,7 @@
 
         <div>
           <!-- 我是样例菜单 -->
-          <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
+          <el-menu default-active="ShowInfo" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
                    :collapse="isCollapse">
 
             <!--ShowInfo-->
