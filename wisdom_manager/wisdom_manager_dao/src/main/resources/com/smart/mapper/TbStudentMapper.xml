@@ -15,21 +15,21 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="identity_id" jdbcType="VARCHAR" property="identityId" />
   </resultMap>
-  <resultMap id="courseList" type="com.smart.pojo.WCourseInfo">
-    <id property="id" column="id"/>
-    <result property="time" column="time"/>
-    <result property="courseId" column="courseId"/>
-    <result property="courseName" column="courseName"/>
-    <result property="courseNote" column="courseNote"/>
-    <result property="attendanceTotalScore" column="attendanceTotalScore"/>
-    <result property="leaveScore" column="leaveScore"/>
-    <result property="attendScore" column="attendScore"/>
-    <result property="lateAttendScore" column="lateAttendScore"/>
-    <result property="headUpScore" column="headUpScore"/>
-    <result property="classroomId" column="classroomId"/>
-    <result property="teacherId" column="teacherId"/>
-    <result property="teacherName" column="teacherName"/>
-  </resultMap>
+<!--  <resultMap id="courseList" type="com.smart.pojo.WCourseInfo">-->
+<!--    <id property="id" column="id"/>-->
+<!--    <result property="time" column="time"/>-->
+<!--    <result property="courseId" column="courseId"/>-->
+<!--    <result property="courseName" column="courseName"/>-->
+<!--    <result property="courseNote" column="courseNote"/>-->
+<!--    <result property="attendanceTotalScore" column="attendanceTotalScore"/>-->
+<!--    <result property="leaveScore" column="leaveScore"/>-->
+<!--    <result property="attendScore" column="attendScore"/>-->
+<!--    <result property="lateAttendScore" column="lateAttendScore"/>-->
+<!--    <result property="headUpScore" column="headUpScore"/>-->
+<!--    <result property="classroomId" column="classroomId"/>-->
+<!--    <result property="teacherId" column="teacherId"/>-->
+<!--    <result property="teacherName" column="teacherName"/>-->
+<!--  </resultMap>-->
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -335,7 +335,7 @@
   </update>
 
 <!--  字节添加的方法-->
-  <select id="selectWCourseInfo" resultMap="courseList">
+  <select id="selectWCourseInfo" resultType="com.smart.pojo.WCourseInfo">
      select tb_courseitem.id, tb_courseitem.time, tb_courseitem.course_id as courseId, tb_courseitem.classroom_id as classroomId, tb_courseitem.teacher_id as teacherId, tb_teacher.name as teacherName ,tb_course.name as courseName ,tb_course.course_note as courseNode, tb_course.attendance_total_score as attendanceTotalScore, tb_course.leave_score as leaveScore, tb_course.attend_score as attendScore, tb_course.late_attend_score as lateAttendScore,tb_course.head_up_score as headUpScore
      from tb_course_class ,tb_courseitem ,tb_teacher ,tb_course
      where tb_course_class.class_id = #{classId}
