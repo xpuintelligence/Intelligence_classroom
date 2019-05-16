@@ -15,7 +15,7 @@ public class WCourseInfo implements Serializable {
     Date time;
     String courseId;
     String courseName;
-    String courseNote;
+    String courseNode;
     int attendanceTotalScore;
     int leaveScore;
     int attendScore;
