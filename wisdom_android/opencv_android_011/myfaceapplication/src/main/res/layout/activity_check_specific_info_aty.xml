@@ -7,16 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".student.CheckSpecificInfoAty">
 
-    <TextView
-        android:padding="10dp"
-        android:id="@+id/CheckSpecificInfoAty_tv"
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/stu_half_chart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <WebView
-        android:id="@+id/webChart"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_height="match_parent" />
 </LinearLayout>

@@ -14,6 +14,7 @@ public class FinalAsyncHttpClient {
         client.setTimeout(5);//设置5秒超时
         // 获取cookie列表
         if (CookieUtils.getCookies() != null) {
+            //TODO 此处的代码警告
             BasicCookieStore bcs = new BasicCookieStore();
             bcs.addCookies(CookieUtils.getCookies().toArray(
                     new Cookie[CookieUtils.getCookies().size()]));//得到cookie列表

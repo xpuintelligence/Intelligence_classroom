@@ -1,6 +1,8 @@
 package edu.xpu.tim.myfaceapplication.student;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,9 +19,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.xuexiang.xui.widget.toast.XToast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +54,12 @@ public class StuCheckInfoAty extends AppCompatActivity {
 
     private void getData() {
         AsyncHttpClient asyncHttpClient = new FinalAsyncHttpClient().getAsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("start", "1970-01-01 00:00:00");
+        params.put("end", "2019-05-15 00:00:00");
+
         //准备数据包
-        asyncHttpClient.post(AppConfig.classInfoAddress, null, new AsyncHttpResponseHandler() {
+        asyncHttpClient.post(AppConfig.classInfoAddress, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String classInfoStr = new String(responseBody);
@@ -82,12 +88,7 @@ public class StuCheckInfoAty extends AppCompatActivity {
 
                 myAdapter.setOnItemClickListener((view, position, data1) ->{
                     Intent intent = new Intent(getContext(), CheckSpecificInfoAty.class);
-                    intent.putExtra("data",
-                            "出勤总分:"+data1.getAttendanceTotalScore()+"\n"+
-                            "缺勤扣分:"+data1.getLeaveScore()+"\n"+
-                            "出勤得分:" + data1.getAttendScore()+"\n"+
-                            "迟到扣分:"+data1.getLateAttendScore()+"\n"+
-                            "抬头得分:"+data1.getHeadUpScore());
+
                     startActivity(intent);
                 });
             }
@@ -111,26 +112,28 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
         this.list = list;
     }
 
+    @NonNull
     @Override
-    public MyRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_stu_classinfo, parent, false);
-        MyRecyclerViewAdapter.ViewHolder viewHolder = new MyRecyclerViewAdapter.ViewHolder(view);
-        return viewHolder;
+        return new MyRecyclerViewAdapter.ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(MyRecyclerViewAdapter.ViewHolder holder, int position) {
-        holder.item_ClassName.setText(list.get(position).getCourseName());
-        holder.item_ClassAddress.setText(list.get(position).getTeacherName() + " " + list.get(position).getClassroomId());
-        holder.item_ClassTime.setText(new SimpleDateFormat("yyyy-MM-dd HH:mm").format(list.get(position).getTime()));
-        if(list.get(position).getCourseNote() == null ||
-                list.get(position).getCourseNote().equals("")){
-            holder.item_ClassDescription.setText("大学之道：大学的宗旨，大学的最终目的。大学：在古代其含义有两种：“博学”之态；与“小学”相对的“大人之学”。古代儿童八岁上小学，主要学习“洒扫、应对、进退、礼乐射御书数”之类的文化课和基本的礼节。");
+    public void onBindViewHolder(@NonNull MyRecyclerViewAdapter.ViewHolder holder, int position) {
+        holder.item_ClassName.setText(list.get(position).getName());
+        holder.item_ClassAddress.setText(list.get(position).getTeacher_name() + " " + list.get(position).getClassroom_id());
+        holder.item_ClassTime.setText(list.get(position).getTime());
+
+        if(list.get(position).getCourse_note() == null ||
+                list.get(position).getCourse_note().equals("")){
+            holder.item_ClassDescription.setText("在古代其含义有两种：“博学”之态；与“小学”相对的“大人之学”。古代儿童八岁上小学，主要学习“洒扫、应对、进退、礼乐射御书数”之类的文化课和基本的礼节。");
+        }else{
+            holder.item_ClassDescription.setText(list.get(position).getCourse_note());
         }
 
-        holder.item_ClassCheck.setImageResource(list.get(position).getAttendScore() < 1.0 ? R.drawable.nopass : R.drawable.pass);
-
-
+        holder.item_ClassCheck.setImageResource("attend".equals(list.get(position).getStatus()) ? R.drawable.pass : R.drawable.nopass);
 
         //设置List监听事件
         int adapterPosition = holder.getAdapterPosition();
@@ -164,7 +167,7 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
     /**
      * 设置点击事件
      */
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -177,7 +180,7 @@ class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter.V
         private int position;
         private AttendanceItem data;
 
-        public MyOnClickListener(int position, AttendanceItem data) {
+        MyOnClickListener(int position, AttendanceItem data) {
             this.position = position;
             this.data = data;
         }

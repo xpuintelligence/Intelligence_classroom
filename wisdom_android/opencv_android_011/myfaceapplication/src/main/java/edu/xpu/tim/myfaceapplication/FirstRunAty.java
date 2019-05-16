@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.CookieManager;
 
 import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
@@ -30,6 +29,9 @@ public class FirstRunAty extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //开启服务
+        //startService(new Intent(getContext(), DetectionService.class));
 
         //首次登陆
         SharedPreferences first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
@@ -57,7 +59,6 @@ public class FirstRunAty extends AppCompatActivity {
                         CookieUtils.setCookies(CookieUtils.getCookie(getApplicationContext()));
                         Log.i(AppConfig.TAG, new String(responseBody));
                         XToast.success(getContext(), "学生端更新Session成功!").show();
-
                         List<Cookie> cookies = CookieUtils.getCookie(getApplicationContext());
 
                         for (Cookie cookie: cookies) {

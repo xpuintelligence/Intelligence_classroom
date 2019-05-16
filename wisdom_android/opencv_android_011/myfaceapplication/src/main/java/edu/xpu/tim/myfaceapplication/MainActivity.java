@@ -4,12 +4,12 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
@@ -35,6 +35,7 @@ import java.io.InputStream;
 import edu.xpu.tim.myfaceapplication.config.AppConfig;
 import edu.xpu.tim.myfaceapplication.util.AuthService;
 import edu.xpu.tim.myfaceapplication.util.ImgSaveUtils;
+
 
 public class MainActivity extends AppCompatActivity implements CameraBridgeViewBase.CvCameraViewListener2 {
     private CameraBridgeViewBase openCvCameraView;
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         requestPermission();
         setContentView(R.layout.activity_main);
 
-        //TODO 权限动态获取
+        //TODO 权限动态获取（此问题暂时保留）
         new Thread(()-> accessToken = AuthService.getAuth()).start();
 
         openCvCameraView = findViewById(R.id.javaCameraView);
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+                                           @NonNull String permissions[], @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
                 if (grantResults.length > 0
@@ -216,12 +217,10 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("警告！")
                 .setMessage("请前往设置->应用->PermissionDemo->权限中打开相关权限，否则功能无法正常运行！")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 一般情况下如果用户不授权的话，功能是无法运行的，做退出处理
-                        finish();
-                    }
+                .setPositiveButton("确定", (dialog1, which) -> {
+                    // 一般情况下如果用户不授权的话，功能是无法运行的，做退出处理
+                    finish();
                 }).show();
+        dialog.show();
     }
 }

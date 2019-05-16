@@ -15,7 +15,7 @@ public class CookieUtils {
     private static List<Cookie> cookies;
 
     /* 返回cookies列表 */
-    public static List<Cookie> getCookies() {
+    static List<Cookie> getCookies() {
         return cookies != null ? cookies : new ArrayList<>();
     }
 
@@ -33,11 +33,11 @@ public class CookieUtils {
     /* 得到cookie */
     public static List<Cookie> getCookie(Context context) {
         PersistentCookieStore cookieStore = new PersistentCookieStore(context);
-        List<Cookie> cookies = cookieStore.getCookies();
-        return cookies;
+        return cookieStore.getCookies();
     }
 
     /* 清除cookie */
+    @SuppressWarnings("unused")
     public static void clearCookie(Context context) {
         PersistentCookieStore cookieStore = new PersistentCookieStore(context);
         cookieStore.clear();

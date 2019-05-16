@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".MyApp"
@@ -34,11 +35,11 @@
         <activity
             android:name=".TeacherAty"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".student.StuCheckInfoAty"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".FirstRunAty">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -48,8 +49,13 @@
         </activity>
         <activity
             android:name=".student.CheckSpecificInfoAty"
-            android:launchMode="singleTask"
-            ></activity>
+            android:launchMode="singleTask" />
+
+        <service
+            android:name=".service.DetectionService"
+            android:enabled="true"
+            android:exported="true"
+            />
     </application>
 
 </manifest>

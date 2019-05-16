@@ -6,14 +6,14 @@ public interface AppConfig {
     boolean netWork = true;
 
     //采集精度控制
-    int pictureCount = 3;
+    int pictureCount = 5;
 
     //登录请求地址
     String loginAddress = "http://47.103.14.73:8080/wisdom_web/login/all";
 
 
     //获取本月的课程信息
-    String classInfoAddress = "http://47.103.14.73:8080/wisdom_web/studentCourseInfo/thisMonth";
+    String classInfoAddress = "http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttASpellTime";
 
     String TAG = "MyAppConfig";
 }

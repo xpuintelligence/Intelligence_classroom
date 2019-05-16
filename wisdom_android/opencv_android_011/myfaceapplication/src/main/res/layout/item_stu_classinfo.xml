@@ -58,7 +58,7 @@
             android:singleLine="false"
             android:maxLines="2"
             android:ellipsize="end"
-            android:text="kafka源码剖析源码剖析让同学们明白Kafka的工作原理, 并对Kafka进行性能优化，Kafka在高并发下的吞吐量控制...."/>
+            android:text="Kafka性能优化，Kafka在高并发下的吞吐量控制...."/>
         <ImageView
             android:paddingLeft="10dp"
             android:id="@+id/item_ClassCheck"
