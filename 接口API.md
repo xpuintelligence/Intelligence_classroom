@@ -448,4 +448,65 @@ name|method|url|requestParams|describe
 查询今天的每日统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfT|无|无
 查询开学到现在的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfTS|page-->第几页（没有该参数默认为第1页）size-->页面几行信息（默认15）|可以使用分页
 ----
+## 给某个固定的学生发响应的信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/monitorStudent/setStudentStatus
+api说明|给服务器发送一个消息加入到消息队列里面
+### _需传输的参数_
+name|describe
+----|------
+msg|要发送的消息
+id|要给哪一个学生发送消息
+status|状态值
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功 0--->失败
+msg|true
+data|
+### 返回值样本
+```json
+{
+    "status": 1,
+    "msg": "true",
+    "data": {}
+     
+}
+```
+----
+## 给某个固定的学生发响应的信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/monitorStudent/getStudentMsg
+api说明|获取服务器消息队列中某个学生的消息
+### _需传输的参数_
+name|describe
+----|------
+id|学生的id
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功 0--->失败
+msg|true
+data|具体的消息
+### 返回值样本
+```json
+{
+    "status": 1,
+    "msg": "true",
+    "data": {
+        "id": "41609050201",--->该学生的学号
+        "status": "1",--->状态值
+        "msg": null--->消息字段
+    }
+}
+```
+----
 
