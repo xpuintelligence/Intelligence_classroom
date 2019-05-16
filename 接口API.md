@@ -1,5 +1,10 @@
 后台API文档
 ===========
+## 1.4后台api版本更新
++ 查询开学到现在的每日统计考勤以及统计这段时间的统计考勤  添加了分页
++ 修复了教室登陆返回1的bug
++ 修复了数据库无事务提交的bug
+----------
 ## web或app端登陆
 ### _请求方式与url_
 name|describe
@@ -315,7 +320,7 @@ name|method|url|requestParams|describe
 name|describe
 ----|------
 method|post
-url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttThisSemester
+url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/allCourseAttASpellTime
 api说明|该为每节课的考勤信息
 ### _需传输的参数_
 name|describe
@@ -440,6 +445,6 @@ name|method|url|requestParams|describe
 查询上月的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfLM|无|无
 查询某天的每日统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfOD|oneday-->某一天的时间(2018-05-12 00:00:00)|无
 查询今天的每日统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfT|无|无
-查询开学到现在的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfTS|无|无
+查询开学到现在的每日统计考勤以及统计这段时间的统计考勤|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getProAttOfTS|page-->第几页（没有该参数默认为第1页）size-->页面几行信息（默认15）|可以使用分页
 ----
 

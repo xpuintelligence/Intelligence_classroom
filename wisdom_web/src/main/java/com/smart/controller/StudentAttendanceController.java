@@ -285,14 +285,18 @@ public class StudentAttendanceController {
         return result;
     }
     /**
-     * 查询今天的考勤大致情况
+     * 查询这个学期的考勤大致情况
      */
     @RequestMapping("/getProAttOfTS")
     @ResponseBody
-    public WisdomResult getThisSemesterProbableAttOfEveryday(HttpServletRequest request){
+    public WisdomResult getThisSemesterProbableAttOfEveryday(Integer page,Integer size,HttpServletRequest request){
+        if (page == null || page == 0  )
+            page = 1;
+        if (size == null || size == 0)
+            size = 15;
         StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
         //调用service方法
-        WisdomResult result = studentAttendanceService.getThisSemesterProbableAttOfEveryday(studentInfo);
+        WisdomResult result = studentAttendanceService.getThisSemesterProbableAttOfEveryday(page,size,studentInfo);
         return result;
     }
 

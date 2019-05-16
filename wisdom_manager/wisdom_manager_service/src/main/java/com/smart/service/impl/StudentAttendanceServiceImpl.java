@@ -1,5 +1,7 @@
 package com.smart.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.smart.mapper.TbStudentMapper;
 import com.smart.pojo.*;
 import com.smart.service.CourseService;
@@ -432,16 +434,33 @@ public class StudentAttendanceServiceImpl implements StudentAttendanceService {
 
     /**
      * 查询这个学生这个学期考勤信息
+     * @param page
+     * @param size
      * @param studentInfo 学生信息
      */
     @Override
-    public WisdomResult getThisSemesterProbableAttOfEveryday(StudentInfo studentInfo) {
+    public WisdomResult getThisSemesterProbableAttOfEveryday(Integer page, Integer size, StudentInfo studentInfo) {
         //获取开学时间
         DateTime opentime = courseServiceImpl.getOpentime();
         //获取当前时间
         DateTime currentTime = DateUtils.getCurrentTime();
-        //查询加返回
-        return getASpellTimeProbableAttOfEveryday(studentInfo,opentime,currentTime);
+        //第一次先查出来所有的
+        List<DaysAttendanceCollect> list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(), opentime.toString(DATE_FORMAT_TOSTRING),
+                currentTime.toString(DATE_FORMAT_TOSTRING));
+        //计算出天数
+        int num = DateUtils.twoDayGap(opentime,currentTime);
+        //将短时间的数据进行格式化
+        DaysAttendanceCollectStatistic daysAttendanceCollectStatistic =
+                new DaysAttendanceCollectStatistic(num,list);
+        PageHelper.startPage(page,size);
+        //这次是查分页的
+        list = tbStudentMapper.selectDaysAttendanceCollectByIDStartEnd(studentInfo.getId(), opentime.toString(DATE_FORMAT_TOSTRING),
+                currentTime.toString(DATE_FORMAT_TOSTRING));
+        PageInfo<DaysAttendanceCollect> pageInfo = new PageInfo<>(list) ;
+        //这里取出来分页的信息
+        daysAttendanceCollectStatistic.setList(pageInfo.getList());
+        //返回值
+        return WisdomResult.ok(daysAttendanceCollectStatistic);
     }
 
 

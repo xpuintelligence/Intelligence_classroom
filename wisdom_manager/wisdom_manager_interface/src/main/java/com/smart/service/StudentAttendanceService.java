@@ -181,9 +181,11 @@ public interface StudentAttendanceService {
 
     /**
      * 查询出这个学期每一天的考勤信息
+     * @param page
+     * @param size
      * @param studentInfo 学生信息
      */
-    public WisdomResult getThisSemesterProbableAttOfEveryday(StudentInfo studentInfo);
+    public WisdomResult getThisSemesterProbableAttOfEveryday(Integer page, Integer size, StudentInfo studentInfo);
 
 
 }

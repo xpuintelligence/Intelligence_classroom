@@ -122,5 +122,16 @@ public class WXLoginServiceImpl implements WXLoginService, Serializable {
         }
     }
 
+    @Override
+    public String test() {
+        TbStudentExample tbStudentExample = new TbStudentExample();
+        TbStudentExample.Criteria criteria = tbStudentExample.createCriteria();
+        criteria.andIdEqualTo("41609050128");
+        TbStudent tbStudent = new TbStudent();
+        tbStudent.setPassword("00001");
+        tbStudentMapper.updateByExampleSelective(tbStudent,tbStudentExample);
+        return "1";
+    }
+
 
 }
