@@ -141,7 +141,7 @@ class FaceSearch:
         # 当前教室人数
         judge_student_num = len(student_actual_list)
         # 判断当前低头人数是否多于全班人数的一半
-        if(len(student_headown_list)>judge_student_num/2):
+        if(len(student_headown_list)>=judge_student_num/2):
             student_headown_list = []
             return student_headown_list
         else:

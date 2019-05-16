@@ -1,4 +1,7 @@
 # 用于判断当前学生的状态
+import requests
+import json
+
 from FaceDataBase import FaceDataBase
 
 class GetJudge:
@@ -26,11 +29,24 @@ class GetJudge:
 
             # 判断学生多次低头的情况是不是在睡觉
             for student_name in self.sleepdict.keys():
-                if(self.sleepdict[student_name]) >=3:
+                if(self.sleepdict[student_name]) >=1:
                     print("请提醒"+student_name+"同学，该同学可能正在睡觉")
+                    faceDataBase = GetJudge.initdatabase()
+                    student_id = faceDataBase.get_student_id(student_name)
+                    GetJudge.post_sleep_student(student_id)
             
             return self.sleepdict
         
+    # 准备链接数据库 返回数据库对象
+    def initdatabase():
+        # 数据库信息
+        print("调用服务器数据库")
+        host = "101.132.78.78"
+        user = "root"
+        database = "team_model"
+        password = "nanshen166013"
+        faceDataBase = FaceDataBase(host, user, database, password)
+        return faceDataBase
 
     # 判断学生出勤情况的查询
     def student_attendance_Judge(self, student_name_list):
@@ -45,16 +61,6 @@ class GetJudge:
             return self.student_attendancedict
 
 
-
-    def initdatabase():
-        # 数据库信息
-        print("调用服务器数据库")
-        host = "101.132.78.78"
-        user = "root"
-        database = "team_model"
-        password = "nanshen166013"
-        faceDataBase = FaceDataBase(host, user, database, password)
-        return faceDataBase
 
 
     # 该学生本节课的抬头（认真听课）分数,该学生本节课的抬头率
@@ -78,6 +84,23 @@ class GetJudge:
             student_id_headuprate_score_dict[student_id] = student_score
 
         return student_score_dict,student_headuprate_dict,student_id_headuprate_score_dict
+
+
+    # 给服务器发送学生睡觉的post请求
+    def post_sleep_student(student_id):
+        # api地址
+        url = "http://192.168.137.1:8081/monitorStudent/setStudentStatus"
+        # 1为睡觉
+        student_id = str(student_id)
+        body = {"status":'1', "id":student_id}
+
+        response = requests.post(url,data = body)
+        print(response.text)
+        response.text = dict(response.text)
+        if response.text['status'] == 1:
+           print("已经向服务器发送了睡觉信息")
+           print(response.status_code)
+
 
 
         

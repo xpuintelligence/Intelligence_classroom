@@ -145,4 +145,9 @@ class FaceDataBase:
 
         conn.close()
 
-    
+    # 将睡觉的学生插入数据库
+
+    def attendance_insert_attend_sleep(self):
+
+        conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
+        #sql = ""
