@@ -22,7 +22,7 @@ public class AttendanceItem implements Serializable {
     String teacher_id;//老师id
     String teacher_name;//老师姓名
     String classroom_id;//教室id
-    String course_node;//课程node
+    String course_note;//课程note
     String student_id;//学生id
     String student_name;//学生名
 }
