@@ -51,7 +51,8 @@ public class LoginController {
             tbTeacher.setPassword(requestLogin.getPassword());
             //调用service层
             result = teacherLoginService.teacherLoginOfWeb(tbTeacher);
-            System.out.println(result);
+            //如果登陆成功将老师信息存在session中
+            request.getSession().setAttribute("teacher",result.getData());
 
         }
         return result;

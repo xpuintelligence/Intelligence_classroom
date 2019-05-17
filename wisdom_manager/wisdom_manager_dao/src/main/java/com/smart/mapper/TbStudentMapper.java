@@ -45,6 +45,7 @@ public interface TbStudentMapper {
      */
     StudentInfo selectStudentInfo(String wexin_id);//用openId查
 
+
     /**
      * 通过账号密码学生账号
      * @param id 账号

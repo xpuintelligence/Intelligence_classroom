@@ -17,18 +17,13 @@ public class TeacherLoginServiceImpl implements TeacherLoginService, Serializabl
 
     @Override
     public WisdomResult teacherLoginOfWeb(TbTeacher tbTeacher) {
-        TbTeacherExample tbTeacherExample = new TbTeacherExample();
-        //附加条件
-        TbTeacherExample.Criteria criteria = tbTeacherExample.createCriteria();
-        //账号密码
-        criteria.andIdEqualTo(tbTeacher.getId());
-        criteria.andPasswordEqualTo(tbTeacher.getPassword());
+
         //获取查询结果
-        List<TbTeacher> tbTeachers = tbTeacherMapper.selectByExample(tbTeacherExample);
+        TeacherInfo teacherInfo = tbTeacherMapper.selectTeacherIdAndPassword(tbTeacher.getId(), tbTeacher.getPassword());
         //查看查出来几条记录
-        if (tbTeachers.size() == 1){
+        if (teacherInfo != null){
             //1条记录则返回改记录所对应的pojo
-            WisdomResult result = new WisdomResult(2,"true",tbTeachers.get(0));
+            WisdomResult result = new WisdomResult(2,"true",teacherInfo);
             return result;
         }
         //不是一条记录返回false
@@ -40,15 +35,13 @@ public class TeacherLoginServiceImpl implements TeacherLoginService, Serializabl
         //拿到student以后，判断openid是不是在数据库中存在
         String openid = tbTeacher.getWexinId();
         //创建查询实例
-        TbTeacherExample tbTeacherExample = new TbTeacherExample();
-        TbTeacherExample.Criteria criteria = tbTeacherExample.createCriteria();
+
         //去数据库中查询是否存在
-        criteria.andWexinIdEqualTo(openid);
-        List<TbTeacher> tbTeachers = tbTeacherMapper.selectByExample(tbTeacherExample);
+        TeacherInfo teacherInfo = tbTeacherMapper.selectTeacherInfo(tbTeacher.getWexinId());
         //如果学生表中没有这个人
-        if (tbTeachers.size() == 0){
+        if (teacherInfo == null){
             return new WisdomResult(0,openid,null);
         }
-        return new WisdomResult(2,openid,tbTeachers.get(0));
+        return new WisdomResult(2,openid,teacherInfo);
     }
 }
