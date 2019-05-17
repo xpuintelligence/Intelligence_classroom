@@ -2,8 +2,7 @@
   <div>
     <div style="text-align: center;">
       <transition enter-active-class="flip" leave-active-class="hinge">
-        <img v-show="flag" alt="logo.png" src="../../assets/logo.png" style="width: 500px" class="animated"
-             onclick="window.open('#')">
+        <img v-show="flag" alt="logo.png" src="../../assets/logo.png" style="width: 500px" class="animated">
       </transition>
 
 
@@ -15,7 +14,7 @@
 <script>
 
   export default {
-    name: "Welcome",
+    name: "t_Welcome",
     data() {
       return {
         flag: false, // 页面 动画控制

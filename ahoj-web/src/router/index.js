@@ -18,29 +18,35 @@ import Login from "@/components/Login"
 import Student from "@/components/Student"
 import Teacher from "@/components/Teacher"
 
-import Welcome from "@/components/Student/Welcome"  // 登录后的欢迎界面
-import ShowInfo from "@/components/Student/ShowInfo" // 个人信息界面
+/******************/
+/*      学生       */
+/******************/
+import Welcome from "@/components/Student/Welcome"    // 登录后的欢迎界面
+import ShowInfo from "@/components/Student/ShowInfo"  // 个人信息界面
 
-import CourseInfo from "@/components/Student/CourseInfo" // 课堂考勤页面
+import CourseInfo from "@/components/Student/CourseInfo"       // 课堂考勤页面
 import GetCourseInfo from "@/components/Student/GetCourseInfo" // 学生考勤信息查询
 
-import Homework from "@/components/Student/Homework" // 课堂作业
-import GetHomework from "@/components/Student/GetHomework" // 查看作业
-import PushHomework from "@/components/Student/PushHomework" // 提交作业
+import Homework from "@/components/Student/Homework"          // 课堂作业
+import GetHomework from "@/components/Student/GetHomework"    // 查看作业
+import PushHomework from "@/components/Student/PushHomework"  // 提交作业
 
-import ClassPreview from "@/components/Student/ClassPreview" // 课前预习
-import AnsweringQuestions from "@/components/Student/AnsweringQuestions" // 课后答疑
+import ClassPreview from "@/components/Student/ClassPreview"              // 课前预习
+import AnsweringQuestions from "@/components/Student/AnsweringQuestions"  // 课后答疑
 
 import Evaluation from "@/components/Student/Evaluation" // 课程评价
 
 import PushActivities from "@/components/Student/PushActivities" // 发布活动
 import JoinActivities from "@/components/Student/JoinActivities" // 活动报名
 
-// import NotFound from "@/components/404" // 404 page
 import testChart from "@/components/testChart"
 
-Vue.use(Router);
+/******************/
+/*      教师       */
+/******************/
+import t_welcome from "@/components/Teacher/t_Welcome"
 
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -121,6 +127,14 @@ export default new Router({
       path: '/Teacher',
       name: 'Teacher',
       component: Teacher,
+      redirect: '/Teacher/t_Welcome',
+      children: [
+        {
+          path: 't_welcome',
+          name: 't_welcome',
+          component: t_welcome,
+        },
+      ]
     },
     { // test~~~~~~~~~~~~
       path: '/testChart',

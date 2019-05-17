@@ -88,7 +88,6 @@
           if (1) {
             sessionStorage.setItem('userData', JSON.stringify(res.data.data));
             if (this.input_who === 1) {
-              console.log('student');
               this.$router.push('Student');
             } else if (this.input_who === 2) {
               console.log('teacher');

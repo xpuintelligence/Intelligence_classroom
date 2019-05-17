@@ -1,72 +1,72 @@
 <template>
   <div>
-    <el-container>
-      <el-aside class="app-side app-side-left" :class="isCollapse ? 'app-side-collapsed' : 'app-side-expanded'">
+    <el-container class="wrap">
+      <el-aside class="app-side silder" :class="isCollapse ? 'app-side-collapsed' : 'app-side-expanded'">
         <div class="app-side-logo">
           <img src="@/assets/logo.png" :width="isCollapse ? '60' : '60'" height="60"/>
         </div>
 
-        <div>
-          <!-- 菜单 -->
-          <el-menu default-active="Welcome" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
-                   :collapse="isCollapse">
+        <!-- 菜单 -->
+        <el-menu default-active="Welcome" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
+                 background-color="#324157"
+                 text-color="#fff"
+                 active-text-color="#ffd04b">
 
-            <el-menu-item index="Welcome">
-              <i class="el-icon-position"></i>
-              <span slot="title">首页</span>
-            </el-menu-item>
+          <el-menu-item index="Welcome">
+            <i class="el-icon-position"></i>
+            <span slot="title">首页</span>
+          </el-menu-item>
 
-            <!--ShowInfo-->
-            <el-menu-item index="ShowInfo">
-              <i class="el-icon-user"></i>
-              <span slot="title">个人信息</span>
-            </el-menu-item>
+          <!--ShowInfo-->
+          <el-menu-item index="ShowInfo">
+            <i class="el-icon-user"></i>
+            <span slot="title">个人信息</span>
+          </el-menu-item>
 
-            <el-submenu index="考勤信息">
-              <template slot="title">
-                <i class="el-icon-date"></i>
-                <span slot="title">考勤信息</span>
-              </template>
-              <el-menu-item index="CourseInfo">概览</el-menu-item>
-              <el-menu-item index="GetCourseInfo">考勤查询</el-menu-item>
-            </el-submenu>
+          <el-submenu index="考勤信息">
+            <template slot="title">
+              <i class="el-icon-date"></i>
+              <span slot="title">考勤信息</span>
+            </template>
+            <el-menu-item index="CourseInfo">概览</el-menu-item>
+            <el-menu-item index="GetCourseInfo">考勤查询</el-menu-item>
+          </el-submenu>
 
-            <el-submenu index="课堂作业">
-              <template slot="title">
-                <i class="el-icon-edit"></i>
-                <span slot="title">课堂作业</span>
-              </template>
-              <el-menu-item index="GetHomework">查看作业</el-menu-item>
-              <el-menu-item index="PushHomework">提交作业</el-menu-item>
-            </el-submenu>
+          <el-submenu index="课堂作业">
+            <template slot="title">
+              <i class="el-icon-edit"></i>
+              <span slot="title">课堂作业</span>
+            </template>
+            <el-menu-item index="GetHomework">查看作业</el-menu-item>
+            <el-menu-item index="PushHomework">提交作业</el-menu-item>
+          </el-submenu>
 
-            <el-submenu index="课堂内容">
-              <template slot="title">
-                <i class="el-icon-chat-dot-round"></i>
-                <span slot="title">课堂内容</span>
-              </template>
-              <el-menu-item index="ClassPreview">课前预习</el-menu-item>
-              <el-menu-item index="AnsweringQuestions">课后答疑</el-menu-item>
-            </el-submenu>
+          <el-submenu index="课堂内容">
+            <template slot="title">
+              <i class="el-icon-chat-dot-round"></i>
+              <span slot="title">课堂内容</span>
+            </template>
+            <el-menu-item index="ClassPreview">课前预习</el-menu-item>
+            <el-menu-item index="AnsweringQuestions">课后答疑</el-menu-item>
+          </el-submenu>
 
-            <el-menu-item index="Evaluation">
-              <i class="el-icon-star-off"></i>
-              <span slot="title">课程评价</span>
-            </el-menu-item>
+          <el-menu-item index="Evaluation">
+            <i class="el-icon-star-off"></i>
+            <span slot="title">课程评价</span>
+          </el-menu-item>
 
-            <el-submenu index="活动">
-              <template slot="title">
-                <i class="el-icon-basketball"></i>
-                <span slot="title">课外活动</span>
-              </template>
-              <el-menu-item index="PushActivities">发布活动</el-menu-item>
-              <el-menu-item index="JoinActivities">活动报名</el-menu-item>
-            </el-submenu>
-          </el-menu>
-        </div>
+          <el-submenu index="活动">
+            <template slot="title">
+              <i class="el-icon-basketball"></i>
+              <span slot="title">课外活动</span>
+            </template>
+            <el-menu-item index="PushActivities">发布活动</el-menu-item>
+            <el-menu-item index="JoinActivities">活动报名</el-menu-item>
+          </el-submenu>
+        </el-menu>
       </el-aside>
 
-      <el-container>
+      <el-container class="container">
 
         <!--上边栏-->
         <el-header class="app-header">
@@ -81,28 +81,17 @@
             <Mallki class="loginOut" text="溜了溜了"></Mallki>
           </el-button>
 
-          <!--<div class="app-header-userinfo">-->
-            <!--<el-dropdown trigger="hover" :hide-on-click="false">-->
-              <!--<span class="el-dropdown-link">-->
-                <!--{{ this.userData.name }}-->
-                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-              <!--</span>-->
-              <!--<el-dropdown-menu slot="dropdown">-->
-                <!--<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>-->
-              <!--</el-dropdown-menu>-->
-            <!--</el-dropdown>-->
-          <!--</div>-->
-
         </el-header>
 
         <!--主要内容部分-->
-        <el-main class="app-body">
+        <el-main class="main">
           <transition name="fade" mode="out-in" translate="yes">
             <router-view></router-view>
           </transition>
         </el-main>
 
       </el-container>
+
     </el-container>
 
   </div>
@@ -110,6 +99,7 @@
 
 <script>
   import Mallki from "@/components/MyComponents/Mallki";
+
   export default {
     name: "Student",
     data() {
@@ -155,9 +145,51 @@
 </script>
 
 <style lang="scss">
+  $hideWidth: 0px;
+  $silderWidth: 230px;
+  .wrap {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .container {
+    position: relative;
+    height: 100vh;
+    transition: margin 0.3s;
+    margin-left: $silderWidth;
+  }
+
+  .main {
+    position: absolute;
+    left: 0;
+    top: 50px;
+    width: 100%;
+    bottom: 0;
+    overflow-y: auto;
+  }
+
+  .silder {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    overflow: hidden;
+    transition: width 0.3s;
+    background-color: #324157;
+    color: #bfcbd9;
+    font-size: 14px;
+    user-select: none;
+    width: 180px;
+    overflow-y: auto;
+
+    & > ul {
+      width: 180px;
+    }
+  }
 
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .25s;
+    transition: opacity .3s;
   }
 
   .fade-enter, .fade-leave-to {
@@ -200,6 +232,7 @@
       height: 100%;
       font-weight: 400;
 
+      /* logo 背景颜色 */
       &-left {
         background-color: rgb(255, 255, 255);
       }
@@ -228,6 +261,10 @@
       justify-content: flex-start;
       align-items: center;
       border-bottom: $solidBorder;
+      background-color: #fff;
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+      position: relative;
+      filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 1.0;
 
       &-userinfo {
         position: absolute;
