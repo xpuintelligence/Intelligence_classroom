@@ -1,16 +1,16 @@
 <template>
   <div>
-    <el-card>
+    <el-card v-if="chartsRanderOk === true">
       <x-chart id="thisSemesterCharts" class="thisSemesterCharts" :option="thisSemesterCharts"></x-chart>
     </el-card>
 
 
-    <el-card>
+    <el-card v-if="chartsRanderOk === true">
       <x-chart id="packedbubbleCharts" class="packedbubbleCharts" :option="packedbubbleCharts"></x-chart>
     </el-card>
 
 
-    <el-card>
+    <el-card v-if="chartsRanderOk === true">
       <x-chart id="thisSemester3dPointChart" class="thisSemester3dPointChart"
                :option="thisSemester3dPointChart"></x-chart>
     </el-card>
@@ -28,6 +28,7 @@
         thisSemesterTotalInfo: {},
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
+        chartsRanderOk: false,
 
         thisSemesterCharts: {
           navigation: {
@@ -255,11 +256,6 @@
         this.thisSemesterCharts.series[0].data.push(this.thisSemesterTotalInfo[i].headUpScore);  // 专注度
         this.thisSemesterCharts.series[1].data.push(this.thisSemesterTotalInfo[i].attendanceTotalScore);  // 考勤总分
 
-        // 泡泡表格数据
-        // let tmp = { // 请假数据
-        //   name: new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString(),
-        //   value: this.thisSemesterTotalInfo[i].leaveScore
-        // };\
         this.packedbubbleCharts.series[0].name = '请假';
         this.packedbubbleCharts.series[0].data.push({
           name: new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString(),
@@ -280,9 +276,7 @@
       }
       this.thisSemesterCharts.title.text = '智慧教室-学期总成绩-' + this.userData.name;
 
-      // var url = document.location.toString();
-      // var arrUrl = url.split("?");
-      // console.log(arrUrl);
+      this.chartsRanderOk = true; // 表格处理完毕，显示进行渲染
     },
   }
 </script>

@@ -7,7 +7,7 @@
         </div>
 
         <!-- 菜单 -->
-        <el-menu default-active="Welcome" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
+        <el-menu :default-active="active" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
                  background-color="#324157"
                  text-color="#fff"
                  active-text-color="#ffd04b">
@@ -106,6 +106,7 @@
       return {
         userData: {},
         isCollapse: false,
+        active: '',
       }
     },
     methods: {
@@ -115,30 +116,37 @@
       logout: function () {
         this.$confirm('确认退出?', '提示', {})
           .then(() => {
-            sessionStorage.removeItem('userData');
+            sessionStorage.removeItem('userData');  // 移除用户信息
+            localStorage.removeItem('active');  // 移除当前标签页信息
             this.$router.push('/');
           })
           .catch(() => {
           });
       },
       handleOpen(key, keyPath) {
-        // console.log(key, keyPath);
       },
       handleClose(key, keyPath) {
-        // console.log(key, keyPath);
       },
       handleSelect(key, keyPath) {
-        // console.log(key, keyPath);
+        localStorage.setItem('active', key);
         this.$router.push('/Student/' + key);
       },
     },
     mounted() {
+      let tmp = localStorage.getItem('active'); // 读取保存的标签页信息
+      if (tmp != null) {  // 如果为空就是 welcome，不为空就是当前页面
+        this.active = tmp;
+        console.log(1);
+      } else {
+        this.active = 'Welcome';
+      }
+
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
+
       this.$notify({
         message: '你好，' + this.userData.name,
         type: 'success'
       });
-      // console.log(this.userData);
     },
     components: {Mallki},
   }
@@ -264,7 +272,9 @@
       background-color: #fff;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
       position: relative;
-      filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 1.0;
+      filter: alpha(Opacity=60);
+      -moz-opacity: 0.6;
+      opacity: 1.0;
 
       &-userinfo {
         position: absolute;

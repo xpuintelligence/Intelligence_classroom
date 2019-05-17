@@ -10,7 +10,7 @@
 
       <div class="text item">
         <el-row :span="16">
-          <el-card>
+          <el-card v-if="chartsRanderOk === true">
             <x-chart id="high" class="high" :option="thisWeekChart"></x-chart>
           </el-card>
         </el-row>
@@ -18,7 +18,7 @@
         <br>
 
         <el-row :span="8">
-          <el-card>
+          <el-card v-if="chartsRanderOk === true">
             <x-chart id="thisWeekHeatMapChart" class="thisWeekHeatMapChart" :option="thisWeekHeatMapChart"></x-chart>
           </el-card>
         </el-row>
@@ -42,6 +42,7 @@
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
         thisWeekTime: '',
+        chartsRanderOk: false,
 
         chartTittle: '',
         thisWeekChart: {
@@ -224,6 +225,7 @@
 
       } // for
 
+      this.chartsRanderOk = true;
     },
     components: {Mallki, XChart}
   }

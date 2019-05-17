@@ -10,7 +10,7 @@
 
       <div class="text item">
         <el-row :span="16">
-          <el-card>
+          <el-card v-if="chartsRanderOk === true">
             <x-chart id="thisMonthChart" class="thisMonthChart" :option="thisMonthChart"></x-chart>
           </el-card>
         </el-row>
@@ -18,7 +18,7 @@
         <br>
 
         <el-row :span="8">
-          <el-card>
+          <el-card v-if="chartsRanderOk === true">
             <x-chart id="thisMonthHeatMapChart" class="thisMonthHeatMapChart" :option="thisMonthHeatMapChart"></x-chart>
           </el-card>
         </el-row>
@@ -41,6 +41,7 @@
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
         thisMonthTime: '',  // 本月时间段
+        chartsRanderOk: false,
 
         chartTittle: '',
         thisMonthHeatMapChart: {
@@ -231,6 +232,7 @@
         ;
       } // for
 
+      this.chartsRanderOk = true;
     },
     components: {Mallki, XChart}
   }

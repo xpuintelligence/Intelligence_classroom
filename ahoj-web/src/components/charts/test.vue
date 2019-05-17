@@ -51,13 +51,11 @@
     },
     watch: {
       mc() {
-        // HighCharts.chart(this.id, this.option);
+        HighCharts.chart(this.id, this.option);
       }
     },
     async mounted() {
-      // console.log("======");
       // console.log(this.option);
-
       // await HighCharts.chart(this.id, this.option);
       await setTimeout(() => {
         HighCharts.chart(this.id, this.option);

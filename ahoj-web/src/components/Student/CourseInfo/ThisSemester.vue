@@ -9,13 +9,13 @@
       </div>
 
       <div class="text item">
-        <el-card>
+        <el-card v-if="chartsRanderOk === true">
           <x-chart id="thisSemesterChart" class="thisSemesterChart" :option="thisSemesterChart"></x-chart>
         </el-card>
 
         <br>
 
-        <el-card>
+        <el-card v-if="chartsRanderOk === true">
           <x-chart id="thisSemesterHeatMapChart" class="thisSemesterHeatMapChart"
                    :option="thisSemesterHeatMapChart"></x-chart>
         </el-card>
@@ -39,6 +39,7 @@
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
         thisSemesterTime: '',  // 本月时间段
+        chartsRanderOk: false,
 
         chartTittle: '',
         thisSemesterChart: {
@@ -222,8 +223,9 @@
           + this.thisSemesterHeatMapChart.yAxis.categories[new Date(this.thisSemesterData[i].time).getDay()]
           + '<br>考勤总分' + this.thisSemesterData[i].attendanceTotalScore + '分'
         ;
-
       } // for
+
+      this.chartsRanderOk = true;
     },
     components: {Mallki, XChart}
   }

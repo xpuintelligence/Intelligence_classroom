@@ -10,13 +10,13 @@
 
       <div class="text item">
         <el-col :span="12">
-          <el-card>
+          <el-card v-if="chartsRanderOk === true">
             <x-chart class="todayState" id="todayState" :option="yibiaoCharts"></x-chart>
           </el-card>
         </el-col>
 
         <el-col :span="12">
-          <el-card>
+          <el-card v-if="chartsRanderOk === true">
             <x-chart id="TodayChart" class="TodayChart" :option="todayChart"></x-chart>
           </el-card>
         </el-col>
@@ -40,6 +40,7 @@
         attendTotalScore: [], // 出勤总分数
         headUpScore: [],  // 抬头率分数
         todayTime: '',  // 今天的时间
+        chartsRanderOk: false,
 
         chartTittle: '',
         todayChart: {
@@ -227,6 +228,7 @@
         this.yibiaoCharts.series[1].data[0].y = this.todayData.headUpScore;
       }
 
+      this.chartsRanderOk = true; // 表格数据处理完成
       // 处理本月上课数据 生成表格
       // this.chartTittle = this.userData.name + '-今天上课状态';
       //

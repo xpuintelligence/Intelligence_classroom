@@ -83,13 +83,14 @@
             }
           );
 
-          // console.log(res);
+          // console.log(res.body);
 
-          if (1) {
-            sessionStorage.setItem('userData', JSON.stringify(res.data.data));
-            if (this.input_who === 1) {
+          if (res.body.msg === 'true') {
+            sessionStorage.setItem('userData', JSON.stringify(res.body.data));
+
+            if (res.body.status === 1) {
               this.$router.push('Student');
-            } else if (this.input_who === 2) {
+            } else if (res.body.status === 2) {
               console.log('teacher');
               this.$router.push('Teacher');
             } else {
