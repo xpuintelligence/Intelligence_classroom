@@ -37,18 +37,18 @@ data|查询到的学生信息对象，对应数据库中的tb_student的各个�
        "status": 1,
        "msg": "true",
        "data": {
-           "id": "41609050128",
-           "name": "宁大力",
-           "sex": "male",
-           "phone": "",
-           "email": null,
-           "classId": "080902201601",
-           "className": "软件1班",
-           "professionId": "080902",
-           "professionName": "软件工程",
-           "collegeId": "06",
-           "collegeName": "计算机科学学院",
-           "weixinId": null
+           "id": "41609050128", //学生id
+           "name": "宁大力", //学生姓名
+           "sex": "male", //学生性别
+           "phone": "", //学生电话号码
+           "email": null, //学生邮箱
+           "classId": "080902201601", //班级id
+           "className": "软件1班", //班级名称
+           "professionId": "080902", //专业id
+           "professionName": "软件工程", //专业名称
+           "collegeId": "06", //学院id
+           "collegeName": "计算机科学学院", //学院名称
+           "weixinId": null //微信号
        }
    }
 账号或密码错误情况:
@@ -121,18 +121,18 @@ data|null
     "msg":"true",
     "data":
      {
-        "id": "41609050128",
-        "name": "宁大力",
-        "sex": "male",
-        "phone": "",
-        "email": null,
-        "classId": "080902201601",
-        "className": "软件1班",
-        "professionId": "080902",
-        "professionName": "软件工程",
-        "collegeId": "06",
-        "collegeName": "计算机科学学院",
-        "weixinId": null}
+        "id": "41609050128", //学生id
+        "name": "宁大力", //姓名
+        "sex": "male", //性别
+        "phone": "", //电话号码
+        "email": null, //电子邮箱
+        "classId": "080902201601", //班级id
+        "className": "软件1班", //班级名称
+        "professionId": "080902", //专业id
+        "professionName": "软件工程", //专业名称
+        "collegeId": "06", //学院名称
+        "collegeName": "计算机科学学院", 学院名称
+        "weixinId": null} //微信号
 用户绑定的账号或密码错误:
     {"status":0,
     "msg":"账号或密码错误",
@@ -164,18 +164,18 @@ data|null
     "msg":"true",
     "data":
      {
-        "id": "41609050128",
-        "name": "宁大力",
-        "sex": "male",
-        "phone": "",
-        "email": null,
-        "classId": "080902201601",
-        "className": "软件1班",
-        "professionId": "080902",
-        "professionName": "软件工程",
-        "collegeId": "06",
-        "collegeName": "计算机科学学院",
-        "weixinId": null}
+        "id": "41609050128", //学生id
+        "name": "宁大力", //姓名
+        "sex": "male", //性别
+        "phone": "", //电话号码
+        "email": null, //电子邮箱
+        "classId": "080902201601", //班级id
+        "className": "软件1班", //班级名称
+        "professionId": "080902", //专业id
+        "professionName": "软件工程", //专业名称
+        "collegeId": "06", //学院id
+        "collegeName": "计算机科学学院", //学院名称
+        "weixinId": null} //微信号
 用户绑定的账号或密码错误:
     {"status":0,
     "msg":"账号或密码错误",
@@ -207,19 +207,19 @@ data|（List集合）课程的信息，该节课老师的信息，该节课的�
     "msg": "true",
     "data": [
                 {
-            "id": "20190503081000",
-            "time": 1556842200000,
-            "courseId": "1008",
-            "courseName": "企业管理与技术经济",
-            "courseNote": null,
-            "attendanceTotalScore": 60,
-            "leaveScore": 20,
-            "attendScore": 20,
-            "lateAttendScore": 10,
-            "headUpScore": 40,
-            "classroomId": "B135",
-            "teacherId": "15",
-            "teacherName": "龚东生"
+            "id": "20190503081000", //这节课的id
+            "time": 1556842200000, //上课时间
+            "courseId": "1008", //课程id
+            "courseName": "企业管理与技术经济",//课程名称
+            "courseNote": null,//课程备注
+            "attendanceTotalScore": 60,//考勤总分
+            "leaveScore": 20,//请假分数
+            "attendScore": 20,//出席分数
+            "lateAttendScore": 10,//迟到分数
+            "headUpScore": 40,//抬头总分
+            "classroomId": "B135",//教室id
+            "teacherId": "15",//教师id
+            "teacherName": "龚东生"//教师姓名
         },
         {
               "id": "20190503081000",
@@ -278,19 +278,19 @@ data|（List集合）课程考勤信息
     "msg": "true",
     "data": [
         {
-            "attendance_id": "20190401081000-41609050128",
-            "courseitem_id": "20190401081000",
-            "name": "算法设计与分析",
-            "time": "2019-04-01 08:10:00.0",
-            "status": "attend",
-            "head_up_rate": "1",
-            "goal": "60",
-            "teacher_id": "12",
-            "teacher_name": "李婷",
-            "classroom_id": "D3102",
-            "course_node": null,
-            "student_id": null,
-            "student_name": null
+            "attendance_id": "20190401081000-41609050128",//考勤id
+            "courseitem_id": "20190401081000",//考勤的那节课的id
+            "name": "算法设计与分析",//那节课的课程名
+            "time": "2019-04-01 08:10:00.0",//上课时间
+            "status": "attend",//到勤状态
+            "head_up_rate": "1",//抬头率
+            "goal": "60",//考勤得分
+            "teacher_id": "12",//老师id
+            "teacher_name": "李婷",//老师姓名
+            "classroom_id": "D3102",//教室id
+            "course_node": null,//课程备注
+            "student_id": null,//学生id
+            "student_name": null//学生姓名
         },
         {
             "attendance_id": "20190405101000-41609050128",
@@ -346,19 +346,19 @@ data|（List集合）课程考勤信息
     "msg": "true",
     "data": [
         {
-            "attendance_id": "20190401081000-41609050128",
-            "courseitem_id": "20190401081000",
-            "name": "算法设计与分析",
-            "time": "2019-04-01 08:10:00.0",
-            "status": "attend",
-            "head_up_rate": "1",
-            "goal": "60",
-            "teacher_id": "12",
-            "teacher_name": "李婷",
-            "classroom_id": "D3102",
-            "course_node": null,
-            "student_id": null,
-            "student_name": null
+            "attendance_id": "20190401081000-41609050128",//考勤的id
+            "courseitem_id": "20190401081000",//这节课的id
+            "name": "算法设计与分析",//这节课的课程名
+            "time": "2019-04-01 08:10:00.0",//上课时间
+            "status": "attend",//道勤状态
+            "head_up_rate": "1",//抬头率
+            "goal": "60",//考勤得分
+            "teacher_id": "12",//教师id
+            "teacher_name": "李婷",//教师姓名
+            "classroom_id": "D3102",//教室id
+            "course_node": null,//课程备注
+            "student_id": null,//学生id
+            "student_name": null//学生名称
         },
         {
             "attendance_id": "20190401101000-41609050128",
