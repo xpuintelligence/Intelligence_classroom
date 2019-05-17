@@ -131,7 +131,7 @@ class FaceSearch:
                 # 将低头学生的id保存到低头学生的列表中
                 student_headown_list.append(student_headown_name)
 
-                student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
+                #student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
             # print("当前低头的学生为:"+str(student_headown_list))
             return student_headown_list
             

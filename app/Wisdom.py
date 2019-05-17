@@ -97,6 +97,8 @@ class Wisdom:
                     sleepdict_actual = sleepdict
 
                     print("当前低头或睡觉学生情况为: "+str(sleepdict_actual))
+                else:
+                    sleepdict_actual = {}
 
                 headup_rate = faceDetect.get_headup_rate()
                 print("班级当前抬头率为："+str(headup_rate))
@@ -133,5 +135,8 @@ class Wisdom:
                 print("人名已经清除")
                 print()
 
-        
+        # if sleepdict_actual is None:
+        #     sleepdict_actual = {}
+        #     return sleepdict_actual, student_attendancedict, student_id_list_actual
+        # else:
         return sleepdict_actual, student_attendancedict, student_id_list_actual
