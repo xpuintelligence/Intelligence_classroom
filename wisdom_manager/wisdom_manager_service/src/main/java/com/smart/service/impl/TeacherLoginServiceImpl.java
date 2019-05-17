@@ -28,7 +28,7 @@ public class TeacherLoginServiceImpl implements TeacherLoginService, Serializabl
         //查看查出来几条记录
         if (tbTeachers.size() == 1){
             //1条记录则返回改记录所对应的pojo
-            WisdomResult result = WisdomResult.ok(tbTeachers.get(0));
+            WisdomResult result = new WisdomResult(2,"true",tbTeachers.get(0));
             return result;
         }
         //不是一条记录返回false
