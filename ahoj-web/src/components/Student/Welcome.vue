@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="text-align: center;">
-      <transition enter-active-class="flip" leave-active-class="hinge">
+      <transition enter-active-class="flip">
         <img v-show="flag" alt="logo.png" src="../../assets/logo.png" style="width: 500px" class="animated"
              onclick="window.open('#')">
       </transition>
@@ -24,10 +24,6 @@
     components: {},
     mounted() {
       this.flag = true;
-
-      setInterval(function () {
-        this.flag = false;
-      }, 3000);
     },
   }
 </script>

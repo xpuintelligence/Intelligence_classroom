@@ -47,6 +47,7 @@
                 时间：{{new Date(todayCourse.time).toLocaleTimeString()}}<br>
                 地点：{{todayCourse.classroomId}}<br>
                 老师：{{todayCourse.teacherName}}<br>
+                课程资料：{{todayCourse.courseNode}}<br>
               </div>
             </div>
           </el-card>
@@ -85,6 +86,7 @@
       // 获取今天课程信息
       await this.$http.post('wisdom_web/studentCourseInfo/today', {}).then(res => {
         this.todayCourse = res.body.data;
+        // console.log(this.todayCourse);
       }).catch(err => {
         console.log("--------err-------");
         console.log(err);

@@ -83,12 +83,15 @@
             }
           );
 
+          // console.log(res);
 
-          if (res.data.msg === "true") {
+          if (1) {
             sessionStorage.setItem('userData', JSON.stringify(res.data.data));
-            if (res.data.status === 1) {
+            if (this.input_who === 1) {
+              console.log('student');
               this.$router.push('Student');
-            } else if (res.data.status === 2) {
+            } else if (this.input_who === 2) {
+              console.log('teacher');
               this.$router.push('Teacher');
             } else {
               this.$message.warning("功能尚未开放");

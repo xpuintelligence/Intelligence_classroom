@@ -183,7 +183,7 @@
         if (res.body.data.length === 0) {
           this.isWeekend = true;
         } else {
-          console.log(res.body.data);
+          // console.log(res.body.data);
           this.todayCourse = res.body.data[0];
         }
       }).catch(err => {

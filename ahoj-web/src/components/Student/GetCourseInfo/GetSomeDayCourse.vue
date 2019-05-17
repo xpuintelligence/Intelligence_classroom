@@ -54,7 +54,7 @@
         this.time[0] = this.time[0].toLocaleDateString().replace(/\//g, '-') + ' ' + this.time[0].toTimeString().split(' ')[0];
         this.time[1] = this.time[1].toLocaleDateString().replace(/\//g, '-') + ' ' + this.time[1].toTimeString().split(' ')[0];
         // console.log(this.time);
-        await this.$http.post('wisdom_web/studetnAttendance/allCourseAttThisSemester', {
+        await this.$http.post('wisdom_web/studetnAttendance/allCourseAttASpellTime', {
           start: this.time[0],
           end: this.time[1],
         }).then(res => {

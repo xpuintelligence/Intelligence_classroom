@@ -7,9 +7,14 @@
         </div>
 
         <div>
-          <!-- 我是样例菜单 -->
-          <el-menu default-active="ShowInfo" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
+          <!-- 菜单 -->
+          <el-menu default-active="Welcome" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
                    :collapse="isCollapse">
+
+            <el-menu-item index="Welcome">
+              <i class="el-icon-position"></i>
+              <span slot="title">首页</span>
+            </el-menu-item>
 
             <!--ShowInfo-->
             <el-menu-item index="ShowInfo">
@@ -62,24 +67,35 @@
       </el-aside>
 
       <el-container>
+
+        <!--上边栏-->
         <el-header class="app-header">
+
+          <!--侧栏开关-->
           <div style="width: 60px; cursor: pointer;" @click.prevent="toggleSideBar">
-            <i v-show="!isCollapse" class="el-icon-d-arrow-left"></i>
-            <i v-show="isCollapse" class="el-icon-d-arrow-right"></i>
+            <i v-show="!isCollapse" class="el-icon-open"></i>
+            <i v-show="isCollapse" class="el-icon-turn-off"></i>
           </div>
 
-          <div class="app-header-userinfo">
-            <el-dropdown trigger="hover" :hide-on-click="false">
-              <span class="el-dropdown-link">{{ this.userData.name }}<i
-                class="el-icon-arrow-down el-icon--right"></i></span>
-              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item divided @click.native="logout">退出登录
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </el-dropdown>
-          </div>
+          <el-button class="app-header-userinfo" type="text" style="color: black;" @click.native="logout">
+            <Mallki class="loginOut" text="溜了溜了"></Mallki>
+          </el-button>
+
+          <!--<div class="app-header-userinfo">-->
+            <!--<el-dropdown trigger="hover" :hide-on-click="false">-->
+              <!--<span class="el-dropdown-link">-->
+                <!--{{ this.userData.name }}-->
+                <!--<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
+              <!--</span>-->
+              <!--<el-dropdown-menu slot="dropdown">-->
+                <!--<el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>-->
+              <!--</el-dropdown-menu>-->
+            <!--</el-dropdown>-->
+          <!--</div>-->
+
         </el-header>
 
+        <!--主要内容部分-->
         <el-main class="app-body">
           <transition name="fade" mode="out-in" translate="yes">
             <router-view></router-view>
@@ -93,6 +109,7 @@
 </template>
 
 <script>
+  import Mallki from "@/components/MyComponents/Mallki";
   export default {
     name: "Student",
     data() {
@@ -128,12 +145,12 @@
     mounted() {
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
       this.$notify({
-        message: '你好，'+this.userData.name,
+        message: '你好，' + this.userData.name,
         type: 'success'
       });
       // console.log(this.userData);
     },
-    components: {},
+    components: {Mallki},
   }
 </script>
 
@@ -192,11 +209,12 @@
         text-align: center;
       }
 
+      /* 关闭的侧栏宽度 */
       &-collapsed {
         width: 66px !important;
       }
 
-      /* 侧边栏宽度 */
+      /* 展开的侧边栏宽度 */
       &-expanded {
         width: 170px !important;
       }
