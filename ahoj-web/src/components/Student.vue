@@ -270,7 +270,7 @@
       align-items: center;
       border-bottom: $solidBorder;
       background-color: #fff;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
+      // box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
       position: relative;
       filter: alpha(Opacity=60);
       -moz-opacity: 0.6;
