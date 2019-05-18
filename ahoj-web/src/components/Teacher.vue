@@ -105,6 +105,8 @@
 
 <script>
   import Mallki from "@/components/MyComponents/Mallki";
+  import ElContainer from "element-ui/packages/container/src/main";
+  import ElAside from "element-ui/packages/aside/src/main";
 
   export default {
     name: "Teacher",
@@ -146,7 +148,7 @@
       });
       // console.log(this.userData);
     },
-    components: {Mallki},
+    components: {ElAside, ElContainer, Mallki},
   }
 </script>
 

@@ -44,7 +44,7 @@
             enabled: false, // 右下角的 highcharts 标识去掉
           },
           chart: {
-            type: 'line',  // 图表类型
+            type: 'spline',  // 图表类型
             renderTo: 'thisSemesterCharts',
           },
           title: {
