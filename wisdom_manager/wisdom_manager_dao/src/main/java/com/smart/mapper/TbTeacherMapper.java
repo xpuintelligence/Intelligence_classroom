@@ -1,11 +1,14 @@
 package com.smart.mapper;
 
+import com.smart.pojo.AttendanceSituation;
 import com.smart.pojo.TbTeacher;
 import com.smart.pojo.TbTeacherExample;
 import java.util.List;
 
 import com.smart.pojo.TeacherInfo;
 import org.apache.ibatis.annotations.Param;
+
+import javax.xml.stream.events.EndDocument;
 
 public interface TbTeacherMapper {
     long countByExample(TbTeacherExample example);
@@ -52,4 +55,14 @@ public interface TbTeacherMapper {
      * @return
      */
     TeacherInfo selectTeacherInfoById(String id);
+
+    /**
+     * 查询一段时间的缺勤情况
+     * @param status 查勤的状态
+     * @param start 开始时间(可以和下者同时为null)
+     * @param end 结束时间(可以和上着同时为null)
+     * @param courseitem_id 哪节课(可以为null，为null是必须有start和end)
+     * @return
+     */
+    List<AttendanceSituation> queryAttendanceSituation(@Param("status")String status, @Param("start")String start, @Param("end")String end, @Param("courseitem_id")String courseitem_id);
 }

@@ -311,4 +311,18 @@
         and tb_teacher.college_id = tb_college.id
         and tb_teacher.position_id = tb_position.id
   </select>
+  <select id="queryAttendanceSituation" resultType="com.smart.pojo.AttendanceSituation">
+    select tb_attendance.student_id, tb_class.name, tb_attendance.create_date, tb_attendance.courseitem_id
+    from tb_attendance, tb_student, tb_class
+    where status = #{status}
+      <if test="start != null">
+        and create_date between #{start} and #{end}
+      </if>
+      <if test="courseitem_id != null">
+        and courseitem_id = #{courseitem_id}
+      </if>
+        and tb_student.id = tb_attendance.student_id
+        and tb_student.class_id = tb_class.id
+        order by tb_attendance.courseitem_id asc
+  </select>
 </mapper>
