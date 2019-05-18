@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TbAnswerQuestion implements Serializable {
-    private String id;
+    private String id;//每条留言的id
 
-    private String fatherId;
+    private String fatherId;//父子关系
 
-    private String fromId;
+    private String fromId;//谁发的
 
-    private String toId;
+    private String toId;//谁接受的
 
-    private Date time;
+    private Date time;//实践
 
-    private String msg;
+    private String msg;//消息
 
-    private String status;
+    private String status;//状态
 
     private static final long serialVersionUID = 1L;
 

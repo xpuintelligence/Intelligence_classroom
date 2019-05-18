@@ -35,6 +35,10 @@ public class WisdomResult implements Serializable{
         return new WisdomResult(null);
     }
 
+    public static WisdomResult errot(String msg){
+        return new WisdomResult(0,msg,null);
+    }
+
     public WisdomResult() {
 
     }

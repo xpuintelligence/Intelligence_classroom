@@ -44,6 +44,7 @@ public class LoginController {
             //将获取到的值存进session中
             StudentInfo studentInfo= (StudentInfo) result.getData();
             request.getSession().setAttribute("student",studentInfo);
+            request.getSession().setAttribute("status",1);
         }else if (requestLogin.getStatus() == 2){
             //老师，封装一下账号密码
             TbTeacher tbTeacher = new TbTeacher();
@@ -53,7 +54,7 @@ public class LoginController {
             result = teacherLoginService.teacherLoginOfWeb(tbTeacher);
             //如果登陆成功将老师信息存在session中
             request.getSession().setAttribute("teacher",result.getData());
-
+            request.getSession().setAttribute("status",2);
         }
         return result;
     }
