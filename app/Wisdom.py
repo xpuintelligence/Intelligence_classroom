@@ -13,6 +13,7 @@ from Upload import Upload
 
 
 
+
 class Wisdom:
 
     def drawInfo(img,student_name_list,headup_rate,attendence,student_num,image_height,image_width,filename):
@@ -81,7 +82,7 @@ class Wisdom:
                 groupIdList = "wisdom_class,1" # 人脸库的名字和id
                 facefolder = "../faces/" # 存储的位置
                 faceSearch = FaceSearch(facefolder, imageType, groupIdList, client_baidu_face) # 实例化人脸搜索对象
-                student_name_list = [] # 初始化人名列表
+                # student_name_list = [] # 初始化人名列表
                 student_name_list ,student_headown_list,student_id_list_actual= faceSearch.search()    # 人脸库人脸搜素
                 print("当前识别到的学生为："+str(student_name_list))
                 # 当前学生的单个考勤查询

@@ -67,7 +67,7 @@ class FaceDataBase:
     def get_student_id_all_debug(self):
         student_id_class = []
         conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
-        sql = "select id from tb_student_debug3;"
+        sql = "select id from tb_student_debug1;"
         cursor = conn.cursor()
         try:
             cursor.execute(sql)

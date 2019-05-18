@@ -5,3 +5,5 @@ test.json
 app/test.json
 /output/*.jpg
 /app/testsql.py
+/app/testPost.py
+/app/.qiniu_pythonsdk_hostscache.json

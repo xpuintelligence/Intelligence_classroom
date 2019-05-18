@@ -1,12 +1,11 @@
 # -*-coding:utf-8 -*-
 
-
 import os
 import time
 from LoadVideo import LoadVideo
 from Wisdom import Wisdom
-import getpass
 from GetJudge import GetJudge
+import sys
 
 # 初始化睡觉判断和出勤判断字典
 sleepdict = dict()
@@ -78,14 +77,17 @@ if __name__ == "__main__":
             #print("是否继续?(Y/N)")
             #passflag = input()
             passflag = "y"
-            if(passflag == "y" or passflag == "Y"):
+            if passflag == "y" or passflag == "Y":
                 try:
                     print("开始")
                     i = 0
-                    while(i!=4):
+                    while i!=4:
                         localtime = time.strftime("%H-%M-%S")
                         newtime = localtime.split('-')
-                        if(int(newtime[2])%10==0):
+                        sys.stdout.write("\r"+"Now time:"+str(newtime))
+                        sys.stdout.flush()
+                        time.sleep(0.1)
+                        if int(newtime[2])%20==0:
                             print()
                             get_image(user, ip, password)
                             print("图片获取完毕")

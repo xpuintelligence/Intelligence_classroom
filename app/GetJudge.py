@@ -9,8 +9,8 @@ class GetJudge:
     def __init__(self,sleepdict,student_attendancedict):
 
         # 初始化睡觉判断和出勤判断字典
-        #self.sleepdict = dict()
-        #self.student_attendancedict = dict()
+        # self.sleepdict = dict()
+        # self.student_attendancedict = dict()
         # 学生睡觉的字典
         self.sleepdict = sleepdict
         # 学生识别情况的字典
@@ -38,6 +38,7 @@ class GetJudge:
             return self.sleepdict
         
     # 准备链接数据库 返回数据库对象
+
     def initdatabase():
         # 数据库信息
         print("调用服务器数据库")
@@ -51,7 +52,7 @@ class GetJudge:
     # 判断学生出勤情况的查询
     def student_attendance_Judge(self, student_name_list):
 
-        if(len(student_name_list)):
+        if len(student_name_list):
             for student_name in student_name_list:
                 if student_name in self.student_attendancedict.keys():
                     self.student_attendancedict[student_name] = self.student_attendancedict[student_name]+1
