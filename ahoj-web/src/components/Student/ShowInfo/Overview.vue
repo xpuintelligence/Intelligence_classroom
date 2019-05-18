@@ -28,7 +28,8 @@
               班级：{{userData.classId}}<br>
               性别：{{userData.sex === "male" ? '男': '女'}}<br>
               手机：{{userData.phone}}<br>
-              <el-button icon="el-icon-key" type="text" style="color: dodgerblue" @click="changePassword">修改密码
+              <el-button icon="el-icon-key" type="text" style="color: dodgerblue" @click="changePassword">
+                修改密码
               </el-button>
             </div>
           </el-card>
@@ -51,6 +52,17 @@
               </div>
             </div>
           </el-card>
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>我的消息</span>
+            </div>
+            <div style="font-size: 12px">
+              {{message}}<br>
+              <el-button icon="el-icon-message" type="text" style="color: dodgerblue" @click="sendMsg">
+                发送消息
+              </el-button>
+            </div>
+          </el-card>
         </el-col>
       </el-row>
 
@@ -70,11 +82,17 @@
         userData: {},
         todayCourse: {},
         hasCourse: true,
+        message: '没有收到消息哦~',
       }
     },
     async mounted() {
       // 获取用户数据
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
+      // 获取留言消息
+      let test = JSON.parse(localStorage.getItem('message'));
+      if (test.data !== null) {
+        this.message = test.data;
+      }
 
       // console.log(new Date().getDay());  周六是6 周日是0
       if (new Date().getDay() === 6 || new Date().getDay() === 0) { // 如果是周末就不获取信息了
@@ -118,9 +136,10 @@
             message: '取消输入'
           });
         });
-
       },
-
+      sendMsg() {
+        this.$msgbox('功能暂未启用', '发送信息');
+      }
     },
   }
 </script>

@@ -34,7 +34,7 @@
               <el-alert
                 title="啊啊啊啊啊啊啊哈"
                 type="success"
-                description="这是一句绕口令：黑灰化肥会挥发发灰黑化肥挥发；灰黑化肥会挥发发黑灰化肥发挥。 黑灰化肥会挥发发灰黑化肥黑灰挥发化为灰……"
+                :description="message"
                 :closable="false">
               </el-alert>
             </el-tab-pane>
@@ -57,10 +57,12 @@
     components: {VueAudio, Mallki, XChart},
     data() {
       return {
+        userData: {},
         teacherWord: {
           url: 'http://106.12.202.93/aaa.mp3',
           whichIsActive: '语音留言',
         },
+        message: '还没有收到消息哟~',
 
         classStar: {
           value: 3,
@@ -171,6 +173,19 @@
       }
     },
     async mounted() {
+      this.userData = JSON.parse(sessionStorage.getItem('userData'));
+
+      // 获取学生消息
+      this.$http.post('wisdom_web/monitorStudent/getStudentMsg', {
+        id: this.userData.id
+      }).then(res => {
+        localStorage.setItem('message', JSON.stringify(res.body));
+        if (res.body.data !== null) {
+          this.message = res.body.data;
+        }
+      }).catch(err => {
+        console.log(err);
+      });
 
       // 如果是周六、周日就不显示这一栏
       if (new Date().getDay() === 6 || new Date().getDay() === 0) {
@@ -193,6 +208,7 @@
       this.todayDate = new Date().toLocaleDateString();
       this.yibiaoCharts.series[0].data[0].y = this.todayCourse.attendanceTotalScore;
       this.yibiaoCharts.series[1].data[0].y = this.todayCourse.headUpScore;
+
     }
   }
 </script>
