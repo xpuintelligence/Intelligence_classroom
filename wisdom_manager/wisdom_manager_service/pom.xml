@@ -24,6 +24,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.57</version>
+        </dependency>
+        <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
         </dependency>
@@ -34,11 +39,13 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!--添加dao的依赖-->
+
         <dependency>
             <groupId>com.smart</groupId>
             <artifactId>wisdom_manager_dao</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -72,6 +79,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo</artifactId>

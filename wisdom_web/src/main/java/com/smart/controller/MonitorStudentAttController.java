@@ -5,7 +5,6 @@ import com.smart.pojo.WisdomResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletContext;
@@ -51,7 +50,7 @@ public class MonitorStudentAttController {
      * app获取消息队列
      * @param id 学生id
      */
-    @RequestMapping("/getStudentMsg")
+        @RequestMapping("/getStudentMsg")
     @ResponseBody
     public WisdomResult sendStudentMsgToApp(String id,HttpServletRequest request){
         //获取消息队列

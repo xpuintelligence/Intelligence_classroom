@@ -187,5 +187,19 @@ public interface StudentAttendanceService {
      */
     public WisdomResult getThisSemesterProbableAttOfEveryday(Integer page, Integer size, StudentInfo studentInfo);
 
+    /**
+     * 计算昨天与今天的考勤抬头率和总分的差值
+     */
+    public WisdomResult getYesterdayWithTodayAttDiff(StudentInfo studentInfo);
 
+    /**
+     * 计算上月和这个月额抬头率以及总分的差值
+     */
+    public WisdomResult getLastMonthWithThisMonthAttDiff(StudentInfo studentInfo);
+
+    /**
+     * 计算出上周与这个周以及总份的差值
+     * @return
+     */
+    public WisdomResult getLastWeekWithThisWeekAttDiff(StudentInfo studentInfo);
 }

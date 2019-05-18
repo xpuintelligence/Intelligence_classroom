@@ -41,7 +41,7 @@ public class DaysAttendanceCollectStatistic implements Serializable {
             headUpTotal += Double.parseDouble(daysAttendanceCollect.avg_head_up_rate);
         }
         //计算出考勤的平均值
-        this.AttendanceGoalAverage = new DecimalFormat("0.00").format(AttendanceGoalTotal/num);
-        this.headUpRateAverage = new DecimalFormat("0.00").format(headUpTotal/num);
+        this.AttendanceGoalAverage = new DecimalFormat("0.0").format(AttendanceGoalTotal/num);
+        this.headUpRateAverage = new DecimalFormat("0.0").format(headUpTotal/num);
     }
 }

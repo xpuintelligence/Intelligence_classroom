@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * 课程答疑
  * 留言
  */
-@Controller
+
 @RequestMapping("/courseCriticism")
 public class CourseCriticismController {
 
@@ -31,9 +31,11 @@ public class CourseCriticismController {
         StudentInfo studentInfo ;
         TeacherInfo teacherInfo;
         String id = null;
+        String fromName = null;
         if (status == 1) {
             studentInfo = (StudentInfo) request.getSession().getAttribute("student");
             id = studentInfo.getId();
+            fromName = studentInfo.getName();
         } else if (status == 2){
             teacherInfo = (TeacherInfo) request.getSession().getAttribute("teacher");
             id = teacherInfo.getId();
@@ -42,5 +44,9 @@ public class CourseCriticismController {
         courseCriticismService.addCriticism(tbAnswerQuestion);
         //获取学生或老师的信息
         return new WisdomResult();
+    }
+
+    public WisdomResult getCriticismListForOneCourse(HttpServletRequest request,String courseId){
+        return WisdomResult.ok();
     }
 }

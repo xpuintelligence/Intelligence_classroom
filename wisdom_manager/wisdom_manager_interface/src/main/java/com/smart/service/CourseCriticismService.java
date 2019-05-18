@@ -13,4 +13,7 @@ public interface CourseCriticismService {
      * @return
      */
     public WisdomResult addCriticism(TbAnswerQuestion tbAnswerQuestion);
+
+
+    public WisdomResult getCriticismListForOneCourse(String courseId);
 }

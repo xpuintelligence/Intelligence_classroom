@@ -22,7 +22,7 @@
         <mybatis.paginator.version>1.2.15</mybatis.paginator.version>
         <mysql.version>5.1.32</mysql.version>
         <slf4j.version>1.6.4</slf4j.version>
-        <!--<fastjson.version>1.2.57</fastjson.version>-->
+        <!--<fastjson.version>1.2.58</fastjson.version>-->
         <jackson.version>2.9.8</jackson.version>
         <druid.version>1.0.9</druid.version>
         <httpclient.version>4.3.5</httpclient.version>
@@ -52,6 +52,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--<dependency>-->
+                <!--<groupId>com.alibaba</groupId>-->
+                <!--<artifactId>fastjson</artifactId>-->
+                <!--<version>${jackson.version}</version>-->
+            <!--</dependency>-->
             <!--http请求-->
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>

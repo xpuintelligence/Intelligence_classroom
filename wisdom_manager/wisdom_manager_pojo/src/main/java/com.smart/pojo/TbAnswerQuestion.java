@@ -4,19 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class TbAnswerQuestion implements Serializable {
-    private String id;//每条留言的id
+    private String id;
 
-    private String fatherId;//父子关系
+    private String fatherId;
 
-    private String fromId;//谁发的
+    private String fromId;
 
-    private String toId;//谁接受的
+    private String fromName;
 
-    private Date time;//实践
+    private String toId;
 
-    private String msg;//消息
+    private String toName;
 
-    private String status;//状态
+    private Date time;
+
+    private String msg;
+
+    private String status;
 
     private static final long serialVersionUID = 1L;
 
@@ -44,12 +48,28 @@ public class TbAnswerQuestion implements Serializable {
         this.fromId = fromId == null ? null : fromId.trim();
     }
 
+    public String getFromName() {
+        return fromName;
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName == null ? null : fromName.trim();
+    }
+
     public String getToId() {
         return toId;
     }
 
     public void setToId(String toId) {
         this.toId = toId == null ? null : toId.trim();
+    }
+
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName == null ? null : toName.trim();
     }
 
     public Date getTime() {
