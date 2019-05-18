@@ -44,7 +44,26 @@ import testChart from "@/components/testChart"
 /******************/
 /*      教师       */
 /******************/
-import t_welcome from "@/components/Teacher/t_Welcome"
+import t_welcome from "@/components/Teacher/t_Welcome" // 欢迎界面
+
+import t_Activities from "@/components/Teacher/t_Activities" // 发布、组织活动
+import t_AnsweringQuestions from "@/components/Teacher/t_AnsweringQuestions" // 答疑解惑
+import t_CheckInfo from "@/components/Teacher/t_CheckInfo" // 查看学生信息
+import t_ClassAttendance from "@/components/Teacher/t_ClassAttendance" // 课堂考勤
+import t_ClassContent from "@/components/Teacher/t_ClassContent" // 课堂内容
+import t_MyInfo from "@/components/Teacher/t_MyInfo" // 教师个人信息
+import t_SendMsg from "@/components/Teacher/t_SendMsg" // 教师个人信息
+
+import t_ThisClassAttendance from "@/components/Teacher/t_ThisClassAttendance" // 当堂考勤
+import t_GetClassAttendance from "@/components/Teacher/t_GetClassAttendance" // 考勤查询
+import t_ClassAttendanceRanking from "@/components/Teacher/t_ClassAttendanceRanking" // 班级考勤对比
+import t_MsgBoard from "@/components/Teacher/t_MsgBoard" // 答疑留言板
+import t_PushHomework from "@/components/Teacher/t_PushHomework" // 布置作业
+import t_HomeworkCorrecting from "@/components/Teacher/t_HomeworkCorrecting" // 批改作业
+import t_HomeworkStatistics from "@/components/Teacher/t_HomeworkStatistics" // 作业统计
+import t_PrepareLessonsBeforeClass from "@/components/Teacher/t_PrepareLessonsBeforeClass" // 发布预习内容
+import t_StudentInfo from "@/components/Teacher/t_StudentInfo" // 查看学生学习情况
+
 
 Vue.use(Router);
 
@@ -134,6 +153,86 @@ export default new Router({
           name: 't_welcome',
           component: t_welcome,
         },
+        {
+          path: 't_StudentInfo',
+          name: 't_StudentInfo',
+          component: t_StudentInfo
+        },
+        {
+          path: 't_PrepareLessonsBeforeClass',
+          name: 't_PrepareLessonsBeforeClass',
+          component: t_PrepareLessonsBeforeClass
+        },
+        {
+          path: 't_HomeworkStatistics',
+          name: 't_HomeworkStatistics',
+          component: t_HomeworkStatistics
+        },
+        {
+          path: 't_ThisClassAttendance',
+          name: 't_ThisClassAttendance',
+          component: t_ThisClassAttendance,
+        },
+        {
+          path: 't_GetClassAttendance',
+          name: 't_GetClassAttendance',
+          component: t_GetClassAttendance,
+        },
+        {
+          path: 't_ClassAttendanceRanking',
+          name: 't_ClassAttendanceRanking',
+          component: t_ClassAttendanceRanking,
+        },
+        {
+          path: 't_MsgBoard',
+          name: 't_MsgBoard',
+          component: t_MsgBoard,
+        },
+        {
+          path: 't_PushHomework',
+          name: 't_PushHomework',
+          component: t_PushHomework
+        },
+        {
+          path: 't_HomeworkCorrecting',
+          name: 't_HomeworkCorrecting',
+          component: t_HomeworkCorrecting
+        },
+        {
+          path: 't_Activities',
+          name: 't_Activities',
+          component: t_Activities,
+        },
+        {
+          path: 't_AnsweringQuestions',
+          name: 't_AnsweringQuestions',
+          component: t_AnsweringQuestions,
+        },
+        {
+          path: 't_CheckInfo',
+          name: 't_CheckInfo',
+          component: t_CheckInfo,
+        },
+        {
+          path: 't_ClassAttendance',
+          name: 't_ClassAttendance',
+          component: t_ClassAttendance,
+        },
+        {
+          path: 't_ClassContent',
+          name: 't_ClassContent',
+          component: t_ClassContent,
+        },
+        {
+          path: 't_MyInfo',
+          name: 't_MyInfo',
+          component: t_MyInfo,
+        },
+        {
+          path: 't_SendMsg',
+          name: 't_SendMsg',
+          component: t_SendMsg,
+        }
       ]
     },
     { // test~~~~~~~~~~~~

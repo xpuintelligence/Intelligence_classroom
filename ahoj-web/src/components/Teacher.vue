@@ -17,19 +17,28 @@
             <span slot="title">首页</span>
           </el-menu-item>
 
-          <!--ShowInfo-->
-          <el-menu-item index="ShowInfo">
-            <i class="el-icon-user"></i>
+          <el-menu-item index="t_MyInfo">
+            <i class="el-icon-s-custom"></i>
             <span slot="title">个人信息</span>
           </el-menu-item>
 
-          <el-submenu index="考勤信息">
+          <el-submenu index="课堂考勤">
             <template slot="title">
               <i class="el-icon-date"></i>
-              <span slot="title">考勤信息</span>
+              <span slot="title">课堂考勤</span>
             </template>
-            <el-menu-item index="CourseInfo">概览</el-menu-item>
-            <el-menu-item index="GetCourseInfo">考勤查询</el-menu-item>
+            <el-menu-item index="t_ThisClassAttendance">当堂考勤</el-menu-item>
+            <el-menu-item index="t_GetClassAttendance">考勤查询</el-menu-item>
+            <el-menu-item index="t_ClassAttendanceRanking">考勤排名</el-menu-item>
+          </el-submenu>
+
+          <el-submenu index="答疑">
+            <template slot="title">
+              <i class="el-icon-chat-dot-round"></i>
+              <span slot="title">答疑</span>
+            </template>
+            <el-menu-item index="t_MsgBoard">留言板</el-menu-item>
+            <!--<el-menu-item index="GetCourseInfo">语音</el-menu-item>-->
           </el-submenu>
 
           <el-submenu index="课堂作业">
@@ -37,25 +46,22 @@
               <i class="el-icon-edit"></i>
               <span slot="title">课堂作业</span>
             </template>
-            <el-menu-item index="GetHomework">查看作业</el-menu-item>
-            <el-menu-item index="PushHomework">提交作业</el-menu-item>
+            <el-menu-item index="t_PushHomework">发布作业</el-menu-item>
+            <el-menu-item index="t_HomeworkCorrecting">批改作业</el-menu-item>
+            <el-menu-item index="t_HomeworkStatistics">作业统计</el-menu-item>
           </el-submenu>
 
-          <el-submenu index="课堂内容">
-            <template slot="title">
-              <i class="el-icon-chat-dot-round"></i>
-              <span slot="title">课堂内容</span>
-            </template>
-            <el-menu-item index="ClassPreview">课前预习</el-menu-item>
-            <el-menu-item index="AnsweringQuestions">课后答疑</el-menu-item>
-          </el-submenu>
-
-          <el-menu-item index="Evaluation">
-            <i class="el-icon-star-off"></i>
-            <span slot="title">课程评价</span>
+          <el-menu-item index="t_PrepareLessonsBeforeClass">
+            <i class="el-icon-folder-opened"></i>
+            <span slot="title">课前预习</span>
           </el-menu-item>
 
-          <el-submenu index="活动">
+          <el-menu-item index="t_StudentInfo">
+            <i class="el-icon-search"></i>
+            <span slot="title">学习情况</span>
+          </el-menu-item>
+
+          <el-submenu index="活动" disabled>
             <template slot="title">
               <i class="el-icon-basketball"></i>
               <span slot="title">课外活动</span>

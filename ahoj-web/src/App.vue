@@ -4,7 +4,7 @@
     <router-view/>
 
     <!--<div v-for="(item, index) in audios" :key="index">-->
-      <!--<VueAudio :theUrl="item.url" :theControlList="item.controlList"/>-->
+    <!--<VueAudio :theUrl="item.url" :theControlList="item.controlList"/>-->
     <!--</div>-->
 
   </div>
@@ -42,6 +42,10 @@
       Login,
       VueAudio,
     },
+    beforeDestroy() {
+      localStorage.removeItem('active');
+      sessionStorage.removeItem('userData');
+    }
   }
 </script>
 

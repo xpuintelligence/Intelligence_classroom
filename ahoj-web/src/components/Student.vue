@@ -7,7 +7,7 @@
         </div>
 
         <!-- 菜单 -->
-        <el-menu :default-active="active" class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
+        <el-menu class="el-menu-vertical-demo" @open="handleOpen" @select="handleSelect"
                  background-color="#324157"
                  text-color="#fff"
                  active-text-color="#ffd04b">
