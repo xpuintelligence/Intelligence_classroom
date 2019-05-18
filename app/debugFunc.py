@@ -39,8 +39,13 @@ print("每个学生的抬头得分情况为：")
 print(str(student_score_dict))
 print(str(student_headuprate_dict))
 print(str(student_id_headuprate_score_dict))
-#facedatabase = initdatabase()
-#facedatabase.attendance_insert_attend_nosleep(student_id_list_actual,student_headuprate_dict,student_id_headuprate_score_dict)
 
+# 初始化数据库对象
+# facedatabase = initdatabase()
+# 将没有睡觉的学生的出勤情况插入数据库
+# facedatabase.attendance_insert_attend_nosleep(student_id_list_actual,student_headuprate_dict,student_id_headuprate_score_dict)
+
+# 将睡觉的学生的出勤情况插入数据库
+# facedatabase.attendance_insert_attend_sleep(sleepdict_end,student_headuprate_dict,student_id_headuprate_score_dict)
 os.chdir("../faces")
 os.system("rm -rf *.jpg")

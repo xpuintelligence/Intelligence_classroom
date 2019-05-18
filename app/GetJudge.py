@@ -18,7 +18,7 @@ class GetJudge:
     
     # 判断学生是不是在睡觉或者不认真听讲
     def sleepJudge(self, student_headown_list):
-        if(len(student_headown_list)):
+        if len(student_headown_list):
             for student_name in student_headown_list:
                 if student_name in self.sleepdict.keys():
                     self.sleepdict[student_name] = self.sleepdict[student_name]+1
@@ -29,13 +29,13 @@ class GetJudge:
 
             # 判断学生多次低头的情况是不是在睡觉
             for student_name in self.sleepdict.keys():
-                if(self.sleepdict[student_name]) >=3:
+                if(self.sleepdict[student_name]) >=2:
                     print("请提醒"+student_name+"同学，该同学可能正在睡觉")
                     faceDataBase = GetJudge.initdatabase()
                     student_id = faceDataBase.get_student_id(student_name)
                     GetJudge.post_sleep_student(student_id)
             
-            return self.sleepdict
+        return self.sleepdict
         
     # 准备链接数据库 返回数据库对象
 

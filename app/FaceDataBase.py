@@ -81,26 +81,6 @@ class FaceDataBase:
             conn.close()
 
 
-    # 学生出勤统计 出勤插入1 未出勤插入0
-
-    def attendence_insert(self, student_id):
-        # 课程id
-        courseitem_id = self.getCourseID()
-        conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
-        sql = "INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `status`) VALUES ('%s','%s', '%s', 'attend');"
-        # INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `status`) VALUES ('2019-4-30 20:29', '100120190422101000', '41609030209', 'attend');
-        cursor = conn.cursor()
-        attendence_id = time.strftime('%Y-%m-%d %H:%M')
-        courseitem_id = "100120190422101000"
-        data = (attendence_id, courseitem_id, student_id)
-        try:
-            cursor.execute(sql%data)
-            conn.commit()
-        except Exception as e:
-            conn.rollback()
-        finally:
-            print("连接关闭")
-            conn.close()
 
     # 获取课程id
     def getCourseID(self):
@@ -145,9 +125,29 @@ class FaceDataBase:
 
         conn.close()
 
-    # 将睡觉的学生插入数据库
 
-    def attendance_insert_attend_sleep(self):
+    # 将睡觉的学生插入数据库
+    def attendance_insert_attend_sleep(self, sleep_student_dict,student_id_headuprate_dict,student_id_headuprate_score_dict):
 
         conn = pymysql.connect(host=self.host,user=self.user,password=self.password,database=self.database,port=3306,charset="utf8")
-        #sql = ""
+        sql = "INSERT INTO `team_model`.`tb_attendance` (`attendance_id`, `courseitem_id`, `student_id`, `create_date`, `status`, `head_up_rate`, `goal`, `sleep`, `headup_score`) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')"
+        courseitem_id = self.getCourseID()
+        create_date = time.strftime('%Y-%m-%d 10:00:00')
+        status = 'attend'
+        cursor = conn.cursor()
+        for sleep_student_name in sleep_student_dict.keys():
+            sleep_student_id = self.get_student_id(sleep_student_name)
+            attendance_id = courseitem_id + '-' + sleep_student_id
+            head_up_rate = str(student_id_headuprate_dict[sleep_student_id])
+            goal = '60'
+            sleep = '1'
+            headup_score = student_id_headuprate_score_dict[sleep_student_id]
+            data = (attendance_id, courseitem_id, sleep_student_id, create_date, status, head_up_rate, goal, sleep, headup_score)
+            try:
+                cursor.execute(sql % data)
+                conn.commit()
+            except Exception as e:
+                conn.rollback()
+
+        conn.close()
+
