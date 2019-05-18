@@ -5,7 +5,9 @@
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="father_id" jdbcType="VARCHAR" property="fatherId" />
     <result column="from_id" jdbcType="VARCHAR" property="fromId" />
+    <result column="from_name" jdbcType="VARCHAR" property="fromName" />
     <result column="to_id" jdbcType="VARCHAR" property="toId" />
+    <result column="to_name" jdbcType="VARCHAR" property="toName" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="msg" jdbcType="VARCHAR" property="msg" />
     <result column="status" jdbcType="CHAR" property="status" />
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, father_id, from_id, to_id, time, msg, status
+    id, father_id, from_id, from_name, to_id, to_name, time, msg, status
   </sql>
   <select id="selectByExample" parameterType="com.smart.pojo.TbAnswerQuestionExample" resultMap="BaseResultMap">
     select
@@ -103,11 +105,11 @@
   </delete>
   <insert id="insert" parameterType="com.smart.pojo.TbAnswerQuestion">
     insert into tb_answer_question (id, father_id, from_id, 
-      to_id, time, msg, 
-      status)
+      from_name, to_id, to_name, 
+      time, msg, status)
     values (#{id,jdbcType=VARCHAR}, #{fatherId,jdbcType=VARCHAR}, #{fromId,jdbcType=VARCHAR}, 
-      #{toId,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{msg,jdbcType=VARCHAR}, 
-      #{status,jdbcType=CHAR})
+      #{fromName,jdbcType=VARCHAR}, #{toId,jdbcType=VARCHAR}, #{toName,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP}, #{msg,jdbcType=VARCHAR}, #{status,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.smart.pojo.TbAnswerQuestion">
     insert into tb_answer_question
@@ -121,8 +123,14 @@
       <if test="fromId != null">
         from_id,
       </if>
+      <if test="fromName != null">
+        from_name,
+      </if>
       <if test="toId != null">
         to_id,
+      </if>
+      <if test="toName != null">
+        to_name,
       </if>
       <if test="time != null">
         time,
@@ -144,8 +152,14 @@
       <if test="fromId != null">
         #{fromId,jdbcType=VARCHAR},
       </if>
+      <if test="fromName != null">
+        #{fromName,jdbcType=VARCHAR},
+      </if>
       <if test="toId != null">
         #{toId,jdbcType=VARCHAR},
+      </if>
+      <if test="toName != null">
+        #{toName,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
@@ -176,8 +190,14 @@
       <if test="record.fromId != null">
         from_id = #{record.fromId,jdbcType=VARCHAR},
       </if>
+      <if test="record.fromName != null">
+        from_name = #{record.fromName,jdbcType=VARCHAR},
+      </if>
       <if test="record.toId != null">
         to_id = #{record.toId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.toName != null">
+        to_name = #{record.toName,jdbcType=VARCHAR},
       </if>
       <if test="record.time != null">
         time = #{record.time,jdbcType=TIMESTAMP},
@@ -198,7 +218,9 @@
     set id = #{record.id,jdbcType=VARCHAR},
       father_id = #{record.fatherId,jdbcType=VARCHAR},
       from_id = #{record.fromId,jdbcType=VARCHAR},
+      from_name = #{record.fromName,jdbcType=VARCHAR},
       to_id = #{record.toId,jdbcType=VARCHAR},
+      to_name = #{record.toName,jdbcType=VARCHAR},
       time = #{record.time,jdbcType=TIMESTAMP},
       msg = #{record.msg,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=CHAR}
@@ -215,8 +237,14 @@
       <if test="fromId != null">
         from_id = #{fromId,jdbcType=VARCHAR},
       </if>
+      <if test="fromName != null">
+        from_name = #{fromName,jdbcType=VARCHAR},
+      </if>
       <if test="toId != null">
         to_id = #{toId,jdbcType=VARCHAR},
+      </if>
+      <if test="toName != null">
+        to_name = #{toName,jdbcType=VARCHAR},
       </if>
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
@@ -234,7 +262,9 @@
     update tb_answer_question
     set father_id = #{fatherId,jdbcType=VARCHAR},
       from_id = #{fromId,jdbcType=VARCHAR},
+      from_name = #{fromName,jdbcType=VARCHAR},
       to_id = #{toId,jdbcType=VARCHAR},
+      to_name = #{toName,jdbcType=VARCHAR},
       time = #{time,jdbcType=TIMESTAMP},
       msg = #{msg,jdbcType=VARCHAR},
       status = #{status,jdbcType=CHAR}

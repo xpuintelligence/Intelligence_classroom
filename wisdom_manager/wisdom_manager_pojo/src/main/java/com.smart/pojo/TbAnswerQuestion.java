@@ -10,7 +10,11 @@ public class TbAnswerQuestion implements Serializable {
 
     private String fromId;
 
+    private String fromName;
+
     private String toId;
+
+    private String toName;
 
     private Date time;
 
@@ -44,12 +48,28 @@ public class TbAnswerQuestion implements Serializable {
         this.fromId = fromId == null ? null : fromId.trim();
     }
 
+    public String getFromName() {
+        return fromName;
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName == null ? null : fromName.trim();
+    }
+
     public String getToId() {
         return toId;
     }
 
     public void setToId(String toId) {
         this.toId = toId == null ? null : toId.trim();
+    }
+
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName == null ? null : toName.trim();
     }
 
     public Date getTime() {

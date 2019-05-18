@@ -315,6 +315,76 @@ public class TbAnswerQuestionExample {
             return (Criteria) this;
         }
 
+        public Criteria andFromNameIsNull() {
+            addCriterion("from_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameIsNotNull() {
+            addCriterion("from_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameEqualTo(String value) {
+            addCriterion("from_name =", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameNotEqualTo(String value) {
+            addCriterion("from_name <>", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameGreaterThan(String value) {
+            addCriterion("from_name >", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameGreaterThanOrEqualTo(String value) {
+            addCriterion("from_name >=", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameLessThan(String value) {
+            addCriterion("from_name <", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameLessThanOrEqualTo(String value) {
+            addCriterion("from_name <=", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameLike(String value) {
+            addCriterion("from_name like", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameNotLike(String value) {
+            addCriterion("from_name not like", value, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameIn(List<String> values) {
+            addCriterion("from_name in", values, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameNotIn(List<String> values) {
+            addCriterion("from_name not in", values, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameBetween(String value1, String value2) {
+            addCriterion("from_name between", value1, value2, "fromName");
+            return (Criteria) this;
+        }
+
+        public Criteria andFromNameNotBetween(String value1, String value2) {
+            addCriterion("from_name not between", value1, value2, "fromName");
+            return (Criteria) this;
+        }
+
         public Criteria andToIdIsNull() {
             addCriterion("to_id is null");
             return (Criteria) this;
@@ -382,6 +452,76 @@ public class TbAnswerQuestionExample {
 
         public Criteria andToIdNotBetween(String value1, String value2) {
             addCriterion("to_id not between", value1, value2, "toId");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameIsNull() {
+            addCriterion("to_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameIsNotNull() {
+            addCriterion("to_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameEqualTo(String value) {
+            addCriterion("to_name =", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameNotEqualTo(String value) {
+            addCriterion("to_name <>", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameGreaterThan(String value) {
+            addCriterion("to_name >", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameGreaterThanOrEqualTo(String value) {
+            addCriterion("to_name >=", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameLessThan(String value) {
+            addCriterion("to_name <", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameLessThanOrEqualTo(String value) {
+            addCriterion("to_name <=", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameLike(String value) {
+            addCriterion("to_name like", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameNotLike(String value) {
+            addCriterion("to_name not like", value, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameIn(List<String> values) {
+            addCriterion("to_name in", values, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameNotIn(List<String> values) {
+            addCriterion("to_name not in", values, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameBetween(String value1, String value2) {
+            addCriterion("to_name between", value1, value2, "toName");
+            return (Criteria) this;
+        }
+
+        public Criteria andToNameNotBetween(String value1, String value2) {
+            addCriterion("to_name not between", value1, value2, "toName");
             return (Criteria) this;
         }
 
