@@ -29,5 +29,7 @@
     <dubbo:service interface="com.smart.service.WXLoginService" ref="wXLoginServiceImpl"/>
     <!--学生考勤-->
     <dubbo:service interface="com.smart.service.StudentAttendanceService" ref="studentAttendanceServiceImpl"/>
+    <!--老师查班级的考勤信息-->
+    <dubbo:service interface="com.smart.service.TeacherAttendanceService" ref="teacherAttendanceServiceImpl"/>
 
 </beans>

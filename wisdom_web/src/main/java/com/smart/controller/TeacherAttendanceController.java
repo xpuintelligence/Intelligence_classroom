@@ -65,4 +65,38 @@ public class TeacherAttendanceController {
        return result;
     }
 
+    /**
+     * 通过courseItem查询这整个一节课中所有学生的考勤信息
+     * @param courseItemId 某一节具体课程的id
+     */
+    @RequestMapping("/getStudentAttWithCourseItem")
+    @ResponseBody
+    public WisdomResult getAllStudentAttWithCourseItemId(String courseItemId){
+        return teacherAttendanceService.getAttOfClass(courseItemId);
+    }
+
+    /**
+     * 通过学生id和课程id查出这个学生整个学期的平均考勤统计
+     * @param studentId 学生id
+     * @param courseId 课程id
+     */
+    @RequestMapping("/getStudentAttInCourse")
+    @ResponseBody
+    public WisdomResult getAStudentAttInCourse(String studentId,String courseId){
+        WisdomResult result = teacherAttendanceService.getStudentAttOfCourse(studentId, courseId);
+        return result;
+    }
+
+    /**
+     * 查询这个学生这个学期每一节这个课都对应的考勤信息
+     * @param studentId 学生id
+     * @param courseId 课程id
+     */
+    @RequestMapping("/getStudentAttInEveryCourse")
+    @ResponseBody
+    public WisdomResult getStudentAttInEveryCourse(String studentId,String courseId){
+        WisdomResult studentAttInEveryCourse = teacherAttendanceService.getStudentAttInEveryCourse(studentId, courseId);
+        return studentAttInEveryCourse;
+    }
+
 }

@@ -187,18 +187,32 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
      */
     @Override
     public WisdomResult getAttOfClass(String crouseItemId) {
-        return null;
+        List<AttendanceCourseItem> attendanceCourseItems = tbStudentMapper.queryAttendanceCourseItemByCourseitem_id(crouseItemId);
+        return WisdomResult.ok(attendanceCourseItems);
     }
 
     /**
      * 某一个学生这一学期这节课的考勤信息
-     * @param studentInfo 学生信息
+     * @param studentId 学生信息
      * @param courseId 课程信息
      * @return
      */
     @Override
-    public WisdomResult getStudentAttOfCourse(StudentInfo studentInfo, String courseId) {
-        return null;
+    public WisdomResult getStudentAttOfCourse(String studentId, String courseId) {
+        CourseAVGAttendance courseAVGAttendance = tbStudentMapper.queryCourseAVGAttendance(studentId, courseId);
+        return WisdomResult.ok(courseAVGAttendance);
     }
+
+    /**
+     * 查询这个学生这个学期每一节这个课都对应的考勤信息
+     * @param studentId 学生id
+     * @param courseId 课程id
+     */
+    @Override
+    public WisdomResult getStudentAttInEveryCourse(String studentId, String courseId) {
+        List<AttendanceCourseItem> attendanceCourseItems = tbStudentMapper.queryAttendanceCourseItemByStudentCourse(studentId, courseId);
+        return WisdomResult.ok(attendanceCourseItems);
+    }
+
 
 }

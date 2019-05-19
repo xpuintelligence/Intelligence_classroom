@@ -2,8 +2,10 @@ package com.smart.pojo;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class ServiceMsg {
+public class ServiceMsg implements Serializable {
     String id;
     String status;
     String msg;
