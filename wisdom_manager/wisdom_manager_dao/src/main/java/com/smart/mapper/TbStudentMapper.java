@@ -138,4 +138,12 @@ public interface TbStudentMapper {
      * @return
      */
     CourseAVGAttendance queryCourseAVGAttendance(@Param("student_id")String student_id, @Param("course_id")String course_id);
+
+    /**
+     * 根据学生id，课程id查每节课此学生的课堂表现
+     * @param student_id 学生id
+     * @param course_id 课程id
+     * @return
+     */
+    List<AttendanceCourseItem> queryAttendanceCourseItemByStudentCourse(@Param("student_id")String student_id, @Param("course_id")String course_id);
 }
