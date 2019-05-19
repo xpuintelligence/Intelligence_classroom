@@ -115,4 +115,12 @@ public interface TbStudentMapper {
      * @return
      */
     StageAttendanceCollect queryStageAttendanceCollectByCourseIdStartEnd(@Param("course_id")String course_id,@Param("start")String start,@Param("end")String end);
+
+    /**
+     * 查看今天有几节课+平均考勤总分+平均抬头率+缺勤人数+睡觉人数
+     * @param start
+     * @param end
+     * @return
+     */
+    List<CheckAttendance> queryCheckAttendance(@Param("start")String start,@Param("end")String end);
 }
