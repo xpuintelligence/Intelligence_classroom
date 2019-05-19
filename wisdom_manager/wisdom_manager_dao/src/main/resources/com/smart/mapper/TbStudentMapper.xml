@@ -450,4 +450,12 @@
         and tb_student.id = tb_attendance.student_id
         and tb_course.id = tb_courseitem.course_id
   </select>
+  <select id="queryAttendanceCourseItemByStudentCourse" resultType="com.smart.pojo.AttendanceCourseItem">
+    select tb_attendance.student_id, tb_student.name as student_name, tb_attendance.status, tb_attendance.sleep, tb_attendance.head_up_rate, tb_attendance.headup_score, goal
+    from tb_attendance, tb_courseitem, tb_student
+    where tb_courseitem.course_id = #{course_id}
+        and tb_attendance.student_id = #{student_id}
+        and tb_courseitem.id = tb_attendance.courseitem_id
+        and tb_student.id = tb_attendance.student_id
+  </select>
 </mapper>
