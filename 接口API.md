@@ -1,5 +1,9 @@
 后台API文档
 ===========
+## 1.7后台版本更新
++ 修改了图片服务器端向服务器发送消息，app无法收到消息的bug
++ 修改了微信端获取学生个人信息错误的url
++ 添加了可以查询今天与昨天，本周与上周，本月与上月考勤状态变化的api
 ## 1.6后台版本更新
 + 修复了教师端msg返回1的bug
 + _修复了教师端的返回值_
@@ -164,7 +168,7 @@ data|null
 name|describe
 ----|------
 method|post
-url|http://47.103.14.73:8080/wisdom_web/wxGetPersonInfo/getStudentInfo
+url|http://47.103.14.73:8080/wisdom_web/weixin/getStudentInfo
 
 ### _需传输的参数_
 name|describe
@@ -532,5 +536,44 @@ data|具体的消息
     }
 }
 ```
+----
+----
+## 获取今天与昨天的考勤变化
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getStudentMsg
+api说明|获取今天与昨天的考勤、抬头流程分数之差
+### _需传输的参数_
+name|describe
+----|------
+无|无
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功 0--->失败
+msg|true
+data|具体的消息
+### 返回值样本
+```json
+{
+    "status": 1,
+    "msg": "true",
+    "data": {
+        "thisGrade": "\ufffd",//本月、本周、本日的考勤分数
+        "thisHeadup": "\ufffd",//本月、本周、本日的抬头率
+        "attDiff": "0.0",//考勤分数的增长和下降
+        "headupDiff": "0.0"//抬头率的增长和下降
+    }
+}
+```
+### _类似请求，返回值类似_
+name|method|url|requestParams|describe
+----|------|---|----|--------
+获取今天与昨天的考勤变化|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/lastAndThisWeekDiff|无|无
+获取今天与昨天的考勤变化|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/lastAndThisMonthDiff|无|无
+
 ----
 

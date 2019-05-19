@@ -1,5 +1,8 @@
 package com.smart.service.impl;
 
+
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.smart.mapper.TbStudentMapper;
@@ -7,11 +10,15 @@ import com.smart.pojo.*;
 import com.smart.service.CourseService;
 import com.smart.service.StudentAttendanceService;
 import com.smart.utils.DateUtils;
+import com.smart.utils.JsonUtils;
+import com.smart.utils.StringToJsonSerializer;
 import org.joda.time.DateTime;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -279,6 +286,7 @@ public class StudentAttendanceServiceImpl implements StudentAttendanceService {
     public WisdomResult calculateDaysAttendanceCollectList(DateTime startTime, DateTime endTime, List<DaysAttendanceCollect> list) {
         //计算出天数
         int num = DateUtils.twoDayGap(startTime,endTime);
+        //将list优化一下
         //将短时间的数据进行格式化
         DaysAttendanceCollectStatistic daysAttendanceCollectStatistic =
                 new DaysAttendanceCollectStatistic(num,list);
@@ -463,6 +471,93 @@ public class StudentAttendanceServiceImpl implements StudentAttendanceService {
         return WisdomResult.ok(daysAttendanceCollectStatistic);
     }
 
+    /**
+     *********************************************************************************
+     * 今天于昨天
+     */
+    @Override
+    public WisdomResult getYesterdayWithTodayAttDiff(StudentInfo studentInfo) {
+        DateTime currentTime = DateUtils.getCurrentTime();
+        //获取今天的考勤信息
+        WisdomResult wisdomResult = gettodayProbableAttOfEveryday(studentInfo);
+        //获取昨天
+        DateTime dateTime = currentTime.minusDays(1);
+        WisdomResult oneDayProbableAttOfEveryday = getOneDayProbableAttOfEveryday(studentInfo, dateTime);
+        //计算差值
+        return getASpellTimeAttDiff(wisdomResult, oneDayProbableAttOfEveryday);
+    }
+
+    /**
+     * 计算俩个区间的差值
+     * @return
+     */
+    private WisdomResult getASpellTimeAttDiff(WisdomResult wisdomResult1, WisdomResult wisdomResult2) {
+        //取出数据
+        DaysAttendanceCollectStatistic data = (DaysAttendanceCollectStatistic) wisdomResult1.getData();
+        DaysAttendanceCollectStatistic data1 = (DaysAttendanceCollectStatistic) wisdomResult2.getData();
+        System.out.println(data1.getAttendanceGoalAverage());
+        System.out.println(data.getAttendanceGoalAverage());
+        //计算插值
+        double attDiff = 0;
+        try {
+           attDiff = Double.parseDouble(data.getAttendanceGoalAverage()) - Double.parseDouble(data1.getAttendanceGoalAverage());
+        }catch (Exception e){
+            attDiff = 0;
+        }finally {
+            double headuoDiff= 0;
+            try {
+                headuoDiff = Double.parseDouble(data.getHeadUpRateAverage()) - Double.parseDouble(data1.getHeadUpRateAverage());
+            }catch (Exception e){
+                headuoDiff = 0;
+            }finally {
+                JSONObject jsonObject = new JSONObject();
+                //转成字符串
+                String s1 = new DecimalFormat("0.0").format(attDiff);
+                String s2 = new DecimalFormat("0.00").format(headuoDiff);
+                //转成json
+                AttDiff attDiff1 = new AttDiff();
+                attDiff1.setAttDiff(attDiff+"");
+                attDiff1.setHeadupDiff(headuoDiff+"");
+                attDiff1.setThisGrade(data.getAttendanceGoalAverage());
+                attDiff1.setThisHeadup(data.getHeadUpRateAverage());
+                return wisdomResult1.ok(attDiff1);
+            }
+        }
 
 
+
+    }
+
+    /**
+     上个月和这个月
+     */
+    @Override
+    public WisdomResult getLastMonthWithThisMonthAttDiff(StudentInfo studentInfo) {
+        //获取这个月的大概考勤
+        WisdomResult thisMonthProbableAttOfEveryday = getThisMonthProbableAttOfEveryday(studentInfo);
+        //获取上个月的大概考勤
+        WisdomResult lastMonthProbableAttOfEveryday = getLastMonthProbableAttOfEveryday(studentInfo);
+        return getASpellTimeAttDiff(thisMonthProbableAttOfEveryday,lastMonthProbableAttOfEveryday);
+    }
+
+    /**
+     * 上周和这周
+     */
+    @Override
+
+    public WisdomResult getLastWeekWithThisWeekAttDiff(StudentInfo studentInfo) {
+        //获取这个月的考勤
+        WisdomResult thisWeekProbableAttOfEveryday = getThisWeekProbableAttOfEveryday(studentInfo);
+        //获取上个月的考勤
+        WisdomResult lastWeekProbableAttOfEveryday = getLastWeekProbableAttOfEveryday(studentInfo);
+        return getASpellTimeAttDiff(thisWeekProbableAttOfEveryday,lastWeekProbableAttOfEveryday);
+    }
+
+
+    @Test
+    public void fun(){
+        String a = "\"123";
+        String replace = a.replace("\\", "");
+        System.out.println(replace);
+    }
 }

@@ -300,6 +300,40 @@ public class StudentAttendanceController {
         return result;
     }
 
+    /**
+     * 昨天与今天
+     */
+    @RequestMapping("/yesAndTodayDiff")
+    @ResponseBody
+    public WisdomResult getYesterdayWithTodayAttDiff(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service
+        WisdomResult result = studentAttendanceService.getYesterdayWithTodayAttDiff(studentInfo);
+        return result;
+    }
+    /**
+     * 这周与上周
+     */
+    @RequestMapping("/lastAndThisWeekDiff")
+    @ResponseBody
+    public WisdomResult getLastWeekWithThisWeekAttDiff(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service
+        WisdomResult result = studentAttendanceService.getLastWeekWithThisWeekAttDiff(studentInfo);
+        return result;
+    }
+
+    /**
+     * 这月与上月
+     */
+    @RequestMapping("/lastAndThisMonthDiff")
+    @ResponseBody
+    public WisdomResult getLastMonthWithThisMonthAttDiff(HttpServletRequest request){
+        StudentInfo studentInfo = (StudentInfo)request.getSession().getAttribute("student");
+        //调用service
+        WisdomResult result = studentAttendanceService.getLastMonthWithThisMonthAttDiff(studentInfo);
+        return result;
+    }
 
 
 
