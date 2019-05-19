@@ -119,23 +119,26 @@ class FaceSearch:
         # print(student_actual_list_now)
         student_left = list(set(student_actual_list_now) - set(student_id_list))
         # 如果补集存在（没有抬头的学生存在)
-        if len(student_left) or len(student_left) <= len(student_actual_list) / 2:
-            for student_left_name in student_left:
-                # 返回当前低头的学生的id
-                student_headown_name = faceDataBase.get_student_name(str(student_left_name))
-                # 将低头学生的id保存到低头学生的列表中
-                student_headown_list.append(student_headown_name)
+        try:
+            if len(student_left) or len(student_left) <= len(student_actual_list) / 2:
+                for student_left_name in student_left:
+                    # 返回当前低头的学生的id
+                    student_headown_name = faceDataBase.get_student_name(str(student_left_name))
+                    # 将低头学生的id保存到低头学生的列表中
+                    student_headown_list.append(student_headown_name)
 
-                # student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
-            # print("当前低头的学生为:"+str(student_headown_list))
-            return student_headown_list
+                    # student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
+                # print("当前低头的学生为:"+str(student_headown_list))
+                return student_headown_list
+        except Exception:
+            pass
 
 
     # 判断是不是大家都在写作业做题
     def if_all_write(self, student_actual_list, student_headown_list):
         # 当前教室人数
         judge_student_num = len(student_actual_list)
-        # 判断当前低头人数是否多于全班人数的一半
+        #判断当前低头人数是否多于全班人数的一半
         if len(student_headown_list) >= judge_student_num / 2:
             student_headown_list = []
             return student_headown_list

@@ -88,12 +88,12 @@ class Wisdom:
                 # 当前学生的单个考勤查询
                 student_attendancedict = getJudge.student_attendance_Judge(student_name_list)
                 print("当前学生出勤情况为: "+str(student_attendancedict))
-                if len(student_headown_list):
-                    print("低头的学生为: "+str(student_headown_list))
+                #if len(student_headown_list):
+                print("低头的学生为: "+str(student_headown_list))
                 # 检测学生是不是睡觉或不认真听课
                 sleepdict = getJudge.sleepJudge(student_headown_list)
 
-                # 防止输出为空 
+                # 防止输出为空
                 if sleepdict is not None:
                     sleepdict_actual = sleepdict
 

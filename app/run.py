@@ -72,7 +72,7 @@ if __name__ == "__main__":
             password = "UMABQD"
             # print("请输入网络摄像头的ip地址: ", end="")
             # ip = input()
-            ip = "192.168.0.103"
+            ip = "192.168.43.170"
             print("你输入的内容为："+user+":"+password+"@"+ip+",请检查!")
             #print("是否继续?(Y/N)")
             #passflag = input()
@@ -87,7 +87,7 @@ if __name__ == "__main__":
                         sys.stdout.write("\r"+"Now time:"+str(newtime))
                         sys.stdout.flush()
                         time.sleep(0.1)
-                        if int(newtime[2])%20==0:
+                        if int(newtime[2])%10==0:
                             print()
                             get_image(user, ip, password)
                             print("图片获取完毕")

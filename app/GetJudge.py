@@ -1,6 +1,5 @@
 # 用于判断当前学生的状态
 import requests
-import json
 
 from FaceDataBase import FaceDataBase
 
@@ -28,6 +27,7 @@ class GetJudge:
             #print(self.sleepdict)
 
             # 判断学生多次低头的情况是不是在睡觉
+
             for student_name in self.sleepdict.keys():
                 if(self.sleepdict[student_name]) >=2:
                     print("请提醒"+student_name+"同学，该同学可能正在睡觉")
@@ -50,6 +50,7 @@ class GetJudge:
         return faceDataBase
 
     # 判断学生出勤情况的查询
+
     def student_attendance_Judge(self, student_name_list):
 
         if len(student_name_list):
@@ -60,7 +61,6 @@ class GetJudge:
                     self.student_attendancedict[student_name] = 1
 
             return self.student_attendancedict
-
 
 
 
