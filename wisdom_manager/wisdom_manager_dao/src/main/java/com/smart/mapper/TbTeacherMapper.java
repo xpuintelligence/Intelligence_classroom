@@ -62,7 +62,6 @@ public interface TbTeacherMapper {
      * @param start 开始时间(可以和下者同时为null)
      * @param end 结束时间(可以和上着同时为null)
      * @param courseitem_id 哪节课(可以为null，为null是必须有start和end)
-     * @return
      */
     List<AttendanceSituation> queryAttendanceSituation(@Param("status")String status, @Param("start")String start, @Param("end")String end, @Param("courseitem_id")String courseitem_id);
 }

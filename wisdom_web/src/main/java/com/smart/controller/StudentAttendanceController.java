@@ -336,12 +336,4 @@ public class StudentAttendanceController {
     }
 
 
-
-
-
-
-
-
-
-
 }
