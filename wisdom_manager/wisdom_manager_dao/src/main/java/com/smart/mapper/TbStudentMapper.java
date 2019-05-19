@@ -31,7 +31,7 @@ public interface TbStudentMapper {
 
 //    自己添加的方法
     /**
-     *  查询特定班级的一段时间内的课程
+     * 查询特定班级的一段时间内的课程
      * @param classId 查询的班级编号
      * @param start 开始时间
      * @param end 结束时间

@@ -543,7 +543,7 @@ data|具体的消息
 name|describe
 ----|------
 method|post
-url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/getStudentMsg
+url|http://47.103.14.73:8080/wisdom_web/studetnAttendance/yesAndTodayDiff
 api说明|获取今天与昨天的考勤、抬头流程分数之差
 ### _需传输的参数_
 name|describe

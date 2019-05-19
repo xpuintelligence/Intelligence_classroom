@@ -1,7 +1,10 @@
 package com.smart.service.impl;
 
 import com.smart.mapper.TbStudentMapper;
+import com.smart.mapper.TbTeacherMapper;
 import com.smart.pojo.AttendanceItem;
+import com.smart.pojo.AttendanceSituation;
+import com.smart.pojo.TbTeacher;
 import com.smart.pojo.WisdomResult;
 import com.smart.service.CourseService;
 import com.smart.service.TeacherAttendanceService;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
@@ -25,6 +29,8 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
     @Autowired
     private CourseService courseService;
 
+    @Autowired
+    private TbTeacherMapper tbTeacherMapper;
     /**
      * 查询该学生一学期中该课程的考勤情况
      */
@@ -39,13 +45,22 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
 
     /**
      * 通过课程id与学生id查询这节课他的考勤情况
-     * @param courseItemId 具体某一节课的id
+     * @param start 开始时间
+     * @param end 结束时间
+     * @param courseId 课程id
      * @param studentId 学生id
+     * @return
      */
     @Override
-    public WisdomResult getStudentAttOfOneCourse(String courseItemId , String studentId) {
-        return null;
+    public WisdomResult getStudentAbsentOfOneCourse(String start, String end, String courseId, String studentId) {
+        DateTime currentTime = DateUtils.getCurrentTime();
+        Map<String, DateTime> map = DateUtils.formatSpellTime(currentTime);
+        //获取今天的缺勤情况
+        List<AttendanceSituation> attendanceSituations = tbTeacherMapper.queryAttendanceSituation("absent",start,end,courseId);
+        return WisdomResult.ok(attendanceSituations);
     }
+
+
 
     /**
      *
