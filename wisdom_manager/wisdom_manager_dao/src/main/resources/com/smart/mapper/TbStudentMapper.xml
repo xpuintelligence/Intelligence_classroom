@@ -428,7 +428,7 @@
         and tb_attendance.create_date between #{start} and #{end}
   </select>
   <select id="queryCheckAttendance" resultType="com.smart.pojo.CheckAttendance">
-    select tb_attendance.courseitem_id, count(*) as number, avg(tb_attendance.goal) as avg_goal, avg(tb_attendance.head_up_rate) as avg_head_up_rate, sum(status='absent') as absent_num, SUM(sleep='1') sleep_num,tb_attendance.create_date
+    select tb_attendance.courseitem_id, count(*) as number, avg(tb_attendance.goal) as avg_goal, avg(tb_attendance.head_up_rate) as avg_head_up_rate, avg(tb_attendance.headup_score) as avg_headup_score, sum(status='absent') as absent_num, SUM(sleep='1') sleep_num,tb_attendance.create_date
     from tb_attendance, tb_courseitem
     where tb_attendance.create_date between #{start} and #{end}
         and tb_attendance.courseitem_id = tb_courseitem.id
