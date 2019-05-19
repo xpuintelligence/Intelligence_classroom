@@ -203,4 +203,16 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
         return WisdomResult.ok(courseAVGAttendance);
     }
 
+    /**
+     * 查询这个学生这个学期每一节这个课都对应的考勤信息
+     * @param studentId 学生id
+     * @param courseId 课程id
+     */
+    @Override
+    public WisdomResult getStudentAttInEveryCourse(String studentId, String courseId) {
+        List<AttendanceCourseItem> attendanceCourseItems = tbStudentMapper.queryAttendanceCourseItemByStudentCourse(studentId, courseId);
+        return WisdomResult.ok(attendanceCourseItems);
+    }
+
+
 }

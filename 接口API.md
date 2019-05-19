@@ -1,5 +1,10 @@
 后台API文档
 ===========
+## 1.9后台版本更新
++ 添加了教师3个方法
++ 通过courseItem查询这整个一节课中所有学生的考勤信息
++ 通过学生id和课程id查出这个学生整个学期的平均考勤统计
++ 查询这个学生这个学期每一节这个课的考勤信息
 ## 1.8后台版本更新
 + 添加了 老师端，获取一段时间内有自己课程的每一天的整体考勤信息
 + 修复了张聪说的00：00：00的问题
@@ -698,4 +703,175 @@ name|method|url|requestParams|describe
 获取这学期老师上了那些课，返回考勤信息|post|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime|satus--->4|无
 获取某一天老师上了那些课，返回考勤信息|post|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime|satus--->5,start--->某一天时间|无
 ----
+## 通过courseItem查询这整个一节课中所有学生的考勤信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getStudentAttWithCourseItem
+api说明|通过courseItem查询这整个一节课中所有学生的考勤信息
+### _需传输的参数_
+name|describe
+----|------
+courseItemId|这一门课的唯一的一个id  确定的一节课的id
 
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  0--->失败
+msg|true
+data|具体的消息
+### 返回值样本
+```json
+{
+  
+    "status": 1,--->状态码
+    "msg": "true",--->消息
+    "data": [--->每个同学的这节课信息
+        {
+            "attendance_id": "20190531100000-111",--->这个人的考勤id
+            "courseitem_id": "20190531100000",--->这节课的id
+            "student_id": "111",--->学生id
+            "student_name": "刘景亮",--->学生名字
+            "create_date": "2019-05-31 10:00:00.0",--->这节课开始时间
+            "status": "attend",--->到勤状态，具体的看数据库表有哪几个
+            "head_up_rate": "0.68",--->这节课的抬头率
+            "headup_score": "40",--->这节课抬头分数
+            "goal": "60",--->这节课的考勤总分说
+            "sleep": "0"--->这节课睡觉没
+        },
+        {
+            "attendance_id": "20190531100000-333",
+            "courseitem_id": "20190531100000",
+            "student_id": "333",
+            "student_name": "石万虎",
+            "create_date": "2019-05-31 10:00:00.0",
+            "status": "attend",
+            "head_up_rate": "0.32",
+            "headup_score": "40",
+            "goal": "50",
+            "sleep": "0"
+        },
+        {
+            "attendance_id": "20190531100000-41509050106",
+            "courseitem_id": "20190531100000",
+            "student_id": "41509050106",
+            "student_name": "胡淩斌",
+            "create_date": "2019-05-31 10:00:00.0",
+            "status": "attend",
+            "head_up_rate": "0.33",
+            "headup_score": "40",
+            "goal": "51",
+            "sleep": "0"
+        },
+        {
+            "attendance_id": "20190531100000-41509050216",
+            "courseitem_id": "20190531100000",
+            "student_id": "41509050216",
+            "student_name": "王坤",
+            "create_date": "2019-05-31 10:00:00.0",
+            "status": "attend",
+            "head_up_rate": "0.69",
+            "headup_score": "40",
+            "goal": "60",
+            "sleep": "0"
+        }
+}
+```
+----
+## 老师端，通过学生id和课程id查出这个学生整个学期的平均考勤统计
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getStudentAttInCourse
+api说明|通过学生id和课程id查出这个学生整个学期的平均考勤统计
+### _需传输的参数_
+name|describe|测试参数
+----|------|----
+studentId|学生id|41609050128
+courseId|课程id|1004
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功 0--->失败
+msg|true
+data|具体的消息
+### 返回值样本
+```json
+    {
+        "status": 1,--->状态码
+        "msg": "true",--->消息
+        "data": {--->数据
+            "student_id": "41609050128",--->学生id
+            "name": "宁大力",--->学生姓名
+            "course_id": "1004",--->该门课的id
+            "course_name": "算法设计与分析",--->该门课的名字
+            "total": "2",--->上了几节课
+            "leave_num": "0",--->请假次数
+            "late_num": "0",--->迟到次数
+            "absent_num": "0",--->缺勤次数
+            "attend_num": "2",--->道勤次数
+            "sleep_num": "0",--->睡觉次数
+            "avg_head_up_rate": "1",--->平均抬头率
+            "avg_headup_score": "40.0000",--->平均抬头率得分
+            "avg_goal": "60.0000"--->这学期的平均课堂分数
+        }
+    }
+```
+----
+## 老师端，查询这个学生这个学期每一节这个课的考勤信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getStudentAttInEveryCourse
+api说明|查询这个学生这个学期每一节这个课的考勤信息
+### _需传输的参数_
+name|describe|测试参数
+----|------|----
+studentId|学生id|41609050128
+courseId|课程id|1004
+
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功  0--->失败
+msg|true
+data|具体的消息
+### 返回值样本
+```json
+{
+    "status": 1,--->状态吗
+    "msg": "true",--->消息
+    "data": [--->这个学生在这个课上每一节课的考勤信息
+        {
+            "attendance_id": null,--->无
+            "courseitem_id": null,--->无
+            "student_id": "41609050128",--->学生id
+            "student_name": "宁大力",--->学生姓名
+            "create_date": null,--->这节课的时间
+            "status": "attend",--->这节课的状态
+            "head_up_rate": "1",--->抬头率
+            "headup_score": "40",--->抬头所得分数
+            "goal": "60",--->这节课的考勤总分
+            "sleep": "0"--->是否睡觉
+        },
+        {
+            "attendance_id": null,
+            "courseitem_id": null,
+            "student_id": "41609050128",
+            "student_name": "宁大力",
+            "create_date": null,
+            "status": "attend",
+            "head_up_rate": "1",
+            "headup_score": "40",
+            "goal": "60",
+            "sleep": "0"
+        }
+    ]
+}
+```
+----

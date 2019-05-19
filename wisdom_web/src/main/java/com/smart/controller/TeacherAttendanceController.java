@@ -87,4 +87,16 @@ public class TeacherAttendanceController {
         return result;
     }
 
+    /**
+     * 查询这个学生这个学期每一节这个课都对应的考勤信息
+     * @param studentId 学生id
+     * @param courseId 课程id
+     */
+    @RequestMapping("/getStudentAttInEveryCourse")
+    @ResponseBody
+    public WisdomResult getStudentAttInEveryCourse(String studentId,String courseId){
+        WisdomResult studentAttInEveryCourse = teacherAttendanceService.getStudentAttInEveryCourse(studentId, courseId);
+        return studentAttInEveryCourse;
+    }
+
 }

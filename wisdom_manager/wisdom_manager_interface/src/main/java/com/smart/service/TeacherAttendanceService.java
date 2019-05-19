@@ -116,8 +116,9 @@ public interface TeacherAttendanceService {
     public WisdomResult getStudentAttOfCourse(String studentId,String courseId);
 
     /**
-     *
+     * 查看一个学生，在一门课里面这学期的每一课考勤状态
      */
+    public WisdomResult getStudentAttInEveryCourse(String studentId,String courseId);
 
 
 }
