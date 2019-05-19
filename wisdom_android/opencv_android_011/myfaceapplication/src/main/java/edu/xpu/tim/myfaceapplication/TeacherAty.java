@@ -30,7 +30,6 @@ public class TeacherAty extends AppCompatActivity {
         teaAty_name.startSimpleRoll(datas);
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
