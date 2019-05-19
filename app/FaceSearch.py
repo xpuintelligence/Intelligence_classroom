@@ -7,12 +7,9 @@ from FaceDataBase import FaceDataBase
 # 测试用列表 是要更改的 目前希望是每个教室应该在的学生对应一个表 
 # 教室目前所在的学生
 student_actual_list = []
-# 这样可以获得这个教室里面所有学生的学号信息 
+# 这样可以获得这个教室里面所有学生的学号信息
 student_name_list = []
-# 出勤学生学号信息的列表
-student_id_list = []
-# 出勤学生信息防止重复
-student_id_list_actual = []
+
 
 
 class FaceSearch:
@@ -27,6 +24,12 @@ class FaceSearch:
         # 人脸搜索
 
     def search(self):
+        # 出勤学生信息防止重复
+        student_id_list_actual = []
+        # 出勤学生学号信息的列表
+        student_id_list = []
+        # 这样可以获得这个教室里面所有学生的学号信息
+        student_name_list = []
 
         for filename in os.listdir(self.facefolder):  # 遍历图片文件夹中所有的人像
             if filename.endswith(".jpg"):
@@ -55,6 +58,7 @@ class FaceSearch:
                     for student_id in student_id_list:
                         if student_id not in student_id_list_actual:
                             student_id_list_actual.append(student_id)
+                    print(student_id_list_actual)
 
                 except Exception:
                     os.chdir("../faces")
@@ -111,12 +115,12 @@ class FaceSearch:
         # 利用当前教室学生的学号和检测到的学生的学号求补集
         student_actual_list = faceDataBase_debug.get_student_id_all_debug()  # 当前使用的是本地测试数据库
         # 输出当前教室应该有的学生
-        # print(student_actual_list)
+        # print("输出当前教室应该有的学生"+str(student_actual_list))
         for actual_student in student_actual_list:
             if actual_student is not None:
                 student_actual_list_now.append(actual_student)
         # 输出当前教室实际存在的学生
-        # print(student_actual_list_now)
+        # print("输出当前教室实际存在的学生"+str(student_actual_list_now))
         student_left = list(set(student_actual_list_now) - set(student_id_list))
         # 如果补集存在（没有抬头的学生存在)
         try:
@@ -127,7 +131,7 @@ class FaceSearch:
                     # 将低头学生的id保存到低头学生的列表中
                     student_headown_list.append(student_headown_name)
 
-                    # student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
+                    #student_headown_list=self.if_all_write(student_actual_list, student_headown_list)
                 # print("当前低头的学生为:"+str(student_headown_list))
                 return student_headown_list
         except Exception:
