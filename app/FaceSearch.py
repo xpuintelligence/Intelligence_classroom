@@ -3,6 +3,7 @@ import base64
 import os
 import time
 from FaceDataBase import FaceDataBase
+import requests
 
 # 测试用列表 是要更改的 目前希望是每个教室应该在的学生对应一个表 
 # 教室目前所在的学生
@@ -59,10 +60,10 @@ class FaceSearch:
                         if student_id not in student_id_list_actual:
                             student_id_list_actual.append(student_id)
                     print(student_id_list_actual)
-
+                    self.post_student_list_to_server(student_id_list_actual)
                 except Exception:
-                    os.chdir("../faces")
-                    os.system("rm -rf *.jpg")
+                    #os.chdir("../faces")
+                    #os.system("rm -rf *.jpg")
                     pass
 
         student_headown_list = self.judge_id_In_Not(student_id_list)
@@ -148,3 +149,21 @@ class FaceSearch:
             return student_headown_list
         else:
             return student_headown_list
+
+
+    # 将点名的情况发到服务器
+    def post_student_list_to_server(self,student_id_list_actual):
+
+        # api地址
+        url = "http://47.103.14.73:8080/wisdom_web/monitorStudent/setStudentStatus"
+        for student_id in student_id_list_actual:
+            body = {"status": '2', "id": student_id}
+            response = requests.post(url, data=body)
+            now_respone_server = response.text
+            status = '"status":1'
+            print(response.text)
+            if status in now_respone_server:
+                print("已经把出勤信息发送给服务器")
+                print(response.status_code)
+
+
