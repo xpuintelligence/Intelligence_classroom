@@ -82,7 +82,7 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
         //获取这段时间内的每节课的考勤信息
         List<CheckAttendance> checkAttendances = tbStudentMapper.queryCheckAttendance(start, end, teacherInfo.getId());
         //对这节课进行分装
-
+        return WisdomResult.ok();
     }
 
     /**
