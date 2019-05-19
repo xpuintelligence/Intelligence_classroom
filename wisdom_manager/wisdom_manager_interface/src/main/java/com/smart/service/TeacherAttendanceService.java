@@ -93,7 +93,7 @@ public interface TeacherAttendanceService {
     /**
      * 查询某一天的课程列表，有每一节课的时间等上述考勤信息
      */
-    public WisdomResult getAttOfOneDay(String day);
+    public WisdomResult getAttOfOneDay(String day ,TeacherInfo teacherInfo);
 
     /**
      * 查询某一节课所有学生的考勤信息,带排序

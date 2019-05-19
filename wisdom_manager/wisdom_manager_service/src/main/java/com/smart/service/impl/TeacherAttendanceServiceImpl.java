@@ -2,10 +2,7 @@ package com.smart.service.impl;
 
 import com.smart.mapper.TbStudentMapper;
 import com.smart.mapper.TbTeacherMapper;
-import com.smart.pojo.AttendanceItem;
-import com.smart.pojo.AttendanceSituation;
-import com.smart.pojo.TbTeacher;
-import com.smart.pojo.WisdomResult;
+import com.smart.pojo.*;
 import com.smart.service.CourseService;
 import com.smart.service.TeacherAttendanceService;
 import com.smart.utils.DateUtils;
@@ -64,12 +61,98 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
 
     /**
      *
-     * @param classId
-     * @param courseId
+     * @param classId 班级id
+     * @param courseId 课程id
      * @return
      */
     @Override
     public WisdomResult getCourseAttOfClassToday(String classId, String courseId) {
+
         return null;
     }
+
+    /**
+     * 查询老师带的一段时间里面的课程
+     * @param start 开始时间
+     * @param end 结束时时间
+     * @param teacherInfo 教师信息
+     */
+    @Override
+    public WisdomResult getAttASpellTime(String start, String end, TeacherInfo teacherInfo) {
+        //获取这段时间内的每节课的考勤信息
+        List<CheckAttendance> checkAttendances = tbStudentMapper.queryCheckAttendance(start, end, teacherInfo.getId());
+        //对这节课进行分装
+
+    }
+
+    /**
+     * 获取今天上课的考勤信息每一节课的考勤信息
+     * @param teacherInfo 教师信息
+     * @return
+     */
+    @Override
+    public WisdomResult getAttToday(TeacherInfo teacherInfo) {
+        return null;
+    }
+
+    /**
+     * 本周每节课的考勤信息
+     * @param teacherInfo
+     * @return
+     */
+    @Override
+    public WisdomResult getAttThisWeek(TeacherInfo teacherInfo) {
+        return null;
+    }
+
+    /**
+     * 本月每节课的考勤信息
+     * @param teacherInfo
+     * @return
+     */
+    @Override
+    public WisdomResult getAttThisMont(TeacherInfo teacherInfo) {
+        return null;
+    }
+
+    /**
+     * 这个学期每节课的考勤信息
+     * @param teacherInfo
+     * @return
+     */
+    @Override
+    public WisdomResult getAttThisSemester(TeacherInfo teacherInfo) {
+        return null;
+    }
+
+    /**
+     * 某一天的考勤信息
+     * @param day 某一天的时间
+     * @return
+     */
+    @Override
+    public WisdomResult getAttOfOneDay(String day , TeacherInfo teacherInfo) {
+        return null;
+    }
+
+    /**
+     * 某一节课整个班级的考勤信息
+     * @param crouseItemId 某一节课的id
+     */
+    @Override
+    public WisdomResult getAttOfClass(String crouseItemId) {
+        return null;
+    }
+
+    /**
+     * 某一个学生这一学期这节课的考勤信息
+     * @param studentInfo 学生信息
+     * @param courseId 课程信息
+     * @return
+     */
+    @Override
+    public WisdomResult getStudentAttOfCourse(StudentInfo studentInfo, String courseId) {
+        return null;
+    }
+
 }
