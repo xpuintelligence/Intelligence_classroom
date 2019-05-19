@@ -435,4 +435,19 @@
         and tb_courseitem.teacher_id = #{teacher_id}
         group by tb_attendance.courseitem_id
   </select>
+  <select id="queryAttendanceCourseItemByCourseitem_id" resultType="com.smart.pojo.AttendanceCourseItem">
+    select tb_attendance.*, tb_student.name as student_name
+    from tb_attendance, tb_student
+    where tb_attendance.courseitem_id = #{courseitem_id}
+        and tb_attendance.student_id = tb_student.id
+  </select>
+  <select id="queryCourseAVGAttendance" resultType="com.smart.pojo.CourseAVGAttendance">
+    select tb_attendance.student_id, tb_student.name, tb_courseitem.course_id, tb_course.name as course_name, count(*) as total, sum(status='leave') as leave_num, sum(status='late') as late_num, sum(status='absent') as absent_num, sum(status='attend') as attend_num, sum(sleep='1') as sleep_num, avg(tb_attendance.head_up_rate) avg_head_up_rate, avg(tb_attendance.headup_score) as avg_headup_score, avg(goal) as avg_goal
+    from tb_attendance, tb_courseitem, tb_student, tb_course
+    where tb_courseitem.course_id = #{course_id}
+        and tb_attendance.student_id = #{student_id}
+        and tb_courseitem.id = tb_attendance.courseitem_id
+        and tb_student.id = tb_attendance.student_id
+        and tb_course.id = tb_courseitem.course_id
+  </select>
 </mapper>

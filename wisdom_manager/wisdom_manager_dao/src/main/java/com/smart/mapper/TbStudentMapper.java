@@ -123,4 +123,19 @@ public interface TbStudentMapper {
      * @return
      */
     List<CheckAttendance> queryCheckAttendance(@Param("start")String start, @Param("end")String end, @Param("teacher_id")String teacher_id);
+
+    /**
+     * 根据这节课的id查询每个人的考勤状况
+     * @param courseitem_id 这节课的id
+     * @return
+     */
+    List<AttendanceCourseItem> queryAttendanceCourseItemByCourseitem_id(String courseitem_id);
+
+    /**
+     * 根据课程和学生，查询此学生在这门课的平均表现情况
+     * @param student_id 学生id
+     * @param course_id 课程id
+     * @return
+     */
+    CourseAVGAttendance queryCourseAVGAttendance(@Param("student_id")String student_id, @Param("course_id")String course_id);
 }
