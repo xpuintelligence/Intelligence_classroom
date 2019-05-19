@@ -3,6 +3,7 @@ package com.smart.service;
 import com.smart.pojo.StudentInfo;
 import com.smart.pojo.TeacherInfo;
 import com.smart.pojo.WisdomResult;
+import org.joda.time.DateTime;
 
 public interface TeacherAttendanceService {
     /**
@@ -61,6 +62,11 @@ public interface TeacherAttendanceService {
      * 查看今天有几节课+平均考勤总分+平均抬头率+缺勤人数+睡觉人数
      */
     public WisdomResult getAttASpellTime(String start, String end, TeacherInfo teacherInfo);
+
+    /**
+     * 查看今天有几节课+平均考勤总分+平均抬头率+缺勤人数+睡觉人数
+     */
+    public WisdomResult getAttASpellTime(DateTime start, DateTime end, TeacherInfo teacherInfo);
 
     /**
      * 获得今天的考勤信息

@@ -576,4 +576,123 @@ name|method|url|requestParams|describe
 获取今天与昨天的考勤变化|post|http://47.103.14.73:8080/wisdom_web/studetnAttendance/lastAndThisMonthDiff|无|无
 
 ----
+## 老师端，获取一段时间内有自己课程的每一天的整体考勤信息
+### _请求方式与url_
+name|describe
+----|------
+method|post
+url|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime
+api说明|获取一段时间内有自己上的课程的每一天的整体考勤信息
+### _需传输的参数_
+name|describe
+----|------
+start|开始时间 2019-05-05 00:00:00
+end|结束时间 2019-05-19 00:00:00
+status|请求参数值 6
+
+### _返回值_
+name|describe
+----|------
+status|返回值状态 1--->成功 2--->没有课程 0--->失败
+msg|true
+data|具体的消息
+### 返回值样本
+```json
+有课的情况: 
+{
+    "status": 1,--->返回状态值
+    "msg": "true",--->消息
+    "data": [--->链表
+        {
+            "checkAttendanceList": [--->这一天中该该老师的课程列表
+                {
+                    "courseitem_id": "20190507100000",--->这节课的id号
+                    "number": 78,--->这节课应该到的人数
+                    "avg_goal": "57.3333",--->这节课班级总人获得的平均考勤分
+                    "avg_head_up_rate": "0.583846153846154",--->这节课的平均抬头率
+                    "avg_headup_score": "40.0000",--->这节课的平均抬头率
+                    "absent_num": 1,--->缺勤人数
+                    "sleep_num": 4,--->睡觉任谁
+                    "create_date": "2019-05-07 10:00:00.0"--->上课时间
+                },
+                {
+                    "courseitem_id": "20190507100000",--->这节课的id号
+                    "number": 78,--->这节课应该到的人数
+                    "avg_goal": "57.3333",--->这节课班级总人获得的平均考勤分
+                    "avg_head_up_rate": "0.583846153846154",--->这节课的平均抬头率
+                    "avg_headup_score": "40.0000",--->这节课的平均抬头率
+                    "absent_num": 1,--->缺勤人数
+                    "sleep_num": 4,--->睡觉任谁
+                    "create_date": "2019-05-07 10:00:00.0"--->上课时间
+                }
+            ],
+            "date": "2019-05-07",--->这一天的日期
+            "headcount": 78,--->这个你们不用管
+            "sleepNum": 4,--->睡觉的人数
+            "absentNum": 1,--->缺勤人数
+            "sleepRate": 0.0513,--->睡觉百分比
+            "sbsentRate": 0.0128,--->缺勤率
+            "attGoalAve": 57.3333,--->平均考勤分
+            "headupGoalAue": 40,--->平均抬头分数
+            "headUpAve": 0.5838,--->平均抬头率
+            "toOftenRate": 0.9872--->平均道清率
+        },
+        {
+            "checkAttendanceList": [
+                {
+                    "courseitem_id": "20190510100000",
+                    "number": 78,
+                    "avg_goal": "57.3333",
+                    "avg_head_up_rate": "0.583846153846154",
+                    "avg_headup_score": "40.0000",
+                    "absent_num": 1,
+                    "sleep_num": 5,
+                    "create_date": "2019-05-10 10:00:00.0"
+                }
+            ],
+            "date": "2019-05-10",
+            "headcount": 78,
+            "sleepNum": 5,
+            "absentNum": 1,
+            "sleepRate": 0.0641,
+            "sbsentRate": 0.0128,
+            "attGoalAve": 57.3333,
+            "headupGoalAue": 40,
+            "headUpAve": 0.5838,
+            "toOftenRate": 0.9872
+        },
+        {
+            "checkAttendanceList": [
+                {
+                    "courseitem_id": "20190514100000",
+                    "number": 78,
+                    "avg_goal": "57.3333",
+                    "avg_head_up_rate": "0.583846153846154",
+                    "avg_headup_score": "40.0000",
+                    "absent_num": 2,
+                    "sleep_num": 3,
+                    "create_date": "2019-05-14 10:00:00.0"
+                }
+            ],
+            "date": "2019-05-14",
+            "headcount": 78,
+            "sleepNum": 3,
+            "absentNum": 2,
+            "sleepRate": 0.0385,
+            "sbsentRate": 0.0256,
+            "attGoalAve": 57.3333,
+            "headupGoalAue": 40,
+            "headUpAve": 0.5838,
+            "toOftenRate": 0.9744
+        }
+```
+### _类似请求，返回值类似_
+name|method|url|requestParams|describe
+----|------|---|----|--------
+获取今天老师上了那些课，返回考勤信息|post|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime|satus--->1|无
+获取这周老师上了那些课，返回考勤信息|post|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime|satus--->2|无
+获取这月老师上了那些课，返回考勤信息|post|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime|satus--->3|无
+获取这学期老师上了那些课，返回考勤信息|post|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime|satus--->4|无
+获取某一天老师上了那些课，返回考勤信息|post|http://47.103.14.73:8080/wisdom_web/teacherAttendance/getAttOfClassAtASpellTime|satus--->5,start--->某一天时间|无
+----
 

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,7 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
     public WisdomResult getStudentAbsentOfOneCourse(String start, String end, String courseId, String studentId) {
         DateTime currentTime = DateUtils.getCurrentTime();
         Map<String, DateTime> map = DateUtils.formatSpellTime(currentTime);
+
         //获取今天的缺勤情况
         List<AttendanceSituation> attendanceSituations = tbTeacherMapper.queryAttendanceSituation("absent",start,end,courseId);
         return WisdomResult.ok(attendanceSituations);
@@ -79,10 +81,43 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
      */
     @Override
     public WisdomResult getAttASpellTime(String start, String end, TeacherInfo teacherInfo) {
-        //获取这段时间内的每节课的考勤信息
-        List<CheckAttendance> checkAttendances = tbStudentMapper.queryCheckAttendance(start, end, teacherInfo.getId());
-        //对这节课进行分装
-        return WisdomResult.ok();
+        //格式化时间
+        DateTime startTime = DateUtils.stringToDatetime(start);
+        DateTime endTime = DateUtils.stringToDatetime(end);
+        return getAttASpellTime(startTime,endTime,teacherInfo);
+    }
+
+    @Override
+    public WisdomResult getAttASpellTime(DateTime startTime, DateTime endTime, TeacherInfo teacherInfo) {
+        startTime = DateUtils.formatSpellTime(startTime).get("start");
+        endTime = DateUtils.formatSpellTime(endTime).get("end");
+        //创建一个list
+        List<CheckAttendanceStatistic> lists = new ArrayList<>();
+        //把每天的课程结果都拿出
+        while (!endTime.isEqual(startTime)){
+            Map<String, DateTime> map = DateUtils.formatSpellTime(startTime);
+            //获取这段时间内的每节课的考勤信息
+            List<CheckAttendance> checkAttendances = tbStudentMapper.queryCheckAttendance(map.get("start").toString(DATE_FORMAT_TOSTRING),
+                    map.get("end").toString(DATE_FORMAT_TOSTRING), teacherInfo.getId());
+            //判断一下今天有没有课，没课就下一天
+            if (checkAttendances == null || checkAttendances.size() == 0){
+                System.out.println(map.get("start").toString("yyyy-mm-dd")+"没课");
+                //将时间+1
+                startTime = startTime.plusDays(1);
+                continue;
+            }
+            //对这节课进行分装,以及对信息进行初始化
+            CheckAttendanceStatistic checkAttendanceStatistic = new CheckAttendanceStatistic(checkAttendances);
+            //将封装好的结果放进去
+            lists.add(checkAttendanceStatistic);
+            System.out.println(map.get("start").toString("yyyy-mm-dd"));
+            //将时间+1
+            startTime = startTime.plusDays(1);
+        }
+        //如果没课，返回没课
+        if (lists.size() == 0)
+            return new WisdomResult(2,"今天没有课程",null);
+        return WisdomResult.ok(lists);
     }
 
     /**
@@ -92,7 +127,7 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
      */
     @Override
     public WisdomResult getAttToday(TeacherInfo teacherInfo) {
-        return null;
+        return getAttASpellTime(DateUtils.getCurrentTime(),DateUtils.getCurrentTime(),teacherInfo);
     }
 
     /**
@@ -102,7 +137,11 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
      */
     @Override
     public WisdomResult getAttThisWeek(TeacherInfo teacherInfo) {
-        return null;
+        DateTime currentTime = DateUtils.getCurrentTime();
+        Integer integer = courseService.dayOfWeekInThisSemester(currentTime);
+        Map<String, DateTime> nWeekInThisSemester = courseService.getNWeekInThisSemester(integer);
+        //获取这段时间的
+        return getAttASpellTime(nWeekInThisSemester.get("start"), nWeekInThisSemester.get("end"), teacherInfo);
     }
 
     /**
@@ -112,7 +151,10 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
      */
     @Override
     public WisdomResult getAttThisMont(TeacherInfo teacherInfo) {
-        return null;
+        DateTime dateTime = DateUtils.getCurrentTime();
+        Integer integer = courseService.dayOfMonthInThisSemester(dateTime);
+        Map<String, DateTime> nMonthInThisSemester = courseService.getNMonthInThisSemester(integer);
+        return getAttASpellTime(nMonthInThisSemester.get("start"),nMonthInThisSemester.get("end"),teacherInfo);
     }
 
     /**
@@ -122,7 +164,9 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
      */
     @Override
     public WisdomResult getAttThisSemester(TeacherInfo teacherInfo) {
-        return null;
+        DateTime opentime = courseService.getOpentime();
+        DateTime currentTime = DateUtils.getCurrentTime();
+        return getAttASpellTime(opentime,currentTime,teacherInfo);
     }
 
     /**
@@ -132,7 +176,9 @@ public class TeacherAttendanceServiceImpl implements TeacherAttendanceService {
      */
     @Override
     public WisdomResult getAttOfOneDay(String day , TeacherInfo teacherInfo) {
-        return null;
+        DateTime dateTime = DateUtils.stringToDatetime(day);
+        Map<String, DateTime> map = DateUtils.formatSpellTime(dateTime);
+        return getAttASpellTime(map.get("start"),map.get("end"),teacherInfo);
     }
 
     /**

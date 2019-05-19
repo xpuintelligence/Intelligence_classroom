@@ -1,5 +1,6 @@
 package com.smart.controller;
 
+import com.smart.pojo.TeacherInfo;
 import com.smart.pojo.WisdomResult;
 import com.smart.service.TeacherAttendanceService;
 import com.smart.utils.DateUtils;
@@ -7,6 +8,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,4 +29,40 @@ public class TeacherAttendanceController {
         WisdomResult result = teacherAttendanceService.getStudentAbsentOfOneCourse(null, null, courseId, studentId);
         return result;
     }
+
+    /**
+     * 按照条件查询具体时间的每天上课的考勤信息
+     * @param start 开始时间
+     * @param end 结束时间
+     * @param status 条件
+     */
+    @RequestMapping("/getAttOfClassAtASpellTime")
+    @ResponseBody
+    public WisdomResult getAttOfOneClass(HttpServletRequest request,String start,String end,int status){
+        //获取老师信息
+        TeacherInfo teacherInfo = (TeacherInfo) request.getSession().getAttribute("teacher");
+        WisdomResult result = null;
+       //判断条件
+       if (status == 1){
+           //查询今天的
+           result = teacherAttendanceService.getAttToday(teacherInfo);
+       }else if (status == 2){
+           //查询这周的
+           result = teacherAttendanceService.getAttThisWeek(teacherInfo);
+       }else if (status == 3){
+           //查询这个月的
+           result = teacherAttendanceService.getAttThisMont(teacherInfo);
+       }else if (status == 4){
+           //查询这学期的
+           result = teacherAttendanceService.getAttThisSemester(teacherInfo);
+       }else if (status == 5){
+           //查询某一天的
+           result = teacherAttendanceService.getAttOfOneDay(start,teacherInfo);
+       }else if (status == 6){
+           //查询某一区间的
+           result = teacherAttendanceService.getAttASpellTime(start,end,teacherInfo);
+       }
+       return result;
+    }
+
 }
