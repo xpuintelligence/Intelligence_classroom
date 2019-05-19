@@ -4,6 +4,9 @@ import lombok.Data;
 
 import java.io.Serializable;
 
+/**
+ * 俩个考勤区间进行划分
+ */
 @Data
 public class AttDiff implements Serializable {
     private String thisGrade;//这次的分数

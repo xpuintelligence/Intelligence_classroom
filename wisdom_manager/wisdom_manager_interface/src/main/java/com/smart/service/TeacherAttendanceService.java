@@ -113,7 +113,7 @@ public interface TeacherAttendanceService {
     /**
      * 查看一个学生，在一门课里面这学期的考勤状态
      */
-    public WisdomResult getStudentAttOfCourse(StudentInfo studentInfo,String courseId);
+    public WisdomResult getStudentAttOfCourse(String studentId,String courseId);
 
     /**
      *
