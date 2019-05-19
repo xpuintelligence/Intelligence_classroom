@@ -122,5 +122,5 @@ public interface TbStudentMapper {
      * @param end
      * @return
      */
-    List<CheckAttendance> queryCheckAttendance(@Param("start")String start,@Param("end")String end);
+    List<CheckAttendance> queryCheckAttendance(@Param("start")String start, @Param("end")String end, @Param("teacher_id")String teacher_id);
 }
