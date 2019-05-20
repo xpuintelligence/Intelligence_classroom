@@ -68,7 +68,7 @@
 
 # 框架UML图
 
-![识别框架](https://s2.ax1x.com/2019/05/20/EzFcT0.png)
+![识别框架](https://s2.ax1x.com/2019/05/20/EzFcT0.md.png)
 
 # 注意 部分机器测试bug解决方法
 
