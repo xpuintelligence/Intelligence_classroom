@@ -1,11 +1,11 @@
 <template>
   <div>
-    <el-card class="box-card">
+    <el-card>
       <div slot="header" class="clearfix">
         <!--<span>基本信息</span>-->
         <Mallki class-name="date" text="基本信息"></Mallki>
       </div>
-      <div class="text item" style="font-size: 12px">
+      <div style="font-size: 12px">
         ID：{{userData.id}}<br>
         姓名：{{userData.name}}<br>
         学院：{{userData.college_name}}<br>

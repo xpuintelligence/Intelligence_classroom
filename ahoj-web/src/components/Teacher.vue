@@ -89,9 +89,12 @@
             </el-switch>
           </div>
 
-          <el-button class="app-header-userinfo" type="text" style="color: black;" @click.native="logout">
-            <Mallki class="loginOut" text="安全退出"></Mallki>
-          </el-button>
+          <div class="app-header-userinfo">
+            <Mallki :text="userData.name + '老师'"></Mallki>
+            <el-button type="text" style="color: black;" @click.native="logout">
+              <Mallki class="loginOut" text="安全退出"></Mallki>
+            </el-button>
+          </div>
 
         </el-header>
 
@@ -149,12 +152,11 @@
     mounted() {
       // 获取老师的信息
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
-      console.log(this.userData);
 
-      this.$notify({
-        message: '你好，' + this.userData.name,
+      this.$message({
+        message: '你好，' + this.userData.name + '老师',
         type: 'success'
-      });
+      })
 
     },
     components: {ElAside, ElContainer, Mallki},
@@ -281,7 +283,9 @@
       background-color: #fff;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
       position: relative;
-      filter:alpha(Opacity=60);-moz-opacity:0.6;opacity: 1.0;
+      filter: alpha(Opacity=60);
+      -moz-opacity: 0.6;
+      opacity: 1.0;
 
       &-userinfo {
         position: absolute;
