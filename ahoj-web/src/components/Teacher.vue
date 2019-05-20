@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-container class="wrap">
-      <el-aside class="app-side silder" :class="isCollapse ? 'app-side-collapsed' : 'app-side-expanded'">
+      <el-aside class="app-side silder" :class="isCollapse ? 'app-side-expanded' : 'app-side-collapsed'">
         <div class="app-side-logo">
           <img src="@/assets/logo.png" :width="isCollapse ? '60' : '60'" height="60"/>
         </div>
@@ -79,12 +79,18 @@
 
           <!--侧栏开关-->
           <div style="width: 60px; cursor: pointer;" @click.prevent="toggleSideBar">
-            <i v-show="!isCollapse" class="el-icon-open"></i>
-            <i v-show="isCollapse" class="el-icon-turn-off"></i>
+            <!--<i v-show="!isCollapse" class="el-icon-open"></i>-->
+            <!--<i v-show="isCollapse" class="el-icon-turn-off"></i>-->
+            <el-switch
+              v-model="isCollapse"
+              @change="isCollapse = !isCollapse"
+              active-color="#13ce66"
+              inactive-color="#ff4949">
+            </el-switch>
           </div>
 
           <el-button class="app-header-userinfo" type="text" style="color: black;" @click.native="logout">
-            <Mallki class="loginOut" text="溜了溜了"></Mallki>
+            <Mallki class="loginOut" text="安全退出"></Mallki>
           </el-button>
 
         </el-header>
@@ -113,7 +119,7 @@
     data() {
       return {
         userData: {},
-        isCollapse: false,
+        isCollapse: true,
       }
     },
     methods: {
@@ -141,12 +147,15 @@
       },
     },
     mounted() {
+      // 获取老师的信息
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
+      console.log(this.userData);
+
       this.$notify({
         message: '你好，' + this.userData.name,
         type: 'success'
       });
-      // console.log(this.userData);
+
     },
     components: {ElAside, ElContainer, Mallki},
   }
@@ -252,7 +261,7 @@
 
       /* 关闭的侧栏宽度 */
       &-collapsed {
-        width: 66px !important;
+        width: 53px !important;
       }
 
       /* 展开的侧边栏宽度 */
