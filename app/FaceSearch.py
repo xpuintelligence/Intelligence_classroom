@@ -7,7 +7,7 @@ import requests
 
 # 测试用列表 是要更改的 目前希望是每个教室应该在的学生对应一个表 
 # 教室目前所在的学生
-student_actual_list = []
+# student_actual_list = []
 # 这样可以获得这个教室里面所有学生的学号信息
 student_name_list = []
 
@@ -66,7 +66,11 @@ class FaceSearch:
                     #os.system("rm -rf *.jpg")
                     pass
 
-        student_headown_list = self.judge_id_In_Not(student_id_list)
+        student_headown_list = []
+        if student_headown_list is not  None:
+            student_headown_list = self.judge_id_In_Not(student_id_list)
+        else:
+            student_headown_list = []
         return student_name_list, student_headown_list, student_id_list_actual
 
     # 初始化数据库对象 服务器数据库
@@ -116,12 +120,13 @@ class FaceSearch:
         # 利用当前教室学生的学号和检测到的学生的学号求补集
         student_actual_list = faceDataBase_debug.get_student_id_all_debug()  # 当前使用的是本地测试数据库
         # 输出当前教室应该有的学生
-        # print("输出当前教室应该有的学生"+str(student_actual_list))
-        for actual_student in student_actual_list:
-            if actual_student is not None:
-                student_actual_list_now.append(actual_student)
+        print("输出当前教室应该有的学生"+str(student_actual_list))
+        if student_actual_list is not None:
+            for actual_student in student_actual_list:
+                if actual_student is not None:
+                    student_actual_list_now.append(actual_student)
         # 输出当前教室实际存在的学生
-        # print("输出当前教室实际存在的学生"+str(student_actual_list_now))
+        print("输出当前教室实际存在的学生"+str(student_actual_list_now))
         student_left = list(set(student_actual_list_now) - set(student_id_list))
         # 如果补集存在（没有抬头的学生存在)
         try:

@@ -17,13 +17,14 @@ class GetJudge:
     
     # 判断学生是不是在睡觉或者不认真听讲
     def sleepJudge(self, student_headown_list):
-        if len(student_headown_list):
-            print(student_headown_list)
-            for student_name in student_headown_list:
-                if student_name in self.sleepdict.keys():
-                    self.sleepdict[student_name] = self.sleepdict[student_name]+1
-                else:
-                    self.sleepdict[student_name] = 1
+        if student_headown_list is not None:
+            if len(student_headown_list):
+                print(student_headown_list)
+                for student_name in student_headown_list:
+                    if student_name in self.sleepdict.keys():
+                        self.sleepdict[student_name] = self.sleepdict[student_name]+1
+                    else:
+                        self.sleepdict[student_name] = 1
 
             #print(self.sleepdict)
 
