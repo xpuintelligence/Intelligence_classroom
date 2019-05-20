@@ -4,6 +4,7 @@ package com.smart.pojo;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author LM_Code
@@ -15,7 +16,7 @@ public class AttendanceItem implements Serializable {
     String courseitem_id;//这一节课的id
     String course_id;//课程id
     String name;//课程名
-    String time;//上课时间
+    Date time;//上课时间
     String status;//到勤状态
     String head_up_rate;//抬头率
     String goal;//总分
