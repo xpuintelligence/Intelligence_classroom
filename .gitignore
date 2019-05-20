@@ -7,4 +7,6 @@ app/test.json
 /app/testsql.py
 /app/testPost.py
 /app/.qiniu_pythonsdk_hostscache.json
-/.idea
+*.idea/
+*.pyc
+__pycache__/
