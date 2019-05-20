@@ -39,6 +39,12 @@
         console.log("--------err-------");
         console.log(err);
       });
+
+      for (let i = 0; i < this.thisWeekData.length; i++) {
+        this.thisWeekData[i].time = new Date(this.thisWeekData[i].time).toLocaleDateString()
+          + ' '
+          + new Date(this.thisWeekData[i].time).toLocaleTimeString();
+      }
     },
     methods: {
       hasQuestion() {

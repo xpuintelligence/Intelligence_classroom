@@ -25,7 +25,7 @@
             </div>
             <div class="text item" style="font-size: 12px">
               姓名：{{userData.name}}<br>
-              班级：{{userData.classId}}<br>
+              班级：{{userData.className}}<br>
               性别：{{userData.sex === "male" ? '男': '女'}}<br>
               手机：{{userData.phone}}<br>
               <el-button icon="el-icon-key" type="text" style="color: dodgerblue" @click="changePassword">

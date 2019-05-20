@@ -16,12 +16,12 @@
     "fetch": "^1.1.0",
     "highcharts": "^7.1.1",
     "jquery": "^3.4.1",
+    "tar": "^4.4.2",
     "vue": "^2.5.2",
     "vue-highcharts": "^0.1.0",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
-    "tar": "^4.4.2"
-
+    "vuejs-heatmap": "^1.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

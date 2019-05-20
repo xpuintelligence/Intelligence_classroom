@@ -141,8 +141,26 @@
             title: null
           },
           colorAxis: {
-            // min: 0,
-            minColor: '#AFEEEE',
+            dataClasses: [{
+              from: 0,
+              to: 10,
+              color: '#c6e48b',
+              name: '0 - 9'
+            }, {
+              from: 10,
+              to: 29,
+              color: '#7bc96f',
+              name: '10 - 29'
+            }, {
+              from: 30,
+              to: 60,
+              color: '#239a3b',
+              name: '30 - 79'
+            }, {
+              from: 80,
+              color: '#196127',
+              name: '80 - 100'
+            }]
           },
           legend: {
             // align: 'right',
@@ -168,7 +186,7 @@
                 enabled: true,
                 color: '#000000'
               }
-            }
+            },
           ]
         },  // 本周数据热力图
       }

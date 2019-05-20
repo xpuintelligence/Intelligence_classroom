@@ -19,6 +19,11 @@
           <x-chart id="thisSemesterHeatMapChart" class="thisSemesterHeatMapChart"
                    :option="thisSemesterHeatMapChart"></x-chart>
         </el-card>
+
+        <el-card v-if="chartsRanderOk === true">
+          <vuejs-heatmap selector="ThisSemester" :entries="tmp_entries" :tooltip-unit="tooltipHeatmap" :locale="tmp_locale"
+                         :color-range="['#ebedf0', '#196127']" :max="100"></vuejs-heatmap>
+        </el-card>
       </div>
     </el-card>
 
@@ -29,6 +34,28 @@
 <script>
   import XChart from '@/components/charts/test'
   import Mallki from "@/components/MyComponents/Mallki";
+  // import VuejsHeatmap from 'vuejs-heatmap'
+  import VuejsHeatmap from "vuejs-heatmap/src/VuejsHeatmap";
+
+  function dateFormat(dateStr, pattern = '') {
+    // 根据给定的时间字符串，得到特定的时间
+    var dt = new Date(dateStr)
+
+    //   yyyy-mm-dd
+    var y = dt.getFullYear()
+    var m = (dt.getMonth() + 1).toString().padStart(2, '0')
+    var d = dt.getDate().toString().padStart(2, '0')
+
+    if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+      return `${y}-${m}-${d}`
+    } else {
+      var hh = dt.getHours().toString().padStart(2, '0')
+      var mm = dt.getMinutes().toString().padStart(2, '0')
+      var ss = dt.getSeconds().toString().padStart(2, '0')
+
+      return `${y}-${m}-${d}`
+    }
+  }
 
   export default {
     name: "ThisSemester",
@@ -139,8 +166,26 @@
             title: null
           },
           colorAxis: {
-            // min: 0,
-            minColor: '#AFEEEE',
+            dataClasses: [{
+              from: 0,
+              to: 10,
+              color: '#c6e48b',
+              name: '0 - 9'
+            }, {
+              from: 10,
+              to: 29,
+              color: '#7bc96f',
+              name: '10 - 29'
+            }, {
+              from: 30,
+              to: 60,
+              color: '#239a3b',
+              name: '30 - 79'
+            }, {
+              from: 80,
+              color: '#196127',
+              name: '80 - 100'
+            }]
           },
           legend: {
             // align: 'right',
@@ -169,6 +214,28 @@
             }
           ]
         },  // 本学期数据热力图
+
+        tmp_entries: [
+          {
+            "counting": 100,
+            "created_at": "2019-04-21"
+          },
+          {
+            "counting": 60,
+            "created_at": "2019-04-22"
+          }
+        ],
+
+        tooltipHeatmap: '',
+
+        tmp_locale: {
+          months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          days: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+          No: 'No',
+          on: 'on',
+          Less: 'Less',
+          More: 'More'
+        },
       }
     },
     async mounted() {
@@ -223,11 +290,20 @@
           + this.thisSemesterHeatMapChart.yAxis.categories[new Date(this.thisSemesterData[i].time).getDay()]
           + '<br>考勤总分' + this.thisSemesterData[i].attendanceTotalScore + '分'
         ;
+
+        let t = {
+          // "counting": this.thisSemesterData[i].attendanceTotalScore,
+          "counting": parseInt(Math.random()*100),
+          "created_at": dateFormat(new Date(this.thisSemesterData[i].time), 'yyyy-dd-mm')
+        };
+        this.tooltipHeatmap = this.thisSemesterData[i].courseName + '<br>';
+        this.tmp_entries.push(t);
+
       } // for
 
       this.chartsRanderOk = true;
     },
-    components: {Mallki, XChart}
+    components: {VuejsHeatmap, Mallki, XChart},
   }
 </script>
 

@@ -64,6 +64,13 @@
           console.log("--------err in GetSomeDayCourse.vue-------");
           console.log(err);
         });
+
+        // 处理时间戳
+        for (let i = 0; i < this.getCourseData.length; i++) {
+          this.getCourseData[i].time = new Date(this.getCourseData[i].time).toLocaleDateString()
+            + ' '
+            + new Date(this.getCourseData[i].time).toLocaleTimeString();
+        }
       },
 
     },

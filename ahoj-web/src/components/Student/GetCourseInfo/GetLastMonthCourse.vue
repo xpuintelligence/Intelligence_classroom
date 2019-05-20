@@ -39,6 +39,12 @@
         console.log("--------err-------");
         console.log(err);
       });
+
+      for (let i = 0; i < this.lastMonthData.length; i++) {
+        this.lastMonthData[i].time = new Date(this.lastWeekData[i].time).toLocaleDateString()
+          + ' '
+          + new Date(this.lastMonthData[i].time).toLocaleTimeString();
+      }
     },
     methods: {
       hasQuestion() {

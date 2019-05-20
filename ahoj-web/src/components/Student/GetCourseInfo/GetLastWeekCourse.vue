@@ -40,6 +40,12 @@
         console.log("--------err-------");
         console.log(err);
       });
+
+      for (let i = 0; i < this.lastWeekData.length; i++) {
+        this.lastWeekData[i].time = new Date(this.lastWeekData[i].time).toLocaleDateString()
+          + ' '
+          + new Date(this.lastWeekData[i].time).toLocaleTimeString();
+      }
     },
     methods: {
       hasQuestion() {
