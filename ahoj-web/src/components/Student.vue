@@ -83,9 +83,13 @@
             </el-switch>
           </div>
 
-          <el-button class="app-header-userinfo" type="text" style="color: black;" @click.native="logout">
-            <Mallki class="loginOut" text="溜了溜了"></Mallki>
-          </el-button>
+          <div class="app-header-userinfo">
+            <Mallki class="username" :text="userData.name + '同学'"></Mallki>
+            <i class="el-icon-lock"></i>
+            <el-button type="text" style="color: black;" @click.native="logout">
+              <Mallki class="loginOut" text="溜了溜了"></Mallki>
+            </el-button>
+          </div>
 
         </el-header>
 
@@ -149,8 +153,8 @@
 
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
 
-      this.$notify({
-        message: '你好，' + this.userData.name,
+      this.$message({
+        message: '你好，' + this.userData.name + '同学',
         type: 'success'
       });
     },

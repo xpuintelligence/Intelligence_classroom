@@ -91,6 +91,7 @@
 
           <div class="app-header-userinfo">
             <Mallki :text="userData.name + '老师'"></Mallki>
+            <i class="el-icon-lock"></i>
             <el-button type="text" style="color: black;" @click.native="logout">
               <Mallki class="loginOut" text="安全退出"></Mallki>
             </el-button>
