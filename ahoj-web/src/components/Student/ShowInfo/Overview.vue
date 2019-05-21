@@ -138,7 +138,30 @@
         });
       },
       sendMsg() {
-        this.$msgbox('功能暂未启用', '发送信息');
+        this.$prompt('接收方', '传小纸条', {
+          confirmButtonText: '发送',
+          cancelButtonText: '取消',
+        }).then(({ value }) => {
+          this.$prompt('纸条内容', '传小纸条', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+          }).then(({ value }) => {
+            this.$message({
+              type: 'success',
+              message: '已发送',
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '取消'
+            });
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消'
+          });
+        });
       }
     },
   }

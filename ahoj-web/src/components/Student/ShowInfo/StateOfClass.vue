@@ -27,7 +27,11 @@
             </el-tab-pane>
 
             <el-tab-pane label="语音留言" name="语音留言">
+              <Mallki class-name="teacher_name" :text="'来自'+todayCourse.teacherName+'老师的语音留言'"></Mallki>
               <VueAudio :theUrl="teacherWord.url"></VueAudio>
+              <el-button icon="el-icon-sort" type="primary" @click="commentBack">
+                回复
+              </el-button>
             </el-tab-pane>
 
             <el-tab-pane label="文本留言" name="文本留言">
@@ -176,16 +180,16 @@
       this.userData = JSON.parse(sessionStorage.getItem('userData'));
 
       // 获取学生消息
-      this.$http.post('wisdom_web/monitorStudent/getStudentMsg', {
-        id: this.userData.id
-      }).then(res => {
-        localStorage.setItem('message', JSON.stringify(res.body));
-        if (res.body.data !== null) {
-          this.message = res.body.data;
-        }
-      }).catch(err => {
-        console.log(err);
-      });
+      // this.$http.post('wisdom_web/monitorStudent/getStudentMsg', {
+      //   id: this.userData.id
+      // }).then(res => {
+      //   localStorage.setItem('message', JSON.stringify(res.body));
+      //   if (res.body.data !== null) {
+      //     this.message = res.body.data;
+      //   }
+      // }).catch(err => {
+      //   console.log(err);
+      // });
 
       // 如果是周六、周日就不显示这一栏
       if (new Date().getDay() === 6 || new Date().getDay() === 0) {
@@ -209,6 +213,24 @@
       this.yibiaoCharts.series[0].data[0].y = this.todayCourse.attendanceTotalScore;
       this.yibiaoCharts.series[1].data[0].y = this.todayCourse.headUpScore;
 
+    },
+    methods: {
+      commentBack() {
+        this.$prompt('', '回复', {
+          confirmButtonText: '提交',
+          cancelButtonText: '取消',
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: '已发送',
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消'
+          });
+        });
+      },
     }
   }
 </script>

@@ -38,7 +38,7 @@
               <span slot="title">课堂作业</span>
             </template>
             <el-menu-item index="GetHomework">查看作业</el-menu-item>
-            <el-menu-item index="PushHomework">提交作业</el-menu-item>
+            <el-menu-item index="PushHomework" disabled>提交作业</el-menu-item>
           </el-submenu>
 
           <el-submenu index="课堂内容">

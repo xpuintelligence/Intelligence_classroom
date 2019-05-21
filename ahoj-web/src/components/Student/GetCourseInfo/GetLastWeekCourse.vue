@@ -9,6 +9,8 @@
 
       <el-table-column prop="teacher_name" label="老师"></el-table-column>
 
+      <el-table-column prop="head_up_rate" label="抬头率"></el-table-column>
+
       <el-table-column prop="goal" label="成绩"></el-table-column>
 
       <el-table-column>
@@ -49,7 +51,20 @@
     },
     methods: {
       hasQuestion() {
-        alert('有问题，不会百度啊？');
+        this.$prompt('问题描述', '意见反馈', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: '我们已收到您的反馈意见：' + value + '，会尽快处理。'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });
+        });
       },
     },
   }
