@@ -11,22 +11,22 @@
       <el-carousel :interval="1000" type="card" height="200px">
         <el-carousel-item>
           <!--<h3>智慧教室管理系统</h3>-->
-          <img src="https://i.loli.net/2019/05/20/5ce24794e23bd35527.png" alt="3.png" title="3.png"
+          <img src="http://996xpu.zouchanglin.cn/image/1.jpg" alt="3.png" title="3.png"
                style="width: 300px"/>
         </el-carousel-item>
         <el-carousel-item>
           <!--<h3>智慧教室管理系统</h3>-->
-          <img src="https://i.loli.net/2019/05/20/5ce2479266ce978543.png" alt="5.png" title="5.png"
+          <img src="http://996xpu.zouchanglin.cn/image/2.jpg" alt="5.png" title="5.png"
                style="width: 300px"/>
         </el-carousel-item>
         <el-carousel-item>
           <!--<h3>智慧教室管理系统</h3>-->
-          <img src="https://i.loli.net/2019/05/20/5ce247943808f53039.png" alt="1.png" title="1.png"
+          <img src="http://996xpu.zouchanglin.cn/image/3.jpg" alt="1.png" title="1.png"
                style="width: 300px"/>
         </el-carousel-item>
         <el-carousel-item>
           <!--<h3>智慧教室管理系统</h3>-->
-          <img src="https://i.loli.net/2019/05/20/5ce247955c03b10433.png" alt="2.png" title="2.png"
+          <img src="http://996xpu.zouchanglin.cn/image/4.jpg" alt="2.png" title="2.png"
                style="width: 300px"/>
         </el-carousel-item>
       </el-carousel>

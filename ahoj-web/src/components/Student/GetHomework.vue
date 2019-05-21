@@ -10,6 +10,7 @@
       </div>
     </el-card>
 
+    <br/>
     <el-card class="box-card">
       <div slot="header">
         <Mallki class="homework1" :text="homeworkObj[2].courseName"></Mallki>
@@ -23,6 +24,7 @@
       </el-button>
     </el-card>
 
+    <br/>
     <el-card class="box-card">
       <div slot="header">
         <Mallki class="homework1" :text="homeworkObj[1].courseName"></Mallki>
@@ -86,6 +88,5 @@
 
 <style scoped>
   .box-card {
-    width: 480px;
   }
 </style>
