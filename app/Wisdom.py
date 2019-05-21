@@ -33,7 +33,7 @@ class Wisdom:
         img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
 
         # 保存处理之后的图片
-        cv2.imwrite(output_path,img2)
+        # cv2.imwrite(output_path,img2)
         # 准备上传七牛云
         upload = Upload()
         # upload.upload(output_path,filename)
@@ -141,4 +141,5 @@ class Wisdom:
         #     sleepdict_actual = {}
         #     return sleepdict_actual, student_attendancedict, student_id_list_actual
         # else:
+        faceSearch.post_student_list_to_server(student_attendancedict)
         return sleepdict_actual, student_attendancedict, student_id_list_actual

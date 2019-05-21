@@ -35,8 +35,8 @@ class GetJudge:
                     print("请提醒"+student_name+"同学，该同学可能正在睡觉")
                     faceDataBase = GetJudge.initdatabase()
                     student_id = faceDataBase.get_student_id(student_name)
-                    GetJudge.post_sleep_student(student_id)
-            
+                    # GetJudge.post_sleep_student(student_id)
+
         return self.sleepdict
         
     # 准备链接数据库 返回数据库对象
@@ -105,6 +105,21 @@ class GetJudge:
             print("已经向服务器发送了睡觉信息")
             print(response.status_code)
 
+
+    def post_absent_student(student_list):
+
+        # api地址
+        url = "http://47.103.14.73:8080/wisdom_web/monitorStudent/setStudentStatus"
+
+        body = {"status": '3', "id": "1","msg":str(student_list)}
+
+        response = requests.post(url, data=body)
+        now_respone_server = response.text
+        status = '"status":1'
+        print(response.text)
+        if status in now_respone_server:
+            print("已经向服务器发送了缺勤信息")
+            print(response.status_code)
     
 
 

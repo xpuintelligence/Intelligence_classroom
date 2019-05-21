@@ -27,9 +27,23 @@ print("识别结束当前每个学生的出勤情况为：")
 print(str(student_attendancedict_end))
 print("本次识别中低头的学生情况为：")
 print(str(sleepdict_end))
+
+# 缺勤学生id列表
+sleepdict_absent_list = []
+
+for student_id in sleepdict_end.keys():
+    if sleepdict_end[student_id] > 3:
+        sleepdict_absent_list.append(student_id)
+
+print("缺勤学生为:"+str(sleepdict_absent_list))
+GetJudge.post_absent_student(sleepdict_absent_list)
+
+
 print("学号信息为:")
 print(student_id_list_actual)
 
+
+GetJudge.post_sleep_student("41604090109")
 # 识别次数 目前设置为4次
 
 reco_time = 4

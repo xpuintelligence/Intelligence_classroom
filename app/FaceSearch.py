@@ -60,7 +60,7 @@ class FaceSearch:
                         if student_id not in student_id_list_actual:
                             student_id_list_actual.append(student_id)
                     print(student_id_list_actual)
-                    self.post_student_list_to_server(student_id_list_actual)
+                    #self.post_student_list_to_server(student_id_list_actual)
                 except Exception:
                     #os.chdir("../faces")
                     #os.system("rm -rf *.jpg")
@@ -161,14 +161,14 @@ class FaceSearch:
 
         # api地址
         url = "http://47.103.14.73:8080/wisdom_web/monitorStudent/setStudentStatus"
-        for student_id in student_id_list_actual:
-            body = {"status": '2', "id": student_id}
-            response = requests.post(url, data=body)
-            now_respone_server = response.text
-            status = '"status":1'
-            print(response.text)
-            if status in now_respone_server:
-                print("已经把出勤信息发送给服务器")
-                print(response.status_code)
+        #for student_id in student_id_list_actual:
+        body = {"status": '2', "id": "1","msg":str(student_id_list_actual)}
+        response = requests.post(url, data=body)
+        now_respone_server = response.text
+        status = '"status":1'
+        print(response.text)
+        if status in now_respone_server:
+            print("已经把出勤信息发送给服务器")
+            print(response.status_code)
 
 
