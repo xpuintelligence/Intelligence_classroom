@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/stu_id"
+            android:text="41604090109"
             android:inputType="number"
             android:paddingLeft="15dp"
             tools:ignore="Autofill" />
@@ -49,20 +50,10 @@
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
             android:hint="@string/stu_pwd"
+            android:text="00000"
             android:inputType="textPassword"
             android:paddingLeft="15dp"
             tools:ignore="Autofill" />
-
-
-        <!--<Button-->
-        <!--android:id="@+id/regStuBtn"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="15dp"-->
-        <!--android:background="@drawable/border_line_while"-->
-        <!--android:onClick="toFace"-->
-        <!--android:text="@string/stu_face"-->
-        <!--android:textColor="#FFFFFF" />-->
 
         <com.xuexiang.xui.widget.button.CountDownButton
             android:id="@+id/regStuBtn"

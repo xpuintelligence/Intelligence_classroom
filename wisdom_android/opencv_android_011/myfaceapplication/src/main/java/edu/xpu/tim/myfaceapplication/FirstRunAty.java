@@ -39,31 +39,59 @@ public class FirstRunAty extends AppCompatActivity {
 
         //首次登陆
         SharedPreferences first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
-
-
+        SharedPreferences.Editor editor = first.edit();
         //开启检测服务
         Timer timer = new Timer();
         Vibrator mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
-        new Thread(()-> timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Map<String, String> map = new HashMap<>();
-                String stu_id = first.getString("stu_id", "");
-                assert stu_id != null;
-                map.put("id", stu_id);
-                String post = GetPostUrl.post(AppConfig.nowSmg, map);
-                JSONObject object = JSONObject.parseObject(post);
-                Integer status = object.getInteger("status");
-                String msg = object.getString("msg");
-                if(status == 0){
-                    Log.i(AppConfig.TAG, "msg:" + msg);
-                }else if(status == 1){
-                    runOnUiThread(()-> XToast.info(getContext(), "检测到你正在睡觉！").show());
-                    //停止1秒，开启震动10秒，然后又停止2秒，又开启震动10秒，不重复
-                    mVibrator.vibrate(new long[]{1000, 10000, 2000, 10000}, -1);
+        new Thread(()-> {
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Map<String, String> map = new HashMap<>();
+                    String id = first.getInt("status", -1) == 1 ?
+                            first.getString("stu_id", "-1"):first.getString("tea_id", "-1");
+                    assert id != null;
+                    Log.i(AppConfig.TAG, "SP获取的id = " + id);
+                    map.put("id", id);
+
+                    //请求的时候try-catch
+                    try {
+                        String post = GetPostUrl.post(AppConfig.nowSmg, map);
+                        JSONObject object = JSONObject.parseObject(post);
+                        Log.i(AppConfig.TAG, "post = " + post);
+                        Integer status = object.getInteger("status");
+                        if (status == 0) {
+                            String msg = object.getString("msg");
+                            Log.i(AppConfig.TAG, "msg:" + msg);
+                        } else if (status == 1) {
+                            JSONObject data = object.getJSONObject("data");
+                            Log.i(AppConfig.TAG, "data = "+data);
+                            String status1 = data.getString("status");
+                            if ("1".equals(status1)) {
+                                //学生在睡觉，应该提醒
+                                runOnUiThread(() -> XToast.info(getContext(), "检测到你正在睡觉！").show());
+                                //停止1秒，开启震动10秒，然后又停止2秒，又开启震动10秒，不重复
+                                mVibrator.vibrate(new long[]{1000, 10000, 2000, 10000}, -1);
+                            } else if ("2".equals(status1)) {
+                                //已经获取到出勤的学生名单
+                                editor.putString("attendance2", data.getString("msg"));
+                                editor.apply();
+                            } else if ("3".equals(status1)) {
+                                //已经获取到旷课学生名单
+                                editor.putString("attendance3", data.getString("msg"));
+                                editor.apply();
+                            } else {
+                                //其他情况
+                                Log.e(AppConfig.TAG, data.getString("msg"));
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.i(AppConfig.TAG, "服务器端严重错误：" + e.toString());
+                    }
+
                 }
-            }
-        }, new Date(), 5000)).start();
+            }, new Date(), 10000);
+        }).start();
 
         Boolean isFirst = first.getBoolean("isFirst", true);
         if(isFirst){

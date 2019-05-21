@@ -107,8 +107,8 @@ public class GetPostUrl {
                     while ((line = br.readLine()) != null) {
                         sb.append(line);
                     }
-                    System.out.println(sb.toString());
-                    Log.i(AppConfig.TAG, sb.toString());
+                    //System.out.println(sb.toString());
+                    //Log.i(AppConfig.TAG, sb.toString());
                     return sb.toString();
                 } catch (Exception e) {
                     e.printStackTrace();

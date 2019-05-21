@@ -35,7 +35,7 @@
 
 ### 1、开发平台
 
-* macOS Mojave 14.04  + AndroidStudio 3.2 + JDK1.8 
+* macOS Mojave 14.04  + AndroidStudio 3.2 + JDK1.8 + PostMan测试工具
 
 * Android 5.0 版本的手机、Android 6.0 版本的手机作为测试机器
 
@@ -375,7 +375,13 @@ new Thread(()-> timer.schedule(new TimerTask() {
 
 ### 7、教师端课堂考勤
 
+在硬件端检测完课堂情况后向服务器端的消息队列推送一条消息，App端负责取出消息队列的消息，然后分析消息队列的消息，然后在App端展示出来，下图是使用PostMan发送请求的示例！
 
+![](https://s2.ax1x.com/2019/05/22/VpAVP0.png)
+
+### 8、消息推送
+
+![](https://s2.ax1x.com/2019/05/22/VpVsv8.png)
 
 ## 四、Github开源地址
 
@@ -389,5 +395,5 @@ new Thread(()-> timer.schedule(new TimerTask() {
 
 
 
-
+​	
 

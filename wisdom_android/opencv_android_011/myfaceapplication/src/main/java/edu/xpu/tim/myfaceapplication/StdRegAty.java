@@ -16,7 +16,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
-import com.xuexiang.xui.widget.dialog.LoadingDialog;
 import com.xuexiang.xui.widget.toast.XToast;
 
 
@@ -43,7 +42,6 @@ public class StdRegAty extends AppCompatActivity {
     }
 
     public void toFace(View v){
-
         Button regTeaBtn = findViewById(R.id.regTeaBtn);
         regTeaBtn.setEnabled(false);
         someInfoLogin(true, new Intent(getApplicationContext(), MainActivity.class), regTeaBtn);
@@ -113,11 +111,10 @@ public class StdRegAty extends AppCompatActivity {
                 public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                     try{
                         String retStr = new String(responseBody);
-
                         Log.i(TAG, retStr);
                         JSONObject retJson = JSONObject.parseObject(retStr);
                         Integer status = retJson.getInteger("status");
-                        if(1 == status){
+                        if(2 == status){
                             edit.putString("retStr", retStr);
                             if(edit.commit()) Log.i(TAG,"edit.commit() success!!!");
 
@@ -128,6 +125,14 @@ public class StdRegAty extends AppCompatActivity {
                             finish();
                         }else if(0 == status){
                             XToast.error(getContext(), "用户名或密码不正确").show();
+                        }else if(1 == status){
+                            edit.putString("retStr", retStr);
+                            if(edit.commit()) Log.i(TAG,"edit.commit() success!!!");
+                            XToast.success(getContext(), "登录成功").show();
+                            CookieUtils.setCookies(CookieUtils.getCookie(StdRegAty.this));
+                            //先结束掉此Activity
+                            startActivity(atyIntent);
+                            finish();
                         }
                     }catch (Exception e){
                         e.printStackTrace();

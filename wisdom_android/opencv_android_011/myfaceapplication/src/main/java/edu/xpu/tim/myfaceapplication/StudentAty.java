@@ -2,7 +2,6 @@ package edu.xpu.tim.myfaceapplication;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,13 +13,10 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.xuexiang.xui.widget.banner.anim.select.ZoomInEnter;
 import com.xuexiang.xui.widget.banner.widget.banner.SimpleGuideBanner;
-import com.xuexiang.xui.widget.dialog.materialdialog.MaterialDialog;
 
 import java.util.ArrayList;
-
 import edu.xpu.tim.myfaceapplication.student.StuCheckInfoAty;
 
-import static com.xuexiang.xui.XUI.getContext;
 
 public class StudentAty extends AppCompatActivity {
     private static final String TAG = "StudentAty";
@@ -54,8 +50,6 @@ public class StudentAty extends AppCompatActivity {
         TextView stuAty_collegeName = findViewById(R.id.collegeName);
 
         //积分模块
-        TextView stuAty_jifen = findViewById(R.id.stuAty_jifen);
-
         SharedPreferences first = getSharedPreferences("loginInfo", Context.MODE_PRIVATE);
         String stuInfoStr = first.getString("retStr", "");
         Log.i(TAG, "stuInfoStr:" + stuInfoStr);
@@ -76,27 +70,13 @@ public class StudentAty extends AppCompatActivity {
     public void onBackPressed() {
         new AlertDialog.Builder(this).setTitle("确认退出吗？")
                 .setIcon(R.drawable.icon_tip)
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 点击“确认”后的操作
-                        StudentAty.this.finish();
-                    }
+                .setPositiveButton("确定", (dialog, which) -> {
+                    // 点击“确认”后的操作
+                    StudentAty.this.finish();
                 })
-                .setNegativeButton("返回", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // 点击“返回”后的操作,这里不设置没有任何操作
-                    }
+                .setNegativeButton("返回", (dialog, which) -> {
+                    // 点击“返回”后的操作,这里不设置没有任何操作
                 }).show();
-
-
-
-//        new MaterialDialog.Builder(getContext())
-//                .content(R.string.tip_bluetooth_permission)
-//                .positiveText(R.string.lab_yes)
-//                .negativeText(R.string.lab_no)
-//                .show();
     }
 
 

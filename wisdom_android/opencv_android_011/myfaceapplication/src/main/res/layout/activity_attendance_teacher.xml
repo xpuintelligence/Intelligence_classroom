@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    tools:context=".teacher.AttendanceTeacher">
+
+
+    <com.xuexiang.xui.widget.button.roundbutton.RoundButton
+        style="@style/RoundButton.Auto"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:text="开始进行自动考勤"
+        android:onClick="getAttendanceInfo"
+        app:rb_isRadiusAdjustBounds="true" />
+
+    <TextView
+        android:id="@+id/tv_AttendanceTeacher_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>
