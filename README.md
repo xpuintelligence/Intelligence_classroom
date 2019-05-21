@@ -95,18 +95,6 @@
 
 ## 2.分析过程实现
 
-- 部分处理过程显示：
-
-  实例1：
-
-![5D0023EE-68EE-4AEE-9D9B-37C5CEE6B94D](https://s2.ax1x.com/2019/05/21/Ez2s78.jpg)
-
-​		实例2：	  ![09B57452-2E96-40CF-B7C3-54292FB662F5](https://s2.ax1x.com/2019/05/21/Ez26AS.jpg)
-
-
-
-
-
 - 部分程序输出示例：
 
   此输出实例为最后一次识别 这时系统已经记录了两次学生的睡觉信息
@@ -252,7 +240,7 @@ saving.....
 
 # 六、项目开源地址
 
-##1.Github开源地址
+## 1.Github开源地址
 
 ```bash
 https://github.com/xpuintelligence/Intelligence_classroom/tree/raspberryCode
