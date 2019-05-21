@@ -1,81 +1,271 @@
-# WisdomClassRaspberry
-# 智慧教室树莓派端
 
-/app 
-  - 核心代码文件夹
+# 智慧教室树莓派端开发文档
 
-  - LoadVideo.py rstp视频流读取模块 
+# 一、开发环境
 
-  - FaceDataBase.py 数据库读取模块    
+## 1.硬件平台
 
-  - FaceSearch.py 人脸搜索模块
+- Linux系统
+- 树莓派3B+
+- 海康威视萤石C6T摄像头
 
-  - FaceDetect.py 人脸识别模块
-	
-  - Wisdom.py    功能执行模块
-	
-  -	debugFunc.py  测试功能使用的模块
-	
-  -	deleteCache.py 删除缓存模块
-	
-  -	GetJudge.py   判断模块
-	
-  -	Upload.py     上传模块
 
-  -	run.py 程序执行文件
 
-/faces 
-	- 裁剪人脸文件夹
+## 2.开发语言和开发平台
 
-/image 
-	- 测试图片文件夹
+- Python3
+- JetBrains PyCharm
+- Linux系统(Debian)
+- Unix内核系统(Mac OS X 10.14.3)
 
-/output 
-	- 处理完成的图片文件夹
 
-# 文件树
-    
-    .
-    ├── README.md
-    ├── app
-    │   ├── FaceDataBase.py
-    │   ├── FaceDetect.py
-    │   ├── FaceSearch.py
-    │   ├── GetJudge.py
-    │   ├── LoadVideo.py
-    │   ├── Upload.py
-    │   ├── Wisdom.py
-    │   ├── debugFunc.py
-    │   ├── deleteCache.py
-    │   └── run.py
-    ├── faces
-    │   └── README.md
-    ├── image
-    │   └── README.md
-    └── output
-	
 
-# 运行方法
+## 3.开发依赖的开源库
 
-- 确认安装opencv 
-	```pip3 install opencv-python```
-- 确认安装百度云开放平台
-	```pip3 install baidu-aip```
-- 安装七牛云
-		```pip3 install qiniu```
-- 运行
-  ```python3 run.py```
+- OpenCV开源视觉库
+- 多媒体处理工具ffmpeg
+- MySQL 5.7数据库
+- 百度AI开放平台
+- Face++ 开放平台
 
-# 框架UML图
 
-![识别框架](https://s2.ax1x.com/2019/05/20/EzFcT0.md.png)
+
+## 4.版本控制工具
+
+- 使用Git作为版本控制工具
+- 使用第三方git版本控制服务商github
+
+
+
+# 二、系统流程与软件架构设计
+
+## 1.系统流程
+
+
+
+![软件流程图](https://s2.ax1x.com/2019/05/21/Ez2xnx.md.png)
+
+系统具体流程如图所示
+
+- 球机监控
+- 树莓派获取输入的RTSP视频流
+- ffmpeg处理截取关键帧
+- OpenCV分割人脸
+- 人脸库判断
+- 百度AI签到
+- 将出勤和学生状态发送给服务器
+- 计算学生抬头率
+- 将所有的结果写入数据库
+
+
+
+## 2.模块设计
+
+- FaceDetect  图像识别模块
+- FaceSearch 人脸搜索与判断模块
+- FaceDataBase 数据库读取与数据库操作实现模块
+- LoadVideo RTSP流处理模块
+- Upload 数据结果上传模块
+- GetJudge 逻辑关系处理模块
+- Wisdom 功能整合模块
+
+
+
+# 三、功能实现
+
+## 1.输入输出信息
+
+1.1 输入信息
+
+- 监控学生上课的动态视频
+- 监控视频的关键帧
+- 树莓派调用监控识别到的学生人脸信息
+- 学生的个人信息
+
+1.2 输出信息
+
+- 学生上课的状态
+- 抬头率
+- 课堂考勤分数
+- 考勤统计
+- 人像签到
+- 将信息插入数据库
+
+
+
+## 2.分析过程实现
+
+- 部分处理过程显示：
+
+  实例1：
+
+![5D0023EE-68EE-4AEE-9D9B-37C5CEE6B94D](https://s2.ax1x.com/2019/05/21/Ez2s78.jpg)
+
+​		实例2：	  ![09B57452-2E96-40CF-B7C3-54292FB662F5](https://s2.ax1x.com/2019/05/21/Ez26AS.jpg)
+
+
+
+
+
+- 部分程序输出示例：
+
+  此输出实例为最后一次识别 这时系统已经记录了两次学生的睡觉信息
+
+```2sleep1.jpg
+4normal2.jpg
+当前识别到人脸数为：4
+saving.....
+saving.....
+saving.....
+saving.....
+当前识别到的人体数为: 4
+调用服务器数据库
+当前出勤学生为:41609050201
+识别成功，已存储
+['41609050201']
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+调用服务器数据库
+当前出勤学生为:41609050203
+识别成功，已存储
+['41609050201', '41609050203']
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+调用服务器数据库
+当前出勤学生为:41609030216
+识别成功，已存储
+['41609050201', '41609050203', '41609030216']
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+调用服务器数据库
+当前出勤学生为:41604090109
+识别成功，已存储
+['41609050201', '41609050203', '41609030216', '41604090109']
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+{"status":1,"msg":"true","data":null}
+已经把出勤信息发送给服务器
+200
+调用服务器数据库
+调用本地debug数据库
+当前识别到的学生为：['刘棋军', '刘梦', '史晓烁', '邹长林']
+当前学生出勤情况为: {'刘梦': 4, '史晓烁': 4, '刘棋军': 2, '邹长林': 2}
+低头的学生为: []
+当前低头或睡觉学生情况为: {'刘棋军': 2, '邹长林': 2}
+班级当前抬头率为：1.0
+出勤率为: 1.0
+清除临时文件完毕
+人名已经清除
+
+
+识别结束当前每个学生的出勤情况为：
+{'刘梦': 4, '史晓烁': 4, '刘棋军': 2, '邹长林': 2}
+本次识别中低头的学生情况为：
+{'刘棋军': 2, '邹长林': 2}
+学号信息为:
+['41609050201', '41609050203', '41609030216', '41604090109']
+调用服务器数据库
+每个学生的抬头得分情况为：
+{'刘梦': 40.0, '史晓烁': 40.0, '刘棋军': 20.0, '邹长林': 20.0}
+{'41609050203': 1.0, '41609030216': 1.0, '41609050201': 0.5, '41604090109': 0.5}
+{'41609050203': 40.0, '41609030216': 40.0, '41609050201': 20.0, '41604090109': 20.0}```
+```
+
+
+
+## 3.调用API说明
+
+- 使用了旷视科技的Face++开放平台的人脸识别模块facedetect
+- 使用了百度AI开放平台的人脸识别API AipDetect
+- 使用了百度AI开放平台的人脸搜索API AipFace
+- 使用了百度AI开放平台的人体分析模块API AipBodyAnalysis
+
+
+
+# 五、构建方法
+
+## 1.依赖库安装
+
+- OpenCV安装
+
+  ```pip3 install python-opencv```
+
+- 百度AI开放平台安装
+
+  ```pip3 install baidu-aip```
+
+- ffmpeg安装
+
+  - 进入ffmpeg官方网站 http://ffmpeg.org/ 下载最新的版本
+
+  - 解压安装
+
+    ```
+    tar -xjvf ffmpeg-3.3.1.tar.bz2
+    cd ffmpeg-3.3.1/
+    ./configure
+    make
+    make install
+    ```
+
+- 安装git版本控制工具
+
+  ```yum install git```
+
+
+
+## 2.软件下载运行
+
+- 软件下载
+
+  在terminal下输入以下命令
+
+  ```git clone git@github.com:RoWe98/WisdomClassRaspberry.git```
+
+- 软件运行
+
+  ```bash
+  cd /WisdomClassRaspberry/app/
+  python3 run.py
+  ```
+
+
+
+# 六、项目开源地址
+
+##1.Github开源地址
+
+```bash
+https://github.com/xpuintelligence/Intelligence_classroom/tree/raspberryCode
+```
+
+## 2.开源协议
+
+```bash
+apache开源协议
+```
 
 # 注意 部分机器测试bug解决方法
 
   - bug是由于百度云ai开放平台的人脸识别库中的部分bugs
 
 	- [解决方法](http://120.79.148.86/2019/05/10/Fix-Bug-Baidu-Aip/)
-
-# 工作日志
-
-  - [日志](http://120.79.148.86/2019/05/11/Wisdom-record/)

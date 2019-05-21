@@ -22,18 +22,18 @@ class Wisdom:
         # 利用pillow包输出中文
         pil_im = Image.fromarray(img)
         draw = ImageDraw.Draw(pil_im)
-        font = ImageFont.truetype("STHeiti Light.ttc", 50, encoding="utf-8")
+        font = ImageFont.truetype("STHeiti Light.ttc", 65, encoding="utf-8")
         draw.text((int(image_width*(1/10)), int(image_height*(1/5))), "student: "+str(student_name_list), (0, 255, 0), font=font)
         img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
                 
-        img = cv2.putText(img, "headupRate: "+str(headup_rate), (int(image_width*(1/10)), int(image_height*(1/5)+100)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
-        img = cv2.putText(img, "Attendence: "+str(attendence), (int(image_width*(1/10)), int(image_height*(1/5)+200)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
-        img = cv2.putText(img, "student_num: "+str(student_num), (int(image_width*(1/10)), int(image_height*(1/5)+300)), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
+        img = cv2.putText(img, "headupRate: "+str(headup_rate), (int(image_width*(1/10)), int(image_height*(1/5)+100)), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
+        img = cv2.putText(img, "Attendence: "+str(attendence), (int(image_width*(1/10)), int(image_height*(1/5)+200)), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
+        img = cv2.putText(img, "student_num: "+str(student_num), (int(image_width*(1/10)), int(image_height*(1/5)+300)), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
                 
         img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
 
         # 保存处理之后的图片
-        # cv2.imwrite(output_path,img2)
+        cv2.imwrite(output_path,img2)
         # 准备上传七牛云
         upload = Upload()
         # upload.upload(output_path,filename)
