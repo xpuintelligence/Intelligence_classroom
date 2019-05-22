@@ -27,7 +27,6 @@
               <i class="el-icon-date"></i>
               <span slot="title">课堂考勤</span>
             </template>
-            <el-menu-item index="t_ThisClassAttendance">当堂考勤</el-menu-item>
             <el-menu-item index="t_GetClassAttendance">考勤查询</el-menu-item>
             <el-menu-item index="t_ClassAttendanceRanking">考勤排名</el-menu-item>
           </el-submenu>
