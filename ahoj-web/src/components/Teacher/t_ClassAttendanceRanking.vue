@@ -1,14 +1,14 @@
 <template>
   <div>
-    <h1>
-      班级考勤对比
-    </h1>
+    <ClassAttendanceRanking></ClassAttendanceRanking>
   </div>
 </template>
 
 <script>
+  import ClassAttendanceRanking from "@/components/Teacher/ClassAttendanceRanking/ClassAttendanceRanking";
   export default {
-    name: "t_ClassAttendanceRanking"
+    name: "t_ClassAttendanceRanking",
+    components: {ClassAttendanceRanking}
   }
 </script>
 

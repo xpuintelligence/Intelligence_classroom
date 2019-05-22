@@ -46,16 +46,16 @@
               <span slot="title">课堂作业</span>
             </template>
             <el-menu-item index="t_PushHomework">发布作业</el-menu-item>
-            <el-menu-item index="t_HomeworkCorrecting">批改作业</el-menu-item>
-            <el-menu-item index="t_HomeworkStatistics">作业统计</el-menu-item>
+            <el-menu-item index="t_HomeworkCorrecting" disabled>批改作业</el-menu-item>
+            <el-menu-item index="t_HomeworkStatistics" disabled>作业统计</el-menu-item>
           </el-submenu>
 
-          <el-menu-item index="t_PrepareLessonsBeforeClass">
+          <el-menu-item index="t_PrepareLessonsBeforeClass" disabled>
             <i class="el-icon-folder-opened"></i>
             <span slot="title">课前预习</span>
           </el-menu-item>
 
-          <el-menu-item index="t_StudentInfo">
+          <el-menu-item index="t_StudentInfo" disabled>
             <i class="el-icon-search"></i>
             <span slot="title">学习情况</span>
           </el-menu-item>

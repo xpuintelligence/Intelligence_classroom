@@ -38,7 +38,6 @@
       return {}
     },
     async mounted() {
-
     }
   }
 </script>
