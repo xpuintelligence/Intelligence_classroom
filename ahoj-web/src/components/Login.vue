@@ -26,9 +26,15 @@
             <el-checkbox @change="changeWho">我是教师</el-checkbox>
 
             <el-button type="primary btn-block" @click="onSubmit">{{who}}登录</el-button>
-            <p></p>
+            <br/>
             <el-button type="primary btn-block" @click="onSubmit" disabled>忘记密码</el-button>
 
+            <br/>
+            <el-card>
+              <el-button @click="downloadRelease" style="width: 260px">
+                <Mallki class="downloadRelease" text="下载桌面版"></Mallki>
+              </el-button>
+            </el-card>
           </form>
         </div>
       </div>
@@ -37,8 +43,11 @@
 </template>
 
 <script>
+  import Mallki from "@/components/MyComponents/Mallki";
+
   export default {
     name: "Login",
+    components: {Mallki},
     data() {
       return {
         flag: false, // 页面 动画控制
@@ -54,6 +63,9 @@
       this.flag = true;
     },
     methods: {
+      downloadRelease() {
+        window.open('https://github.com/xpuintelligence/Intelligence_classroom/releases/tag/v1.0', '_blank').location;
+      },
       changeWho() { // 选择
         if (this.who === "学生") {
           this.who = "教师";
