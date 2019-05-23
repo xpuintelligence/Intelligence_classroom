@@ -4,6 +4,7 @@ import os
 from Wisdom import Wisdom
 from GetJudge import GetJudge
 from FaceDataBase import FaceDataBase
+from FaceNotice import FaceNotice
 
 # 初始化数据库
 def initdatabase():
@@ -43,7 +44,11 @@ print("学号信息为:")
 print(student_id_list_actual)
 
 
+phone_number = "15291418231"
+student_name = "邹长林"
+
 GetJudge.post_sleep_student("41604090109")
+FaceNotice.notice(phone_number,student_name)
 # 识别次数 目前设置为4次
 
 reco_time = 4

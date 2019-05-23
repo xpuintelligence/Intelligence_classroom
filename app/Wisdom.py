@@ -12,25 +12,30 @@ from GetJudge import GetJudge
 from Upload import Upload
 
 
-
-
 class Wisdom:
 
-    def drawInfo(img,student_name_list,headup_rate,attendence,student_num,image_height,image_width,filename):
+    def drawInfo(img, student_name_list, headup_rate, attendence, student_num, image_height, image_width, filename):
 
-        output_path = "../output/"+filename
+        output_path = "../output/" + filename
         # 利用pillow包输出中文
         pil_im = Image.fromarray(img)
         draw = ImageDraw.Draw(pil_im)
         font = ImageFont.truetype("STHeiti Light.ttc", 65, encoding="utf-8")
-        draw.text((int(image_width*(1/10)), int(image_height*(1/5))), "student: "+str(student_name_list), (0, 255, 0), font=font)
+        draw.text((int(image_width * (1 / 10)), int(image_height * (1 / 5))), "student: " + str(student_name_list),
+                  (0, 255, 0), font=font)
         img = cv2.cvtColor(np.array(pil_im), cv2.COLOR_RGB2BGR)
-                
-        img = cv2.putText(img, "headupRate: "+str(headup_rate), (int(image_width*(1/10)), int(image_height*(1/5)+100)), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
-        img = cv2.putText(img, "Attendence: "+str(attendence), (int(image_width*(1/10)), int(image_height*(1/5)+200)), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
-        img = cv2.putText(img, "student_num: "+str(student_num), (int(image_width*(1/10)), int(image_height*(1/5)+300)), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
-                
-        img2 = cv2.resize(img, (1280,720), interpolation=cv2.INTER_CUBIC);
+
+        img = cv2.putText(img, "headupRate: " + str(headup_rate),
+                          (int(image_width * (1 / 10)), int(image_height * (1 / 5) + 100)), cv2.FONT_HERSHEY_SIMPLEX, 2,
+                          (0, 255, 0), 3)
+        img = cv2.putText(img, "Attendence: " + str(attendence),
+                          (int(image_width * (1 / 10)), int(image_height * (1 / 5) + 200)), cv2.FONT_HERSHEY_SIMPLEX, 2,
+                          (0, 255, 0), 3)
+        img = cv2.putText(img, "student_num: " + str(student_num),
+                          (int(image_width * (1 / 10)), int(image_height * (1 / 5) + 300)), cv2.FONT_HERSHEY_SIMPLEX, 2,
+                          (0, 255, 0), 3)
+
+        img2 = cv2.resize(img, (1280, 720), interpolation=cv2.INTER_CUBIC);
 
         # 保存处理之后的图片
         # cv2.imwrite(output_path,img2)
@@ -38,9 +43,10 @@ class Wisdom:
         upload = Upload()
         # upload.upload(output_path,filename)
 
+    def run_wisdom(sleepdict, student_attendancedict):
 
-    def run_wisdom(sleepdict,student_attendancedict):
-
+        #global faceSearch
+        #global student_id_list_actual
         # face++的api地址密码 用于人脸识别
         face_http_url = "https://api-cn.faceplusplus.com/facepp/v3/detect"
         face_key = "TISYNrP-YDndZwEYzO1rhlYbJuDZ7SxQ"
@@ -56,41 +62,42 @@ class Wisdom:
         API_KEY_BODY = 'ciU5i0A0Rd77WIZMkBlgutGt'
         SECRET_KEY_BODY = '8N3GpZKlOSLzyFknCsiH6ncoufCSMLaC'
         # 实例化人脸分析搜索对象
-        client_baidu_face = AipFace(APP_ID_FACE, API_KEY_FACE, SECRET_KEY_FACE) 
+        client_baidu_face = AipFace(APP_ID_FACE, API_KEY_FACE, SECRET_KEY_FACE)
         # 实例化人体分析对象
-        client_baidu_body = AipBodyAnalysis(APP_ID_BODY, API_KEY_BODY, SECRET_KEY_BODY) 
+        client_baidu_body = AipBodyAnalysis(APP_ID_BODY, API_KEY_BODY, SECRET_KEY_BODY)
 
         # 实例化判断类的对象
-        getJudge = GetJudge(sleepdict,student_attendancedict)
-    
+        getJudge = GetJudge(sleepdict, student_attendancedict)
+
         # 测试图片的文件位置
         for filename in os.listdir("../image/"):
             if filename.endswith('.jpg'):
                 print(filename)
-                file_path = "../image/"+filename
+                file_path = "../image/" + filename
                 # 实例化人脸检测对象
-                faceDetect = FaceDetect(face_http_url, face_key, face_secret, file_path, client_baidu_body, client_baidu_face)
+                faceDetect = FaceDetect(face_http_url, face_key, face_secret, file_path, client_baidu_body,
+                                        client_baidu_face)
                 faces = faceDetect.getface()  # 获取人脸数
                 # 分割人脸存储到指定文件夹
                 face_pixel = faceDetect.detect(faces)
                 student_num = faceDetect.get_student_num()
                 # print(face_pixel)
-                print("当前识别到的人体数为: "+str(student_num))
+                print("当前识别到的人体数为: " + str(student_num))
 
                 # 测试图片格式为BASE64
-                imageType = "BASE64" 
-                groupIdList = "wisdom_class,1" # 人脸库的名字和id
-                facefolder = "../faces/" # 存储的位置
-                faceSearch = FaceSearch(facefolder, imageType, groupIdList, client_baidu_face) # 实例化人脸搜索对象
+                imageType = "BASE64"
+                groupIdList = "wisdom_class,1"  # 人脸库的名字和id
+                facefolder = "../faces/"  # 存储的位置
+                faceSearch = FaceSearch(facefolder, imageType, groupIdList, client_baidu_face)  # 实例化人脸搜索对象
                 # student_name_list = [] # 初始化人名列表
-                student_name_list ,student_headown_list,student_id_list_actual= faceSearch.search()    # 人脸库人脸搜素
-                print("当前识别到的学生为："+str(student_name_list))
+                student_name_list, student_headown_list, student_id_list_actual = faceSearch.search()  # 人脸库人脸搜素
+                print("当前识别到的学生为：" + str(student_name_list))
                 # 当前学生的单个考勤查询
                 student_attendancedict = getJudge.student_attendance_Judge(student_name_list)
-                print("当前学生出勤情况为: "+str(student_attendancedict))
-                #if len(student_headown_list):
+                print("当前学生出勤情况为: " + str(student_attendancedict))
+                # if len(student_headown_list):
                 if len(student_headown_list):
-                    print("低头的学生为: "+str(student_headown_list))
+                    print("低头的学生为: " + str(student_headown_list))
                 # 检测学生是不是睡觉或不认真听课
                 sleepdict = getJudge.sleepJudge(student_headown_list)
 
@@ -98,14 +105,14 @@ class Wisdom:
                 if sleepdict is not None:
                     sleepdict_actual = sleepdict
                     if len(sleepdict_actual):
-                        print("当前低头或睡觉学生情况为: "+str(sleepdict_actual))
+                        print("当前低头或睡觉学生情况为: " + str(sleepdict_actual))
                 else:
                     sleepdict_actual = {}
 
                 headup_rate = faceDetect.get_headup_rate()
-                print("班级当前抬头率为："+str(headup_rate))
+                print("班级当前抬头率为：" + str(headup_rate))
                 attendence = faceDetect.attendence()
-                print("出勤率为: "+str(attendence))
+                print("出勤率为: " + str(attendence))
 
                 # 读取图片
                 img = cv2.imread(file_path, cv2.IMREAD_COLOR)
@@ -115,19 +122,20 @@ class Wisdom:
                 image_height = imgsize[0]
                 # 图片宽
                 image_width = imgsize[1]
-                for i in range(0,len(face_pixel)):
+                for i in range(0, len(face_pixel)):
                     face_rectangle = list(face_pixel[i].split(","))
                     left = int(face_rectangle[0])
                     top = int(face_rectangle[1])
                     width = int(face_rectangle[2])
                     height = int(face_rectangle[3])
-                    
-                    #print(face_rectangle)
+
+                    # print(face_rectangle)
                     cv2.rectangle(img, (left, top), (left + width, top + height), (0, 255, 0), 2)
 
                 # 利用pillow包输出中文
-                
-                Wisdom.drawInfo(img,student_name_list,headup_rate,attendence,student_num,image_height,image_width,filename)
+
+                Wisdom.drawInfo(img, student_name_list, headup_rate, attendence, student_num, image_height, image_width,
+                                filename)
 
                 # 删除faces文件夹的待识别面部
                 os.chdir("../faces")
@@ -136,10 +144,10 @@ class Wisdom:
                 student_name_list.clear()
                 print("人名已经清除")
                 print()
-
+        faceSearch.post_student_list_to_server(student_attendancedict)
+        return sleepdict_actual, student_attendancedict, student_id_list_actual
         # if sleepdict_actual is None:
         #     sleepdict_actual = {}
         #     return sleepdict_actual, student_attendancedict, student_id_list_actual
         # else:
-        faceSearch.post_student_list_to_server(student_attendancedict)
-        return sleepdict_actual, student_attendancedict, student_id_list_actual
+
