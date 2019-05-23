@@ -21,7 +21,8 @@
         </el-card>
 
         <el-card v-if="chartsRanderOk === true">
-          <vuejs-heatmap selector="ThisSemester" :entries="tmp_entries" :tooltip-unit="tooltipHeatmap" :locale="tmp_locale"
+          <vuejs-heatmap selector="ThisSemester" :entries="tmp_entries" :tooltip-unit="tooltipHeatmap"
+                         :locale="tmp_locale"
                          :color-range="['#ebedf0', '#196127']" :max="100"></vuejs-heatmap>
         </el-card>
       </div>
@@ -178,7 +179,7 @@
               name: '10 - 29'
             }, {
               from: 30,
-              to: 60,
+              to: 79,
               color: '#239a3b',
               name: '30 - 79'
             }, {
@@ -275,11 +276,15 @@
           new Date(this.thisSemesterData[i].time).toLocaleDateString()
           + ")"
         );
-        this.thisSemesterChart.series[0].data.push(this.thisSemesterData[i].attendanceTotalScore);  // 考勤总分
-        this.thisSemesterChart.series[1].data.push(this.thisSemesterData[i].headUpScore);  // 专注度，抬头分
-        this.thisSemesterChart.series[2].data.push(-this.thisSemesterData[i].lateAttendScore);  // 迟到扣的分数
+        // this.thisSemesterChart.series[0].data.push(this.thisSemesterData[i].attendanceTotalScore);  // 考勤总分
+        // this.thisSemesterChart.series[1].data.push(this.thisSemesterData[i].headUpScore);  // 专注度，抬头分
+        // this.thisSemesterChart.series[2].data.push(-this.thisSemesterData[i].lateAttendScore);  // 迟到扣的分数
+        this.thisSemesterChart.series[0].data.push(parseInt(Math.random() * 100));  // 考勤总分
+        this.thisSemesterChart.series[1].data.push(parseInt(Math.random() * 100));  // 专注度，抬头分
+        this.thisSemesterChart.series[2].data.push(-parseInt(Math.random() * 100));  // 迟到扣的分数
 
-        let row = [i, new Date(this.thisSemesterData[i].time).getDay(), this.thisSemesterData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        // let row = [i, new Date(this.thisSemesterData[i].time).getDay(), this.thisSemesterData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        let row = [i, new Date(this.thisSemesterData[i].time).getDay(), parseInt(Math.random() * 100)]; // row[i]  i=[0,4]    // row[]
         this.thisSemesterHeatMapChart.series[0].data.push(row);
 
         // 提示
@@ -293,7 +298,7 @@
 
         let t = {
           // "counting": this.thisSemesterData[i].attendanceTotalScore,
-          "counting": parseInt(Math.random()*100),
+          "counting": parseInt(Math.random() * 100),
           "created_at": dateFormat(new Date(this.thisSemesterData[i].time), 'yyyy-dd-mm')
         };
         this.tooltipHeatmap = this.thisSemesterData[i].courseName + '<br>';

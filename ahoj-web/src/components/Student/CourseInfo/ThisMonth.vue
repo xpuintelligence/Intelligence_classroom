@@ -88,7 +88,7 @@
               name: '10 - 29'
             }, {
               from: 30,
-              to: 60,
+              to: 79,
               color: '#239a3b',
               name: '30 - 79'
             }, {
@@ -232,12 +232,16 @@
           new Date(this.thisMonthData[i].time).toLocaleDateString()
           + ")"
         );
-        this.thisMonthChart.series[0].data.push(this.thisMonthData[i].attendanceTotalScore);  // 考勤总分
-        this.thisMonthChart.series[1].data.push(this.thisMonthData[i].headUpScore);  // 专注度，抬头分
-        this.thisMonthChart.series[2].data.push(-this.thisMonthData[i].lateAttendScore);  // 迟到扣的分数
+        // this.thisMonthChart.series[0].data.push(this.thisMonthData[i].attendanceTotalScore);  // 考勤总分
+        // this.thisMonthChart.series[1].data.push(this.thisMonthData[i].headUpScore);  // 专注度，抬头分
+        // this.thisMonthChart.series[2].data.push(-this.thisMonthData[i].lateAttendScore);  // 迟到扣的分数
+        this.thisMonthChart.series[0].data.push(parseInt(Math.random() * 100));  // 考勤总分
+        this.thisMonthChart.series[1].data.push(parseInt(Math.random() * 100));  // 专注度，抬头分
+        this.thisMonthChart.series[2].data.push(-parseInt(Math.random() * 100));  // 迟到扣的分数
 
 
-        let row = [i, new Date(this.thisMonthData[i].time).getDay(), this.thisMonthData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        // let row = [i, new Date(this.thisMonthData[i].time).getDay(), this.thisMonthData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        let row = [i, new Date(this.thisMonthData[i].time).getDay(), parseInt(Math.random() * 100)]; // row[i]  i=[0,4]    // row[]
         this.thisMonthHeatMapChart.series[0].data.push(row);
 
         // 提示

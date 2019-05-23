@@ -253,25 +253,31 @@
           new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString() + ')'
         );
         // Y轴
-        this.thisSemesterCharts.series[0].data.push(this.thisSemesterTotalInfo[i].headUpScore);  // 专注度
-        this.thisSemesterCharts.series[1].data.push(this.thisSemesterTotalInfo[i].attendanceTotalScore);  // 考勤总分
+        // this.thisSemesterCharts.series[0].data.push(this.thisSemesterTotalInfo[i].headUpScore);  // 专注度
+        // this.thisSemesterCharts.series[1].data.push(this.thisSemesterTotalInfo[i].attendanceTotalScore);  // 考勤总分
+
+        this.thisSemesterCharts.series[0].data.push(parseInt(Math.random() * 100));  // 专注度
+        this.thisSemesterCharts.series[1].data.push(parseInt(Math.random() * 100));  // 考勤总分
 
         this.packedbubbleCharts.series[0].name = '请假';
         this.packedbubbleCharts.series[0].data.push({
           name: new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString(),
-          value: this.thisSemesterTotalInfo[i].leaveScore
+          // value: this.thisSemesterTotalInfo[i].leaveScore
+          value: parseInt(Math.random() * 100)
         });
 
         this.packedbubbleCharts.series[1].name = '迟到';
         this.packedbubbleCharts.series[1].data.push({
           name: new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString(),
-          value: -this.thisSemesterTotalInfo[i].lateAttendScore
+          // value: -this.thisSemesterTotalInfo[i].lateAttendScore
+          value: -parseInt(Math.random() * 100)
         });
 
         this.packedbubbleCharts.series[2].name = '抬头';
         this.packedbubbleCharts.series[2].data.push({
           name: new Date(this.thisSemesterTotalInfo[i].time).toLocaleDateString(),
-          value: this.thisSemesterTotalInfo[i].headUpScore
+          // value: this.thisSemesterTotalInfo[i].headUpScore
+          value: parseInt(Math.random() * 100)
         });
       }
       this.thisSemesterCharts.title.text = '智慧教室-学期总成绩-' + this.userData.name;

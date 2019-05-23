@@ -153,7 +153,7 @@
               name: '10 - 29'
             }, {
               from: 30,
-              to: 60,
+              to: 79,
               color: '#239a3b',
               name: '30 - 79'
             }, {
@@ -225,11 +225,16 @@
           new Date(this.thisWeekData[i].time).toLocaleDateString()
           + ")"
         );
-        this.thisWeekChart.series[0].data.push(this.thisWeekData[i].attendanceTotalScore);  // 考勤总分
-        this.thisWeekChart.series[1].data.push(this.thisWeekData[i].headUpScore);  // 专注度，抬头分
-        this.thisWeekChart.series[2].data.push(-this.thisWeekData[i].lateAttendScore);  // 迟到扣的分数
 
-        let row = [i, new Date(this.thisWeekData[i].time).getDay(), this.thisWeekData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        // this.thisWeekChart.series[0].data.push(this.thisWeekData[i].attendanceTotalScore);  // 考勤总分
+        // this.thisWeekChart.series[1].data.push(this.thisWeekData[i].headUpScore);  // 专注度，抬头分
+        // this.thisWeekChart.series[2].data.push(-this.thisWeekData[i].lateAttendScore);  // 迟到扣的分数
+        this.thisWeekChart.series[0].data.push(parseInt(Math.random() * 100));  // 考勤总分
+        this.thisWeekChart.series[1].data.push(parseInt(Math.random() * 100));  // 专注度，抬头分
+        this.thisWeekChart.series[2].data.push(-parseInt(Math.random() * 100));  // 迟到扣的分数
+
+        // let row = [i, new Date(this.thisWeekData[i].time).getDay(), this.thisWeekData[i].attendanceTotalScore]; // row[i]  i=[0,4]    // row[]
+        let row = [i, new Date(this.thisWeekData[i].time).getDay(), parseInt(Math.random() * 100)]; // row[i]  i=[0,4]    // row[]
         this.thisWeekHeatMapChart.series[0].data.push(row);
 
         // 提示
