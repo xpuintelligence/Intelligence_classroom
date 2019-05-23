@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements CameraBridgeViewB
                 Bitmap mBitmap = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.RGB_565);
                 if(AppConfig.netWork){
                     Utils.matToBitmap(mRgba, mBitmap);
-                    ImgSaveUtils.saveImageToGallery(getApplicationContext(), mBitmap, id, pwd);
+                    //ImgSaveUtils.saveImageToGallery(getApplicationContext(), mBitmap, id, pwd);
                 }
             }else{
                 Intent intent = new Intent(getApplicationContext(), StudentAty.class);

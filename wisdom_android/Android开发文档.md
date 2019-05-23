@@ -381,7 +381,70 @@ new Thread(()-> timer.schedule(new TimerTask() {
 
 ### 8、消息推送
 
+下面是服务器消息队列接口示例返回JSON：
+
 ![](https://s2.ax1x.com/2019/05/22/VpVsv8.png)
+
+![](https://s2.ax1x.com/2019/05/23/VCYhJP.png)
+
+关键代码：
+
+```java
+//开启检测服务
+Timer timer = new Timer();
+Vibrator mVibrator = (Vibrator) getApplication().getSystemService(Service.VIBRATOR_SERVICE);
+new Thread(()-> {
+  timer.schedule(new TimerTask() {
+    @Override
+    public void run() {
+      Map<String, String> map = new HashMap<>();
+      String id = first.getInt("status", -1) == 1 ?
+        first.getString("stu_id", "-1"):first.getString("tea_id", "-1");
+      assert id != null;
+      Log.i(AppConfig.TAG, "SP获取的id = " + id);
+      map.put("id", id);
+
+      //请求的时候try-catch
+      try {
+        String post = GetPostUrl.post(AppConfig.nowSmg, map);
+        JSONObject object = JSONObject.parseObject(post);
+        Log.i(AppConfig.TAG, "post = " + post);
+        Integer status = object.getInteger("status");
+        if (status == 0) {
+          String msg = object.getString("msg");
+          Log.i(AppConfig.TAG, "msg:" + msg);
+        } else if (status == 1) {
+          JSONObject data = object.getJSONObject("data");
+          Log.i(AppConfig.TAG, "data = "+data);
+          String status1 = data.getString("status");
+          if ("1".equals(status1)) {
+            //学生在睡觉，应该提醒
+            runOnUiThread(() -> XToast.info(getContext(), "检测到你正在睡觉！").show());
+            //停止1秒，开启震动10秒，然后又停止2秒，又开启震动10秒，不重复
+            mVibrator.vibrate(new long[]{1000, 10000, 2000, 10000}, -1);
+          } else if ("2".equals(status1)) {
+            //已经获取到出勤的学生名单
+            editor.putString("attendance2", data.getString("msg"));
+            editor.apply();
+          } else if ("3".equals(status1)) {
+            //已经获取到旷课学生名单
+            editor.putString("attendance3", data.getString("msg"));
+            editor.apply();
+          } else {
+            //其他情况
+            Log.e(AppConfig.TAG, data.getString("msg"));
+          }
+        }
+      } catch (Exception e) {
+        Log.i(AppConfig.TAG, "服务器端严重错误：" + e.toString());
+      }
+
+    }
+  }, new Date(), 10000);
+}).start();
+```
+
+
 
 ## 四、Github开源地址
 

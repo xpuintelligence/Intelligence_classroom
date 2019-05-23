@@ -71,7 +71,7 @@ public class FirstRunAty extends AppCompatActivity {
                                 //学生在睡觉，应该提醒
                                 runOnUiThread(() -> XToast.info(getContext(), "检测到你正在睡觉！").show());
                                 //停止1秒，开启震动10秒，然后又停止2秒，又开启震动10秒，不重复
-                                mVibrator.vibrate(new long[]{1000, 10000, 2000, 10000}, -1);
+                                mVibrator.vibrate(new long[]{1000, 10000, 1000, 10000}, -1);
                             } else if ("2".equals(status1)) {
                                 //已经获取到出勤的学生名单
                                 editor.putString("attendance2", data.getString("msg"));
@@ -90,7 +90,7 @@ public class FirstRunAty extends AppCompatActivity {
                     }
 
                 }
-            }, new Date(), 10000);
+            }, new Date(), 2000);
         }).start();
 
         Boolean isFirst = first.getBoolean("isFirst", true);

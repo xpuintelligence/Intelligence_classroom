@@ -6,7 +6,7 @@ public interface AppConfig {
     boolean netWork = true;
 
     //采集精度控制
-    int pictureCount = 20;
+    int pictureCount = 50;
 
     //登录请求地址
     String loginAddress = "http://47.103.14.73:8080/wisdom_web/login/all";
