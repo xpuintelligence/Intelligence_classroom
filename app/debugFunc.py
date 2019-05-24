@@ -17,6 +17,23 @@ def initdatabase():
     faceDataBase = FaceDataBase(host, user, database, password)
     return faceDataBase
 
+
+
+# 给睡觉学生发短信
+def send_message(sleepdict_end):
+
+    faceDataBase = initdatabase()
+
+    for student_name in sleepdict_end.keys():
+        student_id = faceDataBase.get_student_id(student_name)
+        phone_code = faceDataBase.get_student_number(student_name)
+
+        GetJudge.post_sleep_student(str(student_id))
+        FaceNotice.notice(phone_code, student_name)
+
+
+
+
 # 初始化睡觉判断和出勤判断字典
 sleepdict = dict()
 student_attendancedict = dict()
@@ -44,11 +61,12 @@ print("学号信息为:")
 print(student_id_list_actual)
 
 
-phone_number = "15291418231"
-student_name = "邹长林"
+#phone_number = "15291418231"
+#student_name = "邹长林"
 
-GetJudge.post_sleep_student("41604090109")
-FaceNotice.notice(phone_number,student_name)
+
+send_message(sleepdict_end)
+
 # 识别次数 目前设置为4次
 
 reco_time = 4

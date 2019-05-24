@@ -151,3 +151,24 @@ class FaceDataBase:
 
         conn.close()
 
+
+    # 获取学生的手机号
+
+    def get_student_number(self, student_name):
+
+        conn = pymysql.connect(host=self.host, user=self.user, password=self.password, database=self.database,
+                               port=3306, charset="utf8")
+        sql = "select phone_code from tb_student where name = '%s'"
+
+        data = (student_name)
+        cursor = conn.cursor()
+        try:
+            cursor.execute(sql % data)
+            ret = cursor.fetchone()
+            phone_code = ret[0]
+            return phone_code
+        except Exception as e:
+            conn.rollback()
+        finally:
+            conn.close()
+
