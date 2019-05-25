@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Data
 public class CheckAttendance implements Serializable {
     String courseitem_id;//这节课的id
+    String courseitem_name;//课程名
     int number;//人数
     String avg_goal;//这节课平均分数
     String avg_head_up_rate;//这节课平均抬头率
