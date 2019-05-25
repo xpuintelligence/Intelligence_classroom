@@ -50,9 +50,10 @@ public class MonitorStudentAttController {
      * app获取消息队列
      * @param id 学生id
      */
-        @RequestMapping("/getStudentMsg")
+    @RequestMapping("/getStudentMsg")
     @ResponseBody
     public WisdomResult sendStudentMsgToApp(String id,HttpServletRequest request){
+
         //获取消息队列
         ArrayList<ServiceMsg> msgQueue = (ArrayList<ServiceMsg>) servletContext.getAttribute("queue");
         System.out.println(msgQueue);
@@ -64,7 +65,7 @@ public class MonitorStudentAttController {
         for (ServiceMsg msg : msgQueue) {
             if (msg.getId().equals(id)){
                 //如果存在这个学生的id
-                //先从消息队列里面删了
+                //先从消息队列里面删了F
                 ServiceMsg serviceMsg = new ServiceMsg(msg.getId(),msg.getStatus(),msg.getMsg());
                 msgQueue.remove(msg);
                 return WisdomResult.ok(serviceMsg);
