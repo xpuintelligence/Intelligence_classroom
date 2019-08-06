@@ -13,6 +13,11 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = true;
 
+import Video from 'video.js'
+import 'video.js/dist/video-js.css'
+
+Vue.prototype.$video = Video;
+
 // 音频
 // import AudioVisual from 'vue-audio-visual'
 // Vue.use(AudioVisual);
