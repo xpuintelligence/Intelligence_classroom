@@ -64,7 +64,7 @@
     },
     methods: {
       downloadRelease() {
-        window.open('https://github.com/xpuintelligence/Intelligence_classroom/releases/tag/v1.0', '_blank').location;
+        window.open('http://qiniusave.luoshaoqi.cn/i-Class-Mac.dmg', '_blank').location;
       },
       changeWho() { // 选择
         if (this.who === "学生") {
