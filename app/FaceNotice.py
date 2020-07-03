@@ -7,7 +7,7 @@ from aliyunsdkcore.request import CommonRequest
 class FaceNotice:
 
     def notice(phone_number,student_name):
-        client = AcsClient('LTAIN87V3L9IqotZ', 'DlBTCRZ3P8oVcLoinzNBHPydkMITit', 'default')
+        client = AcsClient('******************', '******************', 'default')
 
         request = CommonRequest()
         request.set_accept_format('json')
